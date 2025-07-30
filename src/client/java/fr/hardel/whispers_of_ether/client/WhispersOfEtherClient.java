@@ -1,8 +1,14 @@
 package fr.hardel.whispers_of_ether.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.minecraft.util.Identifier;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
+import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
 
 public class WhispersOfEtherClient implements ClientModInitializer {
 
@@ -12,5 +18,8 @@ public class WhispersOfEtherClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         LOGGER.info("Initializing Whispers of Ether client");
+        ModKeyBindings.register();
+        SpellCastHandler.initialize();
+        HudElementRegistry.addLast(Identifier.of(MOD_ID, "spell_selector"), SpellSelector::render);
     }
 }
