@@ -4,7 +4,8 @@
     "package": "fr.hardel.whispers_of_ether.client.mixin",
     "compatibilityLevel": "JAVA_21",
     "client": [
-        "GameRendererMixin"
+        "GameRendererMixin",
+        "MouseMixin"
     ],
     "injectors": {
         "defaultRequire": 1

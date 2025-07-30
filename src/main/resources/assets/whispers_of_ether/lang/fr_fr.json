@@ -1,4 +1,6 @@
 {
     "attribute.name.camera_shaking_strength": "Force de tremblement de caméra",
-    "attribute.name.camera_shaking_frequency": "Fréquence de tremblement de caméra"
+    "attribute.name.camera_shaking_frequency": "Fréquence de tremblement de caméra",
+    "key.whispers_of_ether.cast_spell": "Lancer un sort",
+    "category.whispers_of_ether": "Whispers of Ether"
 }
