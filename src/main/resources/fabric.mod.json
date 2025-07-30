@@ -1,0 +1,35 @@
+{
+    "schemaVersion": 1,
+    "id": "whispers_of_ether",
+    "version": "${version}",
+    "name": "whispers_of_ether",
+    "description": "",
+    "authors": [],
+    "contact": {},
+    "license": "All-Rights-Reserved",
+    "icon": "assets/whispers_of_ether/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "fabric-datagen": [
+            "fr.hardel.whispers_of_ether.client.WhispersOfEtherDataGenerator"
+        ],
+        "client": [
+            "fr.hardel.whispers_of_ether.client.WhispersOfEtherClient"
+        ],
+        "main": [
+            "fr.hardel.whispers_of_ether.WhispersOfEther"
+        ]
+    },
+    "mixins": [
+        "whispers_of_ether.mixins.json",
+        {
+            "config": "whispers_of_ether.client.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "fabricloader": ">=${loader_version}",
+        "fabric": "*",
+        "minecraft": "${minecraft_version}"
+    }
+}
