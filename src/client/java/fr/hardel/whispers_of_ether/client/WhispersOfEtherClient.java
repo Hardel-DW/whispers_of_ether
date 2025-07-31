@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
 import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
+import fr.hardel.whispers_of_ether.network.NetworkHandler;
 
 public class WhispersOfEtherClient implements ClientModInitializer {
 
@@ -20,6 +21,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         LOGGER.info("Initializing Whispers of Ether client");
         ModKeyBindings.register();
         SpellCastHandler.initialize();
+        NetworkHandler.registerClientPackets();
         HudElementRegistry.addLast(Identifier.of(MOD_ID, "spell_selector"), SpellSelector::render);
     }
 }

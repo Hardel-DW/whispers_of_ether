@@ -94,4 +94,12 @@ public class SpellSelector {
     public static int getSelectedSlot() {
         return selectedSlot;
     }
+
+    public static Identifier getSelectedSpellId() {
+        List<Identifier> spellIds = getValidSpellIds();
+        if (spellIds.isEmpty() || selectedSlot >= spellIds.size()) {
+            return null;
+        }
+        return spellIds.get(selectedSlot);
+    }
 }

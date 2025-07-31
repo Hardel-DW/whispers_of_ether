@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.hardel.whispers_of_ether.attributes.ModAttribute;
 import fr.hardel.whispers_of_ether.command.SpellCommand;
+import fr.hardel.whispers_of_ether.network.NetworkHandler;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -24,5 +25,6 @@ public class WhispersOfEther implements ModInitializer {
             .registerReloadListener(new SpellResourceReloadListener());
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> 
             SpellCommand.register(dispatcher));
+        NetworkHandler.registerServerPackets();
     }
 }

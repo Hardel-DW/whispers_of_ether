@@ -14,5 +14,8 @@
     "command.whispers_of_ether.spell.clear.empty": "%s has no spells to clear",
     "command.whispers_of_ether.spell.clear.success": "Cleared %d spells from %s",
     "command.whispers_of_ether.spell.error": "Error: %s",
-    "command.whispers_of_ether.spell.unknown": "Unknown spell: %s"
+    "command.whispers_of_ether.spell.unknown": "Unknown spell: %s",
+    "spell.cast.not_owned": "You don't have this spell!",
+    "spell.cast.unknown": "Unknown spell!",
+    "spell.cast.success": "Casting spell: %s (Cost: %s mana)"
 }
