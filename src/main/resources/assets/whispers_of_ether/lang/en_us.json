@@ -2,6 +2,8 @@
     "attribute.name.camera_shaking_strength": "Camera Shaking Strength",
     "attribute.name.camera_shaking_frequency": "Camera Shaking Frequency",
     "key.whispers_of_ether.cast_spell": "Cast Spell",
+    "key.whispers_of_ether.spell_up": "Next Spell",
+    "key.whispers_of_ether.spell_down": "Previous Spell",
     "category.whispers_of_ether": "Whispers of Ether",
     "command.whispers_of_ether.spell.add.success": "Added spell %s to %s",
     "command.whispers_of_ether.spell.add.already_has": "%s already has spell %s",
