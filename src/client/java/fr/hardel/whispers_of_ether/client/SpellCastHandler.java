@@ -2,7 +2,9 @@ package fr.hardel.whispers_of_ether.client;
 
 import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
 import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
+import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 public class SpellCastHandler {
     private static boolean wasPressed = false;
@@ -24,7 +26,10 @@ public class SpellCastHandler {
             }
 
             if (!isPressed && wasPressed && !holdLogSent && !scrolledDuringHold) {
-                System.out.println("Spell cast released - Casting spell!");
+                var spellId = SpellSelector.getSelectedSpellId();
+                if (spellId != null) {
+                    ClientPlayNetworking.send(new WhispersOfEtherPacket.SpellCast(spellId));
+                }
             }
 
             if (isSpellUpPressed && !wasSpellUpPressed) {
