@@ -2,5 +2,15 @@
     "attribute.name.camera_shaking_strength": "Force de tremblement de caméra",
     "attribute.name.camera_shaking_frequency": "Fréquence de tremblement de caméra",
     "key.whispers_of_ether.cast_spell": "Lancer un sort",
-    "category.whispers_of_ether": "Whispers of Ether"
+    "category.whispers_of_ether": "Whispers of Ether",
+    "command.whispers_of_ether.spell.add.success": "Sort %s ajouté à %s",
+    "command.whispers_of_ether.spell.add.already_has": "%s possède déjà le sort %s",
+    "command.whispers_of_ether.spell.remove.success": "Sort %s retiré de %s",
+    "command.whispers_of_ether.spell.remove.not_found": "%s ne possède pas le sort %s",
+    "command.whispers_of_ether.spell.list.empty": "%s n'a aucun sort",
+    "command.whispers_of_ether.spell.list.success": "%s possède %d sorts: %s",
+    "command.whispers_of_ether.spell.clear.empty": "%s n'a aucun sort à effacer",
+    "command.whispers_of_ether.spell.clear.success": "%d sorts effacés de %s",
+    "command.whispers_of_ether.spell.error": "Erreur: %s",
+    "command.whispers_of_ether.spell.unknown": "Sort inconnu: %s"
 }

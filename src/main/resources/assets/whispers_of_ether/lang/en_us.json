@@ -2,5 +2,15 @@
     "attribute.name.camera_shaking_strength": "Camera Shaking Strength",
     "attribute.name.camera_shaking_frequency": "Camera Shaking Frequency",
     "key.whispers_of_ether.cast_spell": "Cast Spell",
-    "category.whispers_of_ether": "Whispers of Ether"
+    "category.whispers_of_ether": "Whispers of Ether",
+    "command.whispers_of_ether.spell.add.success": "Added spell %s to %s",
+    "command.whispers_of_ether.spell.add.already_has": "%s already has spell %s",
+    "command.whispers_of_ether.spell.remove.success": "Removed spell %s from %s",
+    "command.whispers_of_ether.spell.remove.not_found": "%s doesn't have spell %s",
+    "command.whispers_of_ether.spell.list.empty": "%s has no spells",
+    "command.whispers_of_ether.spell.list.success": "%s has %d spells: %s",
+    "command.whispers_of_ether.spell.clear.empty": "%s has no spells to clear",
+    "command.whispers_of_ether.spell.clear.success": "Cleared %d spells from %s",
+    "command.whispers_of_ether.spell.error": "Error: %s",
+    "command.whispers_of_ether.spell.unknown": "Unknown spell: %s"
 }

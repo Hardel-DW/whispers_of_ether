@@ -1,11 +1,15 @@
 package fr.hardel.whispers_of_ether.client.screen;
 
 import fr.hardel.whispers_of_ether.client.WhispersOfEtherClient;
+import fr.hardel.whispers_of_ether.component.ModComponents;
+import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
 
 public class SpellSelector {
     private static final Identifier SLOT_BACKGROUND = Identifier.of(WhispersOfEtherClient.MOD_ID,
@@ -32,10 +36,18 @@ public class SpellSelector {
         if (client.player == null)
             return;
 
+        List<Identifier> spellIds = ModComponents.PLAYER_SPELL.get(client.player).getSpellIds().stream()
+                .filter(spellId -> SpellResourceReloadListener.getSpell(spellId) != null)
+                .toList();
+
+        int actualSlotCount = Math.min(spellIds.size(), SLOT_COUNT);
+        if (actualSlotCount == 0)
+            return;
+
         int screenHeight = client.getWindow().getScaledHeight();
-        int totalHeight = (SLOT_SIZE * SLOT_COUNT) + (GAP * (SLOT_COUNT - 1));
+        int totalHeight = (SLOT_SIZE * actualSlotCount) + (GAP * (actualSlotCount - 1));
         int startY = (screenHeight - totalHeight) / 2;
-        float targetY = startY + (selectedSlot * (SLOT_SIZE + GAP));
+        float targetY = startY + (Math.min(selectedSlot, actualSlotCount - 1) * (SLOT_SIZE + GAP));
         currentAnimationY += (targetY - currentAnimationY) * ANIMATION_SPEED;
 
         long currentTime = System.currentTimeMillis();
@@ -43,12 +55,19 @@ public class SpellSelector {
         float targetHudX = shouldBeVisible ? PADDING_LEFT : -SLOT_SIZE - PADDING_LEFT;
         currentHudX += (targetHudX - currentHudX) * SLIDE_SPEED;
 
-        for (int i = 0; i < SLOT_COUNT; i++) {
+        for (int i = 0; i < actualSlotCount; i++) {
             int x = Math.round(currentHudX);
             int y = startY + (i * (SLOT_SIZE + GAP));
-
             drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
                     SLOT_SIZE, SLOT_SIZE);
+
+            var spellId = spellIds.get(i);
+            var spell = SpellResourceReloadListener.getSpell(spellId);
+            if (spell != null) {
+                int iconSize = SLOT_SIZE - 4;
+                drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, spell.getTextureId(),
+                        x + 2, y + 2, 0, 0, iconSize, iconSize, iconSize, iconSize);
+            }
         }
 
         drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, SELECTED_TEXTURE, Math.round(currentHudX),
