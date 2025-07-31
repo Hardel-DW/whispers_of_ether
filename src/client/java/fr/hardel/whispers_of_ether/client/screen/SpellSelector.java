@@ -32,19 +32,12 @@ public class SpellSelector {
     private static final float SLIDE_SPEED = 0.15f;
 
     public static void render(DrawContext drawContext, RenderTickCounter ignoredTickCounter) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null)
+        List<Identifier> spellIds = getValidSpellIds();
+        if (spellIds.isEmpty())
             return;
 
-        List<Identifier> spellIds = ModComponents.PLAYER_SPELL.get(client.player).getSpellIds().stream()
-                .filter(spellId -> SpellResourceReloadListener.getSpell(spellId) != null)
-                .toList();
-
-        int actualSlotCount = Math.min(spellIds.size(), SLOT_COUNT);
-        if (actualSlotCount == 0)
-            return;
-
-        int screenHeight = client.getWindow().getScaledHeight();
+        int actualSlotCount = spellIds.size();
+        int screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
         int totalHeight = (SLOT_SIZE * actualSlotCount) + (GAP * (actualSlotCount - 1));
         int startY = (screenHeight - totalHeight) / 2;
         float targetY = startY + (Math.min(selectedSlot, actualSlotCount - 1) * (SLOT_SIZE + GAP));
@@ -75,8 +68,22 @@ public class SpellSelector {
                 0, 0, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE);
     }
 
+    private static List<Identifier> getValidSpellIds() {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return List.of();
+        
+        return ModComponents.PLAYER_SPELL.get(client.player).getSpellIds().stream()
+                .filter(spellId -> SpellResourceReloadListener.getSpell(spellId) != null)
+                .limit(SLOT_COUNT)
+                .toList();
+    }
+
     public static void setSelectedSlot(int slot) {
-        selectedSlot = ((slot % SLOT_COUNT) + SLOT_COUNT) % SLOT_COUNT;
+        List<Identifier> spellIds = getValidSpellIds();
+        if (spellIds.isEmpty()) return;
+        
+        int actualSlotCount = spellIds.size();
+        selectedSlot = ((slot % actualSlotCount) + actualSlotCount) % actualSlotCount;
         showHUD();
     }
 

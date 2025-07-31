@@ -2,6 +2,8 @@
     "attribute.name.camera_shaking_strength": "Force de tremblement de caméra",
     "attribute.name.camera_shaking_frequency": "Fréquence de tremblement de caméra",
     "key.whispers_of_ether.cast_spell": "Lancer un sort",
+    "key.whispers_of_ether.spell_up": "Sort suivant",
+    "key.whispers_of_ether.spell_down": "Sort précédent",
     "category.whispers_of_ether": "Whispers of Ether",
     "command.whispers_of_ether.spell.add.success": "Sort %s ajouté à %s",
     "command.whispers_of_ether.spell.add.already_has": "%s possède déjà le sort %s",
