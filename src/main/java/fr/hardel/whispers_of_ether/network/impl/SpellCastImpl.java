@@ -27,8 +27,10 @@ public class SpellCastImpl {
                 return;
             }
 
+            spell.cast(player);
+
             player.sendMessage(
-                    Text.translatable("spell.cast.success", spell.name(), spell.manaCost()),
+                    Text.translatable("spell.cast.success", spell.name()),
                     true);
         });
     }

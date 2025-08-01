@@ -1,0 +1,481 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Whispers of Ether Spell Schema",
+  "description": "JSON schema for data-driven spells in the Whispers of Ether mod",
+  "type": "object",
+  "required": ["icon", "name", "timelines", "organization"],
+  "properties": {
+    "icon": {
+      "type": "string",
+      "description": "Namespaced identifier for the spell icon texture",
+      "pattern": "^[a-z0-9_.-]+:[a-z0-9_/.-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the spell"
+    },
+    "cooldown": {
+      "type": "integer",
+      "description": "Optional cooldown in ticks",
+      "minimum": 0
+    },
+    "condition": {
+      "$ref": "#/definitions/loot_condition",
+      "description": "Optional loot condition that must be met to cast the spell"
+    },
+    "timelines": {
+      "type": "array",
+      "description": "List of timeline actions that define spell behavior",
+      "items": {
+        "$ref": "#/definitions/timeline_action"
+      }
+    },
+    "organization": {
+      "$ref": "#/definitions/organization_timeline",
+      "description": "Organization that controls how timelines are executed"
+    },
+    "passive": {
+      "type": "array",
+      "description": "List of passive actions that execute immediately when spell is cast",
+      "items": {
+        "$ref": "#/definitions/spell_action"
+      },
+      "default": []
+    }
+  },
+  "definitions": {
+    "timeline_action": {
+      "type": "object",
+      "required": ["id", "actions", "duration"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this timeline action"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/spell_action"
+          },
+          "description": "List of spell actions to execute"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Duration of this timeline action in ticks",
+          "minimum": 0
+        },
+        "condition": {
+          "$ref": "#/definitions/loot_condition",
+          "description": "Optional condition that must be met to execute this timeline"
+        },
+        "wait": {
+          "type": "integer",
+          "description": "Optional wait time before executing this timeline",
+          "minimum": 0
+        }
+      }
+    },
+    "spell_action": {
+      "type": "object",
+      "required": ["action"],
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/action",
+          "description": "The action to perform"
+        },
+        "condition": {
+          "$ref": "#/definitions/loot_condition",
+          "description": "Optional condition that must be met to execute this action"
+        },
+        "target": {
+          "$ref": "#/definitions/target",
+          "description": "Target for this action (defaults to self if not specified)"
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["whispers_of_ether:damage", "whispers_of_ether:summon"]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:damage" },
+            "amount": {
+              "type": "number",
+              "description": "Damage amount (positive for damage, negative for healing)"
+            },
+            "damage_type": {
+              "type": "string",
+              "description": "Namespaced identifier for damage type",
+              "pattern": "^[a-z0-9_.-]+:[a-z0-9_/.-]+$"
+            }
+          },
+          "required": ["amount", "damage_type"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:summon" },
+            "entity": {
+              "type": "string",
+              "description": "Namespaced identifier for entity to summon",
+              "pattern": "^[a-z0-9_.-]+:[a-z0-9_/.-]+$"
+            }
+          },
+          "required": ["entity"]
+        }
+      ]
+    },
+    "target": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["whispers_of_ether:self", "whispers_of_ether:aimed", "whispers_of_ether:area"]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:self" }
+          }
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:aimed" },
+            "min_distance": {
+              "type": "number",
+              "description": "Minimum targeting distance",
+              "minimum": 0
+            },
+            "max_distance": {
+              "type": "number",
+              "description": "Maximum targeting distance",
+              "minimum": 0
+            },
+            "condition": {
+              "$ref": "#/definitions/loot_condition",
+              "description": "Optional condition for target filtering"
+            }
+          },
+          "required": ["min_distance", "max_distance"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:area" },
+            "shapes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/shape"
+              },
+              "description": "List of shapes that define the target area"
+            },
+            "position": {
+              "$ref": "#/definitions/position_target",
+              "description": "Position where the area is centered"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Optional limit on number of targets",
+              "minimum": 1
+            },
+            "condition": {
+              "$ref": "#/definitions/loot_condition",
+              "description": "Optional condition for target filtering"
+            }
+          },
+          "required": ["shapes", "position"]
+        }
+      ]
+    },
+    "shape": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["whispers_of_ether:sphere", "whispers_of_ether:cube", "whispers_of_ether:box"]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:sphere" },
+            "radius": {
+              "type": "number",
+              "description": "Radius of the sphere",
+              "minimum": 0
+            }
+          },
+          "required": ["radius"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:cube" },
+            "size": {
+              "type": "number",
+              "description": "Size of the cube",
+              "minimum": 0
+            }
+          },
+          "required": ["size"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:box" },
+            "x": {
+              "type": "number",
+              "description": "X dimension of the box",
+              "minimum": 0
+            },
+            "y": {
+              "type": "number",
+              "description": "Y dimension of the box",
+              "minimum": 0
+            },
+            "z": {
+              "type": "number",
+              "description": "Z dimension of the box",
+              "minimum": 0
+            }
+          },
+          "required": ["x", "y", "z"]
+        }
+      ]
+    },
+    "position_target": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["whispers_of_ether:absolute", "whispers_of_ether:relative", "whispers_of_ether:local"]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:absolute" },
+            "position": {
+              "$ref": "#/definitions/position",
+              "description": "Absolute world coordinates"
+            }
+          },
+          "required": ["position"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:relative" },
+            "offset": {
+              "$ref": "#/definitions/position",
+              "description": "Offset from caster position"
+            }
+          },
+          "required": ["offset"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:local" },
+            "offset": {
+              "$ref": "#/definitions/position",
+              "description": "Offset in caster's local coordinate system"
+            }
+          },
+          "required": ["offset"]
+        }
+      ]
+    },
+    "position": {
+      "type": "object",
+      "required": ["x", "y", "z"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "z": { "type": "number" }
+      }
+    },
+    "organization_timeline": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "whispers_of_ether:sequential",
+            "whispers_of_ether:parallel", 
+            "whispers_of_ether:random",
+            "whispers_of_ether:loop",
+            "whispers_of_ether:group"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:sequential" },
+            "timeline_ids": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of timeline IDs to execute in sequence"
+            }
+          },
+          "required": ["timeline_ids"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:parallel" },
+            "timeline_ids": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of timeline IDs to execute in parallel"
+            }
+          },
+          "required": ["timeline_ids"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:random" },
+            "choices": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/random_choice"
+              },
+              "description": "Weighted choices for random timeline selection"
+            }
+          },
+          "required": ["choices"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:loop" },
+            "timeline_id": {
+              "type": "string",
+              "description": "ID of timeline to loop"
+            },
+            "iterations": {
+              "type": "integer",
+              "description": "Number of loop iterations",
+              "minimum": 1
+            },
+            "delay": {
+              "type": "integer",
+              "description": "Optional delay between iterations in ticks",
+              "minimum": 0
+            },
+            "offset": {
+              "$ref": "#/definitions/loop_offset",
+              "description": "Optional offset calculation for each iteration"
+            }
+          },
+          "required": ["timeline_id", "iterations"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:group" },
+            "organization": {
+              "$ref": "#/definitions/organization_timeline",
+              "description": "Nested organization to execute"
+            }
+          },
+          "required": ["organization"]
+        }
+      ]
+    },
+    "random_choice": {
+      "type": "object",
+      "required": ["timeline_id", "weight"],
+      "properties": {
+        "timeline_id": {
+          "type": "string",
+          "description": "ID of timeline to potentially execute"
+        },
+        "weight": {
+          "type": "integer",
+          "description": "Weight for random selection",
+          "minimum": 1
+        }
+      }
+    },
+    "loop_offset": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "whispers_of_ether:random_box",
+            "whispers_of_ether:lookup",
+            "whispers_of_ether:random_value"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:random_box" },
+            "box_size": {
+              "$ref": "#/definitions/position",
+              "description": "Size of box for random position generation"
+            }
+          },
+          "required": ["box_size"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:lookup" },
+            "positions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/position"
+              },
+              "description": "List of positions to cycle through"
+            }
+          },
+          "required": ["positions"]
+        },
+        {
+          "properties": {
+            "type": { "const": "whispers_of_ether:random_value" },
+            "axis": {
+              "type": "string",
+              "enum": ["X", "Y", "Z"],
+              "description": "Axis for random value generation"
+            },
+            "min_value": {
+              "type": "number",
+              "description": "Minimum random value"
+            },
+            "max_value": {
+              "type": "number",
+              "description": "Maximum random value"
+            },  
+            "offset_type": {
+              "type": "string",
+              "enum": ["RELATIVE", "LOCAL", "ABSOLUTE"],
+              "description": "Type of offset calculation"
+            }
+          },
+          "required": ["axis", "min_value", "max_value", "offset_type"]
+        }
+      ]
+    },
+    "loot_condition": {
+      "description": "Standard Minecraft loot condition - supports all vanilla loot conditions like minecraft:entity_properties, minecraft:location_check, etc.",
+      "type": "object",
+      "required": ["condition"],
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Namespaced identifier for the loot condition type"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -428,4 +428,12 @@ type Target =
     | 'self'          // Le lanceur du sort
     | AimedTarget     // L'entité lanceur regarde
     | AreaTarget      // Une zone autour du lanceur
-J
+
+
+/**
+ *   Offset pour Loop :
+ * 
+ * - Ont veut pouvoir choisir une coorodonées aléatoire dans une boite, centrer sur le même point sans déplacer le centre de la boite.
+ * - Choisir une coorodnés dans un lookup donc iteration 1, telle position, it2, telle position, etc.
+ * - Rajouter a x ou y ou z une valeur aléatoire, relative, local.
+ * */
