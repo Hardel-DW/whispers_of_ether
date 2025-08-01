@@ -1,6 +1,5 @@
 package fr.hardel.whispers_of_ether.spell.timeline.offset;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.target.position.Position;
@@ -10,11 +9,7 @@ import net.minecraft.util.math.random.Random;
 public record RandomBoxOffset(Position boxSize) implements LoopOffset {
 
     public static final MapCodec<RandomBoxOffset> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            RecordCodecBuilder.mapCodec(posInstance -> posInstance.group(
-                    Codec.FLOAT.fieldOf("x").forGetter(pos -> ((Position) pos).x()),
-                    Codec.FLOAT.fieldOf("y").forGetter(pos -> ((Position) pos).y()),
-                    Codec.FLOAT.fieldOf("z").forGetter(pos -> ((Position) pos).z())).apply(posInstance, Position::new))
-                    .fieldOf("box_size").forGetter(RandomBoxOffset::boxSize))
+            Position.CODEC.fieldOf("box_size").forGetter(RandomBoxOffset::boxSize))
             .apply(instance, RandomBoxOffset::new));
 
     @Override

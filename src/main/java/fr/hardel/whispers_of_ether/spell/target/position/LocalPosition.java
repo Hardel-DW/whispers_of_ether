@@ -1,6 +1,5 @@
 package fr.hardel.whispers_of_ether.spell.target.position;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.Entity;
@@ -9,11 +8,7 @@ import net.minecraft.util.math.Vec3d;
 public record LocalPosition(Position offset) implements PositionTarget {
 
     public static final MapCodec<LocalPosition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            RecordCodecBuilder.mapCodec(posInstance -> posInstance.group(
-                    Codec.FLOAT.fieldOf("x").forGetter(pos -> ((Position) pos).x()),
-                    Codec.FLOAT.fieldOf("y").forGetter(pos -> ((Position) pos).y()),
-                    Codec.FLOAT.fieldOf("z").forGetter(pos -> ((Position) pos).z())).apply(posInstance, Position::new))
-                    .fieldOf("offset").forGetter(LocalPosition::offset))
+            Position.CODEC.fieldOf("offset").forGetter(LocalPosition::offset))
             .apply(instance, LocalPosition::new));
 
     @Override

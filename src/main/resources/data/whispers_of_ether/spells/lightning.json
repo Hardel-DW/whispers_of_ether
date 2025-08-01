@@ -1,5 +1,34 @@
 {
-  "icon": "whispers_of_ether:lightning",
-  "name": "Lightning",
-  "mana_cost": 40
+    "$schema": "https://raw.githubusercontent.com/Hardel-DW/whispers_of_ether/refs/heads/main/src/schema/spell.json",
+    "icon": "whispers_of_ether:lightning",
+    "name": "Lightning",
+    "timelines": [
+        {
+            "id": "cast",
+            "duration": 0,
+            "actions": [
+                {
+                    "action": {
+                        "type": "whispers_of_ether:summon",
+                        "entity": "minecraft:lightning_bolt"
+                    },
+                    "target": {
+                        "type": "whispers_of_ether:area",
+                        "shapes": [
+                            {
+                                "type": "whispers_of_ether:sphere",
+                                "radius": 8.0
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "organization": {
+        "type": "whispers_of_ether:sequential",
+        "timeline_ids": [
+            "cast"
+        ]
+    }
 }

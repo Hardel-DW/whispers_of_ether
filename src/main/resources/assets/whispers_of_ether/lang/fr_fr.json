@@ -14,9 +14,5 @@
     "command.whispers_of_ether.spell.clear.empty": "%s n'a aucun sort à effacer",
     "command.whispers_of_ether.spell.clear.success": "%d sorts effacés de %s",
     "command.whispers_of_ether.spell.error": "Erreur: %s",
-    "command.whispers_of_ether.spell.unknown": "Sort inconnu: %s",
-    "spell.cast.not_owned": "Vous ne possédez pas ce sort !",
-    "spell.cast.unknown": "Sort inconnu !",
-    "spell.cast.success": "Lancement du sort: %s (Coût: %s mana)",
-    "spell.cast.effect": "Sort %s activé !"
+    "command.whispers_of_ether.spell.unknown": "Sort inconnu: %s"
 }
