@@ -29,7 +29,7 @@ public record AreaTarget(List<Shape> shapes, PositionTarget position, Optional<I
             Shape.CODEC.listOf().fieldOf("shapes").forGetter(AreaTarget::shapes),
             PositionTarget.CODEC.optionalFieldOf("position", new RelativePosition(Position.ZERO)).forGetter(AreaTarget::position),
             Codec.INT.optionalFieldOf("limit").forGetter(AreaTarget::limit),
-            LootCondition.CODEC.optionalFieldOf("condition").forGetter(AreaTarget::condition))
+            LootCondition.CODEC.optionalFieldOf("requirement").forGetter(AreaTarget::condition))
             .apply(instance, AreaTarget::new));
 
     @Override
