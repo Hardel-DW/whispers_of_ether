@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.target.position.PositionTarget;
+import fr.hardel.whispers_of_ether.spell.target.position.RelativePosition;
+import fr.hardel.whispers_of_ether.spell.target.position.Position;
 import fr.hardel.whispers_of_ether.spell.target.shape.Shape;
 import net.minecraft.loot.condition.LootCondition;
 
@@ -25,7 +27,7 @@ public record AreaTarget(List<Shape> shapes, PositionTarget position, Optional<I
 
     public static final MapCodec<AreaTarget> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Shape.CODEC.listOf().fieldOf("shapes").forGetter(AreaTarget::shapes),
-            PositionTarget.CODEC.fieldOf("position").forGetter(AreaTarget::position),
+            PositionTarget.CODEC.optionalFieldOf("position", new RelativePosition(Position.ZERO)).forGetter(AreaTarget::position),
             Codec.INT.optionalFieldOf("limit").forGetter(AreaTarget::limit),
             LootCondition.CODEC.optionalFieldOf("condition").forGetter(AreaTarget::condition))
             .apply(instance, AreaTarget::new));

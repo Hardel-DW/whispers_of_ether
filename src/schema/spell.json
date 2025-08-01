@@ -190,7 +190,7 @@
               "description": "Optional condition for target filtering"
             }
           },
-          "required": ["shapes", "position"]
+          "required": ["shapes"]
         }
       ]
     },

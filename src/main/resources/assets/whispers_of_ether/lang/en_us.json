@@ -17,6 +17,5 @@
     "command.whispers_of_ether.spell.unknown": "Unknown spell: %s",
     "spell.cast.not_owned": "You don't have this spell!",
     "spell.cast.unknown": "Unknown spell!",
-    "spell.cast.success": "Casting spell: %s (Cost: %s mana)",
     "spell.cast.effect": "%s spell activated!"
 }

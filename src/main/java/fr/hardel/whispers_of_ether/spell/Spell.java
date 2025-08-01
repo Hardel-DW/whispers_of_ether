@@ -11,7 +11,6 @@ import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import java.util.List;
 import java.util.Optional;
@@ -64,8 +63,5 @@ public record Spell(Identifier icon, String name, Optional<Integer> cooldown,
         if (!timelines.isEmpty()) {
             organization.execute(timelines, serverWorld, caster);
         }
-
-        caster.sendMessage(Text.translatable("spell.cast.effect", name), false);
     }
-
 }
