@@ -34,9 +34,11 @@ public class WhispersOfEther implements ModInitializer {
         PositionTargetType.register();
         LoopOffsetType.register();
         ResourceManagerHelper.get(ResourceType.SERVER_DATA)
-            .registerReloadListener(new SpellResourceReloadListener());
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> 
-            SpellCommand.register(dispatcher));
+                .registerReloadListener(new SpellResourceReloadListener());
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            SpellResourceReloadListener.setRegistryLookup(registryAccess);
+            SpellCommand.register(dispatcher);
+        });
         NetworkHandler.registerServerPackets();
     }
 }
