@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/Hardel-DW/whispers_of_ether/refs/heads/main/src/schema/spell.json",
+    "$schema": "../../../../../schema/spell.json",
     "icon": "whispers_of_ether:lightning",
     "name": "Lightning",
     "timelines": [
@@ -17,7 +17,7 @@
                         "shapes": [
                             {
                                 "type": "whispers_of_ether:sphere",
-                                "radius": 8.0
+                                "radius": 50.0
                             }
                         ]
                     }

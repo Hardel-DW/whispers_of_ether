@@ -24,9 +24,13 @@ public record LoopOffsetType<T extends LoopOffset>(MapCodec<T> codec) {
     public static final LoopOffsetType<RandomValueOffset> RANDOM_VALUE = 
         new LoopOffsetType<>(RandomValueOffset.CODEC);
     
+    public static final LoopOffsetType<ForwardOffset> FORWARD = 
+        new LoopOffsetType<>(ForwardOffset.CODEC);
+    
     public static void register() {
         Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "random_box"), RANDOM_BOX);
         Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "lookup"), LOOKUP);
         Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "random_value"), RANDOM_VALUE);
+        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "forward"), FORWARD);
     }
 }

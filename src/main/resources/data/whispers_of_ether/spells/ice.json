@@ -1,5 +1,39 @@
 {
-  "icon": "whispers_of_ether:ice",
-  "name": "Heal",
-  "mana_cost": 15
+    "$schema": "../../../../../schema/spell.json",
+    "icon": "whispers_of_ether:ice",
+    "name": "Ice Spikes",
+    "cooldown": 10,
+    "timelines": [
+        {
+            "id": "spike",
+            "duration": 0,
+            "actions": [
+                {
+                    "action": {
+                        "type": "whispers_of_ether:particle",
+                        "particle": "minecraft:snowflake",
+                        "count": 5,
+                        "delta": {
+                            "x": 0.1,
+                            "y": 0.1,
+                            "z": 0.1
+                        }
+                    },
+                    "target": {
+                        "type": "whispers_of_ether:self"
+                    }
+                }
+            ]
+        }
+    ],
+    "organization": {
+        "type": "whispers_of_ether:loop",
+        "timeline_id": "spike",
+        "iterations": 40,
+        "delay": 1,
+        "offset": {
+            "type": "whispers_of_ether:forward",
+            "distance_per_iteration": 1
+        }
+    }
 }

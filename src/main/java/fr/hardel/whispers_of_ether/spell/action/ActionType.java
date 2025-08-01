@@ -21,8 +21,16 @@ public record ActionType<T extends Action>(MapCodec<T> codec) {
     public static final ActionType<DamageAction> DAMAGE = 
         new ActionType<>(DamageAction.CODEC);
     
+    public static final ActionType<IceSpikesAction> ICE_SPIKES = 
+        new ActionType<>(IceSpikesAction.CODEC);
+    
+    public static final ActionType<ParticleAction> PARTICLE = 
+        new ActionType<>(ParticleAction.CODEC);
+    
     public static void register() {
         Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "summon"), SUMMON);
         Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "damage"), DAMAGE);
+        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "ice_spikes"), ICE_SPIKES);
+        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "particle"), PARTICLE);
     }
 }

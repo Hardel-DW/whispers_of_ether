@@ -33,12 +33,16 @@ public class SpellResourceReloadListener implements SimpleSynchronousResourceRel
 
             try (InputStream stream = resource.get().getInputStream()) {
                 JsonElement json = GSON.fromJson(new InputStreamReader(stream), JsonElement.class);
+                WhispersOfEther.LOGGER.info("Parsing spell {}: {}", id, json);
 
                 var result = Spell.CODEC.parse(JsonOps.INSTANCE, json);
                 if (result.result().isPresent()) {
                     Identifier spellId = Identifier.of(id.getNamespace(),
                             id.getPath().substring("spells/".length(), id.getPath().length() - ".json".length()));
                     SPELLS.put(spellId, result.result().get());
+                    WhispersOfEther.LOGGER.info("Loaded spell: {}", spellId);
+                } else {
+                    WhispersOfEther.LOGGER.error("Failed to parse spell {}: {}", id, result.error().orElse(null));
                 }
             } catch (Exception e) {
                 WhispersOfEther.LOGGER.error("Error loading spell {}: {}", id, e.getMessage());
