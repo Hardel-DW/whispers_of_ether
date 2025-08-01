@@ -7,8 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 public class NetworkHandler {
 
     public static void registerClientPackets() {
-        PayloadTypeRegistry.playC2S().register(WhispersOfEtherPacket.SpellCast.ID,
-                WhispersOfEtherPacket.SpellCast.CODEC);
+        // Client registration is handled in registerServerPackets
     }
 
     public static void registerServerPackets() {
