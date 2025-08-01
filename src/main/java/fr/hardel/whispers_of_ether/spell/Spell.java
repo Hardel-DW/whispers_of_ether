@@ -2,6 +2,7 @@ package fr.hardel.whispers_of_ether.spell;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.spell.timeline.OrganizationTimeline;
 import fr.hardel.whispers_of_ether.spell.timeline.TimelineAction;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +34,13 @@ public record Spell(Identifier icon, String name, Optional<Integer> cooldown,
         return Identifier.of(icon.getNamespace(), "textures/spell/" + icon.getPath() + ".png");
     }
 
-    public boolean canCast(PlayerEntity caster) {
+    public boolean canCast(PlayerEntity caster, Identifier spellId) {
+        // Vérifier le cooldown d'abord
+        var spellComponent = ModComponents.PLAYER_SPELL.get(caster);
+        if (spellComponent.isOnCooldown(spellId)) {
+            return false;
+        }
+
         if (condition.isEmpty() || !(caster.getWorld() instanceof ServerWorld)) {
             return true;
         }
@@ -49,12 +56,19 @@ public record Spell(Identifier icon, String name, Optional<Integer> cooldown,
         return condition.get().test(lootContext);
     }
 
-    public void cast(PlayerEntity caster) {
-        if (!canCast(caster))
+    public void cast(PlayerEntity caster, Identifier spellId) {
+        if (!canCast(caster, spellId))
             return;
 
         if (!(caster.getWorld() instanceof ServerWorld serverWorld))
             return;
+
+        // Déclencher le cooldown après un cast réussi
+        if (cooldown.isPresent() && cooldown.get() > 0) {
+            var spellComponent = ModComponents.PLAYER_SPELL.get(caster);
+            long endTime = System.currentTimeMillis() + (cooldown.get() * 1000L);
+            spellComponent.setCooldown(spellId, endTime);
+        }
 
         for (SpellAction action : passive) {
             SpellActionExecutor.execute(action, serverWorld, caster);

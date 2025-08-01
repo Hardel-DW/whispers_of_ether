@@ -24,39 +24,54 @@ public class TimelineScheduler {
             Entity caster, int delayTicks) {
         return executeTimelineAsync(timeline, world, caster, delayTicks, null);
     }
-    
+
     public static CompletableFuture<Void> executeTimelineAsync(TimelineAction timeline, ServerWorld world,
             Entity caster, int delayTicks, Position offset) {
-        return CompletableFuture.runAsync(() -> {
-            try {
-                if (delayTicks > 0) {
-                    Thread.sleep(delayTicks * 50L); // 50ms par tick
-                }
+        CompletableFuture<Void> future = new CompletableFuture<>();
 
+        // Exécution synchrone sur le thread principal
+        Runnable executeTask = () -> {
+            try {
                 if (timeline.condition().isPresent() && !checkCondition(timeline.condition().get(), world, caster)) {
+                    future.complete(null);
                     return;
                 }
 
-                // Créer un caster temporaire avec offset si nécessaire
                 Entity effectiveCaster = caster;
                 if (offset != null) {
-                    // TODO: Créer un caster proxy avec position décalée
-                    // Pour l'instant, on utilise le caster original
-                    effectiveCaster = caster;
+                    double originalX = caster.getX();
+                    double originalY = caster.getY();
+                    double originalZ = caster.getZ();
+
+                    caster.setPosition(
+                            originalX + offset.x(),
+                            originalY + offset.y(),
+                            originalZ + offset.z());
+
+                    for (var action : timeline.actions()) {
+                        SpellActionExecutor.execute(action, world, effectiveCaster);
+                    }
+
+                    caster.setPosition(originalX, originalY, originalZ);
+                } else {
+                    for (var action : timeline.actions()) {
+                        SpellActionExecutor.execute(action, world, effectiveCaster);
+                    }
                 }
 
-                for (var action : timeline.actions()) {
-                    SpellActionExecutor.execute(action, world, effectiveCaster);
-                }
-
-                if (timeline.duration() > 0) {
-                    Thread.sleep(timeline.duration() * 50L);
-                }
-
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+                future.complete(null);
+            } catch (Exception e) {
+                future.completeExceptionally(e);
             }
-        }, scheduler);
+        };
+
+        if (delayTicks > 0) {
+            scheduler.schedule(() -> world.getServer().execute(executeTask), delayTicks * 50L, TimeUnit.MILLISECONDS);
+        } else {
+            world.getServer().execute(executeTask);
+        }
+
+        return future;
     }
 
     public static CompletableFuture<Void> scheduleDelayed(Runnable task, int delayTicks) {

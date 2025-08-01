@@ -5,7 +5,7 @@ import fr.hardel.whispers_of_ether.spell.target.position.Position;
 import net.minecraft.entity.Entity;
 
 public sealed interface LoopOffset 
-    permits RandomBoxOffset, LookupOffset, RandomValueOffset {
+    permits RandomBoxOffset, LookupOffset, RandomValueOffset, ForwardOffset {
 
     Codec<LoopOffset> CODEC = LoopOffsetType.REGISTRY.getCodec()
         .dispatch("type", LoopOffset::getType, LoopOffsetType::codec);

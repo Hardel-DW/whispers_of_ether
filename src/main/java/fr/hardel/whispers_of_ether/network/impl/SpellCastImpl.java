@@ -24,7 +24,7 @@ public class SpellCastImpl {
                 return;
             }
 
-            spell.cast(player);
+            spell.cast(player, packet.spellId());
         });
     }
 }
