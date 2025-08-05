@@ -14,5 +14,15 @@
     "command.whispers_of_ether.spell.clear.empty": "%s n'a aucun sort à effacer",
     "command.whispers_of_ether.spell.clear.success": "%d sorts effacés de %s",
     "command.whispers_of_ether.spell.error": "Erreur: %s",
-    "command.whispers_of_ether.spell.unknown": "Sort inconnu: %s"
+    "command.whispers_of_ether.spell.unknown": "Sort inconnu: %s",
+    "command.whispers_of_ether.waypoint.invalid_color": "Couleur invalide. Utilisez un entier ou RRGGBB",
+    "command.whispers_of_ether.waypoint.player_only": "Cette commande ne peut être utilisée que par un joueur",
+    "command.whispers_of_ether.waypoint.add.success": "Waypoint '%s' ajouté à %d, %d, %d (couleur: #%s)",
+    "command.whispers_of_ether.waypoint.remove.success": "Waypoint '%s' supprimé",
+    "command.whispers_of_ether.waypoint.remove.not_found": "Waypoint '%s' introuvable",
+    "command.whispers_of_ether.waypoint.list.empty": "Aucun waypoint défini",
+    "command.whispers_of_ether.waypoint.list.header": "Waypoints (%d):",
+    "command.whispers_of_ether.waypoint.list.item": "- %s à %d, %d, %d",
+    "command.whispers_of_ether.waypoint.clear.success": "Tous les waypoints ont été supprimés",
+    "waypoint.distance": "%.0fm"
 }

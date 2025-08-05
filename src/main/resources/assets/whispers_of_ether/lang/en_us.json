@@ -17,5 +17,15 @@
     "command.whispers_of_ether.spell.unknown": "Unknown spell: %s",
     "spell.cast.not_owned": "You don't have this spell!",
     "spell.cast.unknown": "Unknown spell!",
-    "spell.cast.effect": "%s spell activated!"
+    "spell.cast.effect": "%s spell activated!",
+    "command.whispers_of_ether.waypoint.invalid_color": "Invalid color. Use an integer or RRGGBB",
+    "command.whispers_of_ether.waypoint.player_only": "This command can only be used by a player",
+    "command.whispers_of_ether.waypoint.add.success": "Waypoint '%s' added at %d, %d, %d (color: #%s)",
+    "command.whispers_of_ether.waypoint.remove.success": "Waypoint '%s' removed",
+    "command.whispers_of_ether.waypoint.remove.not_found": "Waypoint '%s' not found",
+    "command.whispers_of_ether.waypoint.list.empty": "No waypoints defined",
+    "command.whispers_of_ether.waypoint.list.header": "Waypoints (%d):",
+    "command.whispers_of_ether.waypoint.list.item": "- %s at %d, %d, %d",
+    "command.whispers_of_ether.waypoint.clear.success": "All waypoints have been removed",
+    "waypoint.distance": "%.0fm"
 }
