@@ -1,5 +1,6 @@
 package fr.hardel.whispers_of_ether.client;
 
+import fr.hardel.whispers_of_ether.client.screen.WaypointRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.util.Identifier;
@@ -22,6 +23,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         ModKeyBindings.register();
         SpellCastHandler.initialize();
         NetworkHandler.registerClientPackets();
+        WaypointRenderer.register();
         HudElementRegistry.addLast(Identifier.of(MOD_ID, "spell_selector"), SpellSelector::render);
     }
 }
