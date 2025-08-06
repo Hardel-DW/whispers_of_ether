@@ -24,5 +24,8 @@
     "command.whispers_of_ether.waypoint.list.header": "Waypoints (%d):",
     "command.whispers_of_ether.waypoint.list.item": "- %s à %d, %d, %d",
     "command.whispers_of_ether.waypoint.clear.success": "Tous les waypoints ont été supprimés",
-    "waypoint.distance": "%.0fm"
+    "waypoint.distance": "%dm",
+    "command.whispers_of_ether.ethersphere.create.success": "Sphère Ether '%s' créée à %d, %d, %d (rayon: %.1f)",
+    "command.whispers_of_ether.ethersphere.remove.success": "Sphère Ether '%s' supprimée",
+    "command.whispers_of_ether.ethersphere.clear.success": "Toutes les sphères Ether ont été supprimées"
 }

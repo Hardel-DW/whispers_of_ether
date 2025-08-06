@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import fr.hardel.whispers_of_ether.attributes.ModAttribute;
 import fr.hardel.whispers_of_ether.command.SpellCommand;
 import fr.hardel.whispers_of_ether.command.WaypointCommand;
+import fr.hardel.whispers_of_ether.command.EtherSphereCommand;
 import fr.hardel.whispers_of_ether.network.NetworkHandler;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
 import fr.hardel.whispers_of_ether.spell.action.ActionType;
@@ -42,6 +43,7 @@ public class WhispersOfEther implements ModInitializer {
                 .register((dispatcher, registryAccess, environment) -> {
                     SpellCommand.register(dispatcher);
                     WaypointCommand.register(dispatcher);
+                    EtherSphereCommand.register(dispatcher);
                 });
         NetworkHandler.registerServerPackets();
     }
