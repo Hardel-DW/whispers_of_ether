@@ -154,7 +154,7 @@ public class WaypointRenderer {
         MinecraftClient client = MinecraftClient.getInstance();
         TextRenderer textRenderer = client.textRenderer;
 
-        Text text = Text.translatable("waypoint.distance", distance);
+        Text text = Text.translatable("waypoint.distance", (int)Math.round(distance));
 
         matrices.push();
         matrices.translate(0, TEXT_Y_OFFSET, 0);
