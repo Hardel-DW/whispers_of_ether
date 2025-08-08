@@ -13,10 +13,12 @@ import net.minecraft.client.gl.UniformType;
 
 public class EtherSphereRenderer {
 
-    private static final Identifier NOISE_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID, "textures/shader/noise.png");
-    private static final Identifier STARS_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID, "textures/shader/stars.png");
+    private static final Identifier NOISE_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
+            "textures/shader/noise.png");
+    private static final Identifier STARS_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
+            "textures/shader/stars.png");
     private static RenderPipeline customPipeline;
-    
+
     private static RenderPipeline getGalaxyPipeline() {
         if (customPipeline == null) {
             try {
@@ -31,15 +33,17 @@ public class EtherSphereRenderer {
                 RenderPipeline.Snippet globalsSnippet = RenderPipeline.builder()
                         .withUniform("Globals", UniformType.UNIFORM_BUFFER)
                         .buildSnippet();
-                
+
                 // Pipeline EXACTEMENT comme END_PORTAL avec snippets dans le même ordre
                 customPipeline = RenderPipeline.builder(transformsSnippet, fogSnippet, globalsSnippet)
-                        .withLocation(Identifier.of(WhispersOfEther.MOD_ID, "rendertype_galaxy"))
-                        .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
-                        .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
+                        .withLocation(Identifier.of("rendertype_galaxy"))
+                        .withVertexShader(Identifier.of("core/galaxy"))
+                        .withFragmentShader(Identifier.of("core/galaxy"))
                         .withSampler("Sampler0")
                         .withSampler("Sampler1")
-                        .withVertexFormat(VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS)
+                        .withVertexFormat(
+                                VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
+                                VertexFormat.DrawMode.QUADS)
                         .withBlend(BlendFunction.TRANSLUCENT)
                         .withCull(false)
                         .build();
@@ -51,12 +55,12 @@ public class EtherSphereRenderer {
         }
         return customPipeline;
     }
-    
+
     private static final RenderLayer GALAXY_LAYER = RenderLayer.of(
             "ether_galaxy",
             1536,
             false,
-            true,
+            false,
             getGalaxyPipeline(),
             RenderLayer.MultiPhaseParameters.builder()
                     .texture(RenderPhase.Textures.create()
@@ -65,8 +69,7 @@ public class EtherSphereRenderer {
                             .build())
                     .lightmap(RenderPhase.ENABLE_LIGHTMAP)
                     .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
-                    .build(false)
-    );
+                    .build(false));
 
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, Vec3d center, float radius) {
         matrices.push();
@@ -79,7 +82,7 @@ public class EtherSphereRenderer {
     }
 
     private void renderSphere(VertexConsumer vertexConsumer, MatrixStack matrices, float radius) {
-        int segments = 16;
+        int segments = Math.max(32, Math.min(96, (int) (radius * 12)));
 
         for (int lat = 0; lat < segments; lat++) {
             float theta1 = lat * (float) Math.PI / segments;
@@ -105,6 +108,7 @@ public class EtherSphereRenderer {
                 float y4 = radius * (float) Math.cos(theta2);
                 float z4 = radius * (float) (Math.sin(theta2) * Math.sin(phi1));
 
+                // UVs not used for sampling anymore (shader uses spherical mapping via normal)
                 float u1 = (float) lon / segments;
                 float v1 = (float) lat / segments;
                 float u2 = (float) (lon + 1) / segments;
@@ -119,25 +123,25 @@ public class EtherSphereRenderer {
                         .color(255, 255, 255, 255)
                         .texture(u1, v1)
                         .overlay(0)
-                        .light(15728880)
+                        .light(0x00F000F0)
                         .normal(matrices.peek(), nx1, ny1, nz1);
                 vertexConsumer.vertex(matrices.peek().getPositionMatrix(), x2, y2, z2)
                         .color(255, 255, 255, 255)
                         .texture(u2, v1)
                         .overlay(0)
-                        .light(15728880)
+                        .light(0x00F000F0)
                         .normal(matrices.peek(), nx2, ny2, nz2);
                 vertexConsumer.vertex(matrices.peek().getPositionMatrix(), x3, y3, z3)
                         .color(255, 255, 255, 255)
                         .texture(u2, v2)
                         .overlay(0)
-                        .light(15728880)
+                        .light(0x00F000F0)
                         .normal(matrices.peek(), nx3, ny3, nz3);
                 vertexConsumer.vertex(matrices.peek().getPositionMatrix(), x4, y4, z4)
                         .color(255, 255, 255, 255)
                         .texture(u1, v2)
                         .overlay(0)
-                        .light(15728880)
+                        .light(0x00F000F0)
                         .normal(matrices.peek(), nx4, ny4, nz4);
             }
         }
