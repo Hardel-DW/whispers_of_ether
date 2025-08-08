@@ -9,7 +9,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RenderSystem {
+    private static RenderSystem instance;
     private final Map<SceneObjectType, SceneObjectRenderer> renderers = new HashMap<>();
+
+    private RenderSystem() {}
+
+    public static RenderSystem getInstance() {
+        if (instance == null) {
+            instance = new RenderSystem();
+        }
+        return instance;
+    }
+
+    public static void register() {
+        getInstance();
+    }
 
     public void registerRenderer(SceneObjectRenderer renderer) {
         renderers.put(renderer.getType(), renderer);

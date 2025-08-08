@@ -11,7 +11,7 @@ public class RendererFactory {
     }
 
     public RenderSystem createRenderSystem() {
-        RenderSystem renderSystem = new RenderSystem();
+        RenderSystem renderSystem = RenderSystem.getInstance();
         registerRenderers(renderSystem);
         return renderSystem;
     }
