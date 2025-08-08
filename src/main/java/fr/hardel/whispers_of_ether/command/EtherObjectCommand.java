@@ -8,6 +8,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import fr.hardel.whispers_of_ether.object.SceneObjectsComponents;
 import fr.hardel.whispers_of_ether.object.SceneObjectType;
+import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
 import net.minecraft.util.Identifier;
 import fr.hardel.whispers_of_ether.object.SceneObject;
 import fr.hardel.whispers_of_ether.object.SceneObjectsComponent;
@@ -65,7 +66,7 @@ public class EtherObjectCommand {
                 : Identifier.of(fr.hardel.whispers_of_ether.WhispersOfEther.MOD_ID, typeStr);
         SceneObjectType type = typeId == null ? null : SceneObjectType.REGISTRY.get(typeId);
         if (type == null) {
-            src.sendError(Text.literal("Unknown type: " + typeStr));
+            src.sendError(Text.translatable("command.whispers_of_ether.etherobj.unknown_type", typeStr));
             return 0;
         }
 
@@ -78,12 +79,9 @@ public class EtherObjectCommand {
 
         SceneObjectsComponent comp = SceneObjectsComponents.SCENE_OBJECTS.get(world);
         boolean isNew = comp.upsert(obj);
-        Identifier typeResolvedId = SceneObjectType.REGISTRY.getId(type);
-        src.sendFeedback(() -> Text
-                .literal((isNew ? "Created " : "Updated ") + id + " ("
-                        + (typeResolvedId != null ? typeResolvedId : "unknown") + ") @ "
-                        + bp + ", r=" + radius + ", s=" + strength),
-                false);
+        Text displayName = SceneObjectTypes.getDisplayName(type);
+        String actionKey = isNew ? "command.whispers_of_ether.etherobj.created" : "command.whispers_of_ether.etherobj.updated";
+        src.sendFeedback(() -> Text.translatable(actionKey, id, displayName, bp.getX(), bp.getY(), bp.getZ(), radius, strength), false);
         return 1;
     }
 
@@ -93,18 +91,20 @@ public class EtherObjectCommand {
         String id = StringArgumentType.getString(ctx, "id");
         SceneObjectsComponent comp = SceneObjectsComponents.SCENE_OBJECTS.get(world);
         if (comp.remove(id)) {
-            src.sendFeedback(() -> Text.literal("Removed " + id), false);
+            src.sendFeedback(() -> Text.translatable("command.whispers_of_ether.etherobj.removed", id), false);
             return 1;
         }
-        src.sendError(Text.literal("No object with id " + id));
+        src.sendError(Text.translatable("command.whispers_of_ether.etherobj.not_found", id));
         return 0;
     }
 
     private static int clear(CommandContext<ServerCommandSource> ctx) {
         var src = ctx.getSource();
         ServerWorld world = src.getWorld();
-        SceneObjectsComponents.SCENE_OBJECTS.get(world).clear();
-        src.sendFeedback(() -> Text.literal("Cleared all ether objects"), false);
+        var comp = SceneObjectsComponents.SCENE_OBJECTS.get(world);
+        int count = comp.getAll().size();
+        comp.clear();
+        src.sendFeedback(() -> Text.translatable("command.whispers_of_ether.etherobj.cleared", count), false);
         return 1;
     }
 }

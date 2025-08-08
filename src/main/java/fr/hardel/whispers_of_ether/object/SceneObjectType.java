@@ -31,11 +31,6 @@ public final class SceneObjectType {
                 return id != null ? id : Identifier.of(WhispersOfEther.MOD_ID, "unknown");
             });
 
-    public static final SceneObjectType GALAXY_SPHERE = new SceneObjectType();
-    public static final SceneObjectType BLACK_HOLE = new SceneObjectType();
-
     public static void register() {
-        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "galaxy_sphere"), GALAXY_SPHERE);
-        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "black_hole"), BLACK_HOLE);
     }
 }
