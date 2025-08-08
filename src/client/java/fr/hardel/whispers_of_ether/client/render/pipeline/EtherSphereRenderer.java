@@ -1,80 +1,54 @@
-package fr.hardel.whispers_of_ether.client.render;
+package fr.hardel.whispers_of_ether.client.render.pipeline;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
+import fr.hardel.whispers_of_ether.client.render.PipelineFactory;
+import fr.hardel.whispers_of_ether.client.render.SceneObjectRenderer;
+import fr.hardel.whispers_of_ether.object.SceneObject;
+import fr.hardel.whispers_of_ether.object.SceneObjectType;
+import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.client.gl.RenderPipelines;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.pipeline.BlendFunction;
-import net.minecraft.client.gl.UniformType;
 
-public class EtherSphereRenderer {
+public class EtherSphereRenderer implements SceneObjectRenderer {
 
     private static final Identifier NOISE_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
             "textures/shader/noise.png");
     private static final Identifier STARS_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
             "textures/shader/stars.png");
-    private static RenderPipeline customPipeline;
+    
+    private final RenderLayer renderLayer;
 
-    private static RenderPipeline getGalaxyPipeline() {
-        if (customPipeline == null) {
-            try {
-                RenderPipeline.Snippet transformsSnippet = RenderPipeline.builder()
-                        .withUniform("DynamicTransforms", UniformType.UNIFORM_BUFFER)
-                        .withUniform("Projection", UniformType.UNIFORM_BUFFER)
-                        .buildSnippet();
-                RenderPipeline.Snippet fogSnippet = RenderPipeline.builder()
-                        .withUniform("Fog", UniformType.UNIFORM_BUFFER)
-                        .buildSnippet();
-                RenderPipeline.Snippet globalsSnippet = RenderPipeline.builder()
-                        .withUniform("Globals", UniformType.UNIFORM_BUFFER)
-                        .buildSnippet();
-
-                customPipeline = RenderPipeline.builder(transformsSnippet, fogSnippet, globalsSnippet)
-                        .withLocation(Identifier.of("rendertype_galaxy"))
-                        .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
-                        .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
-                        .withSampler("Sampler0")
-                        .withSampler("Sampler1")
-                        .withVertexFormat(
-                                VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
-                                VertexFormat.DrawMode.QUADS)
-                        .withBlend(BlendFunction.TRANSLUCENT)
-                        .withCull(false)
-                        .build();
-            } catch (Exception e) {
-                System.out.println("[EtherSphere] ERREUR création pipeline: " + e.getMessage());
-                e.printStackTrace();
-                return RenderPipelines.ENTITY_TRANSLUCENT; // Fallback
-            }
-        }
-        return customPipeline;
+    public EtherSphereRenderer(PipelineFactory pipelineFactory) {
+        this.renderLayer = RenderLayer.of(
+                "ether_galaxy",
+                1536,
+                false,
+                false,
+                pipelineFactory.createGalaxyPipeline(),
+                RenderLayer.MultiPhaseParameters.builder()
+                        .texture(RenderPhase.Textures.create()
+                                .add(NOISE_TEXTURE, false)
+                                .add(STARS_TEXTURE, false)
+                                .build())
+                        .lightmap(RenderPhase.ENABLE_LIGHTMAP)
+                        .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
+                        .build(false));
     }
 
-    private static final RenderLayer GALAXY_LAYER = RenderLayer.of(
-            "ether_galaxy",
-            1536,
-            false,
-            false,
-            getGalaxyPipeline(),
-            RenderLayer.MultiPhaseParameters.builder()
-                    .texture(RenderPhase.Textures.create()
-                            .add(NOISE_TEXTURE, false)
-                            .add(STARS_TEXTURE, false)
-                            .build())
-                    .lightmap(RenderPhase.ENABLE_LIGHTMAP)
-                    .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
-                    .build(false));
+    @Override
+    public SceneObjectType getType() {
+        return SceneObjectTypes.GALAXY_SPHERE;
+    }
 
-    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, Vec3d center, float radius) {
+    @Override
+    public void render(MatrixStack matrices, WorldRenderContext context, SceneObject object) {
         matrices.push();
-        matrices.translate(center.x, center.y, center.z);
+        matrices.translate(object.position().x, object.position().y, object.position().z);
 
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(GALAXY_LAYER);
-        renderSphere(vertexConsumer, matrices, radius);
+        VertexConsumer vertexConsumer = context.consumers().getBuffer(renderLayer);
+        renderSphere(vertexConsumer, matrices, object.radius());
 
         matrices.pop();
     }
