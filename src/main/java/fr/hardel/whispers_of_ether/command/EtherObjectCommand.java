@@ -7,6 +7,8 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import fr.hardel.whispers_of_ether.object.SceneObjectsComponents;
+import fr.hardel.whispers_of_ether.object.SceneObjectType;
+import net.minecraft.util.Identifier;
 import fr.hardel.whispers_of_ether.object.SceneObject;
 import fr.hardel.whispers_of_ether.object.SceneObjectsComponent;
 import net.minecraft.command.CommandSource;
@@ -42,7 +44,8 @@ public class EtherObjectCommand {
 
     private static CompletableFuture<Suggestions> suggestTypes(CommandContext<ServerCommandSource> ctx,
             SuggestionsBuilder builder) {
-        return CommandSource.suggestMatching(new String[] { "galaxy_sphere", "black_hole" }, builder);
+        return CommandSource.suggestMatching(
+                SceneObjectType.REGISTRY.getIds().stream().map(Identifier::getPath), builder);
     }
 
     private static CompletableFuture<Suggestions> suggestExistingIds(CommandContext<ServerCommandSource> ctx,
@@ -58,13 +61,11 @@ public class EtherObjectCommand {
 
         String id = StringArgumentType.getString(ctx, "id");
         String typeStr = StringArgumentType.getString(ctx, "type");
-        SceneObject.Type type = switch (typeStr) {
-            case "galaxy_sphere" -> SceneObject.Type.GALAXY_SPHERE;
-            case "black_hole" -> SceneObject.Type.BLACK_HOLE;
-            default -> null;
-        };
+        Identifier typeId = typeStr.contains(":") ? Identifier.tryParse(typeStr)
+                : Identifier.of(fr.hardel.whispers_of_ether.WhispersOfEther.MOD_ID, typeStr);
+        SceneObjectType type = typeId == null ? null : SceneObjectType.REGISTRY.get(typeId);
         if (type == null) {
-            src.sendError(Text.literal("Unknown type: " + typeStr + " (expected: galaxy_sphere, black_hole)"));
+            src.sendError(Text.literal("Unknown type: " + typeStr));
             return 0;
         }
 
@@ -77,8 +78,12 @@ public class EtherObjectCommand {
 
         SceneObjectsComponent comp = SceneObjectsComponents.SCENE_OBJECTS.get(world);
         boolean isNew = comp.upsert(obj);
-        src.sendFeedback(() -> Text.literal((isNew ? "Created " : "Updated ") + id + " (" + type.asString() + ") @ "
-                + bp + ", r=" + radius + ", s=" + strength), false);
+        Identifier typeResolvedId = SceneObjectType.REGISTRY.getId(type);
+        src.sendFeedback(() -> Text
+                .literal((isNew ? "Created " : "Updated ") + id + " ("
+                        + (typeResolvedId != null ? typeResolvedId : "unknown") + ") @ "
+                        + bp + ", r=" + radius + ", s=" + strength),
+                false);
         return 1;
     }
 
