@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
 import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
 import fr.hardel.whispers_of_ether.network.NetworkHandler;
-import fr.hardel.whispers_of_ether.client.render.SceneObjectRenderer;
+import fr.hardel.whispers_of_ether.client.render.SceneObjectRenderersInitializer;
 
 public class WhispersOfEtherClient implements ClientModInitializer {
 
@@ -27,7 +27,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         NetworkHandler.registerClientPackets();
         WaypointRenderer.register();
         EtherSphereManager.register();
-        SceneObjectRenderer.register();
+        SceneObjectRenderersInitializer.initialize();
         HudElementRegistry.addLast(Identifier.of(MOD_ID, "spell_selector"), SpellSelector::render);
     }
 }

@@ -30,5 +30,13 @@
     "waypoint.distance": "%dm",
     "command.whispers_of_ether.ethersphere.create.success": "Ether Sphere '%s' created at %d, %d, %d (radius: %.1f)",
     "command.whispers_of_ether.ethersphere.remove.success": "Ether Sphere '%s' removed",
-    "command.whispers_of_ether.ethersphere.clear.success": "All Ether Spheres have been removed"
+    "command.whispers_of_ether.ethersphere.clear.success": "All Ether Spheres have been removed",
+    "scene_object.whispers_of_ether.galaxy_sphere": "Galaxy Sphere",
+    "scene_object.whispers_of_ether.black_hole": "Black Hole",
+    "command.whispers_of_ether.etherobj.unknown_type": "Unknown ether object type: %s",
+    "command.whispers_of_ether.etherobj.created": "Created ether object '%s' (%s) at %d, %d, %d (radius: %.1f, strength: %.1f)",
+    "command.whispers_of_ether.etherobj.updated": "Updated ether object '%s' (%s) at %d, %d, %d (radius: %.1f, strength: %.1f)", 
+    "command.whispers_of_ether.etherobj.removed": "Removed ether object '%s'",
+    "command.whispers_of_ether.etherobj.not_found": "Ether object '%s' not found",
+    "command.whispers_of_ether.etherobj.cleared": "Cleared %d ether objects"
 }

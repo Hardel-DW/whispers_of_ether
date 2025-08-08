@@ -27,5 +27,13 @@
     "waypoint.distance": "%dm",
     "command.whispers_of_ether.ethersphere.create.success": "Sphère Ether '%s' créée à %d, %d, %d (rayon: %.1f)",
     "command.whispers_of_ether.ethersphere.remove.success": "Sphère Ether '%s' supprimée",
-    "command.whispers_of_ether.ethersphere.clear.success": "Toutes les sphères Ether ont été supprimées"
+    "command.whispers_of_ether.ethersphere.clear.success": "Toutes les sphères Ether ont été supprimées",
+    "scene_object.whispers_of_ether.galaxy_sphere": "Sphère Galactique",
+    "scene_object.whispers_of_ether.black_hole": "Trou Noir",
+    "command.whispers_of_ether.etherobj.unknown_type": "Type d'objet éthéré inconnu : %s",
+    "command.whispers_of_ether.etherobj.created": "Objet éthéré '%s' (%s) créé à %d, %d, %d (rayon: %.1f, puissance: %.1f)",
+    "command.whispers_of_ether.etherobj.updated": "Objet éthéré '%s' (%s) mis à jour à %d, %d, %d (rayon: %.1f, puissance: %.1f)",
+    "command.whispers_of_ether.etherobj.removed": "Objet éthéré '%s' supprimé",
+    "command.whispers_of_ether.etherobj.not_found": "Objet éthéré '%s' introuvable",
+    "command.whispers_of_ether.etherobj.cleared": "%d objets éthérés supprimés"
 }
