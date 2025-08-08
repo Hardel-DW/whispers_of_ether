@@ -12,7 +12,9 @@ out float sphericalVertexDistance;
 out float cylindricalVertexDistance;
 
 void main() {
-    gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+    // Slight shrink to reduce edge bleeding when billboarding
+    vec3 pos = Position * 0.9995;
+    gl_Position = ProjMat * ModelViewMat * vec4(pos, 1.0);
     texCoord0 = UV0;
     sphericalVertexDistance = fog_spherical_distance(Position);
     cylindricalVertexDistance = fog_cylindrical_distance(Position);

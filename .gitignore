@@ -123,4 +123,5 @@ TODO.md
 bin/
 .claude/settings.local.json
 .vscode/settings.json
-minecraft_source/
+minecraft_sources/
+githubsource/

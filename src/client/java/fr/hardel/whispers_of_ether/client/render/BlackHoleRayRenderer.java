@@ -16,8 +16,12 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 
-public class BlackHoleRenderer {
+public class BlackHoleRayRenderer {
     private static RenderPipeline pipeline;
+    private static final Identifier NOISE_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
+            "textures/shader/noise_colored.png");
+    private static final Identifier STARS_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
+            "textures/shader/stars.png");
 
     private static RenderPipeline getPipeline() {
         if (pipeline == null) {
@@ -33,9 +37,11 @@ public class BlackHoleRenderer {
                     .buildSnippet();
 
             pipeline = RenderPipeline.builder(transforms, fog, globals)
-                    .withLocation(Identifier.of("rendertype_blackhole"))
-                    .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/blackhole"))
-                    .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/blackhole"))
+                    .withLocation(Identifier.of("rendertype_blackhole_ray"))
+                    .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/blackhole_ray"))
+                    .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/blackhole_ray"))
+                    .withSampler("Sampler0")
+                    .withSampler("Sampler1")
                     .withVertexFormat(VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
                             VertexFormat.DrawMode.QUADS)
                     .withBlend(BlendFunction.TRANSLUCENT)
@@ -46,13 +52,16 @@ public class BlackHoleRenderer {
     }
 
     private static final RenderLayer LAYER = RenderLayer.of(
-            "ether_blackhole",
+            "ether_blackhole_ray",
             1536,
             false,
             false,
             getPipeline(),
             RenderLayer.MultiPhaseParameters.builder()
-                    .texture(RenderPhase.Textures.create().build())
+                    .texture(RenderPhase.Textures.create()
+                            .add(NOISE_TEXTURE, false)
+                            .add(STARS_TEXTURE, false)
+                            .build())
                     .lightmap(RenderPhase.ENABLE_LIGHTMAP)
                     .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
                     .build(false));

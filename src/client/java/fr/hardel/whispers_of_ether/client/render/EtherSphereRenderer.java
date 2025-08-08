@@ -37,8 +37,8 @@ public class EtherSphereRenderer {
                 // Pipeline EXACTEMENT comme END_PORTAL avec snippets dans le même ordre
                 customPipeline = RenderPipeline.builder(transformsSnippet, fogSnippet, globalsSnippet)
                         .withLocation(Identifier.of("rendertype_galaxy"))
-                        .withVertexShader(Identifier.of("core/galaxy"))
-                        .withFragmentShader(Identifier.of("core/galaxy"))
+                        .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
+                        .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
                         .withSampler("Sampler0")
                         .withSampler("Sampler1")
                         .withVertexFormat(
