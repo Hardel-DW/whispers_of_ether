@@ -4,7 +4,6 @@ import fr.hardel.whispers_of_ether.client.screen.WaypointRenderer;
 import fr.hardel.whispers_of_ether.client.render.EtherSphereManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.util.Identifier;
 
 import org.slf4j.Logger;
