@@ -22,7 +22,9 @@ public class RenderSystem {
     }
 
     public static void register() {
-        getInstance();
+        var pipelineFactory = new PipelineFactory();
+        var rendererFactory = new RendererFactory(pipelineFactory);
+        rendererFactory.createRenderSystem();
     }
 
     public void registerRenderer(SceneObjectRenderer renderer) {
@@ -41,7 +43,12 @@ public class RenderSystem {
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
 
         var comp = SceneObjectsComponents.SCENE_OBJECTS.get(client.world);
-        comp.getAll().forEach(obj -> renderers.get(obj.type()).render(matrices, context, obj));
+        comp.getAll().forEach(obj -> {
+            var renderer = renderers.get(obj.type());
+            if (renderer != null) {
+                renderer.render(matrices, context, obj);
+            }
+        });
 
         matrices.pop();
     }
