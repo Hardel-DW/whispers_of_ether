@@ -1,14 +1,9 @@
 package fr.hardel.whispers_of_ether.client.render;
 
-import fr.hardel.whispers_of_ether.client.render.pipeline.BlackHoleRenderer;
+import fr.hardel.whispers_of_ether.client.render.pipeline.SingularityRenderer;
 import fr.hardel.whispers_of_ether.client.render.pipeline.EtherSphereRenderer;
 
 public class RendererFactory {
-    private final PipelineFactory pipelineFactory;
-
-    public RendererFactory(PipelineFactory pipelineFactory) {
-        this.pipelineFactory = pipelineFactory;
-    }
 
     public RenderSystem createRenderSystem() {
         RenderSystem renderSystem = RenderSystem.getInstance();
@@ -17,7 +12,7 @@ public class RendererFactory {
     }
 
     private void registerRenderers(RenderSystem renderSystem) {
-        renderSystem.registerRenderer(new EtherSphereRenderer(pipelineFactory));
-        renderSystem.registerRenderer(new BlackHoleRenderer(pipelineFactory));
+        renderSystem.registerRenderer(new EtherSphereRenderer());
+        renderSystem.registerRenderer(new SingularityRenderer());
     }
 }

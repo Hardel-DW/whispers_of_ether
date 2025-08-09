@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 public final class SceneObjectTypes {
     public static final SceneObjectType GALAXY_SPHERE = register("galaxy_sphere");
-    public static final SceneObjectType BLACK_HOLE = register("black_hole");
+    public static final SceneObjectType SINGULAIRY = register("singularity");
 
     private static SceneObjectType register(String name) {
         return Registry.register(SceneObjectType.REGISTRY,

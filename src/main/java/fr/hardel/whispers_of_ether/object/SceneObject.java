@@ -7,7 +7,7 @@ import net.minecraft.util.math.Vec3d;
 /**
  * World-persistent renderable object definition.
  *
- * @param strength used by some types (e.g. black hole lensing)
+ * @param strength used by some types
  */
 public record SceneObject(String id, SceneObjectType type, Vec3d position,
         float radius, float strength) {
