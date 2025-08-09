@@ -5,47 +5,45 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.client.render.SceneObjectRenderer;
-import fr.hardel.whispers_of_ether.client.render.obj.Sphere;
+import fr.hardel.whispers_of_ether.client.render.obj.Circle;
 import fr.hardel.whispers_of_ether.object.SceneObject;
 import fr.hardel.whispers_of_ether.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gl.UniformType;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderPhase;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.RotationAxis;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EtherSphereRenderer implements SceneObjectRenderer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EtherSphereRenderer.class);
-    
-    private static final Identifier NOISE_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
-            "textures/shader/noise.png");
-    private static final Identifier STARS_TEXTURE = Identifier.of(WhispersOfEther.MOD_ID,
-            "textures/shader/stars.png");
-    
+public class SingularityRenderer implements SceneObjectRenderer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SingularityRenderer.class);
+
     private final RenderLayer renderLayer;
 
-    public EtherSphereRenderer() {
+    public SingularityRenderer() {
         this.renderLayer = RenderLayer.of(
-                "ether_galaxy",
+                "ether_singularity",
                 1536,
                 false,
                 false,
-                createGalaxyPipeline(),
+                createSingularityPipeline(),
                 RenderLayer.MultiPhaseParameters.builder()
-                        .texture(RenderPhase.Textures.create()
-                                .add(NOISE_TEXTURE, false)
-                                .add(STARS_TEXTURE, false)
-                                .build())
+                        .texture(RenderPhase.Textures.create().build())
                         .lightmap(RenderPhase.ENABLE_LIGHTMAP)
                         .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
                         .build(false));
     }
-    
-    private RenderPipeline createGalaxyPipeline() {
+
+    private RenderPipeline createSingularityPipeline() {
         try {
             var transforms = RenderPipeline.builder()
                     .withUniform("DynamicTransforms", UniformType.UNIFORM_BUFFER)
@@ -59,25 +57,23 @@ public class EtherSphereRenderer implements SceneObjectRenderer {
                     .buildSnippet();
 
             return RenderPipeline.builder(transforms, fog, globals)
-                    .withLocation(Identifier.of("rendertype_galaxy"))
-                    .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
-                    .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/galaxy"))
-                    .withSampler("Sampler0")
-                    .withSampler("Sampler1")
+                    .withLocation(Identifier.of("rendertype_singularity"))
+                    .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/singularity"))
+                    .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/singularity"))
                     .withVertexFormat(VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
                             VertexFormat.DrawMode.QUADS)
                     .withBlend(BlendFunction.TRANSLUCENT)
                     .withCull(false)
                     .build();
         } catch (Exception e) {
-            LOGGER.error("Error creating galaxy pipeline: {}", e.getMessage(), e);
+            LOGGER.error("Error creating singularity pipeline: {}", e.getMessage(), e);
             return RenderPipelines.ENTITY_TRANSLUCENT;
         }
     }
 
     @Override
     public SceneObjectType getType() {
-        return SceneObjectTypes.GALAXY_SPHERE;
+        return SceneObjectTypes.SINGULAIRY;
     }
 
     @Override
@@ -85,8 +81,14 @@ public class EtherSphereRenderer implements SceneObjectRenderer {
         matrices.push();
         matrices.translate(object.position().x, object.position().y, object.position().z);
 
+        var client = MinecraftClient.getInstance();
+        matrices.multiply(RotationAxis.POSITIVE_Y
+                .rotationDegrees(-client.gameRenderer.getCamera().getYaw()));
+        matrices.multiply(RotationAxis.POSITIVE_X
+                .rotationDegrees(client.gameRenderer.getCamera().getPitch()));
+
         VertexConsumer vertexConsumer = context.consumers().getBuffer(renderLayer);
-        new Sphere(object.radius()).render(vertexConsumer, matrices);
+        new Circle(object.radius()).render(vertexConsumer, matrices);
 
         matrices.pop();
     }

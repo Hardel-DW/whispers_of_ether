@@ -29,7 +29,7 @@
     "command.whispers_of_ether.ethersphere.remove.success": "Sphère Ether '%s' supprimée",
     "command.whispers_of_ether.ethersphere.clear.success": "Toutes les sphères Ether ont été supprimées",
     "scene_object.whispers_of_ether.galaxy_sphere": "Sphère Galactique",
-    "scene_object.whispers_of_ether.black_hole": "Trou Noir",
+    "scene_object.whispers_of_ether.singularity": "Singularité",
     "command.whispers_of_ether.etherobj.unknown_type": "Type d'objet éthéré inconnu : %s",
     "command.whispers_of_ether.etherobj.created": "Objet éthéré '%s' (%s) créé à %d, %d, %d (rayon: %.1f, puissance: %.1f)",
     "command.whispers_of_ether.etherobj.updated": "Objet éthéré '%s' (%s) mis à jour à %d, %d, %d (rayon: %.1f, puissance: %.1f)",

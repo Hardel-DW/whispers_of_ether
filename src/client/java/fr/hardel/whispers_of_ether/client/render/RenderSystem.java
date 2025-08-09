@@ -22,8 +22,7 @@ public class RenderSystem {
     }
 
     public static void register() {
-        var pipelineFactory = new PipelineFactory();
-        var rendererFactory = new RendererFactory(pipelineFactory);
+        var rendererFactory = new RendererFactory();
         rendererFactory.createRenderSystem();
     }
 

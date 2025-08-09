@@ -74,7 +74,7 @@ void main() {
     float ringG = exp(-pow((r - PHOTON_SPHERE_R) / PHOTON_WIDTH, 2.0));
     vec3 ringCol = vec3(1.6, 1.25, 0.85) * ringG * (0.55 + 0.60 * flicker);
 
-    // Accretion disk aligned to the black hole equator (horizon line across uv.y = 0)
+    // Accretion disk aligned to the equator (horizon line across uv.y = 0)
     float thickness = 0.085;
     float diskProfile = exp(-pow(uv.y / thickness, 2.0));
     diskProfile *= smoothstep(0.20, 0.95, r); // avoid disk in the very center and near edge
