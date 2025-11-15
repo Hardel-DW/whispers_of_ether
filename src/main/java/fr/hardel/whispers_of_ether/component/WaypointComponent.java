@@ -1,20 +1,20 @@
 package fr.hardel.whispers_of_ether.component;
 
 import fr.hardel.whispers_of_ether.waypoint.Waypoint;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.core.BlockPos;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WaypointComponent implements AutoSyncedComponent {
-    private final PlayerEntity player;
+    private final Player player;
     private final List<Waypoint> waypoints = new ArrayList<>();
 
-    public WaypointComponent(PlayerEntity player) {
+    public WaypointComponent(Player player) {
         this.player = player;
     }
 
@@ -43,13 +43,13 @@ public class WaypointComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void readData(ReadView readView) {
+    public void readData(ValueInput readView) {
         waypoints.clear();
         readView.read("waypoints", Waypoint.CODEC.listOf()).ifPresent(waypoints::addAll);
     }
 
     @Override
-    public void writeData(WriteView writeView) {
-        writeView.put("waypoints", Waypoint.CODEC.listOf(), waypoints);
+    public void writeData(ValueOutput writeView) {
+        writeView.store("waypoints", Waypoint.CODEC.listOf(), waypoints);
     }
 }

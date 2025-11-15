@@ -9,17 +9,17 @@ import fr.hardel.whispers_of_ether.client.render.obj.Circle;
 import fr.hardel.whispers_of_ether.object.SceneObject;
 import fr.hardel.whispers_of_ether.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gl.UniformType;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderPhase;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexFormats;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderPipelines;
+import com.mojang.blaze3d.shaders.UniformType;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderStateShard;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Axis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,20 +27,21 @@ import org.slf4j.LoggerFactory;
 public class SingularityRenderer implements SceneObjectRenderer {
     private static final Logger LOGGER = LoggerFactory.getLogger(SingularityRenderer.class);
 
-    private final RenderLayer renderLayer;
+    private final RenderType renderLayer;
 
     public SingularityRenderer() {
-        this.renderLayer = RenderLayer.of(
+        this.renderLayer = RenderType.create(
                 "ether_singularity",
                 1536,
                 false,
                 false,
                 createSingularityPipeline(),
-                RenderLayer.MultiPhaseParameters.builder()
-                        .texture(RenderPhase.Textures.create().build())
-                        .lightmap(RenderPhase.ENABLE_LIGHTMAP)
-                        .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
-                        .build(false));
+                RenderType.CompositeState.builder()
+                        .setTextureState(RenderStateShard.MultiTextureStateShard.builder()
+                                .build())
+                        .setLightmapState(RenderStateShard.LIGHTMAP)
+                        .setOverlayState(RenderStateShard.OVERLAY)
+                        .createCompositeState(false));
     }
 
     private RenderPipeline createSingularityPipeline() {
@@ -57,11 +58,13 @@ public class SingularityRenderer implements SceneObjectRenderer {
                     .buildSnippet();
 
             return RenderPipeline.builder(transforms, fog, globals)
-                    .withLocation(Identifier.of("rendertype_singularity"))
-                    .withVertexShader(Identifier.of(WhispersOfEther.MOD_ID, "core/singularity"))
-                    .withFragmentShader(Identifier.of(WhispersOfEther.MOD_ID, "core/singularity"))
-                    .withVertexFormat(VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
-                            VertexFormat.DrawMode.QUADS)
+                    .withLocation(ResourceLocation.parse("rendertype_singularity"))
+                    .withVertexShader(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID,
+                            "core/singularity"))
+                    .withFragmentShader(ResourceLocation.fromNamespaceAndPath(
+                            WhispersOfEther.MOD_ID, "core/singularity"))
+                    .withVertexFormat(DefaultVertexFormat.NEW_ENTITY,
+                            VertexFormat.Mode.QUADS)
                     .withBlend(BlendFunction.TRANSLUCENT)
                     .withCull(false)
                     .build();
@@ -77,19 +80,19 @@ public class SingularityRenderer implements SceneObjectRenderer {
     }
 
     @Override
-    public void render(MatrixStack matrices, WorldRenderContext context, SceneObject object) {
-        matrices.push();
+    public void render(PoseStack matrices, WorldRenderContext context, SceneObject object) {
+        matrices.pushPose();
         matrices.translate(object.position().x, object.position().y, object.position().z);
 
-        var client = MinecraftClient.getInstance();
-        matrices.multiply(RotationAxis.POSITIVE_Y
-                .rotationDegrees(-client.gameRenderer.getCamera().getYaw()));
-        matrices.multiply(RotationAxis.POSITIVE_X
-                .rotationDegrees(client.gameRenderer.getCamera().getPitch()));
+        var client = Minecraft.getInstance();
+        matrices.mulPose(Axis.YP
+                .rotationDegrees(-client.gameRenderer.getMainCamera().getYRot()));
+        matrices.mulPose(Axis.XP
+                .rotationDegrees(client.gameRenderer.getMainCamera().getXRot()));
 
         VertexConsumer vertexConsumer = context.consumers().getBuffer(renderLayer);
         new Circle(object.radius()).render(vertexConsumer, matrices);
 
-        matrices.pop();
+        matrices.popPose();
     }
 }

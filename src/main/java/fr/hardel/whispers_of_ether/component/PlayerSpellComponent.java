@@ -2,10 +2,10 @@ package fr.hardel.whispers_of_ether.component;
 
 import com.mojang.serialization.Codec;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.resources.ResourceLocation;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.ArrayList;
@@ -14,19 +14,19 @@ import java.util.List;
 import java.util.Map;
 
 public class PlayerSpellComponent implements AutoSyncedComponent {
-    private final PlayerEntity player;
-    private final List<Identifier> spellIds = new ArrayList<>();
-    private final Map<Identifier, Long> spellCooldowns = new HashMap<>();
+    private final Player player;
+    private final List<ResourceLocation> spellIds = new ArrayList<>();
+    private final Map<ResourceLocation, Long> spellCooldowns = new HashMap<>();
 
-    public PlayerSpellComponent(PlayerEntity player) {
+    public PlayerSpellComponent(Player player) {
         this.player = player;
     }
 
-    public List<Identifier> getSpellIds() {
+    public List<ResourceLocation> getSpellIds() {
         return new ArrayList<>(spellIds);
     }
 
-    public void addSpell(Identifier spellId) {
+    public void addSpell(ResourceLocation spellId) {
         if (spellIds.contains(spellId))
             return;
 
@@ -37,13 +37,13 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
         ModComponents.PLAYER_SPELL.sync(player);
     }
 
-    public void removeSpell(Identifier spellId) {
+    public void removeSpell(ResourceLocation spellId) {
         if (spellIds.remove(spellId)) {
             ModComponents.PLAYER_SPELL.sync(player);
         }
     }
 
-    public boolean hasSpell(Identifier spellId) {
+    public boolean hasSpell(ResourceLocation spellId) {
         return spellIds.contains(spellId);
     }
 
@@ -54,12 +54,12 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
         }
     }
 
-    public void setCooldown(Identifier spellId, long endTimeMillis) {
+    public void setCooldown(ResourceLocation spellId, long endTimeMillis) {
         spellCooldowns.put(spellId, endTimeMillis);
         ModComponents.PLAYER_SPELL.sync(player);
     }
 
-    public long getRemainingCooldown(Identifier spellId) {
+    public long getRemainingCooldown(ResourceLocation spellId) {
         Long endTime = spellCooldowns.get(spellId);
         if (endTime == null) {
             return 0;
@@ -67,7 +67,7 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
         return Math.max(0, endTime - System.currentTimeMillis());
     }
 
-    public boolean isOnCooldown(Identifier spellId) {
+    public boolean isOnCooldown(ResourceLocation spellId) {
         return getRemainingCooldown(spellId) > 0;
     }
 
@@ -79,29 +79,29 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
         }
     }
 
-    public Map<Identifier, Long> getCooldowns() {
+    public Map<ResourceLocation, Long> getCooldowns() {
         return new HashMap<>(spellCooldowns);
     }
 
     @Override
-    public void readData(ReadView readView) {
+    public void readData(ValueInput readView) {
         spellIds.clear();
         spellCooldowns.clear();
 
         readView.read("spells", Codec.STRING.listOf()).ifPresent(strings -> {
             strings.forEach(str -> {
-                var id = Identifier.tryParse(str);
+                var id = ResourceLocation.tryParse(str);
                 if (id != null) {
                     spellIds.add(id);
                 }
             });
         });
 
-        var cooldownsViewOpt = readView.getOptionalReadView("cooldowns");
+        var cooldownsViewOpt = readView.child("cooldowns");
         if (cooldownsViewOpt.isPresent()) {
             var cooldownsView = cooldownsViewOpt.get();
-            for (Identifier spellId : spellIds) {
-                var endTimeOpt = cooldownsView.getOptionalLong(spellId.toString());
+            for (ResourceLocation spellId : spellIds) {
+                var endTimeOpt = cooldownsView.getLong(spellId.toString());
                 if (endTimeOpt.isPresent() && endTimeOpt.get() > 0) {
                     spellCooldowns.put(spellId, endTimeOpt.get());
                 }
@@ -110,12 +110,12 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void writeData(WriteView writeView) {
-        var strings = spellIds.stream().map(Identifier::toString).toList();
-        writeView.put("spells", Codec.STRING.listOf(), strings);
+    public void writeData(ValueOutput writeView) {
+        var strings = spellIds.stream().map(ResourceLocation::toString).toList();
+        writeView.store("spells", Codec.STRING.listOf(), strings);
 
         if (!spellCooldowns.isEmpty()) {
-            var cooldownsView = writeView.get("cooldowns");
+            var cooldownsView = writeView.child("cooldowns");
             for (var entry : spellCooldowns.entrySet()) {
                 cooldownsView.putLong(entry.getKey().toString(), entry.getValue());
             }

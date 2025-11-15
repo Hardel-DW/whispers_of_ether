@@ -3,8 +3,8 @@ package fr.hardel.whispers_of_ether.spell.timeline.offset;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.target.position.Position;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.util.RandomSource;
 
 public record RandomBoxOffset(Position boxSize) implements LoopOffset {
 
@@ -19,7 +19,7 @@ public record RandomBoxOffset(Position boxSize) implements LoopOffset {
 
     @Override
     public Position calculateOffset(int iteration, Entity caster) {
-        Random random = caster.getWorld().getRandom();
+        RandomSource random = caster.level().getRandom();
 
         float offsetX = (random.nextFloat() - 0.5f) * boxSize.x();
         float offsetY = (random.nextFloat() - 0.5f) * boxSize.y();

@@ -1,9 +1,9 @@
 package fr.hardel.whispers_of_ether.object;
 
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.Level;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.*;
@@ -13,10 +13,10 @@ import java.util.*;
  * to players via CCA.
  */
 public class SceneObjectsComponent implements AutoSyncedComponent {
-    private final World world;
+    private final Level world;
     private final Map<String, SceneObject> objectsById = new LinkedHashMap<>();
 
-    public SceneObjectsComponent(World world) {
+    public SceneObjectsComponent(Level world) {
         this.world = world;
     }
 
@@ -51,13 +51,13 @@ public class SceneObjectsComponent implements AutoSyncedComponent {
     }
 
     private void sync() {
-        if (world instanceof ServerWorld serverWorld) {
+        if (world instanceof ServerLevel serverWorld) {
             SceneObjectsComponents.SCENE_OBJECTS.sync(serverWorld);
         }
     }
 
     @Override
-    public void readData(ReadView readView) {
+    public void readData(ValueInput readView) {
         objectsById.clear();
         readView.read("objects", SceneObject.CODEC.listOf()).ifPresent(list -> {
             for (SceneObject obj : list) {
@@ -67,7 +67,7 @@ public class SceneObjectsComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void writeData(WriteView writeView) {
-        writeView.put("objects", SceneObject.CODEC.listOf(), new ArrayList<>(objectsById.values()));
+    public void writeData(ValueOutput writeView) {
+        writeView.store("objects", SceneObject.CODEC.listOf(), new ArrayList<>(objectsById.values()));
     }
 }

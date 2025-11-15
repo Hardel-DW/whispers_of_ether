@@ -6,42 +6,42 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import fr.hardel.whispers_of_ether.component.ModComponents;
-import net.minecraft.command.argument.BlockPosArgumentType;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
 
 public class WaypointCommand {
 
     private static final SimpleCommandExceptionType INVALID_COLOR_EXCEPTION = new SimpleCommandExceptionType(
-            Text.translatable("command.whispers_of_ether.waypoint.invalid_color"));
+            Component.translatable("command.whispers_of_ether.waypoint.invalid_color"));
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(CommandManager.literal("waypoint")
-                .then(CommandManager.literal("add")
-                        .then(CommandManager.argument("name", StringArgumentType.string())
-                                .then(CommandManager.argument("pos", BlockPosArgumentType.blockPos())
-                                        .then(CommandManager.argument("color", StringArgumentType.string())
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(Commands.literal("waypoint")
+                .then(Commands.literal("add")
+                        .then(Commands.argument("name", StringArgumentType.string())
+                                .then(Commands.argument("pos", BlockPosArgument.blockPos())
+                                        .then(Commands.argument("color", StringArgumentType.string())
                                                 .executes(WaypointCommand::addWaypoint)))))
-                .then(CommandManager.literal("remove")
-                        .then(CommandManager.argument("name", StringArgumentType.string())
+                .then(Commands.literal("remove")
+                        .then(Commands.argument("name", StringArgumentType.string())
                                 .executes(WaypointCommand::removeWaypoint)))
-                .then(CommandManager.literal("list")
+                .then(Commands.literal("list")
                         .executes(WaypointCommand::listWaypoints))
-                .then(CommandManager.literal("clear")
+                .then(Commands.literal("clear")
                         .executes(WaypointCommand::clearWaypoints)));
     }
 
-    private static int addWaypoint(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+    private static int addWaypoint(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         var source = context.getSource();
         if (source.getPlayer() == null) {
-            source.sendError(Text.translatable("command.whispers_of_ether.waypoint.player_only"));
+            source.sendFailure(Component.translatable("command.whispers_of_ether.waypoint.player_only"));
             return 0;
         }
 
         String name = StringArgumentType.getString(context, "name");
-        BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
+        BlockPos pos = BlockPosArgument.getBlockPos(context, "pos");
         String colorString = StringArgumentType.getString(context, "color");
 
         int color = parseColor(colorString);
@@ -49,15 +49,15 @@ public class WaypointCommand {
         var waypointComponent = ModComponents.WAYPOINTS.get(source.getPlayer());
         waypointComponent.addWaypoint(name, pos, color);
 
-        source.sendFeedback(() -> Text.translatable("command.whispers_of_ether.waypoint.add.success",
+        source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.add.success",
                 name, pos.getX(), pos.getY(), pos.getZ(), String.format("%06X", color)), false);
         return 1;
     }
 
-    private static int removeWaypoint(CommandContext<ServerCommandSource> context) {
+    private static int removeWaypoint(CommandContext<CommandSourceStack> context) {
         var source = context.getSource();
         if (source.getPlayer() == null) {
-            source.sendError(Text.translatable("command.whispers_of_ether.waypoint.player_only"));
+            source.sendFailure(Component.translatable("command.whispers_of_ether.waypoint.player_only"));
             return 0;
         }
 
@@ -65,18 +65,18 @@ public class WaypointCommand {
         var waypointComponent = ModComponents.WAYPOINTS.get(source.getPlayer());
 
         if (waypointComponent.removeWaypoint(name)) {
-            source.sendFeedback(() -> Text.translatable("command.whispers_of_ether.waypoint.remove.success", name), false);
+            source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.remove.success", name), false);
             return 1;
         } else {
-            source.sendError(Text.translatable("command.whispers_of_ether.waypoint.remove.not_found", name));
+            source.sendFailure(Component.translatable("command.whispers_of_ether.waypoint.remove.not_found", name));
             return 0;
         }
     }
 
-    private static int listWaypoints(CommandContext<ServerCommandSource> context) {
+    private static int listWaypoints(CommandContext<CommandSourceStack> context) {
         var source = context.getSource();
         if (source.getPlayer() == null) {
-            source.sendError(Text.translatable("command.whispers_of_ether.waypoint.player_only"));
+            source.sendFailure(Component.translatable("command.whispers_of_ether.waypoint.player_only"));
             return 0;
         }
 
@@ -84,30 +84,30 @@ public class WaypointCommand {
         var waypoints = waypointComponent.getWaypoints();
 
         if (waypoints.isEmpty()) {
-            source.sendFeedback(() -> Text.translatable("command.whispers_of_ether.waypoint.list.empty"), false);
+            source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.list.empty"), false);
             return 0;
         }
 
-        source.sendFeedback(() -> Text.translatable("command.whispers_of_ether.waypoint.list.header", waypoints.size()), false);
+        source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.list.header", waypoints.size()), false);
         for (var waypoint : waypoints) {
             var pos = waypoint.getPosition();
-            source.sendFeedback(() -> Text.translatable("command.whispers_of_ether.waypoint.list.item",
+            source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.list.item",
                     waypoint.getName(), pos.getX(), pos.getY(), pos.getZ()), false);
         }
         return waypoints.size();
     }
 
-    private static int clearWaypoints(CommandContext<ServerCommandSource> context) {
+    private static int clearWaypoints(CommandContext<CommandSourceStack> context) {
         var source = context.getSource();
         if (source.getPlayer() == null) {
-            source.sendError(Text.translatable("command.whispers_of_ether.waypoint.player_only"));
+            source.sendFailure(Component.translatable("command.whispers_of_ether.waypoint.player_only"));
             return 0;
         }
 
         var waypointComponent = ModComponents.WAYPOINTS.get(source.getPlayer());
         waypointComponent.clearWaypoints();
 
-        source.sendFeedback(() -> Text.translatable("command.whispers_of_ether.waypoint.clear.success"), false);
+        source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.clear.success"), false);
         return 1;
     }
 

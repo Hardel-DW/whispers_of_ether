@@ -2,13 +2,13 @@ package fr.hardel.whispers_of_ether.spell.timeline;
 
 import fr.hardel.whispers_of_ether.spell.SpellActionExecutor;
 import fr.hardel.whispers_of_ether.spell.target.position.Position;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.loot.context.LootContextTypes;
-import net.minecraft.loot.context.LootWorldContext;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.LootParams;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -20,13 +20,13 @@ public class TimelineScheduler {
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(4);
 
-    public static CompletableFuture<Void> executeTimelineAsync(TimelineAction timeline, ServerWorld world,
-            Entity caster, int delayTicks) {
+    public static CompletableFuture<Void> executeTimelineAsync(TimelineAction timeline, ServerLevel world,
+                                                               Entity caster, int delayTicks) {
         return executeTimelineAsync(timeline, world, caster, delayTicks, null);
     }
 
-    public static CompletableFuture<Void> executeTimelineAsync(TimelineAction timeline, ServerWorld world,
-            Entity caster, int delayTicks, Position offset) {
+    public static CompletableFuture<Void> executeTimelineAsync(TimelineAction timeline, ServerLevel world,
+                                                               Entity caster, int delayTicks, Position offset) {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
         // Exécution synchrone sur le thread principal
@@ -43,7 +43,7 @@ public class TimelineScheduler {
                     double originalY = caster.getY();
                     double originalZ = caster.getZ();
 
-                    caster.setPosition(
+                    caster.setPos(
                             originalX + offset.x(),
                             originalY + offset.y(),
                             originalZ + offset.z());
@@ -52,7 +52,7 @@ public class TimelineScheduler {
                         SpellActionExecutor.execute(action, world, effectiveCaster);
                     }
 
-                    caster.setPosition(originalX, originalY, originalZ);
+                    caster.setPos(originalX, originalY, originalZ);
                 } else {
                     for (var action : timeline.actions()) {
                         SpellActionExecutor.execute(action, world, effectiveCaster);
@@ -87,12 +87,12 @@ public class TimelineScheduler {
         return future;
     }
 
-    private static boolean checkCondition(LootCondition condition, ServerWorld world, Entity caster) {
-        LootWorldContext lootWorldContext = new LootWorldContext.Builder(world)
-                .add(LootContextParameters.THIS_ENTITY, caster)
-                .add(LootContextParameters.ORIGIN, caster.getPos())
-                .build(LootContextTypes.COMMAND);
-        LootContext lootContext = new LootContext.Builder(lootWorldContext).build(Optional.empty());
+    private static boolean checkCondition(LootItemCondition condition, ServerLevel world, Entity caster) {
+        LootParams lootWorldContext = new LootParams.Builder(world)
+                .withParameter(LootContextParams.THIS_ENTITY, caster)
+                .withParameter(LootContextParams.ORIGIN, caster.position())
+                .create(LootContextParamSets.COMMAND);
+        LootContext lootContext = new LootContext.Builder(lootWorldContext).create(Optional.empty());
         return condition.test(lootContext);
     }
 

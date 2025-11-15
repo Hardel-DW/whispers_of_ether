@@ -1,8 +1,8 @@
 package fr.hardel.whispers_of_ether.client;
 
 import fr.hardel.whispers_of_ether.attributes.ModAttribute;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 
 /**
  * Camera shake manager that applies screen shake effects based on player's
@@ -38,7 +38,7 @@ public class CameraShakeManager {
     }
 
     public void update() {
-        MinecraftClient client = MinecraftClient.getInstance();
+        Minecraft client = Minecraft.getInstance();
         if (client.player == null) {
             resetShake();
             return;
@@ -64,7 +64,7 @@ public class CameraShakeManager {
         updateShakeValues(client.player);
     }
 
-    private void updateShakeValues(PlayerEntity player) {
+    private void updateShakeValues(Player player) {
         double strengthAttribute = player.getAttributeValue(ModAttribute.CAMERA_SHAKING_STRENTH);
         double frequencyAttribute = player.getAttributeValue(ModAttribute.CAMERA_SHAKING_FREQUENCY);
 

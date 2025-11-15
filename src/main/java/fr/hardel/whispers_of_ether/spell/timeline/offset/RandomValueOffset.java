@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.target.position.Position;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.util.RandomSource;
 
 public record RandomValueOffset(OffsetAxis axis, float minValue, float maxValue, OffsetType offsetType) implements LoopOffset {
 
@@ -23,7 +23,7 @@ public record RandomValueOffset(OffsetAxis axis, float minValue, float maxValue,
 
     @Override
     public Position calculateOffset(int iteration, Entity caster) {
-        Random random = caster.getWorld().getRandom();
+        RandomSource random = caster.level().getRandom();
         float randomValue = minValue + random.nextFloat() * (maxValue - minValue);
         
         return switch (axis) {

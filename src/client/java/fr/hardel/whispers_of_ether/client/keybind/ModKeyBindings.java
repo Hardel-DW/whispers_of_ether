@@ -1,19 +1,29 @@
 package fr.hardel.whispers_of_ether.client.keybind;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.ResourceLocation;
+
+import com.mojang.blaze3d.platform.InputConstants;
+
+import fr.hardel.whispers_of_ether.WhispersOfEther;
+
 import org.lwjgl.glfw.GLFW;
 
 public class ModKeyBindings {
-    public static final KeyBinding CAST_SPELL = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.whispers_of_ether.cast_spell", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, "category.whispers_of_ether"));
-    
-    public static final KeyBinding SPELL_UP = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.whispers_of_ether.spell_up", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UP, "category.whispers_of_ether"));
-    
-    public static final KeyBinding SPELL_DOWN = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.whispers_of_ether.spell_down", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_DOWN, "category.whispers_of_ether"));
+    private static final KeyMapping.Category MAIN_CATEGORY = KeyMapping.Category
+            .register(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "main"));
+    public static final KeyMapping CAST_SPELL = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+            "key.whispers_of_ether.cast_spell", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C,
+            MAIN_CATEGORY));
+
+    public static final KeyMapping SPELL_UP = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+            "key.whispers_of_ether.spell_up", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UP,
+            MAIN_CATEGORY));
+
+    public static final KeyMapping SPELL_DOWN = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+            "key.whispers_of_ether.spell_down", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_DOWN,
+            MAIN_CATEGORY));
 
     public static void register() {
         // Les keybindings sont enregistrées automatiquement par

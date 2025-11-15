@@ -2,15 +2,15 @@ package fr.hardel.whispers_of_ether.client.screen;
 
 import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.waypoint.Waypoint;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.render.*;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.network.chat.Component;
+import com.mojang.math.Axis;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 
 public class WaypointRenderer {
@@ -48,11 +48,11 @@ public class WaypointRenderer {
     private static final int LIGHT_VALUE = 15728880;
 
     public static void register() {
-        WorldRenderEvents.AFTER_TRANSLUCENT.register(WaypointRenderer::render);
+        WorldRenderEvents.AFTER_ENTITIES.register(WaypointRenderer::render);
     }
 
     private static void render(WorldRenderContext context) {
-        MinecraftClient client = MinecraftClient.getInstance();
+        Minecraft client = Minecraft.getInstance();
         if (client.player == null)
             return;
 
@@ -61,22 +61,22 @@ public class WaypointRenderer {
         if (waypoints.isEmpty())
             return;
 
-        MatrixStack matrices = context.matrixStack();
-        Vec3d cameraPos = context.camera().getPos();
-        float tickDelta = context.tickCounter().getTickProgress(false);
+        PoseStack matrices = context.matrices();
+        Vec3 cameraPos = context.worldState().cameraRenderState.pos;
+        float tickDelta = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
 
         assert matrices != null;
-        matrices.push();
+        matrices.pushPose();
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
 
         for (Waypoint waypoint : waypoints) {
             renderWaypoint(matrices, waypoint, cameraPos, tickDelta);
         }
 
-        matrices.pop();
+        matrices.popPose();
     }
 
-    private static void renderWaypoint(MatrixStack matrices, Waypoint waypoint, Vec3d cameraPos, float tickDelta) {
+    private static void renderWaypoint(PoseStack matrices, Waypoint waypoint, Vec3 cameraPos, float tickDelta) {
         double distance = waypoint.getDistanceTo(cameraPos);
 
         if (distance < MIN_DISTANCE || distance > MAX_DISTANCE)
@@ -86,24 +86,24 @@ public class WaypointRenderer {
         if (alpha <= 0.0f)
             return;
 
-        Vec3d waypointPos = waypoint.getCenterPosition();
-        matrices.push();
+        Vec3 waypointPos = waypoint.getCenterPosition();
+        matrices.pushPose();
         matrices.translate(waypointPos.x, waypointPos.y, waypointPos.z);
 
-        MinecraftClient client = MinecraftClient.getInstance();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-client.gameRenderer.getCamera().getYaw()));
-        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(client.gameRenderer.getCamera().getPitch()));
+        Minecraft client = Minecraft.getInstance();
+        matrices.mulPose(Axis.YP.rotationDegrees(-client.gameRenderer.getMainCamera().getYRot()));
+        matrices.mulPose(Axis.XP.rotationDegrees(client.gameRenderer.getMainCamera().getXRot()));
 
         float scale = calculateScale(distance);
         matrices.scale(scale, scale, scale);
 
-        assert client.world != null;
-        float time = (client.world.getTime() + tickDelta) * TIME_MULTIPLIER;
+        assert client.level != null;
+        float time = (client.level.getGameTime() + tickDelta) * TIME_MULTIPLIER;
 
         renderDiamond(matrices, waypoint.getColor(), time, alpha);
         renderDistanceText(matrices, distance, alpha);
 
-        matrices.pop();
+        matrices.popPose();
     }
 
     private static float calculateScale(double distance) {
@@ -126,22 +126,26 @@ public class WaypointRenderer {
         return fadeProgress * fadeProgress;
     }
 
-    private static void renderDiamond(MatrixStack matrices, int color, float time, float alpha) {
-        Matrix4f matrix = matrices.peek().getPositionMatrix();
+    private static void renderDiamond(PoseStack matrices, int color, float time, float alpha) {
+        Matrix4f matrix = matrices.last().pose();
 
         float r = ((color >> 16) & 0xFF) / 255.0f;
         float g = ((color >> 8) & 0xFF) / 255.0f;
         float b = (color & 0xFF) / 255.0f;
 
-        var vertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        var buffer = vertexConsumers.getBuffer(RenderLayer.getTextBackgroundSeeThrough());
+        var vertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
+        var buffer = vertexConsumers.getBuffer(RenderType.textBackgroundSeeThrough());
 
         // 1. Losange central fixe
-        buffer.vertex(matrix, 0.0f, DIAMOND_SIZE, 0.0f).color(r, g, b, DIAMOND_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, DIAMOND_SIZE, 0.0f, 0.0f).color(r, g, b, DIAMOND_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, -DIAMOND_SIZE, 0.0f).color(r, g, b, DIAMOND_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, -DIAMOND_SIZE, 0.0f, 0.0f).color(r, g, b, DIAMOND_ALPHA * alpha).light(LIGHT_VALUE);
-        vertexConsumers.draw();
+        buffer.addVertex(matrix, 0.0f, DIAMOND_SIZE, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
+                .setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, DIAMOND_SIZE, 0.0f, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
+                .setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -DIAMOND_SIZE, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
+                .setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, -DIAMOND_SIZE, 0.0f, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
+                .setLight(LIGHT_VALUE);
+        vertexConsumers.endBatch();
 
         // 2. Bordure statique (avec gap/spacing)
         renderStaticBorder(matrices, r, g, b, alpha);
@@ -150,66 +154,66 @@ public class WaypointRenderer {
         renderPulseBorder(matrices, r, g, b, alpha, time);
     }
 
-    private static void renderDistanceText(MatrixStack matrices, double distance, float alpha) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        TextRenderer textRenderer = client.textRenderer;
+    private static void renderDistanceText(PoseStack matrices, double distance, float alpha) {
+        Minecraft client = Minecraft.getInstance();
+        Font textRenderer = client.font;
 
-        Text text = Text.translatable("waypoint.distance", (int)Math.round(distance));
+        Component text = Component.translatable("waypoint.distance", (int) Math.round(distance));
 
-        matrices.push();
+        matrices.pushPose();
         matrices.translate(0, TEXT_Y_OFFSET, 0);
         matrices.scale(TEXT_SCALE, TEXT_SCALE, -TEXT_SCALE);
 
-        int textWidth = textRenderer.getWidth(text);
-        Matrix4f matrix = matrices.peek().getPositionMatrix();
+        int textWidth = textRenderer.width(text);
+        Matrix4f matrix = matrices.last().pose();
 
         int alphaInt = (int) (ALPHA_MAX * alpha);
         int color = (alphaInt << 24) | TEXT_COLOR;
 
-        textRenderer.draw(text, -textWidth / 2f, 0, color, false, matrix,
-                client.getBufferBuilders().getEntityVertexConsumers(),
-                TextRenderer.TextLayerType.SEE_THROUGH, 0, LIGHT_VALUE);
+        textRenderer.drawInBatch(text, -textWidth / 2f, 0, color, false, matrix,
+                client.renderBuffers().bufferSource(),
+                Font.DisplayMode.SEE_THROUGH, 0, LIGHT_VALUE);
 
-        client.getBufferBuilders().getEntityVertexConsumers().draw();
-        matrices.pop();
+        client.renderBuffers().bufferSource().endBatch();
+        matrices.popPose();
     }
 
-    private static void renderStaticBorder(MatrixStack matrices, float r, float g, float b, float alpha) {
-        var vertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        var buffer = vertexConsumers.getBuffer(RenderLayer.getTextBackgroundSeeThrough());
-        Matrix4f matrix = matrices.peek().getPositionMatrix();
+    private static void renderStaticBorder(PoseStack matrices, float r, float g, float b, float alpha) {
+        var vertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
+        var buffer = vertexConsumers.getBuffer(RenderType.textBackgroundSeeThrough());
+        Matrix4f matrix = matrices.last().pose();
 
         float outerSize = BORDER_SIZE;
         float innerSize = outerSize - BORDER_THICKNESS;
 
         // Top-right
-        buffer.vertex(matrix, 0.0f, outerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, outerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, innerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, innerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, outerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, outerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, innerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, innerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
 
         // Right-bottom
-        buffer.vertex(matrix, outerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, -outerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, -innerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, innerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, outerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -outerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -innerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, innerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
 
         // Bottom-left
-        buffer.vertex(matrix, 0.0f, -outerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, -outerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, -innerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, -innerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -outerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, -outerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, -innerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -innerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
 
         // Left-top
-        buffer.vertex(matrix, -outerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, outerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, innerSize, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, -innerSize, 0.0f, 0.0f).color(r, g, b, PING_ALPHA * alpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, -outerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, outerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, innerSize, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, -innerSize, 0.0f, 0.0f).setColor(r, g, b, PING_ALPHA * alpha).setLight(LIGHT_VALUE);
 
-        vertexConsumers.draw();
+        vertexConsumers.endBatch();
     }
 
-    private static void renderPulseBorder(MatrixStack matrices, float r, float g, float b, float alpha, float time) {
+    private static void renderPulseBorder(PoseStack matrices, float r, float g, float b, float alpha, float time) {
         float cycleTime = time % PULSE_INTERVAL;
         if (cycleTime > PULSE_DURATION)
             return;
@@ -222,38 +226,38 @@ public class WaypointRenderer {
         if (pulseAlpha <= 0.0f)
             return;
 
-        var vertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        var buffer = vertexConsumers.getBuffer(RenderLayer.getTextBackgroundSeeThrough());
-        Matrix4f matrix = matrices.peek().getPositionMatrix();
+        var vertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
+        var buffer = vertexConsumers.getBuffer(RenderType.textBackgroundSeeThrough());
+        Matrix4f matrix = matrices.last().pose();
 
         float thickness = BORDER_THICKNESS * pulseScale;
         float outerSize = BORDER_SIZE * pulseScale;
         float innerSize = outerSize - thickness;
 
         // Top-right
-        buffer.vertex(matrix, 0.0f, outerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, outerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, innerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, innerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, outerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, outerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, innerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, innerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
 
         // Right-bottom
-        buffer.vertex(matrix, outerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, -outerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, -innerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, innerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, outerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -outerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -innerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, innerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
 
         // Bottom-left
-        buffer.vertex(matrix, 0.0f, -outerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, -outerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, -innerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, -innerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -outerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, -outerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, -innerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, -innerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
 
         // Left-top
-        buffer.vertex(matrix, -outerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, outerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, 0.0f, innerSize, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
-        buffer.vertex(matrix, -innerSize, 0.0f, 0.0f).color(r, g, b, pulseAlpha).light(LIGHT_VALUE);
+        buffer.addVertex(matrix, -outerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, outerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, 0.0f, innerSize, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
+        buffer.addVertex(matrix, -innerSize, 0.0f, 0.0f).setColor(r, g, b, pulseAlpha).setLight(LIGHT_VALUE);
 
-        vertexConsumers.draw();
+        vertexConsumers.endBatch();
     }
 }

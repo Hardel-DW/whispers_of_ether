@@ -1,9 +1,9 @@
 package fr.hardel.whispers_of_ether.object;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public final class SceneObjectTypes {
     public static final SceneObjectType GALAXY_SPHERE = register("galaxy_sphere");
@@ -11,18 +11,18 @@ public final class SceneObjectTypes {
 
     private static SceneObjectType register(String name) {
         return Registry.register(SceneObjectType.REGISTRY,
-                Identifier.of(WhispersOfEther.MOD_ID, name), new SceneObjectType());
+                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name), new SceneObjectType());
     }
 
-    public static Text getDisplayName(SceneObjectType type) {
-        var id = SceneObjectType.REGISTRY.getId(type);
+    public static Component getDisplayName(SceneObjectType type) {
+        var id = SceneObjectType.REGISTRY.getKey(type);
         return id != null
-                ? Text.translatable("scene_object.%s.%s".formatted(id.getNamespace(), id.getPath()))
-                : Text.literal("unknown");
+                ? Component.translatable("scene_object.%s.%s".formatted(id.getNamespace(), id.getPath()))
+                : Component.literal("unknown");
     }
 
     public static String getTranslationKey(SceneObjectType type) {
-        var id = SceneObjectType.REGISTRY.getId(type);
+        var id = SceneObjectType.REGISTRY.getKey(type);
         return id != null
                 ? "scene_object.%s.%s".formatted(id.getNamespace(), id.getPath())
                 : "scene_object.unknown";

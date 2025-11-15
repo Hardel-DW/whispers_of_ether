@@ -6,13 +6,13 @@ import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket.SpellCast;
 import fr.hardel.whispers_of_ether.spell.Spell;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 public class SpellCastImpl {
 
     public static void handle(SpellCast packet, ServerPlayNetworking.Context context) {
         context.server().execute(() -> {
-            ServerPlayerEntity player = context.player();
+            ServerPlayer player = context.player();
             PlayerSpellComponent component = ModComponents.PLAYER_SPELL.get(player);
 
             if (!component.hasSpell(packet.spellId())) {

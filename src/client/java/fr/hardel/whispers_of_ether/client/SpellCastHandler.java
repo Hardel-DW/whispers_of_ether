@@ -15,9 +15,9 @@ public class SpellCastHandler {
 
     public static void initialize() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            boolean isPressed = ModKeyBindings.CAST_SPELL.isPressed();
-            boolean isSpellUpPressed = ModKeyBindings.SPELL_UP.isPressed();
-            boolean isSpellDownPressed = ModKeyBindings.SPELL_DOWN.isPressed();
+            boolean isPressed = ModKeyBindings.CAST_SPELL.isDown();
+            boolean isSpellUpPressed = ModKeyBindings.SPELL_UP.isDown();
+            boolean isSpellDownPressed = ModKeyBindings.SPELL_DOWN.isDown();
 
             if (isPressed && !wasPressed) {
                 holdLogSent = false;

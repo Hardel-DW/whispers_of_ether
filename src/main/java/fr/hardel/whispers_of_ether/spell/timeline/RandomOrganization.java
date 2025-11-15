@@ -2,9 +2,9 @@ package fr.hardel.whispers_of_ether.spell.timeline;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 
 import java.util.List;
 
@@ -20,13 +20,13 @@ public record RandomOrganization(List<RandomChoice> choices) implements Organiza
     }
 
     @Override
-    public void execute(List<TimelineAction> timelines, ServerWorld world, Entity caster) {
+    public void execute(List<TimelineAction> timelines, ServerLevel world, Entity caster) {
         if (choices.isEmpty()) return;
         
         int totalWeight = choices.stream().mapToInt(RandomChoice::weight).sum();
         if (totalWeight <= 0) return;
         
-        Random random = world.getRandom();
+        RandomSource random = world.getRandom();
         int randomValue = random.nextInt(totalWeight);
         
         int currentWeight = 0;

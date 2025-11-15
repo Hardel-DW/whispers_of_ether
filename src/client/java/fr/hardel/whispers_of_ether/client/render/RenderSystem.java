@@ -2,17 +2,19 @@ package fr.hardel.whispers_of_ether.client.render;
 
 import fr.hardel.whispers_of_ether.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.object.SceneObjectsComponents;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.mojang.blaze3d.vertex.PoseStack;
 
 public class RenderSystem {
     private static RenderSystem instance;
     private final Map<SceneObjectType, SceneObjectRenderer> renderers = new HashMap<>();
 
-    private RenderSystem() {}
+    private RenderSystem() {
+    }
 
     public static RenderSystem getInstance() {
         if (instance == null) {
@@ -30,18 +32,18 @@ public class RenderSystem {
         renderers.put(renderer.getType(), renderer);
     }
 
-    public void renderAll(WorldRenderContext context) {
-        var client = MinecraftClient.getInstance();
-        if (client.world == null)
+    public void renderAll(net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext context) {
+        var client = Minecraft.getInstance();
+        if (client.level == null)
             return;
 
-        var matrices = context.matrixStack();
-        var cameraPos = context.camera().getPos();
+        PoseStack matrices = context.matrices();
+        var cameraPos = context.gameRenderer().getMainCamera().getPosition();
 
-        matrices.push();
+        matrices.pushPose();
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
 
-        var comp = SceneObjectsComponents.SCENE_OBJECTS.get(client.world);
+        var comp = SceneObjectsComponents.SCENE_OBJECTS.get(client.level);
         comp.getAll().forEach(obj -> {
             var renderer = renderers.get(obj.type());
             if (renderer != null) {
@@ -49,7 +51,7 @@ public class RenderSystem {
             }
         });
 
-        matrices.pop();
+        matrices.popPose();
     }
 
     public void cleanup() {
