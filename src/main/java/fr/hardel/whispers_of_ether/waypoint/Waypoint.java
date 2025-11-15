@@ -2,8 +2,8 @@ package fr.hardel.whispers_of_ether.waypoint;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 public class Waypoint {
     public static final Codec<Waypoint> CODEC = RecordCodecBuilder.create(instance ->
@@ -32,15 +32,15 @@ public class Waypoint {
         return position;
     }
 
-    public Vec3d getCenterPosition() {
-        return Vec3d.ofCenter(position);
+    public Vec3 getCenterPosition() {
+        return Vec3.atCenterOf(position);
     }
 
     public int getColor() {
         return color;
     }
 
-    public double getDistanceTo(Vec3d playerPos) {
+    public double getDistanceTo(Vec3 playerPos) {
         return getCenterPosition().distanceTo(playerPos);
     }
 }

@@ -35,5 +35,15 @@
     "command.whispers_of_ether.etherobj.updated": "Objet éthéré '%s' (%s) mis à jour à %d, %d, %d (rayon: %.1f, puissance: %.1f)",
     "command.whispers_of_ether.etherobj.removed": "Objet éthéré '%s' supprimé",
     "command.whispers_of_ether.etherobj.not_found": "Objet éthéré '%s' introuvable",
-    "command.whispers_of_ether.etherobj.cleared": "%d objets éthérés supprimés"
+    "command.whispers_of_ether.etherobj.cleared": "%d objets éthérés supprimés",
+    "itemGroup.whispers_of_ether": "Whispers of Ether",
+    "item.whispers_of_ether.rune_attack_speed": "Vitesse d'attaque Rune %d",
+    "item.whispers_of_ether.rune_exp": "Expérience Rune %d",
+    "item.whispers_of_ether.rune_exp_job": "Expérience de métier Rune %d",
+    "item.whispers_of_ether.rune_fall": "Chute amortie Rune %d",
+    "item.whispers_of_ether.rune_money_job": "Argent de métier Rune %d",
+    "item.whispers_of_ether.rune_other": "Mystérieuse Rune %d",
+    "item.whispers_of_ether.rune_saturation": "Satiation Rune %d",
+    "item.whispers_of_ether.rune_speed": "Vitesse Rune %d",
+    "item.whispers_of_ether.rune_strength": "Force Rune %d"
 }

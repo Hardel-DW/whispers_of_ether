@@ -1,0 +1,44 @@
+﻿{
+    "model": {
+        "type": "minecraft:select",
+        "property": "minecraft:component",
+        "component": "whispers_of_ether:rune",
+        "cases": [
+            {
+                "when": 1,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune_attack_speed_1"
+                }
+            },
+            {
+                "when": 2,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune_attack_speed_2"
+                }
+            },
+            {
+                "when": 3,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune_attack_speed_3"
+                }
+            },
+            {
+                "when": 4,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune_attack_speed_4"
+                }
+            },
+            {
+                "when": 5,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune_attack_speed_5"
+                }
+            }
+        ]
+    }
+}

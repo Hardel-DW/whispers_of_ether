@@ -5,65 +5,63 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.spell.timeline.OrganizationTimeline;
 import fr.hardel.whispers_of_ether.spell.timeline.TimelineAction;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.loot.context.LootContextTypes;
-import net.minecraft.loot.context.LootWorldContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 import java.util.Optional;
 
-public record Spell(Identifier icon, String name, Optional<Integer> cooldown,
-        Optional<LootCondition> condition, List<TimelineAction> timelines, OrganizationTimeline organization,
+public record Spell(ResourceLocation icon, String name, Optional<Integer> cooldown,
+        Optional<LootItemCondition> condition, List<TimelineAction> timelines, OrganizationTimeline organization,
         List<SpellAction> passive) {
 
     public static final Codec<Spell> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Identifier.CODEC.fieldOf("icon").forGetter(Spell::icon),
+            ResourceLocation.CODEC.fieldOf("icon").forGetter(Spell::icon),
             Codec.STRING.fieldOf("name").forGetter(Spell::name),
             Codec.INT.optionalFieldOf("cooldown").forGetter(Spell::cooldown),
-            LootCondition.CODEC.optionalFieldOf("condition").forGetter(Spell::condition),
+            LootItemCondition.DIRECT_CODEC.optionalFieldOf("condition").forGetter(Spell::condition),
             TimelineAction.CODEC.listOf().fieldOf("timelines").forGetter(Spell::timelines),
             OrganizationTimeline.CODEC.fieldOf("organization").forGetter(Spell::organization),
             SpellAction.CODEC.listOf().optionalFieldOf("passive", List.of()).forGetter(Spell::passive))
             .apply(instance, Spell::new));
 
-    public Identifier getTextureId() {
-        return Identifier.of(icon.getNamespace(), "textures/spell/" + icon.getPath() + ".png");
+    public ResourceLocation getTextureId() {
+        return ResourceLocation.fromNamespaceAndPath(icon.getNamespace(), "textures/spell/" + icon.getPath() + ".png");
     }
 
-    public boolean canCast(PlayerEntity caster, Identifier spellId) {
-        // Vérifier le cooldown d'abord
+    public boolean canCast(Player caster, ResourceLocation spellId) {
         var spellComponent = ModComponents.PLAYER_SPELL.get(caster);
         if (spellComponent.isOnCooldown(spellId)) {
             return false;
         }
 
-        if (condition.isEmpty() || !(caster.getWorld() instanceof ServerWorld)) {
+        if (condition.isEmpty() || !(caster.level() instanceof ServerLevel)) {
             return true;
         }
 
-        if (!(caster.getWorld() instanceof ServerWorld serverWorld))
+        if (!(caster.level() instanceof ServerLevel serverWorld))
             return true;
 
-        LootWorldContext lootWorldContext = new LootWorldContext.Builder(serverWorld)
-                .add(LootContextParameters.THIS_ENTITY, caster)
-                .add(LootContextParameters.ORIGIN, caster.getPos())
-                .build(LootContextTypes.COMMAND);
-        LootContext lootContext = new LootContext.Builder(lootWorldContext).build(Optional.empty());
+        LootParams lootWorldContext = new LootParams.Builder(serverWorld)
+                .withParameter(LootContextParams.THIS_ENTITY, caster)
+                .withParameter(LootContextParams.ORIGIN, caster.position())
+                .create(LootContextParamSets.COMMAND);
+        LootContext lootContext = new LootContext.Builder(lootWorldContext).create(Optional.empty());
         return condition.get().test(lootContext);
     }
 
-    public void cast(PlayerEntity caster, Identifier spellId) {
+    public void cast(Player caster, ResourceLocation spellId) {
         if (!canCast(caster, spellId))
             return;
 
-        if (!(caster.getWorld() instanceof ServerWorld serverWorld))
+        if (!(caster.level() instanceof ServerLevel serverWorld))
             return;
 
-        // Déclencher le cooldown après un cast réussi
         if (cooldown.isPresent() && cooldown.get() > 0) {
             var spellComponent = ModComponents.PLAYER_SPELL.get(caster);
             long endTime = System.currentTimeMillis() + (cooldown.get() * 1000L);

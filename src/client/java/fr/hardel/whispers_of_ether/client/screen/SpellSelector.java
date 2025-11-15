@@ -3,18 +3,18 @@ package fr.hardel.whispers_of_ether.client.screen;
 import fr.hardel.whispers_of_ether.client.WhispersOfEtherClient;
 import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
 public class SpellSelector {
-    private static final Identifier SLOT_BACKGROUND = Identifier.of(WhispersOfEtherClient.MOD_ID,
+    private static final ResourceLocation SLOT_BACKGROUND = ResourceLocation.fromNamespaceAndPath(WhispersOfEtherClient.MOD_ID,
             "textures/gui/sprites/hud/spell/slot_background.png");
-    private static final Identifier SELECTED_TEXTURE = Identifier.of(WhispersOfEtherClient.MOD_ID,
+    private static final ResourceLocation SELECTED_TEXTURE = ResourceLocation.fromNamespaceAndPath(WhispersOfEtherClient.MOD_ID,
             "textures/gui/sprites/hud/spell/selected.png");
 
     private static final int SLOT_SIZE = 20;
@@ -31,13 +31,13 @@ public class SpellSelector {
     private static final long VISIBILITY_DURATION = 5000;
     private static final float SLIDE_SPEED = 0.15f;
 
-    public static void render(DrawContext drawContext, RenderTickCounter ignoredTickCounter) {
-        List<Identifier> spellIds = getValidSpellIds();
+    public static void render(GuiGraphics drawContext, DeltaTracker ignoredTickCounter) {
+        List<ResourceLocation> spellIds = getValidSpellIds();
         if (spellIds.isEmpty())
             return;
 
         int actualSlotCount = spellIds.size();
-        int screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
+        int screenHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         int totalHeight = (SLOT_SIZE * actualSlotCount) + (GAP * (actualSlotCount - 1));
         int startY = (screenHeight - totalHeight) / 2;
         float targetY = startY + (Math.min(selectedSlot, actualSlotCount - 1) * (SLOT_SIZE + GAP));
@@ -51,14 +51,14 @@ public class SpellSelector {
         for (int i = 0; i < actualSlotCount; i++) {
             int x = Math.round(currentHudX);
             int y = startY + (i * (SLOT_SIZE + GAP));
-            drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
+            drawContext.blit(RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
                     SLOT_SIZE, SLOT_SIZE);
 
             var spellId = spellIds.get(i);
             var spell = SpellResourceReloadListener.getSpell(spellId);
             if (spell != null) {
                 int iconSize = SLOT_SIZE - 4;
-                drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, spell.getTextureId(),
+                drawContext.blit(RenderPipelines.GUI_TEXTURED, spell.getTextureId(),
                         x + 2, y + 2, 0, 0, iconSize, iconSize, iconSize, iconSize);
             }
         }
@@ -70,8 +70,8 @@ public class SpellSelector {
             var spellId = spellIds.get(i);
             var spell = SpellResourceReloadListener.getSpell(spellId);
             if (spell != null) {
-                assert MinecraftClient.getInstance().player != null;
-                var spellComponent = ModComponents.PLAYER_SPELL.get(MinecraftClient.getInstance().player);
+                assert Minecraft.getInstance().player != null;
+                var spellComponent = ModComponents.PLAYER_SPELL.get(Minecraft.getInstance().player);
                 long remainingCooldown = spellComponent.getRemainingCooldown(spellId);
                 if (remainingCooldown > 0 && spell.cooldown().isPresent()) {
                     float progress = (float) remainingCooldown / (spell.cooldown().get() * 1000f);
@@ -81,28 +81,28 @@ public class SpellSelector {
                     drawContext.fill(x + 2, y + 2, x + 2 + iconSize, y + 2 + overlayHeight, 0x80808080);
 
                     String timeText = String.format("%.1fs", remainingCooldown / 1000.0);
-                    var textRenderer = MinecraftClient.getInstance().textRenderer;
+                    var textRenderer = Minecraft.getInstance().font;
                     float scale = 0.6f;
 
-                    drawContext.getMatrices().pushMatrix();
-                    drawContext.getMatrices().translate(x + 2 + iconSize / 2f, y + 2 + iconSize / 2f);
-                    drawContext.getMatrices().scale(scale, scale);
+                    drawContext.pose().pushMatrix();
+                    drawContext.pose().translate(x + 2 + iconSize / 2f, y + 2 + iconSize / 2f);
+                    drawContext.pose().scale(scale, scale);
 
-                    int textWidth = textRenderer.getWidth(timeText);
-                    int textHeight = textRenderer.fontHeight;
-                    drawContext.drawText(textRenderer, timeText, -textWidth / 2, -textHeight / 2, 0xFFFFFFFF, true);
-                    drawContext.getMatrices().popMatrix();
+                    int textWidth = textRenderer.width(timeText);
+                    int textHeight = textRenderer.lineHeight;
+                    drawContext.drawString(textRenderer, timeText, -textWidth / 2, -textHeight / 2, 0xFFFFFFFF, true);
+                    drawContext.pose().popMatrix();
                 }
             }
         }
 
-        drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, SELECTED_TEXTURE, Math.round(currentHudX),
+        drawContext.blit(RenderPipelines.GUI_TEXTURED, SELECTED_TEXTURE, Math.round(currentHudX),
                 Math.round(currentAnimationY),
                 0, 0, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE);
     }
 
-    private static List<Identifier> getValidSpellIds() {
-        MinecraftClient client = MinecraftClient.getInstance();
+    private static List<ResourceLocation> getValidSpellIds() {
+        Minecraft client = Minecraft.getInstance();
         if (client.player == null)
             return List.of();
 
@@ -113,7 +113,7 @@ public class SpellSelector {
     }
 
     public static void setSelectedSlot(int slot) {
-        List<Identifier> spellIds = getValidSpellIds();
+        List<ResourceLocation> spellIds = getValidSpellIds();
         if (spellIds.isEmpty())
             return;
 
@@ -130,8 +130,8 @@ public class SpellSelector {
         return selectedSlot;
     }
 
-    public static Identifier getSelectedSpellId() {
-        List<Identifier> spellIds = getValidSpellIds();
+    public static ResourceLocation getSelectedSpellId() {
+        List<ResourceLocation> spellIds = getValidSpellIds();
         if (spellIds.isEmpty() || selectedSlot >= spellIds.size()) {
             return null;
         }

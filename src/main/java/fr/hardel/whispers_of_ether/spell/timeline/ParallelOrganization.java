@@ -3,8 +3,8 @@ package fr.hardel.whispers_of_ether.spell.timeline;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public record ParallelOrganization(List<String> timelineIds) implements Organiza
     }
 
     @Override
-    public void execute(List<TimelineAction> timelines, ServerWorld world, Entity caster) {
+    public void execute(List<TimelineAction> timelines, ServerLevel world, Entity caster) {
         for (String timelineId : timelineIds) {
             TimelineAction timeline = findTimelineById(timelines, timelineId);
             if (timeline != null) {

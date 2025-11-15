@@ -1,5 +1,6 @@
 package fr.hardel.whispers_of_ether;
 
+import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,8 @@ import fr.hardel.whispers_of_ether.attributes.ModAttribute;
 import fr.hardel.whispers_of_ether.command.SpellCommand;
 import fr.hardel.whispers_of_ether.command.WaypointCommand;
 import fr.hardel.whispers_of_ether.command.EtherObjectCommand;
+import fr.hardel.whispers_of_ether.item.ModItems;
+import fr.hardel.whispers_of_ether.itemgroup.ItemGroupMod;
 import fr.hardel.whispers_of_ether.network.NetworkHandler;
 import fr.hardel.whispers_of_ether.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
@@ -19,9 +22,9 @@ import fr.hardel.whispers_of_ether.spell.target.shape.ShapeType;
 import fr.hardel.whispers_of_ether.spell.timeline.OrganizationType;
 import fr.hardel.whispers_of_ether.spell.timeline.offset.LoopOffsetType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.resource.ResourceType;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 
 public class WhispersOfEther implements ModInitializer {
 
@@ -31,7 +34,10 @@ public class WhispersOfEther implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initializing Whispers of Ether");
-        ModAttribute.registerAttributes();
+        ModAttribute.register();
+        ModItems.register();
+        ModItemComponent.register();
+        ItemGroupMod.register();
         OrganizationType.register();
         ActionType.register();
         TargetType.register();
@@ -40,9 +46,10 @@ public class WhispersOfEther implements ModInitializer {
         LoopOffsetType.register();
         SceneObjectType.register();
         SceneObjectTypes.register();
-        ResourceManagerHelper.get(ResourceType.SERVER_DATA)
-                .registerReloadListener(new SpellResourceReloadListener());
-        ServerLifecycleEvents.SERVER_STARTING.register(SpellResourceReloadListener::setServerInstance);
+
+        ResourceLoader.get(PackType.SERVER_DATA)
+                .registerReloader(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spells"),
+                        new SpellResourceReloadListener());
         CommandRegistrationCallback.EVENT
                 .register((dispatcher, registryAccess, environment) -> {
                     SpellCommand.register(dispatcher);

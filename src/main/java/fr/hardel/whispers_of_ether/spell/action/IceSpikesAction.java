@@ -4,13 +4,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.timeline.TimelineScheduler;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.decoration.DisplayEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Display;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 import java.util.List;
@@ -28,42 +28,42 @@ public record IceSpikesAction(int height, int duration) implements Action {
     }
 
     @Override
-    public void execute(ServerWorld world, Entity caster, List<Entity> targets) {
+    public void execute(ServerLevel world, Entity caster, List<Entity> targets) {
         for (Entity target : targets) {
-            Vec3d targetPos = target.getPos();
-            BlockPos basePos = BlockPos.ofFloored(targetPos.x, targetPos.y - 1, targetPos.z);
+            Vec3 targetPos = target.position();
+            BlockPos basePos = BlockPos.containing(targetPos.x, targetPos.y - 1, targetPos.z);
 
-            while (basePos.getY() > world.getBottomY() && world.getBlockState(basePos).isAir()) {
-                basePos = basePos.down();
+            while (basePos.getY() > world.getMinY() && world.getBlockState(basePos).isAir()) {
+                basePos = basePos.below();
             }
 
-            Vec3d groundPos = new Vec3d(
+            Vec3 groundPos = new Vec3(
                     Math.floor(targetPos.x) + 0.5,
                     basePos.getY() + 1,
                     Math.floor(targetPos.z) + 0.5);
 
-            DisplayEntity.BlockDisplayEntity blockDisplay = new DisplayEntity.BlockDisplayEntity(
+            Display.BlockDisplay blockDisplay = new Display.BlockDisplay(
                     EntityType.BLOCK_DISPLAY, world);
-            blockDisplay.setBlockState(Blocks.ICE.getDefaultState());
-            blockDisplay.setPosition(groundPos.x, groundPos.y, groundPos.z);
+            blockDisplay.setBlockState(Blocks.ICE.defaultBlockState());
+            blockDisplay.setPos(groundPos.x, groundPos.y, groundPos.z);
 
             Vector3f initialScale = new Vector3f(1.0f, 0.1f, 1.0f);
             Vector3f finalScale = new Vector3f(1.0f, (float) height, 1.0f);
             Vector3f initialTranslation = new Vector3f(0.0f, -((float) height / 2.0f), 0.0f);
             Vector3f finalTranslation = new Vector3f(0.0f, 0.0f, 0.0f);
 
-            blockDisplay.setTransformation(new net.minecraft.util.math.AffineTransformation(
+            blockDisplay.setTransformation(new com.mojang.math.Transformation(
                     initialTranslation,
                     new org.joml.Quaternionf(),
                     initialScale,
                     new org.joml.Quaternionf()));
 
-            blockDisplay.setInterpolationDuration(20);
-            blockDisplay.setStartInterpolation(0);
+            blockDisplay.setTransformationInterpolationDuration(20);
+            blockDisplay.setTransformationInterpolationDelay(0);
 
-            world.spawnEntity(blockDisplay);
+            world.addFreshEntity(blockDisplay);
 
-            blockDisplay.setTransformation(new net.minecraft.util.math.AffineTransformation(
+            blockDisplay.setTransformation(new com.mojang.math.Transformation(
                     finalTranslation,
                     new org.joml.Quaternionf(),
                     finalScale,
@@ -74,10 +74,10 @@ public record IceSpikesAction(int height, int duration) implements Action {
                     Vector3f shrinkScale = new Vector3f(1.0f, 0.1f, 1.0f);
                     Vector3f shrinkTranslation = new Vector3f(0.0f, -((float) height / 2.0f), 0.0f);
 
-                    blockDisplay.setInterpolationDuration(20);
-                    blockDisplay.setStartInterpolation(0);
+                    blockDisplay.setTransformationInterpolationDuration(20);
+                    blockDisplay.setTransformationInterpolationDelay(0);
 
-                    blockDisplay.setTransformation(new net.minecraft.util.math.AffineTransformation(
+                    blockDisplay.setTransformation(new com.mojang.math.Transformation(
                             shrinkTranslation,
                             new org.joml.Quaternionf(),
                             shrinkScale,

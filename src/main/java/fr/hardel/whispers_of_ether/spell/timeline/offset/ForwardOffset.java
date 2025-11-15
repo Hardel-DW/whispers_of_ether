@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.target.position.Position;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public record ForwardOffset(float distancePerIteration) implements LoopOffset {
 
@@ -20,7 +20,7 @@ public record ForwardOffset(float distancePerIteration) implements LoopOffset {
 
     @Override
     public Position calculateOffset(int iteration, Entity caster) {
-        Vec3d lookDirection = caster.getRotationVector();
+        Vec3 lookDirection = caster.getLookAngle();
         float distance = distancePerIteration * iteration;
 
         return new Position(

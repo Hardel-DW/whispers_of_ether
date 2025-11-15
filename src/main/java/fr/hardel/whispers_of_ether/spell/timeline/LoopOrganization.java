@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.timeline.offset.LoopOffset;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +26,7 @@ public record LoopOrganization(String timelineId, int iterations, Optional<Integ
     }
 
     @Override
-    public void execute(List<TimelineAction> timelines, ServerWorld world, Entity caster) {
+    public void execute(List<TimelineAction> timelines, ServerLevel world, Entity caster) {
         TimelineAction timeline = findTimelineById(timelines, timelineId);
         if (timeline == null)
             return;
@@ -34,7 +34,7 @@ public record LoopOrganization(String timelineId, int iterations, Optional<Integ
         executeLoop(timeline, world, caster, 0);
     }
 
-    private void executeLoop(TimelineAction timeline, ServerWorld world, Entity caster, int currentIteration) {
+    private void executeLoop(TimelineAction timeline, ServerLevel world, Entity caster, int currentIteration) {
         if (currentIteration >= iterations)
             return;
 

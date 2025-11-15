@@ -2,9 +2,9 @@ package fr.hardel.whispers_of_ether.object;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 
@@ -15,20 +15,20 @@ import com.mojang.serialization.DataResult;
  * separately.
  */
 public final class SceneObjectType {
-    public static final RegistryKey<Registry<SceneObjectType>> REGISTRY_KEY = RegistryKey
-            .ofRegistry(Identifier.of(WhispersOfEther.MOD_ID, "scene_object_type"));
+    public static final ResourceKey<Registry<SceneObjectType>> REGISTRY_KEY = ResourceKey
+            .createRegistryKey(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "scene_object_type"));
 
     public static final Registry<SceneObjectType> REGISTRY = FabricRegistryBuilder.createSimple(REGISTRY_KEY)
             .buildAndRegister();
 
-    public static final Codec<SceneObjectType> CODEC = Identifier.CODEC.comapFlatMap(
+    public static final Codec<SceneObjectType> CODEC = ResourceLocation.CODEC.comapFlatMap(
             id -> {
-                var t = REGISTRY.get(id);
+                var t = REGISTRY.getValue(id);
                 return t != null ? DataResult.success(t) : DataResult.error(() -> "Unknown scene object type: " + id);
             },
             t -> {
-                var id = REGISTRY.getId(t);
-                return id != null ? id : Identifier.of(WhispersOfEther.MOD_ID, "unknown");
+                var id = REGISTRY.getKey(t);
+                return id != null ? id : ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "unknown");
             });
 
     public static void register() {

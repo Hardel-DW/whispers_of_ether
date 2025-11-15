@@ -2,8 +2,8 @@ package fr.hardel.whispers_of_ether.spell.target.position;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public record LocalPosition(Position offset) implements PositionTarget {
 
@@ -17,14 +17,14 @@ public record LocalPosition(Position offset) implements PositionTarget {
     }
 
     @Override
-    public Vec3d toVec3d(Entity caster) {
-        Vec3d forward = caster.getRotationVector();
-        Vec3d right = forward.crossProduct(new Vec3d(0, 1, 0)).normalize();
-        Vec3d up = right.crossProduct(forward).normalize();
+    public Vec3 toVec3d(Entity caster) {
+        Vec3 forward = caster.getLookAngle();
+        Vec3 right = forward.cross(new Vec3(0, 1, 0)).normalize();
+        Vec3 up = right.cross(forward).normalize();
 
-        return caster.getPos()
-                .add(forward.multiply(offset.z()))
-                .add(right.multiply(offset.x()))
-                .add(up.multiply(offset.y()));
+        return caster.position()
+                .add(forward.scale(offset.z()))
+                .add(right.scale(offset.x()))
+                .add(up.scale(offset.y()));
     }
 }

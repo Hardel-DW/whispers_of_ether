@@ -1,19 +1,13 @@
 package fr.hardel.whispers_of_ether.client.render.obj;
 
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.util.math.MatrixStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.PoseStack;
 
-public class Circle {
-    private final float radius;
-
-    public Circle(float radius) {
-        this.radius = radius;
-    }
-
-    public void render(VertexConsumer v, MatrixStack matrices) {
-        var m = matrices.peek().getPositionMatrix();
+public record Circle(float radius) {
+    public void render(VertexConsumer v, PoseStack matrices) {
+        var m = matrices.last().pose();
         float[][] verts = {{-radius, -radius, 0, 0, 1}, {radius, -radius, 0, 1, 1}, {radius, radius, 0, 1, 0}, {-radius, radius, 0, 0, 0}};
         for (var vert : verts)
-            v.vertex(m, vert[0], vert[1], vert[2]).color(255,255,255,255).texture(vert[3], vert[4]).overlay(0).light(0x00F000F0).normal(matrices.peek(), 0, 0, 1);
+            v.addVertex(m, vert[0], vert[1], vert[2]).setColor(255, 255, 255, 255).setUv(vert[3], vert[4]).setOverlay(0).setLight(0x00F000F0).setNormal(matrices.last(), 0, 0, 1);
     }
 }

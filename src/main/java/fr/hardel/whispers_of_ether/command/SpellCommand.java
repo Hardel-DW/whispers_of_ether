@@ -4,144 +4,144 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.argument.IdentifierArgumentType;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public class SpellCommand {
     
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(CommandManager.literal("spell")
-            .requires(source -> source.hasPermissionLevel(2))
-            .then(CommandManager.literal("add")
-                .then(CommandManager.argument("spell", IdentifierArgumentType.identifier())
-                    .suggests((context, builder) -> CommandSource.suggestIdentifiers(SpellResourceReloadListener.getSpells().keySet(), builder))
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(Commands.literal("spell")
+            .requires(source -> source.hasPermission(2))
+            .then(Commands.literal("add")
+                .then(Commands.argument("spell", ResourceLocationArgument.id())
+                    .suggests((context, builder) -> SharedSuggestionProvider.suggestResource(SpellResourceReloadListener.getSpells().keySet(), builder))
                     .executes(SpellCommand::addSpell)
-                    .then(CommandManager.argument("player", EntityArgumentType.player())
+                    .then(Commands.argument("player", EntityArgument.player())
                         .executes(SpellCommand::addSpell))))
-            .then(CommandManager.literal("remove")
-                .then(CommandManager.argument("spell", IdentifierArgumentType.identifier())
-                    .suggests((context, builder) -> CommandSource.suggestIdentifiers(SpellResourceReloadListener.getSpells().keySet(), builder))
+            .then(Commands.literal("remove")
+                .then(Commands.argument("spell", ResourceLocationArgument.id())
+                    .suggests((context, builder) -> SharedSuggestionProvider.suggestResource(SpellResourceReloadListener.getSpells().keySet(), builder))
                     .executes(SpellCommand::removeSpell)
-                    .then(CommandManager.argument("player", EntityArgumentType.player())
+                    .then(Commands.argument("player", EntityArgument.player())
                         .executes(SpellCommand::removeSpell))))
-            .then(CommandManager.literal("list")
+            .then(Commands.literal("list")
                 .executes(SpellCommand::listSpells)
-                .then(CommandManager.argument("player", EntityArgumentType.player())
+                .then(Commands.argument("player", EntityArgument.player())
                     .executes(SpellCommand::listSpells)))
-            .then(CommandManager.literal("clear")
+            .then(Commands.literal("clear")
                 .executes(SpellCommand::clearSpells)
-                .then(CommandManager.argument("player", EntityArgumentType.player())
+                .then(Commands.argument("player", EntityArgument.player())
                     .executes(SpellCommand::clearSpells))));
     }
 
-    private static ServerPlayerEntity getTargetPlayer(CommandContext<ServerCommandSource> context) throws Exception {
+    private static ServerPlayer getTargetPlayer(CommandContext<CommandSourceStack> context) throws Exception {
         try {
-            return EntityArgumentType.getPlayer(context, "player");
+            return EntityArgument.getPlayer(context, "player");
         } catch (IllegalArgumentException e) {
-            return context.getSource().getPlayerOrThrow();
+            return context.getSource().getPlayerOrException();
         }
     }
 
-    private static int addSpell(CommandContext<ServerCommandSource> context) {
+    private static int addSpell(CommandContext<CommandSourceStack> context) {
         try {
-            ServerPlayerEntity player = getTargetPlayer(context);
-            Identifier spellId = IdentifierArgumentType.getIdentifier(context, "spell");
+            ServerPlayer player = getTargetPlayer(context);
+            ResourceLocation spellId = ResourceLocationArgument.getId(context, "spell");
             
             if (SpellResourceReloadListener.getSpell(spellId) == null) {
-                context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.unknown", spellId));
+                context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.unknown", spellId));
                 return 0;
             }
             var component = ModComponents.PLAYER_SPELL.get(player);
             
             if (component.hasSpell(spellId)) {
-                context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.add.already_has", 
+                context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.add.already_has",
                     player.getName().getString(), spellId.toString()));
                 return 0;
             }
             
             component.addSpell(spellId);
-            context.getSource().sendFeedback(() -> 
-                Text.translatable("command.whispers_of_ether.spell.add.success", spellId.toString(), player.getName().getString()), true);
+            context.getSource().sendSuccess(() ->
+                Component.translatable("command.whispers_of_ether.spell.add.success", spellId.toString(), player.getName().getString()), true);
             return 1;
         } catch (Exception e) {
-            context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
+            context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
             return 0;
         }
     }
 
-    private static int removeSpell(CommandContext<ServerCommandSource> context) {
+    private static int removeSpell(CommandContext<CommandSourceStack> context) {
         try {
-            ServerPlayerEntity player = getTargetPlayer(context);
-            Identifier spellId = IdentifierArgumentType.getIdentifier(context, "spell");
+            ServerPlayer player = getTargetPlayer(context);
+            ResourceLocation spellId = ResourceLocationArgument.getId(context, "spell");
             
             if (SpellResourceReloadListener.getSpell(spellId) == null) {
-                context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.unknown", spellId));
+                context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.unknown", spellId));
                 return 0;
             }
             var component = ModComponents.PLAYER_SPELL.get(player);
             
             if (!component.hasSpell(spellId)) {
-                context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.remove.not_found", 
+                context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.remove.not_found",
                     player.getName().getString(), spellId.toString()));
                 return 0;
             }
             
             component.removeSpell(spellId);
-            context.getSource().sendFeedback(() -> 
-                Text.translatable("command.whispers_of_ether.spell.remove.success", spellId.toString(), player.getName().getString()), true);
+            context.getSource().sendSuccess(() ->
+                Component.translatable("command.whispers_of_ether.spell.remove.success", spellId.toString(), player.getName().getString()), true);
             return 1;
         } catch (Exception e) {
-            context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
+            context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
             return 0;
         }
     }
 
-    private static int listSpells(CommandContext<ServerCommandSource> context) {
+    private static int listSpells(CommandContext<CommandSourceStack> context) {
         try {
-            ServerPlayerEntity player = getTargetPlayer(context);
+            ServerPlayer player = getTargetPlayer(context);
             var spells = ModComponents.PLAYER_SPELL.get(player).getSpellIds();
             
             if (spells.isEmpty()) {
-                context.getSource().sendFeedback(() -> 
-                    Text.translatable("command.whispers_of_ether.spell.list.empty", player.getName().getString()), false);
+                context.getSource().sendSuccess(() ->
+                    Component.translatable("command.whispers_of_ether.spell.list.empty", player.getName().getString()), false);
                 return 0;
             }
             
-            context.getSource().sendFeedback(() -> 
-                Text.translatable("command.whispers_of_ether.spell.list.success", 
+            context.getSource().sendSuccess(() ->
+                Component.translatable("command.whispers_of_ether.spell.list.success",
                     player.getName().getString(), spells.size(), 
-                    String.join(", ", spells.stream().map(Identifier::toString).toList())), false);
+                    String.join(", ", spells.stream().map(ResourceLocation::toString).toList())), false);
             return spells.size();
         } catch (Exception e) {
-            context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
+            context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
             return 0;
         }
     }
 
-    private static int clearSpells(CommandContext<ServerCommandSource> context) {
+    private static int clearSpells(CommandContext<CommandSourceStack> context) {
         try {
-            ServerPlayerEntity player = getTargetPlayer(context);
+            ServerPlayer player = getTargetPlayer(context);
             var component = ModComponents.PLAYER_SPELL.get(player);
             int count = component.getSpellIds().size();
             
             if (count == 0) {
-                context.getSource().sendFeedback(() -> 
-                    Text.translatable("command.whispers_of_ether.spell.clear.empty", player.getName().getString()), false);
+                context.getSource().sendSuccess(() ->
+                    Component.translatable("command.whispers_of_ether.spell.clear.empty", player.getName().getString()), false);
                 return 0;
             }
             
             component.clearSpells();
-            context.getSource().sendFeedback(() -> 
-                Text.translatable("command.whispers_of_ether.spell.clear.success", count, player.getName().getString()), true);
+            context.getSource().sendSuccess(() ->
+                Component.translatable("command.whispers_of_ether.spell.clear.success", count, player.getName().getString()), true);
             return count;
         } catch (Exception e) {
-            context.getSource().sendError(Text.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
+            context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.error", e.getMessage()));
             return 0;
         }
     }

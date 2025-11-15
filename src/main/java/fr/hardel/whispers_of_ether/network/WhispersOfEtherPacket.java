@@ -1,22 +1,22 @@
 package fr.hardel.whispers_of_ether.network;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 
 public class WhispersOfEtherPacket {
-    public record SpellCast(Identifier spellId) implements CustomPayload {
-        public static final CustomPayload.Id<SpellCast> ID = new CustomPayload.Id<>(
-                Identifier.of(WhispersOfEther.MOD_ID, "spell_cast"));
+    public record SpellCast(ResourceLocation spellId) implements CustomPacketPayload {
+        public static final CustomPacketPayload.Type<SpellCast> ID = new CustomPacketPayload.Type<>(
+                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "spell_cast"));
 
-        public static final PacketCodec<RegistryByteBuf, SpellCast> CODEC = PacketCodec.tuple(
-                Identifier.PACKET_CODEC, SpellCast::spellId,
+        public static final StreamCodec<RegistryFriendlyByteBuf, SpellCast> CODEC = StreamCodec.composite(
+                ResourceLocation.STREAM_CODEC, SpellCast::spellId,
                 SpellCast::new);
 
         @Override
-        public Id<? extends CustomPayload> getId() {
+        public Type<? extends CustomPacketPayload> type() {
             return ID;
         }
     }

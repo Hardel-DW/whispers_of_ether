@@ -1,23 +1,23 @@
 package fr.hardel.whispers_of_ether.spell;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.loot.context.LootContextTypes;
-import net.minecraft.loot.context.LootWorldContext;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.List;
 import java.util.Optional;
 
 public class SpellActionExecutor {
-    public static void execute(SpellAction spellAction, ServerWorld world, Entity caster) {
+    public static void execute(SpellAction spellAction, ServerLevel world, Entity caster) {
         if (spellAction.condition().isPresent()) {
-            LootWorldContext lootWorldContext = new LootWorldContext.Builder(world)
-                    .add(LootContextParameters.THIS_ENTITY, caster)
-                    .add(LootContextParameters.ORIGIN, caster.getPos())
-                    .build(LootContextTypes.COMMAND);
-            LootContext lootContext = new LootContext.Builder(lootWorldContext).build(Optional.empty());
+            LootParams lootWorldContext = new LootParams.Builder(world)
+                    .withParameter(LootContextParams.THIS_ENTITY, caster)
+                    .withParameter(LootContextParams.ORIGIN, caster.position())
+                    .create(LootContextParamSets.COMMAND);
+            LootContext lootContext = new LootContext.Builder(lootWorldContext).create(Optional.empty());
 
             if (!spellAction.condition().get().test(lootContext)) {
                 return;

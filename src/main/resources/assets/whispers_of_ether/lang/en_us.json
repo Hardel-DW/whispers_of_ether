@@ -38,5 +38,16 @@
     "command.whispers_of_ether.etherobj.updated": "Updated ether object '%s' (%s) at %d, %d, %d (radius: %.1f, strength: %.1f)",
     "command.whispers_of_ether.etherobj.removed": "Removed ether object '%s'",
     "command.whispers_of_ether.etherobj.not_found": "Ether object '%s' not found",
-    "command.whispers_of_ether.etherobj.cleared": "Cleared %d ether objects"
+    "command.whispers_of_ether.etherobj.cleared": "Cleared %d ether objects",
+    "itemGroup.whispers_of_ether": "Whispers of Ether",
+    "component.whispers_of_ether.rune.lore": "Tier %d",
+    "item.whispers_of_ether.rune_attack_speed": "Attack Speed Rune",
+    "item.whispers_of_ether.rune_exp": "Experience Rune",
+    "item.whispers_of_ether.rune_exp_job": "Job Experience Rune",
+    "item.whispers_of_ether.rune_fall": "Feather Falling Rune",
+    "item.whispers_of_ether.rune_money_job": "Job Money Rune",
+    "item.whispers_of_ether.rune_other": "Mystery Rune",
+    "item.whispers_of_ether.rune_saturation": "Saturation Rune",
+    "item.whispers_of_ether.rune_speed": "Speed Rune",
+    "item.whispers_of_ether.rune_strength": "Strength Rune"
 }

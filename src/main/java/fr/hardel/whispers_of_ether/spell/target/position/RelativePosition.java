@@ -2,8 +2,8 @@ package fr.hardel.whispers_of_ether.spell.target.position;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public record RelativePosition(Position offset) implements PositionTarget {
 
@@ -17,7 +17,7 @@ public record RelativePosition(Position offset) implements PositionTarget {
     }
 
     @Override
-    public Vec3d toVec3d(Entity caster) {
-        return caster.getPos().add(offset.x(), offset.y(), offset.z());
+    public Vec3 toVec3d(Entity caster) {
+        return caster.position().add(offset.x(), offset.y(), offset.z());
     }
 }

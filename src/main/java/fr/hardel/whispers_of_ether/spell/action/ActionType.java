@@ -3,14 +3,14 @@ package fr.hardel.whispers_of_ether.spell.action;
 import com.mojang.serialization.MapCodec;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 
 public record ActionType<T extends Action>(MapCodec<T> codec) {
     
-    public static final RegistryKey<Registry<ActionType<?>>> REGISTRY_KEY = 
-        RegistryKey.ofRegistry(Identifier.of(WhispersOfEther.MOD_ID, "action_type"));
+    public static final ResourceKey<Registry<ActionType<?>>> REGISTRY_KEY =
+        ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "action_type"));
     
     public static final Registry<ActionType<?>> REGISTRY = 
         FabricRegistryBuilder.createSimple(REGISTRY_KEY).buildAndRegister();
@@ -28,9 +28,9 @@ public record ActionType<T extends Action>(MapCodec<T> codec) {
         new ActionType<>(ParticleAction.CODEC);
     
     public static void register() {
-        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "summon"), SUMMON);
-        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "damage"), DAMAGE);
-        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "ice_spikes"), ICE_SPIKES);
-        Registry.register(REGISTRY, Identifier.of(WhispersOfEther.MOD_ID, "particle"), PARTICLE);
+        Registry.register(REGISTRY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "summon"), SUMMON);
+        Registry.register(REGISTRY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "damage"), DAMAGE);
+        Registry.register(REGISTRY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "ice_spikes"), ICE_SPIKES);
+        Registry.register(REGISTRY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "particle"), PARTICLE);
     }
 }

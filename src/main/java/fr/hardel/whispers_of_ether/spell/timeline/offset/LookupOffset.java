@@ -3,7 +3,7 @@ package fr.hardel.whispers_of_ether.spell.timeline.offset;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hardel.whispers_of_ether.spell.target.position.Position;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 import java.util.List;
 

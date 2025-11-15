@@ -3,8 +3,8 @@ package fr.hardel.whispers_of_ether.spell.target.shape;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 public record CubeShape(float size) implements Shape {
 
@@ -17,15 +17,15 @@ public record CubeShape(float size) implements Shape {
     }
 
     @Override
-    public Box getBoundingBox(Vec3d center) {
+    public AABB getBoundingBox(Vec3 center) {
         double half = size / 2.0;
-        return new Box(
+        return new AABB(
                 center.x - half, center.y - half, center.z - half,
                 center.x + half, center.y + half, center.z + half);
     }
 
     @Override
-    public boolean contains(Vec3d center, Vec3d point) {
+    public boolean contains(Vec3 center, Vec3 point) {
         double half = size / 2.0;
         return Math.abs(point.x - center.x) <= half &&
                Math.abs(point.y - center.y) <= half &&

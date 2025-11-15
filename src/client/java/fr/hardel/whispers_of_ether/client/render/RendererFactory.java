@@ -5,10 +5,9 @@ import fr.hardel.whispers_of_ether.client.render.pipeline.EtherSphereRenderer;
 
 public class RendererFactory {
 
-    public RenderSystem createRenderSystem() {
+    public void createRenderSystem() {
         RenderSystem renderSystem = RenderSystem.getInstance();
         registerRenderers(renderSystem);
-        return renderSystem;
     }
 
     private void registerRenderers(RenderSystem renderSystem) {
