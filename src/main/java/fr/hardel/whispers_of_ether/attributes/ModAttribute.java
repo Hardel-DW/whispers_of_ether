@@ -16,15 +16,23 @@ public class ModAttribute {
             new RangedAttribute("attribute.name.camera_shaking_strength", 0.0, 0.0, 10.0).setSyncable(true));
     public static final Holder<Attribute> CAMERA_SHAKING_FREQUENCY = register("camera_shaking_frequency",
             new RangedAttribute("attribute.name.camera_shaking_frequency", 0.0, 0.0, 10.0).setSyncable(true));
+    public static final Holder<Attribute> PICKUP_AREA_SIZE = register("pickup_area_size",
+            new RangedAttribute("attribute.name.pickup_area_size", 1.0, 0.0,
+                    10.0).setSyncable(true));
+    public static final Holder<Attribute> MULTI_JUMP = register("multi_jump",
+            new RangedAttribute("attribute.name.multi_jump", 1, 0,
+                    Integer.MAX_VALUE).setSyncable(true));
 
     private static Holder<Attribute> register(String id, Attribute attribute) {
-        return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, id), attribute);
+        return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE,
+                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, id), attribute);
     }
 
     public static void register() {
         WhispersOfEther.LOGGER.info("Registering Mod Attributes for {}", WhispersOfEther.MOD_ID);
 
         FabricDefaultAttributeRegistry.register(EntityType.PLAYER,
-                Player.createAttributes().add(CAMERA_SHAKING_STRENTH).add(CAMERA_SHAKING_FREQUENCY));
+                Player.createAttributes().add(CAMERA_SHAKING_STRENTH).add(CAMERA_SHAKING_FREQUENCY)
+                        .add(PICKUP_AREA_SIZE).add(MULTI_JUMP));
     }
 }
