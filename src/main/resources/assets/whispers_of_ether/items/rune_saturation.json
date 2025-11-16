@@ -8,35 +8,35 @@
                 "when": 1,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_saturation_1"
+                    "model": "whispers_of_ether:item/rune/saturation_1"
                 }
             },
             {
                 "when": 2,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_saturation_2"
+                    "model": "whispers_of_ether:item/rune/saturation_2"
                 }
             },
             {
                 "when": 3,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_saturation_3"
+                    "model": "whispers_of_ether:item/rune/saturation_3"
                 }
             },
             {
                 "when": 4,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_saturation_4"
+                    "model": "whispers_of_ether:item/rune/saturation_4"
                 }
             },
             {
                 "when": 5,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_saturation_5"
+                    "model": "whispers_of_ether:item/rune/saturation_5"
                 }
             }
         ]

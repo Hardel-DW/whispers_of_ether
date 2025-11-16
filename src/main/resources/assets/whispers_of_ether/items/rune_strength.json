@@ -8,35 +8,35 @@
                 "when": 1,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_strength_1"
+                    "model": "whispers_of_ether:item/rune/strength_1"
                 }
             },
             {
                 "when": 2,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_strength_2"
+                    "model": "whispers_of_ether:item/rune/strength_2"
                 }
             },
             {
                 "when": 3,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_strength_3"
+                    "model": "whispers_of_ether:item/rune/strength_3"
                 }
             },
             {
                 "when": 4,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_strength_4"
+                    "model": "whispers_of_ether:item/rune/strength_4"
                 }
             },
             {
                 "when": 5,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_strength_5"
+                    "model": "whispers_of_ether:item/rune/strength_5"
                 }
             }
         ]

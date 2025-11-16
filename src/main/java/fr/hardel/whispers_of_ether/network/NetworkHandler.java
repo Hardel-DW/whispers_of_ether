@@ -1,5 +1,6 @@
 package fr.hardel.whispers_of_ether.network;
 
+import fr.hardel.whispers_of_ether.network.impl.MultiJumpImpl;
 import fr.hardel.whispers_of_ether.network.impl.SpellCastImpl;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -14,5 +15,9 @@ public class NetworkHandler {
         PayloadTypeRegistry.playC2S().register(WhispersOfEtherPacket.SpellCast.ID,
                 WhispersOfEtherPacket.SpellCast.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(WhispersOfEtherPacket.SpellCast.ID, SpellCastImpl::handle);
+
+        PayloadTypeRegistry.playC2S().register(WhispersOfEtherPacket.MultiJump.ID,
+                WhispersOfEtherPacket.MultiJump.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(WhispersOfEtherPacket.MultiJump.ID, MultiJumpImpl::handle);
     }
 }

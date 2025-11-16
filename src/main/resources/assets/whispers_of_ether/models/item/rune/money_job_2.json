@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "whispers_of_ether:item/rune/money_job_2"
+  }
+}
+

@@ -1,0 +1,6 @@
+{
+    "textures": {
+        "layer0": "whispers_of_ether:item/ice/frost_bow_pulling_2"
+    },
+    "parent": "minecraft:item/bow"
+}
