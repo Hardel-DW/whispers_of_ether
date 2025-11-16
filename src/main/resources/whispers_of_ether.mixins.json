@@ -4,6 +4,10 @@
     "package": "fr.hardel.whispers_of_ether.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        "ItemStackMixin",
+        "LivingEntityJumpMixin",
+        "PlayerAttributesMixin",
+        "PlayerPickupMixin"
     ],
     "injectors": {
         "defaultRequire": 1

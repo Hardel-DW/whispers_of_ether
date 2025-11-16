@@ -9,6 +9,7 @@ import fr.hardel.whispers_of_ether.attributes.ModAttribute;
 import fr.hardel.whispers_of_ether.command.SpellCommand;
 import fr.hardel.whispers_of_ether.command.WaypointCommand;
 import fr.hardel.whispers_of_ether.command.EtherObjectCommand;
+import fr.hardel.whispers_of_ether.effects.ModEffects;
 import fr.hardel.whispers_of_ether.item.ModItems;
 import fr.hardel.whispers_of_ether.itemgroup.ItemGroupMod;
 import fr.hardel.whispers_of_ether.network.NetworkHandler;
@@ -46,6 +47,7 @@ public class WhispersOfEther implements ModInitializer {
         LoopOffsetType.register();
         SceneObjectType.register();
         SceneObjectTypes.register();
+        ModEffects.register();
 
         ResourceLoader.get(PackType.SERVER_DATA)
                 .registerReloader(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spells"),
