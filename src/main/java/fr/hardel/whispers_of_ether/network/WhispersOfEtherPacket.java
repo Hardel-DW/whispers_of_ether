@@ -20,4 +20,17 @@ public class WhispersOfEtherPacket {
             return ID;
         }
     }
+
+    public record MultiJump() implements CustomPacketPayload {
+        public static final CustomPacketPayload.Type<MultiJump> ID = new CustomPacketPayload.Type<>(
+                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump"));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, MultiJump> CODEC =
+                StreamCodec.unit(new MultiJump());
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return ID;
+        }
+    }
 }

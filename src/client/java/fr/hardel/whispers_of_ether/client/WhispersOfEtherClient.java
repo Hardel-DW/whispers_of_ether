@@ -1,5 +1,6 @@
 package fr.hardel.whispers_of_ether.client;
 
+import fr.hardel.whispers_of_ether.client.particles.ModParticleClient;
 import fr.hardel.whispers_of_ether.client.render.RenderSystem;
 import fr.hardel.whispers_of_ether.client.screen.WaypointRenderer;
 import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
@@ -20,6 +21,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
     public void onInitializeClient() {
         LOGGER.info("Initializing Whispers of Ether client");
         ModKeyBindings.register();
+        ModParticleClient.register();
         SpellCastHandler.initialize();
         NetworkHandler.registerClientPackets();
         WaypointRenderer.register();

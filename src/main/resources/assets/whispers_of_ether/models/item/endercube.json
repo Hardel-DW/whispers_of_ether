@@ -1,0 +1,6 @@
+{
+    "textures": {
+        "layer0": "whispers_of_ether:item/endercube"
+    },
+    "parent": "minecraft:item/generated"
+}

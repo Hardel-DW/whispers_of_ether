@@ -12,6 +12,7 @@ import fr.hardel.whispers_of_ether.command.EtherObjectCommand;
 import fr.hardel.whispers_of_ether.effects.ModEffects;
 import fr.hardel.whispers_of_ether.item.ModItems;
 import fr.hardel.whispers_of_ether.itemgroup.ItemGroupMod;
+import fr.hardel.whispers_of_ether.particle.ModParticle;
 import fr.hardel.whispers_of_ether.network.NetworkHandler;
 import fr.hardel.whispers_of_ether.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
@@ -38,6 +39,7 @@ public class WhispersOfEther implements ModInitializer {
         ModAttribute.register();
         ModItems.register();
         ModItemComponent.register();
+        ModParticle.register();
         ItemGroupMod.register();
         OrganizationType.register();
         ActionType.register();

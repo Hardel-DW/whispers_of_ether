@@ -8,35 +8,35 @@
                 "when": 1,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_attack_speed_1"
+                    "model": "whispers_of_ether:item/rune/attack_speed_1"
                 }
             },
             {
                 "when": 2,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_attack_speed_2"
+                    "model": "whispers_of_ether:item/rune/attack_speed_2"
                 }
             },
             {
                 "when": 3,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_attack_speed_3"
+                    "model": "whispers_of_ether:item/rune/attack_speed_3"
                 }
             },
             {
                 "when": 4,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_attack_speed_4"
+                    "model": "whispers_of_ether:item/rune/attack_speed_4"
                 }
             },
             {
                 "when": 5,
                 "model": {
                     "type": "minecraft:model",
-                    "model": "whispers_of_ether:item/rune_attack_speed_5"
+                    "model": "whispers_of_ether:item/rune/attack_speed_5"
                 }
             }
         ]

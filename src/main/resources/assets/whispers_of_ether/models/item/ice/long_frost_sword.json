@@ -1,0 +1,6 @@
+{
+    "textures": {
+        "layer0": "whispers_of_ether:item/ice/long_frost_sword"
+    },
+    "parent": "minecraft:item/handheld"
+}
