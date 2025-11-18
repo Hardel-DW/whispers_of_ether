@@ -39,6 +39,7 @@
         "cardinal-components": [
             "whispers_of_ether:player_spell",
             "whispers_of_ether:waypoints",
+            "whispers_of_ether:omnivampirism",
             "whispers_of_ether:scene_objects"
         ]
     }
