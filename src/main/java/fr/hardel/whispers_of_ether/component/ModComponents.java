@@ -16,9 +16,13 @@ public class ModComponents implements EntityComponentInitializer {
     public static final ComponentKey<WaypointComponent> WAYPOINTS =
             ComponentRegistry.getOrCreate(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "waypoints"), WaypointComponent.class);
 
+    public static final ComponentKey<OmnivampirismComponent> OMNIVAMPIRISM =
+            ComponentRegistry.getOrCreate(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "omnivampirism"), OmnivampirismComponent.class);
+
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.registerFor(Player.class, PLAYER_SPELL, player -> new PlayerSpellComponent(player));
         registry.registerFor(Player.class, WAYPOINTS, player -> new WaypointComponent(player));
+        registry.registerFor(Player.class, OMNIVAMPIRISM, player -> new OmnivampirismComponent(player));
     }
 }

@@ -21,7 +21,7 @@ public class MultiJumpImpl {
             }
             float pitch = 0.5f + level.random.nextFloat() * 1.5f;
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.BREEZE_SLIDE, SoundSource.PLAYERS, 0.1f, pitch); 
+                    SoundEvents.BREEZE_SLIDE, SoundSource.PLAYERS, 0.1f, pitch);
         });
     }
 }
