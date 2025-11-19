@@ -50,6 +50,8 @@
     "command.whispers_of_ether.etherobj.cleared": "Cleared %d ether objects",
     "itemGroup.whispers_of_ether": "Whispers of Ether",
     "component.whispers_of_ether.rune.lore": "Tier %d",
+    "entity.whispers_of_ether.damage_indicator": "Damage Indicator",
+    "entity.whispers_of_ether.target_dummy": "Target Dummy",
     "item.whispers_of_ether.rune_attack_speed": "Attack Speed Rune",
     "item.whispers_of_ether.rune_exp": "Experience Rune",
     "item.whispers_of_ether.rune_exp_job": "Job Experience Rune",
@@ -98,5 +100,6 @@
     "item.whispers_of_ether.card": "Card",
     "item.whispers_of_ether.endercube": "Ender Cube",
     "item.whispers_of_ether.spring_leaf": "Spring Leaf",
-    "item.whispers_of_ether.three_spring_leaf": "Three Spring Leaf"
+    "item.whispers_of_ether.three_spring_leaf": "Three Spring Leaf",
+    "item.whispers_of_ether.target_dummy": "Target Dummy"
 }

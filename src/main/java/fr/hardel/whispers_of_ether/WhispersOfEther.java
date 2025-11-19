@@ -10,6 +10,7 @@ import fr.hardel.whispers_of_ether.command.SpellCommand;
 import fr.hardel.whispers_of_ether.command.WaypointCommand;
 import fr.hardel.whispers_of_ether.command.EtherObjectCommand;
 import fr.hardel.whispers_of_ether.effects.ModEffects;
+import fr.hardel.whispers_of_ether.entity.ModEntities;
 import fr.hardel.whispers_of_ether.item.ModItems;
 import fr.hardel.whispers_of_ether.itemgroup.ItemGroupMod;
 import fr.hardel.whispers_of_ether.particle.ModParticle;
@@ -37,6 +38,7 @@ public class WhispersOfEther implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initializing Whispers of Ether");
         ModAttribute.register();
+        ModEntities.register();
         ModItems.register();
         ModItemComponent.register();
         ModParticle.register();

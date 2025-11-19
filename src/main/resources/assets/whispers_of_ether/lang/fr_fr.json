@@ -47,6 +47,8 @@
     "command.whispers_of_ether.etherobj.cleared": "%d objets éthérés supprimés",
     "component.whispers_of_ether.rune.lore": "Tier %d",
     "itemGroup.whispers_of_ether": "Whispers of Ether",
+    "entity.whispers_of_ether.damage_indicator": "Indicateur de Dégâts",
+    "entity.whispers_of_ether.target_dummy": "Cible d'entraînement",
     "item.whispers_of_ether.rune_attack_speed": "Vitesse d'attaque Rune %d",
     "item.whispers_of_ether.rune_exp": "Expérience Rune %d",
     "item.whispers_of_ether.rune_exp_job": "Expérience de métier Rune %d",
@@ -95,5 +97,6 @@
     "item.whispers_of_ether.card": "Carte",
     "item.whispers_of_ether.endercube": "Cube d'Ender",
     "item.whispers_of_ether.spring_leaf": "Feuille de Printemps",
-    "item.whispers_of_ether.three_spring_leaf": "Trois Feuilles de Printemps"
+    "item.whispers_of_ether.three_spring_leaf": "Trois Feuilles de Printemps",
+    "item.whispers_of_ether.target_dummy": "Dummy de Cible"
 }

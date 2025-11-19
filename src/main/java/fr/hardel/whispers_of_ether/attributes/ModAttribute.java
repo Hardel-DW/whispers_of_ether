@@ -25,13 +25,13 @@ public class ModAttribute {
             new RangedAttribute("attribute.name.multi_jump", 1, 0,
                     Integer.MAX_VALUE).setSyncable(true));
     public static final Holder<Attribute> CRIT_RATE = register("crit_rate",
-            new RangedAttribute("attribute.name.crit_rate", 0.0, 0.0, 1.0).setSyncable(true));
+            new RangedAttribute("attribute.name.crit_rate", 1.0, 0.0, 1024.0).setSyncable(true));
     public static final Holder<Attribute> CRIT_DAMAGE = register("crit_damage",
-            new RangedAttribute("attribute.name.crit_damage", 0.0, 0.0, 10.0).setSyncable(true));
+            new RangedAttribute("attribute.name.crit_damage", 1.0, 0.0, 1024.0).setSyncable(true));
     public static final Holder<Attribute> OMNIVAMPIRISM = register("omnivampirism",
-            new RangedAttribute("attribute.name.omnivampirism", 0.0, 0.0, 10.0).setSyncable(true));
+            new RangedAttribute("attribute.name.omnivampirism", 1.0, 0.0, 10.0).setSyncable(true));
     public static final Holder<Attribute> OMNIVAMPIRISM_RATE = register("omnivampirism_rate",
-            new RangedAttribute("attribute.name.omnivampirism_rate", 0.0, 0.0, 1.0).setSyncable(true));
+            new RangedAttribute("attribute.name.omnivampirism_rate", 1.0, 0.0, 1024.0).setSyncable(true));
 
     private static Holder<Attribute> register(String id, Attribute attribute) {
         return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE,
@@ -55,6 +55,5 @@ public class ModAttribute {
  * 
  * For crit rate:
  * give @a
- * minecraft:diamond_sword[minecraft:attribute_modifiers=[{"id":"attack_damage","type":"attack_damage","amount":7,"operation":"add_value"},{"id":"crit_rate","type":"whispers_of_ether:crit_rate","amount":1,"operation":"add_multiplied_base"},
- * {"id":"crit_damage","type":"whispers_of_ether:crit_damage","amount":1,"operation":"add_multiplied_base"}]]
+ * minecraft:diamond_sword[minecraft:attribute_modifiers=[{"id":"attack_damage","type":"attack_damage","amount":7,"operation":"add_value"},{"id":"crit_rate","type":"whispers_of_ether:crit_rate","amount":1,"operation":"add_multiplied_base"},{"id":"crit_damage","type":"whispers_of_ether:crit_damage","amount":1,"operation":"add_multiplied_base"}]]
  */
