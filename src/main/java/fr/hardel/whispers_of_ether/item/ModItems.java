@@ -17,6 +17,8 @@ import java.util.function.Function;
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import fr.hardel.whispers_of_ether.component.item.RuneComponent;
 
+import fr.hardel.whispers_of_ether.item.custom.TargetDummyItem;
+
 public class ModItems {
     // Runes
     public static final Item RUNE_ATTACK_SPEED = register("rune_attack_speed", Item::new,
@@ -86,6 +88,7 @@ public class ModItems {
     public static final Item ENDERCUBE = register("endercube", Item::new, new Item.Properties());
     public static final Item SPRING_LEAF = register("spring_leaf", Item::new, new Item.Properties());
     public static final Item THREE_SPRING_LEAF = register("three_spring_leaf", Item::new, new Item.Properties());
+    public static final Item TARGET_DUMMY = register("target_dummy", TargetDummyItem::new, new Item.Properties());
 
     public static Item register(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM,
@@ -155,6 +158,7 @@ public class ModItems {
             content.accept(ENDERCUBE);
             content.accept(SPRING_LEAF);
             content.accept(THREE_SPRING_LEAF);
+            content.accept(TARGET_DUMMY);
         });
     }
 
