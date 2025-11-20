@@ -17,8 +17,6 @@ import java.util.function.Function;
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import fr.hardel.whispers_of_ether.component.item.RuneComponent;
 
-import fr.hardel.whispers_of_ether.item.custom.TargetDummyItem;
-
 public class ModItems {
     // Runes
     public static final Item RUNE_ATTACK_SPEED = register("rune_attack_speed", Item::new,

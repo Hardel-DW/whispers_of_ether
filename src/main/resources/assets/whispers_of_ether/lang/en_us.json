@@ -101,5 +101,6 @@
     "item.whispers_of_ether.endercube": "Ender Cube",
     "item.whispers_of_ether.spring_leaf": "Spring Leaf",
     "item.whispers_of_ether.three_spring_leaf": "Three Spring Leaf",
-    "item.whispers_of_ether.target_dummy": "Target Dummy"
+    "item.whispers_of_ether.target_dummy": "Target Dummy",
+    "block.whispers_of_ether.forgemagic_block": "Runic Forging Table"
 }
