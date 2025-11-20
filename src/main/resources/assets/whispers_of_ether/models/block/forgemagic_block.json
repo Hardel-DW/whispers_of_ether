@@ -1,0 +1,301 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"ambientocclusion": true,
+	"textures": {
+		"particle": "whispers_of_ether:block/forgemagic_table/runic_table_wood",
+		"runic_table_wood": "whispers_of_ether:block/forgemagic_table/runic_table_wood",
+		"runic_table_pillar": "whispers_of_ether:block/forgemagic_table/runic_table_pillar",
+		"upper_page": "whispers_of_ether:block/forgemagic_table/upper_page",
+		"border_page": "whispers_of_ether:block/forgemagic_table/border_page",
+		"plate_book": "whispers_of_ether:block/forgemagic_table/plate_book"
+	},
+	"elements": [
+		{
+			"from": [1, 16, 2],
+			"to": [10, 17, 14],
+			"rotation": {"angle": -5, "axis": "z", "origin": [5.5, 16.5, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 4.5, 0.5], "texture": "#plate_book"},
+				"east": {"uv": [0, 0, 6, 0.5], "texture": "#plate_book"},
+				"south": {"uv": [0, 0, 4.5, 0.5], "texture": "#plate_book"},
+				"west": {"uv": [0, 0, 6, 0.5], "texture": "#plate_book"},
+				"up": {"uv": [0, 0, 4.5, 6], "texture": "#plate_book"},
+				"down": {"uv": [0, 0, 4.5, 6], "texture": "#plate_book"}
+			}
+		},
+		{
+			"from": [2, 17, 3.1],
+			"to": [9, 18, 8.1],
+			"rotation": {"angle": 7.5, "axis": "x", "origin": [5.5, 17.5, 5.5]},
+			"faces": {
+				"north": {"uv": [5, 5, 8.5, 5.5], "texture": "#border_page"},
+				"east": {"uv": [2.55, 5, 5, 5.5], "texture": "#border_page"},
+				"south": {"uv": [0, 5.5, 3.5, 6], "texture": "#plate_book"},
+				"west": {"uv": [0, 5, 2.45, 5.5], "texture": "#border_page"},
+				"up": {"uv": [3.5, 5, 0, 2.55], "texture": "#upper_page"},
+				"down": {"uv": [7, 2.55, 3.5, 5], "texture": "#border_page"}
+			}
+		},
+		{
+			"from": [2, 17, 7.9],
+			"to": [9, 18, 12.9],
+			"rotation": {"angle": -7.5, "axis": "x", "origin": [5.5, 17.5, 10.5]},
+			"faces": {
+				"north": {"uv": [5, 5, 8.5, 5.5], "texture": "#plate_book"},
+				"east": {"uv": [0, 5, 2.55, 5.5], "texture": "#border_page"},
+				"south": {"uv": [0, 5.5, 3.5, 6], "texture": "#border_page"},
+				"west": {"uv": [2.45, 5, 5, 5.5], "texture": "#border_page"},
+				"up": {"uv": [3.5, 2.55, 0, 0], "texture": "#upper_page"},
+				"down": {"uv": [7, 0, 3.5, 2.55], "texture": "#border_page"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 16, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 16, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 16, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [6, 2, 6],
+			"to": [10, 12, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 4]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 10], "texture": "#runic_table_pillar"},
+				"east": {"uv": [0, 0, 4, 10], "texture": "#runic_table_pillar"},
+				"south": {"uv": [0, 0, 4, 10], "texture": "#runic_table_pillar"},
+				"west": {"uv": [0, 0, 4, 10], "texture": "#runic_table_pillar"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#runic_table_pillar"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#runic_table_pillar"}
+			}
+		},
+		{
+			"from": [0, 12, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 12, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 16, 4], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 16, 4], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [0, 9, 0],
+			"to": [1, 12, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 9, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 3], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 14, 3], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 1, 3], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 1, 14, 4], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 0.5, 7], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 1, 14], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [15, 9, 2],
+			"to": [16, 12, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [15, 9, 2]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 3], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 2, 14, 5], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 1, 3], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 14, 3], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 0.5, 7], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 1, 14], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [2, 9, 0],
+			"to": [16, 12, 1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 9, 0]},
+			"faces": {
+				"north": {"uv": [0, 2, 14, 5], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 1, 3], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 14, 3], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 1, 3], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 7, 0.5], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 14, 1], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [0, 9, 15],
+			"to": [14, 12, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 9, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 14, 3], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 8, 1, 11], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 1, 14, 4], "texture": "#runic_table_wood"},
+				"west": {"uv": [1, 8, 2, 11], "texture": "#runic_table_wood"},
+				"up": {"uv": [14, 7, 0, 6], "texture": "#runic_table_wood"},
+				"down": {"uv": [15, 4, 1, 5], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [5, 9, 3],
+			"to": [13, 11, 5],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [3, 9, 11],
+			"to": [11, 11, 13],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [3, 9, 3],
+			"to": [5, 11, 11],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [11, 9, 5],
+			"to": [13, 11, 13],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [3, 6, 1],
+			"to": [15, 8, 3],
+			"rotation": {"angle": 0, "axis": "z", "origin": [3, 6, 1]},
+			"faces": {
+				"north": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [1, 6, 13],
+			"to": [13, 8, 15],
+			"rotation": {"angle": 0, "axis": "z", "origin": [1, 6, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [1, 6, 1],
+			"to": [3, 8, 13],
+			"rotation": {"angle": 0, "axis": "z", "origin": [1, 6, 1]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 2, 12], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 2, 12], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [13, 6, 3],
+			"to": [15, 8, 15],
+			"rotation": {"angle": 0, "axis": "z", "origin": [13, 6, 3]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 12, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 2, 12], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 2, 12], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [5, 3, 3],
+			"to": [13, 5, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 3, 3]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [3, 3, 11],
+			"to": [11, 5, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 11]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [3, 3, 3],
+			"to": [5, 5, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 3]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"}
+			}
+		},
+		{
+			"from": [11, 3, 5],
+			"to": [13, 5, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 3, 5]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 1], "texture": "#runic_table_wood"},
+				"east": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#runic_table_wood"},
+				"west": {"uv": [0, 0, 8, 2], "texture": "#runic_table_wood"},
+				"up": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"},
+				"down": {"uv": [0, 0, 2, 8], "texture": "#runic_table_wood"}
+			}
+		}
+	]
+}

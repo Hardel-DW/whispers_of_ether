@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.hardel.whispers_of_ether.attributes.ModAttribute;
+import fr.hardel.whispers_of_ether.block.ModBlocks;
 import fr.hardel.whispers_of_ether.command.SpellCommand;
 import fr.hardel.whispers_of_ether.command.WaypointCommand;
 import fr.hardel.whispers_of_ether.command.EtherObjectCommand;
@@ -39,6 +40,7 @@ public class WhispersOfEther implements ModInitializer {
         LOGGER.info("Initializing Whispers of Ether");
         ModAttribute.register();
         ModEntities.register();
+        ModBlocks.register();
         ModItems.register();
         ModItemComponent.register();
         ModParticle.register();

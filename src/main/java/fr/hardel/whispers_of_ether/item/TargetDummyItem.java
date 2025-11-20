@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.item.custom;
+package fr.hardel.whispers_of_ether.item;
 
 import fr.hardel.whispers_of_ether.entity.ModEntities;
 import fr.hardel.whispers_of_ether.entity.TargetDummy;
