@@ -163,7 +163,7 @@ public class ModItems {
     private static void registerRuneWithTiers(FabricItemGroupEntries content, Item item) {
         for (int i = 1; i <= 5; i++) {
             ItemStack stack = new ItemStack(item);
-            stack.set(ModItemComponent.RUNES, new RuneComponent(i));
+            stack.set(ModItemComponent.RUNES, RuneRegistry.createRuneComponent(item, i));
             content.accept(stack);
         }
     }

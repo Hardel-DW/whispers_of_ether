@@ -6,7 +6,8 @@
     "client": [
         "GameRendererMixin",
         "LivingEntityJumpClientMixin",
-        "MouseMixin"
+        "MouseMixin",
+        "RangeSelectItemModelPropertiesMixin"
     ],
     "injectors": {
         "defaultRequire": 1

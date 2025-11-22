@@ -21,8 +21,8 @@ public class ModComponents implements EntityComponentInitializer {
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.registerFor(Player.class, PLAYER_SPELL, player -> new PlayerSpellComponent(player));
-        registry.registerFor(Player.class, WAYPOINTS, player -> new WaypointComponent(player));
-        registry.registerFor(Player.class, OMNIVAMPIRISM, player -> new OmnivampirismComponent(player));
+        registry.registerFor(Player.class, PLAYER_SPELL, PlayerSpellComponent::new);
+        registry.registerFor(Player.class, WAYPOINTS, WaypointComponent::new);
+        registry.registerFor(Player.class, OMNIVAMPIRISM, OmnivampirismComponent::new);
     }
 }
