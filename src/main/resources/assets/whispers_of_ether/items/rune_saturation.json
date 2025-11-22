@@ -1,44 +1,47 @@
 ﻿{
     "model": {
-        "type": "minecraft:select",
-        "property": "minecraft:component",
-        "component": "whispers_of_ether:rune",
-        "cases": [
+        "type": "minecraft:range_dispatch",
+        "property": "whispers_of_ether:rune_tier",
+        "entries": [
             {
-                "when": 1,
+                "threshold": 1,
                 "model": {
                     "type": "minecraft:model",
                     "model": "whispers_of_ether:item/rune/saturation_1"
                 }
             },
             {
-                "when": 2,
+                "threshold": 2,
                 "model": {
                     "type": "minecraft:model",
                     "model": "whispers_of_ether:item/rune/saturation_2"
                 }
             },
             {
-                "when": 3,
+                "threshold": 3,
                 "model": {
                     "type": "minecraft:model",
                     "model": "whispers_of_ether:item/rune/saturation_3"
                 }
             },
             {
-                "when": 4,
+                "threshold": 4,
                 "model": {
                     "type": "minecraft:model",
                     "model": "whispers_of_ether:item/rune/saturation_4"
                 }
             },
             {
-                "when": 5,
+                "threshold": 5,
                 "model": {
                     "type": "minecraft:model",
                     "model": "whispers_of_ether:item/rune/saturation_5"
                 }
             }
-        ]
+        ],
+        "fallback": {
+            "type": "minecraft:model",
+            "model": "whispers_of_ether:item/rune/saturation_1"
+        }
     }
 }

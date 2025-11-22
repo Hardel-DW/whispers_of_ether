@@ -1,0 +1,736 @@
+[09:32:54] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:32:54] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:32:54] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:32:54] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:32:55] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:55] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:55] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:55] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:55] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:55] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 300.0/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=0.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 0.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 300.0/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=16.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 1.5841584158415842
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 298.41584158415844/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=32.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.1683168316831685
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_SUCCESS - forge.whispers_of_ether.critical_success
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 295.2475247524753/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=64.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 288.91089108910893/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=64.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 282.5742574257426/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=64.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 276.23762376237624/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=80.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 7.920792079207921
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 268.31683168316835/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=96.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 9.504950495049505
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 258.81188118811883/300.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=112.0, max=101.0
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.max_stat
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 300.0/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=0.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 0.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 300.0/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=16.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 1.5841584158415842
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 298.41584158415844/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=32.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.1683168316831685
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_SUCCESS - forge.whispers_of_ether.critical_success
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 295.2475247524753/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=64.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 288.91089108910893/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=80.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 7.920792079207921
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 280.99009900990103/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=96.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 9.504950495049505
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 271.4851485148515/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=96.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 9.504950495049505
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 261.980198019802/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=96.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 9.504950495049505
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_attack_speed, 1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 252.4752475247525/300.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_speed: current=112.0, max=101.0
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.max_stat
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:32:56] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:01] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:01] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:06] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:06] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:06] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:06] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[], this.container=[], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 252.4752475247525/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=0.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 0.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 252.4752475247525/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=0.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 0.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 252.4752475247525/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=4.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 0.7920792079207921
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_SUCCESS - forge.whispers_of_ether.critical_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 251.6831683168317/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=12.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 2.376237623762376
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 249.30693069306935/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=16.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.1683168316831685
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 246.13861386138618/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=20.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.9603960396039604
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 242.17821782178223/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=24.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 4.752475247524752
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 237.42574257425747/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=24.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 4.752475247524752
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 232.6732673267327/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=24.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 4.752475247524752
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 227.92079207920796/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=28.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 5.544554455445545
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 222.37623762376242/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=28.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 5.544554455445545
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 216.83168316831689/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=28.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 5.544554455445545
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 211.28712871287135/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=32.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 204.950495049505/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=32.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 198.61386138613867/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=36.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 7.128712871287128
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 191.48514851485155/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=36.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 7.128712871287128
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_SUCCESS - forge.whispers_of_ether.critical_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 184.35643564356442/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=44.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 8.712871287128714
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 175.64356435643572/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=48.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 9.504950495049505
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 166.1386138613862/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=52.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 10.297029702970297
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 155.8415841584159/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=52.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 10.297029702970297
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 145.54455445544562/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=52.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 10.297029702970297
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 135.24752475247533/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=52.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 10.297029702970297
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 124.95049504950504/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 113.86138613861395/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 102.77227722772287/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=60.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.881188118811881
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 90.89108910891099/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=64.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 12.673267326732674
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 78.21782178217832/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=68.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 13.465346534653467
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 64.75247524752486/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=68.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 13.465346534653467
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 51.28712871287139/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 37.02970297029714/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 22.77227722772288/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=76.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 15.049504950495049
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 7.722772277227833/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=76.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 15.049504950495049
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 7.722772277227833/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=76.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 15.049504950495049
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 7.722772277227833/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=76.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 15.049504950495049
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 7.722772277227833/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=76.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 15.049504950495049
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 252.4752475247525/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=0.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 0.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 252.4752475247525/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=4.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 0.7920792079207921
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_SUCCESS - forge.whispers_of_ether.critical_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 251.6831683168317/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=12.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 2.376237623762376
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 249.30693069306935/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=16.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.1683168316831685
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 246.13861386138618/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=16.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.1683168316831685
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 242.970297029703/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=16.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.1683168316831685
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 239.80198019801983/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=20.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 3.9603960396039604
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 235.84158415841588/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=24.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 4.752475247524752
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 231.08910891089113/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=28.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 5.544554455445545
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 225.5445544554456/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=28.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 5.544554455445545
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 220.00000000000006/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=32.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 213.66336633663371/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=32.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 6.336633663366337
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 207.32673267326737/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=36.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 7.128712871287128
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_SUCCESS - forge.whispers_of_ether.critical_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 200.19801980198025/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=44.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 8.712871287128714
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 191.48514851485155/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=48.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 9.504950495049505
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 181.98019801980203/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=48.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 9.504950495049505
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 172.47524752475252/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=52.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 10.297029702970297
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 162.17821782178223/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 151.08910891089113/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 140.00000000000003/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 128.91089108910893/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 117.82178217821784/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 106.73267326732676/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=56.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.08910891089109
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 95.64356435643568/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=60.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 11.881188118811881
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 83.7623762376238/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=64.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 12.673267326732674
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 71.08910891089113/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=68.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 13.465346534653467
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 57.623762376237664/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=68.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 13.465346534653467
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: NEUTRAL_SUCCESS - forge.whispers_of_ether.neutral_success
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 44.1584158415842/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 29.900990099009945/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 15.64356435643569/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: CRITICAL_FAILURE - forge.whispers_of_ether.critical_failure
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 1.3861386138614336/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Success! Rune consumed.
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 minecraft:diamond_chestplate], this.container=[1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 1.3861386138614336/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 1.3861386138614336/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 1.3861386138614336/300.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Server thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 1.3861386138614336/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], this.container=[1 whispers_of_ether:rune_strength, 1 minecraft:diamond_chestplate], equals=true
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Attempting to apply rune...
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well: 1.3861386138614336/300.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Attribute minecraft:attack_damage: current=72.0, max=101.0
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [LOGIC] Well consumed: 14.257425742574256
+[09:33:08] [Render thread/INFO] (Minecraft) [STDOUT]: [FORGE] Result: BLOCKED - forge.whispers_of_ether.insufficient_well
+[09:33:12] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:12] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:12] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:12] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:12] [Render thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:13] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:13] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:13] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:13] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
+[09:33:13] [Server thread/INFO] (Minecraft) [STDOUT]: [DEBUG] slotsChanged called! container=[1 whispers_of_ether:rune_strength], this.container=[1 whispers_of_ether:rune_strength], equals=true
