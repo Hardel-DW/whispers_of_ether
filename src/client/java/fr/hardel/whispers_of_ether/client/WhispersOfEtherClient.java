@@ -1,6 +1,7 @@
 package fr.hardel.whispers_of_ether.client;
 
 import fr.hardel.whispers_of_ether.client.gui.screen.ForgeMagicScreen;
+import fr.hardel.whispers_of_ether.client.network.ClientNetworkHandler;
 import fr.hardel.whispers_of_ether.client.particles.ModParticleClient;
 import fr.hardel.whispers_of_ether.client.render.RenderSystem;
 import fr.hardel.whispers_of_ether.client.screen.WaypointRenderer;
@@ -34,6 +35,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         ModParticleClient.register();
         SpellCastHandler.initialize();
         NetworkHandler.registerClientPackets();
+        ClientNetworkHandler.register();
         WaypointRenderer.register();
         RenderSystem.register();
 
@@ -44,7 +46,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
 
         WorldRenderEvents.AFTER_ENTITIES.register(RenderSystem.getInstance()::renderAll);
         HudElementRegistry.addLast(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spell_selector"),
-                SpellSelector::render);
+            SpellSelector::render);
     }
 
     public static RenderSystem getRenderSystem() {

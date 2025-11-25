@@ -14,29 +14,30 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Function;
+import java.util.Map;
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import fr.hardel.whispers_of_ether.component.item.RuneComponent;
 
 public class ModItems {
     // Runes
     public static final Item RUNE_ATTACK_SPEED = register("rune_attack_speed", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_EXP = register("rune_exp", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_EXP_JOB = register("rune_exp_job", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_FALL = register("rune_fall", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_MONEY_JOB = register("rune_money_job", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_OTHER = register("rune_other", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_SATURATION = register("rune_saturation", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_SPEED = register("rune_speed", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_STRENGTH = register("rune_strength", Item::new,
-            new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
 
     // Flame items
     public static final Item FLAME_AXE = register("flame_axe", Item::new, new Item.Properties());
@@ -79,7 +80,7 @@ public class ModItems {
 
     // Root items
     public static final Item AMETHYSM_CORAL_CRYSTAL = register("amethysm_coral_crystal", Item::new,
-            new Item.Properties());
+        new Item.Properties());
     public static final Item AUTNOM_LEAF = register("autnom_leaf", Item::new, new Item.Properties());
     public static final Item BIG_SCROLL = register("big_scroll", Item::new, new Item.Properties());
     public static final Item CARD = register("card", Item::new, new Item.Properties());
@@ -90,11 +91,22 @@ public class ModItems {
 
     public static Item register(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM,
-                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name));
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name));
         Item item = itemFactory.apply(settings.setId(itemKey));
         Registry.register(BuiltInRegistries.ITEM, itemKey, item);
         return item;
     }
+
+    private static final Map<Item, ResourceLocation> RUNE_TO_DATA = Map.ofEntries(
+        Map.entry(RUNE_ATTACK_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_speed_percent")),
+        Map.entry(RUNE_STRENGTH, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_damage_flat")),
+        Map.entry(RUNE_EXP, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_flat")),
+        Map.entry(RUNE_EXP_JOB, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "entity_interaction_range_flat")),
+        Map.entry(RUNE_FALL, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_knockback_percent")),
+        Map.entry(RUNE_MONEY_JOB, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "max_health_flat")),
+        Map.entry(RUNE_OTHER, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "mining_efficiency_percent")),
+        Map.entry(RUNE_SATURATION, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "knockback_resistance_percent")),
+        Map.entry(RUNE_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "movement_speed_percent")));
 
     public static void register() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.CUSTOM_ITEM_GROUP_KEY).register(content -> {
@@ -161,9 +173,13 @@ public class ModItems {
     }
 
     private static void registerRuneWithTiers(FabricItemGroupEntries content, Item item) {
-        for (int i = 1; i <= 5; i++) {
+        ResourceLocation runeId = RUNE_TO_DATA.get(item);
+        if (runeId == null)
+            return;
+
+        for (int tier = 1; tier <= 5; tier++) {
             ItemStack stack = new ItemStack(item);
-            stack.set(ModItemComponent.RUNES, RuneRegistry.createRuneComponent(item, i));
+            stack.set(ModItemComponent.RUNES, new RuneComponent(runeId, tier));
             content.accept(stack);
         }
     }

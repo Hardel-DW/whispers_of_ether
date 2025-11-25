@@ -3,6 +3,9 @@ package fr.hardel.whispers_of_ether.menu;
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import fr.hardel.whispers_of_ether.menu.slot.EquipmentSlot;
 import fr.hardel.whispers_of_ether.menu.slot.RuneSlot;
+import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class ForgeMagicMenu extends AbstractContainerMenu {
@@ -17,6 +21,9 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
     private static final int EQUIPMENT_SLOT = 1;
     private static final int CONTAINER_SIZE = 2;
     private boolean isProcessing = false;
+    private final Level level;
+    private final Player player;
+    private ItemStack lastEquipmentStack = ItemStack.EMPTY;
 
     private final Container container = new SimpleContainer(CONTAINER_SIZE) {
         @Override
@@ -28,10 +35,11 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
 
     public ForgeMagicMenu(int containerId, Inventory playerInventory) {
         super(ModMenuTypes.FORGE_MAGIC, containerId);
+        this.level = playerInventory.player.level();
+        this.player = playerInventory.player;
         container.startOpen(playerInventory.player);
         addSlot(new RuneSlot(container, RUNE_SLOT, 133, 47));
         addSlot(new EquipmentSlot(container, EQUIPMENT_SLOT, 232, 47));
-
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
     }
@@ -53,7 +61,6 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
     @Override
     public @NotNull ItemStack quickMoveStack(Player player, int index) {
         Slot slot = slots.get(index);
-
         if (!slot.hasItem()) {
             return ItemStack.EMPTY;
         }
@@ -104,30 +111,29 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
 
     @Override
     public void slotsChanged(Container container) {
-        if (isProcessing) {
+        if (isProcessing)
+            return;
+
+        super.slotsChanged(container);
+        if (container != this.container || level.isClientSide()) {
             return;
         }
-        super.slotsChanged(container);
-        System.out.println("[DEBUG] slotsChanged called! container=" + container + ", this.container=" + this.container
-                + ", equals=" + (container == this.container));
-        if (container != this.container) {
-            System.out.println("[DEBUG] Container mismatch, returning.");
-            return;
+
+        ItemStack currentEquipment = getEquipmentStack();
+        if (!ItemStack.isSameItemSameComponents(currentEquipment, lastEquipmentStack)) {
+            boolean wasForgeResult = isProcessing;
+            if (!wasForgeResult && player instanceof ServerPlayer serverPlayer) {
+                ServerPlayNetworking.send(serverPlayer, new WhispersOfEtherPacket.ForgeHistoryClear());
+            }
+            lastEquipmentStack = currentEquipment.copy();
         }
 
         ItemStack runeStack = getRuneStack();
         ItemStack equipmentStack = getEquipmentStack();
-
-        if (runeStack.isEmpty() || equipmentStack.isEmpty()) {
+        if (runeStack.isEmpty() || equipmentStack.isEmpty() || !runeStack.has(ModItemComponent.RUNES)) {
             return;
         }
 
-        if (!runeStack.has(ModItemComponent.RUNES)) {
-            System.out.println("[FORGE] Rune stack has no RUNES component!");
-            return;
-        }
-
-        System.out.println("[FORGE] Attempting to apply rune...");
         isProcessing = true;
         try {
             applyRune(runeStack, equipmentStack);
@@ -138,15 +144,18 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
 
     private void applyRune(ItemStack runeStack, ItemStack equipmentStack) {
         RuneForgeLogic.ForgeResult result = RuneForgeLogic.applyRune(runeStack, equipmentStack);
-        System.out.println("[FORGE] Result: " + result.outcome() + " - " + result.message());
-
         if (result.outcome() == RuneForgeLogic.Outcome.BLOCKED) {
             return;
         }
 
+        if (player instanceof ServerPlayer serverPlayer) {
+            ForgeHistoryEntry entry = new ForgeHistoryEntry(runeStack.copy(), result.outcome(), result.statChanges());
+            ServerPlayNetworking.send(serverPlayer, new WhispersOfEtherPacket.ForgeHistoryAdd(entry));
+        }
+
         container.setItem(EQUIPMENT_SLOT, result.resultStack());
+        lastEquipmentStack = result.resultStack().copy();
         runeStack.shrink(1);
         container.setChanged();
-        System.out.println("[FORGE] Success! Rune consumed.");
     }
 }
