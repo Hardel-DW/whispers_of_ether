@@ -6,18 +6,20 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 public class NetworkHandler {
-
     public static void registerClientPackets() {
-        // Client registration is handled in registerServerPackets
+        PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.ForgeHistoryAdd.ID,
+            WhispersOfEtherPacket.ForgeHistoryAdd.CODEC);
+        PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.ForgeHistoryClear.ID,
+            WhispersOfEtherPacket.ForgeHistoryClear.CODEC);
     }
 
     public static void registerServerPackets() {
         PayloadTypeRegistry.playC2S().register(WhispersOfEtherPacket.SpellCast.ID,
-                WhispersOfEtherPacket.SpellCast.CODEC);
+            WhispersOfEtherPacket.SpellCast.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(WhispersOfEtherPacket.SpellCast.ID, SpellCastImpl::handle);
 
         PayloadTypeRegistry.playC2S().register(WhispersOfEtherPacket.MultiJump.ID,
-                WhispersOfEtherPacket.MultiJump.CODEC);
+            WhispersOfEtherPacket.MultiJump.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(WhispersOfEtherPacket.MultiJump.ID, MultiJumpImpl::handle);
     }
 }

@@ -1,35 +1,62 @@
 package fr.hardel.whispers_of_ether.network;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
+import fr.hardel.whispers_of_ether.menu.ForgeHistoryEntry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 public class WhispersOfEtherPacket {
     public record SpellCast(ResourceLocation spellId) implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<SpellCast> ID = new CustomPacketPayload.Type<>(
-                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "spell_cast"));
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "spell_cast"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, SpellCast> CODEC = StreamCodec.composite(
-                ResourceLocation.STREAM_CODEC, SpellCast::spellId,
-                SpellCast::new);
+            ResourceLocation.STREAM_CODEC, SpellCast::spellId,
+            SpellCast::new);
 
         @Override
-        public Type<? extends CustomPacketPayload> type() {
+        public @NotNull Type<? extends CustomPacketPayload> type() {
             return ID;
         }
     }
 
     public record MultiJump() implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<MultiJump> ID = new CustomPacketPayload.Type<>(
-                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump"));
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, MultiJump> CODEC =
-                StreamCodec.unit(new MultiJump());
+        public static final StreamCodec<RegistryFriendlyByteBuf, MultiJump> CODEC = StreamCodec.unit(new MultiJump());
 
         @Override
-        public Type<? extends CustomPacketPayload> type() {
+        public @NotNull Type<? extends CustomPacketPayload> type() {
+            return ID;
+        }
+    }
+
+    public record ForgeHistoryAdd(ForgeHistoryEntry entry) implements CustomPacketPayload {
+        public static final CustomPacketPayload.Type<ForgeHistoryAdd> ID = new CustomPacketPayload.Type<>(
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "forge_history_add"));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, ForgeHistoryAdd> CODEC = StreamCodec.composite(
+            ForgeHistoryEntry.STREAM_CODEC, ForgeHistoryAdd::entry,
+            ForgeHistoryAdd::new);
+
+        @Override
+        public @NotNull Type<? extends CustomPacketPayload> type() {
+            return ID;
+        }
+    }
+
+    public record ForgeHistoryClear() implements CustomPacketPayload {
+        public static final CustomPacketPayload.Type<ForgeHistoryClear> ID = new CustomPacketPayload.Type<>(
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "forge_history_clear"));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, ForgeHistoryClear> CODEC = StreamCodec.unit(new ForgeHistoryClear());
+
+        @Override
+        public @NotNull Type<? extends CustomPacketPayload> type() {
             return ID;
         }
     }

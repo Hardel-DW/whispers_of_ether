@@ -3,6 +3,8 @@ package fr.hardel.whispers_of_ether.menu;
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import fr.hardel.whispers_of_ether.component.item.RuneComponent;
 import fr.hardel.whispers_of_ether.component.item.WellComponent;
+import fr.hardel.whispers_of_ether.runic_attribute.AttributeData;
+import fr.hardel.whispers_of_ether.runic_attribute.AttributeDataLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,14 +16,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.resources.ResourceLocation;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RuneForgeLogic {
-    private static final double[] BASE_PROBABILITIES = {0.30, 0.45, 0.60, 0.75, 0.90};
-    private static final double MAX_STAT_WEIGHT = 101.0;
     private static final Random RANDOM = new Random();
 
     public enum Outcome {
@@ -31,30 +30,34 @@ public class RuneForgeLogic {
         BLOCKED
     }
 
-    public record ForgeResult(Outcome outcome, ItemStack resultStack, String message) {}
+    public record ForgeResult(Outcome outcome, ItemStack resultStack, String message, List<ForgeHistoryEntry.StatChange> statChanges) {}
 
     public static ForgeResult applyRune(ItemStack runeStack, ItemStack equipmentStack) {
         RuneComponent rune = runeStack.get(ModItemComponent.RUNES);
         if (rune == null) {
-            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.no_rune");
+            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.no_rune", List.of());
         }
 
+        Optional<AttributeData> runeDataOpt = AttributeDataLoader.getAttribute(rune.runeId());
+        if (runeDataOpt.isEmpty()) {
+            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.invalid_rune", List.of());
+        }
+
+        AttributeData runeData = runeDataOpt.get();
         WellComponent well = equipmentStack.getOrDefault(ModItemComponent.WELL, WellComponent.EMPTY);
-        System.out.println("[LOGIC] Well: " + well.currentWell() + "/" + well.maxWell());
 
-        double currentValue = getAttributeValue(equipmentStack, rune.attributeId());
-        double maxValue = getMaxAttributeValue(rune.attributeId());
-        System.out.println("[LOGIC] Attribute " + rune.attributeId() + ": current=" + currentValue + ", max=" + maxValue);
+        double currentValue = getAttributeValue(equipmentStack, runeData.attribute());
+        double maxValue = runeData.maxValue();
+        boolean inverted = maxValue < 0;
 
-        if (currentValue >= maxValue) {
-            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.max_stat");
+        if (inverted ? currentValue <= maxValue : currentValue >= maxValue) {
+            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.max_stat", List.of());
         }
 
-        double wellConsumed = calculateWellConsumption(rune.weight(), currentValue, maxValue);
-        System.out.println("[LOGIC] Well consumed: " + wellConsumed);
+        double wellConsumed = calculateWellConsumption(runeData.weight(), currentValue, maxValue);
 
         if (well.currentWell() < wellConsumed) {
-            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.insufficient_well");
+            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.insufficient_well", List.of());
         }
 
         WellComponent newWell = well.consume(wellConsumed);
@@ -63,7 +66,8 @@ public class RuneForgeLogic {
         Probabilities prob = calculateProbabilities(rune.tier(), currentValue, maxValue, newWell.getWellFactor());
         Outcome outcome = determineOutcome(prob);
 
-        ItemStack result = applyOutcome(equipmentStack, rune, outcome, totalItemWeight);
+        List<ForgeHistoryEntry.StatChange> statChanges = new ArrayList<>();
+        ItemStack result = applyOutcome(equipmentStack, runeData, outcome, totalItemWeight, statChanges);
         result.set(ModItemComponent.WELL, newWell);
 
         String message = switch (outcome) {
@@ -73,25 +77,19 @@ public class RuneForgeLogic {
             case BLOCKED -> "forge.whispers_of_ether.blocked";
         };
 
-        return new ForgeResult(outcome, result, message);
+        return new ForgeResult(outcome, result, message, statChanges);
     }
 
     private static double calculateWellConsumption(double runeWeight, double currentValue, double maxValue) {
-        double currentStatLevel = maxValue > 0 ? currentValue / maxValue : 0;
+        double currentStatLevel = maxValue != 0 ? Math.abs(currentValue / maxValue) : 0;
         return runeWeight * currentStatLevel;
     }
 
-    private static Probabilities calculateProbabilities(int tier, double currentValue, double maxValue, double wellFactor) {
-        int tierIndex = tier - 1;
-        if (tierIndex < 0 || tierIndex >= BASE_PROBABILITIES.length) {
-            tierIndex = 0;
-        }
-
-        double baseProb = BASE_PROBABILITIES[tierIndex];
-        double penaltyMax = maxValue > 0 ? (currentValue / maxValue) * 0.5 : 0;
-
+    private static Probabilities calculateProbabilities(int tier, double currentValue, double maxValue,
+        double wellFactor) {
+        double baseProb = 0.15 + (tier * 0.15);
+        double penaltyMax = maxValue != 0 ? Math.abs(currentValue / maxValue) * 0.5 : 0;
         double penaltyWell = wellFactor < 0.2 ? 0.3 : (wellFactor < 0.5 ? 0.1 : 0);
-
         double critSuccess = baseProb * (1 - penaltyMax) * 0.15;
         double neutralSuccess = baseProb * (1 - penaltyMax) * (1 - penaltyWell);
         double critFailure = 1 - critSuccess - neutralSuccess;
@@ -99,8 +97,7 @@ public class RuneForgeLogic {
         return new Probabilities(
             Math.max(0, Math.min(1, critSuccess)),
             Math.max(0, Math.min(1, neutralSuccess)),
-            Math.max(0, Math.min(1, critFailure))
-        );
+            Math.max(0, Math.min(1, critFailure)));
     }
 
     private static Outcome determineOutcome(Probabilities prob) {
@@ -115,51 +112,113 @@ public class RuneForgeLogic {
         return Outcome.CRITICAL_FAILURE;
     }
 
-    private static ItemStack applyOutcome(ItemStack equipment, RuneComponent rune, Outcome outcome, double totalWeight) {
+    private static ItemStack applyOutcome(ItemStack equipment, AttributeData runeData, Outcome outcome,
+        double totalWeight, List<ForgeHistoryEntry.StatChange> statChanges) {
         ItemStack result = equipment.copy();
 
         double statGain = switch (outcome) {
-            case CRITICAL_SUCCESS -> rune.value() * 2;
-            case NEUTRAL_SUCCESS -> rune.value();
-            case CRITICAL_FAILURE -> 0;
-            case BLOCKED -> 0;
+            case CRITICAL_SUCCESS, NEUTRAL_SUCCESS -> {
+                double min = runeData.onPass().min();
+                double max = runeData.onPass().max();
+                if (max < min) {
+                    double temp = min;
+                    min = max;
+                    max = temp;
+                }
+                double randomValue = min + RANDOM.nextDouble() * (max - min);
+                yield Math.round(randomValue * 1000.0) / 1000.0;
+            }
+            case CRITICAL_FAILURE, BLOCKED -> 0;
         };
 
-        if (statGain > 0) {
-            addAttributeModifier(result, rune.attributeId(), rune.operation(), statGain);
+        if (statGain != 0) {
+            addAttributeModifier(result, runeData.attribute(), runeData.operation(), statGain);
+            boolean isPositive = isPositiveChange(runeData.attribute(), statGain);
+            statChanges.add(new ForgeHistoryEntry.StatChange(runeData.attribute(), statGain, runeData.operation(), isPositive));
         }
 
         if (outcome == Outcome.NEUTRAL_SUCCESS || outcome == Outcome.CRITICAL_FAILURE) {
             double lossMultiplier = outcome == Outcome.NEUTRAL_SUCCESS ? 0.1 : 0.2;
-            applyStatLoss(result, rune.attributeId(), rune.weight(), totalWeight, lossMultiplier);
+            applyStatLoss(result, runeData.attribute(), runeData.weight(), totalWeight, lossMultiplier, outcome, statChanges);
         }
 
         return result;
     }
 
-    private static void addAttributeModifier(ItemStack stack, ResourceLocation attributeId, AttributeModifier.Operation operation, double value) {
-        ItemAttributeModifiers modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-        List<ItemAttributeModifiers.Entry> entries = new ArrayList<>(modifiers.modifiers());
-        Optional<Holder.Reference<Attribute>> attributeHolder = BuiltInRegistries.ATTRIBUTE.get(
-            ResourceKey.create(Registries.ATTRIBUTE, attributeId)
-        );
+    private static boolean isPositiveChange(ResourceLocation attributeId, double delta) {
+        Optional<Holder.Reference<Attribute>> holder = BuiltInRegistries.ATTRIBUTE.get(
+            ResourceKey.create(Registries.ATTRIBUTE, attributeId));
+        if (holder.isEmpty())
+            return delta > 0;
 
-        if (attributeHolder.isEmpty()) return;
-        entries.add(new ItemAttributeModifiers.Entry(
-            attributeHolder.get(),
-            new AttributeModifier(attributeId, value, operation),
-            EquipmentSlotGroup.ANY
-        ));
+        Attribute attr = holder.get().value();
+        return attr.getStyle(delta > 0) == net.minecraft.ChatFormatting.BLUE;
+    }
+
+    private static void addAttributeModifier(ItemStack stack, ResourceLocation attributeId,
+        AttributeModifier.Operation operation, double valueToAdd) {
+        ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
+        List<ItemAttributeModifiers.Entry> entries = new ArrayList<>(modifiers.modifiers());
+
+        Optional<Holder.Reference<Attribute>> attributeHolder = BuiltInRegistries.ATTRIBUTE.get(
+            ResourceKey.create(Registries.ATTRIBUTE, attributeId));
+
+        if (attributeHolder.isEmpty())
+            return;
+        Holder<Attribute> attribute = attributeHolder.get();
+        ItemAttributeModifiers.Entry existingEntry = null;
+        double currentAmount = 0.0;
+
+        for (ItemAttributeModifiers.Entry entry : entries) {
+            if (entry.attribute().value().equals(attribute.value()) && entry.modifier().operation() == operation) {
+                existingEntry = entry;
+                currentAmount = entry.modifier().amount();
+                break;
+            }
+        }
+
+        if (existingEntry != null) {
+            entries.remove(existingEntry);
+            entries.add(new ItemAttributeModifiers.Entry(
+                existingEntry.attribute(),
+                new AttributeModifier(existingEntry.modifier().id(), currentAmount + valueToAdd, operation),
+                existingEntry.slot()));
+        } else {
+            entries.add(new ItemAttributeModifiers.Entry(
+                attribute,
+                new AttributeModifier(attributeId, valueToAdd, operation),
+                EquipmentSlotGroup.ANY));
+        }
 
         stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(entries));
     }
 
-    private static void applyStatLoss(ItemStack stack, ResourceLocation excludeAttribute, double runeWeight, double totalWeight, double multiplier) {
-        ItemAttributeModifiers modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-
+    private static void applyStatLoss(ItemStack stack, ResourceLocation excludeAttribute, double runeWeight,
+        double totalWeight, double multiplier, Outcome outcome, List<ForgeHistoryEntry.StatChange> statChanges) {
+        ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
         if (totalWeight <= 0) {
             return;
         }
+
+        List<ItemAttributeModifiers.Entry> eligibleForLoss = modifiers.modifiers().stream()
+            .filter(entry -> !Objects.equals(BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value()), excludeAttribute))
+            .toList();
+
+        if (eligibleForLoss.isEmpty()) {
+            return;
+        }
+
+        int maxAffected = outcome == Outcome.CRITICAL_FAILURE
+            ? 1 + RANDOM.nextInt(3)
+            : 1 + RANDOM.nextInt(2);
+        int affected = Math.min(maxAffected, eligibleForLoss.size());
+
+        List<ItemAttributeModifiers.Entry> toAffect = new ArrayList<>(eligibleForLoss);
+        Collections.shuffle(toAffect, RANDOM);
+        Set<ResourceLocation> affectedAttributes = toAffect.stream()
+            .limit(affected)
+            .map(e -> BuiltInRegistries.ATTRIBUTE.getKey(e.attribute().value()))
+            .collect(Collectors.toSet());
 
         double lossFactor = (runeWeight / totalWeight) * multiplier;
         List<ItemAttributeModifiers.Entry> newEntries = new ArrayList<>();
@@ -168,13 +227,17 @@ public class RuneForgeLogic {
             Holder<Attribute> holder = entry.attribute();
             ResourceLocation attrId = BuiltInRegistries.ATTRIBUTE.getKey(holder.value());
 
-            if (!attrId.equals(excludeAttribute)) {
-                double newValue = entry.modifier().amount() * (1 - lossFactor);
-                newEntries.add(new ItemAttributeModifiers.Entry(
-                    holder,
-                    new AttributeModifier(entry.modifier().id(), Math.max(0, newValue), entry.modifier().operation()),
-                    entry.slot()
-                ));
+            if (affectedAttributes.contains(attrId)) {
+                double currentValue = entry.modifier().amount();
+                double newValue = currentValue > 0
+                    ? currentValue * (1 - lossFactor)
+                    : currentValue * (1 + lossFactor);
+                double delta = newValue - currentValue;
+                if (Math.abs(newValue) > 0.001) {
+                    newEntries.add(new ItemAttributeModifiers.Entry(holder, new AttributeModifier(entry.modifier().id(), newValue, entry.modifier().operation()), entry.slot()));
+                    boolean isPositive = isPositiveChange(attrId, delta);
+                    statChanges.add(new ForgeHistoryEntry.StatChange(attrId, delta, entry.modifier().operation(), isPositive));
+                }
             } else {
                 newEntries.add(entry);
             }
@@ -184,50 +247,38 @@ public class RuneForgeLogic {
     }
 
     private static double getAttributeValue(ItemStack stack, ResourceLocation attributeId) {
-        ItemAttributeModifiers modifiers = stack.getOrDefault(net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+        ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
 
         return modifiers.modifiers().stream()
-            .filter(entry -> {
-                ResourceLocation id = BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value());
-                return id.equals(attributeId);
-            })
+            .filter(entry -> Objects.equals(BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value()), attributeId))
             .mapToDouble(entry -> entry.modifier().amount())
             .sum();
     }
 
     private static double calculateTotalWeight(ItemStack stack) {
-        ItemAttributeModifiers modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+        ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
 
         return modifiers.modifiers().stream()
             .mapToDouble(entry -> {
                 double value = entry.modifier().amount();
                 ResourceLocation attrId = BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value());
-                double weight = getAttributeWeight(attrId);
+                assert attrId != null;
+                double weight = getAttributeWeightFromData(attrId);
                 return Math.abs(value) * weight;
             })
             .sum();
     }
 
-    private static double getAttributeWeight(ResourceLocation attributeId) {
-        return switch (attributeId.toString()) {
-            case "minecraft:generic.armor" -> 5.0;
-            case "minecraft:generic.attack_damage" -> 20.0;
-            case "minecraft:generic.attack_speed" -> 10.0;
-            case "minecraft:generic.attack_knockback" -> 10.0;
-            case "minecraft:generic.max_health" -> 1.0;
-            case "minecraft:generic.movement_speed" -> 200.0;
-            case "minecraft:generic.knockback_resistance" -> 20.0;
-            case "whispers_of_ether:crit_rate" -> 10.0;
-            case "whispers_of_ether:crit_damage" -> 10.0;
-            case "whispers_of_ether:omnivampirism" -> 10.0;
-            case "whispers_of_ether:omnivampirism_rate" -> 10.0;
-            case "whispers_of_ether:multi_jump" -> 50.0;
-            default -> 1.0;
-        };
+    private static ItemAttributeModifiers getOrInitModifiers(ItemStack stack) {
+        return stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, stack.getItem().components().getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY));
     }
 
-    private static double getMaxAttributeValue(ResourceLocation attributeId) {
-        return MAX_STAT_WEIGHT / getAttributeWeight(attributeId);
+    private static double getAttributeWeightFromData(ResourceLocation attributeId) {
+        return AttributeDataLoader.getAttributes().values().stream()
+            .filter(data -> data.attribute().equals(attributeId))
+            .findFirst()
+            .map(AttributeData::weight)
+            .orElse(1.0);
     }
 
     private record Probabilities(double criticalSuccess, double neutralSuccess, double criticalFailure) {}

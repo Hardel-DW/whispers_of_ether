@@ -11,33 +11,23 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import java.util.function.Consumer;
 import net.minecraft.network.codec.ByteBufCodecs;
 
-public record RuneComponent(ResourceLocation attributeId, AttributeModifier.Operation operation, double weight, int tier, double value) implements TooltipProvider {
+public record RuneComponent(ResourceLocation runeId, int tier) implements TooltipProvider {
     public static final RuneComponent EMPTY = new RuneComponent(
-        ResourceLocation.withDefaultNamespace("generic.max_health"),
-        AttributeModifier.Operation.ADD_VALUE,
-        1.0,
-        1,
-        1.0
+        ResourceLocation.withDefaultNamespace("empty"),
+        1
     );
 
     public static final Codec<RuneComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        ResourceLocation.CODEC.fieldOf("attribute_id").forGetter(RuneComponent::attributeId),
-        AttributeModifier.Operation.CODEC.fieldOf("operation").forGetter(RuneComponent::operation),
-        Codec.DOUBLE.fieldOf("weight").forGetter(RuneComponent::weight),
-        Codec.INT.fieldOf("tier").forGetter(RuneComponent::tier),
-        Codec.DOUBLE.fieldOf("value").forGetter(RuneComponent::value)
+        ResourceLocation.CODEC.fieldOf("rune_id").forGetter(RuneComponent::runeId),
+        Codec.INT.fieldOf("tier").forGetter(RuneComponent::tier)
     ).apply(instance, RuneComponent::new));
 
     public static final StreamCodec<ByteBuf, RuneComponent> STREAM_CODEC = StreamCodec.composite(
-        ResourceLocation.STREAM_CODEC, RuneComponent::attributeId,
-        AttributeModifier.Operation.STREAM_CODEC, RuneComponent::operation,
-        ByteBufCodecs.DOUBLE, RuneComponent::weight,
+        ResourceLocation.STREAM_CODEC, RuneComponent::runeId,
         ByteBufCodecs.VAR_INT, RuneComponent::tier,
-        ByteBufCodecs.DOUBLE, RuneComponent::value,
         RuneComponent::new
     );
 
@@ -46,7 +36,5 @@ public record RuneComponent(ResourceLocation attributeId, AttributeModifier.Oper
             final TooltipFlag flag, final DataComponentGetter components) {
         consumer.accept(Component.translatable("component.whispers_of_ether.rune.tier", this.tier)
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
-        consumer.accept(Component.translatable("component.whispers_of_ether.rune.value", String.format("%.1f", this.value))
-                .withStyle(ChatFormatting.GRAY));
     }
 }
