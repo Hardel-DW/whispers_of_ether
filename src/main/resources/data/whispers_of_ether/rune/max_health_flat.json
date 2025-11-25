@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:max_health",
+    "operation": "add_value",
+    "weight": 20.0,
+    "max_value": 10.0,
+    "on_pass": {
+        "min": 0.5,
+        "max": 1
+    }
+}

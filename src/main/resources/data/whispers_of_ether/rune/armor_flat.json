@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:armor",
+    "operation": "add_value",
+    "weight": 10.0,
+    "max_value": 12.0,
+    "on_pass": {
+        "min": 0.1,
+        "max": 0.9
+    }
+}

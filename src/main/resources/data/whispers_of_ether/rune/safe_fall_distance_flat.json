@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:safe_fall_distance",
+    "operation": "add_value",
+    "weight": 25.0,
+    "max_value": 10.0,
+    "on_pass": {
+        "min": 0.25,
+        "max": 2
+    }
+}

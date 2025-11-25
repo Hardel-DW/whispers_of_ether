@@ -1,0 +1,10 @@
+{
+    "attribute": "whispers_of_ether:multi_jump",
+    "operation": "add_value",
+    "weight": 50.0,
+    "max_value": 3.0,
+    "on_pass": {
+        "min": 1,
+        "max": 1
+    }
+}

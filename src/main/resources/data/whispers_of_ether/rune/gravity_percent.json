@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:gravity",
+    "operation": "add_multiplied_base",
+    "weight": 50.0,
+    "max_value": -1.0,
+    "on_pass": {
+        "min": -0.1,
+        "max": -0.25
+    }
+}

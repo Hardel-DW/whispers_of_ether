@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:sweeping_damage_ratio",
+    "operation": "add_multiplied_base",
+    "weight": 5.0,
+    "max_value": 1.0,
+    "on_pass": {
+        "min": 0.01,
+        "max": 0.1
+    }
+}

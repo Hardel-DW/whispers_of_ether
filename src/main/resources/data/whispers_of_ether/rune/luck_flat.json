@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:luck",
+    "operation": "add_value",
+    "weight": 100.0,
+    "max_value": 5.0,
+    "on_pass": {
+        "min": 0.5,
+        "max": 1
+    }
+}

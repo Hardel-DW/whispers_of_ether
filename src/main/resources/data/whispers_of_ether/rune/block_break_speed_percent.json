@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:block_break_speed",
+    "operation": "add_multiplied_base",
+    "weight": 50.0,
+    "max_value": 3.0,
+    "on_pass": {
+        "min": 0.15,
+        "max": 0.75
+    }
+}

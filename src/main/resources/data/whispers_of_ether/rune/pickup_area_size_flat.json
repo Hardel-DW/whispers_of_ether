@@ -1,0 +1,10 @@
+{
+    "attribute": "whispers_of_ether:pickup_area_size",
+    "operation": "add_value",
+    "weight": 30.0,
+    "max_value": 5.0,
+    "on_pass": {
+        "min": 0.5,
+        "max": 1
+    }
+}
