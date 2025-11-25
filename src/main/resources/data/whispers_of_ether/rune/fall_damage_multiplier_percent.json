@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:fall_damage_multiplier",
+    "operation": "add_multiplied_base",
+    "weight": 25.0,
+    "max_value": -1.0,
+    "on_pass": {
+        "min": -0.01,
+        "max": -0.1
+    }
+}

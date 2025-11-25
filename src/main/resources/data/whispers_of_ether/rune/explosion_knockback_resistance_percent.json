@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:explosion_knockback_resistance",
+    "operation": "add_multiplied_base",
+    "weight": 8.0,
+    "max_value": 1.0,
+    "on_pass": {
+        "min": 0.01,
+        "max": 0.09
+    }
+}

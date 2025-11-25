@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:sneaking_speed",
+    "operation": "add_multiplied_base",
+    "weight": 5.0,
+    "max_value": 1.5,
+    "on_pass": {
+        "min": 0.07,
+        "max": 1.12
+    }
+}

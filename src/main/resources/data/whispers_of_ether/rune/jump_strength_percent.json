@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:jump_strength",
+    "operation": "add_multiplied_base",
+    "weight": 10.0,
+    "max_value": 2.0,
+    "on_pass": {
+        "min": 0.05,
+        "max": 0.15
+    }
+}

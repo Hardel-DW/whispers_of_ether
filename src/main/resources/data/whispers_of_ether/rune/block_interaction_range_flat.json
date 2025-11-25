@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:block_interaction_range",
+    "operation": "add_value",
+    "weight": 15.0,
+    "max_value": 3.0,
+    "on_pass": {
+        "min": 0.1,
+        "max": 0.5
+    }
+}

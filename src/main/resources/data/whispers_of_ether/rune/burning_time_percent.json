@@ -1,0 +1,10 @@
+{
+    "attribute": "minecraft:burning_time",
+    "operation": "add_multiplied_base",
+    "weight": 25.0,
+    "max_value": -0.25,
+    "on_pass": {
+        "min": -0.01,
+        "max": -0.07
+    }
+}
