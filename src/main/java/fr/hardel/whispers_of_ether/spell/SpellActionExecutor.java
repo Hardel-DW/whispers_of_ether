@@ -13,10 +13,7 @@ import java.util.Optional;
 public class SpellActionExecutor {
     public static void execute(SpellAction spellAction, ServerLevel world, Entity caster) {
         if (spellAction.condition().isPresent()) {
-            LootParams lootWorldContext = new LootParams.Builder(world)
-                    .withParameter(LootContextParams.THIS_ENTITY, caster)
-                    .withParameter(LootContextParams.ORIGIN, caster.position())
-                    .create(LootContextParamSets.COMMAND);
+            LootParams lootWorldContext = new LootParams.Builder(world).withParameter(LootContextParams.THIS_ENTITY, caster).withParameter(LootContextParams.ORIGIN, caster.position()).create(LootContextParamSets.COMMAND);
             LootContext lootContext = new LootContext.Builder(lootWorldContext).create(Optional.empty());
 
             if (!spellAction.condition().get().test(lootContext)) {

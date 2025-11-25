@@ -1,6 +1,7 @@
 package fr.hardel.whispers_of_ether;
 
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
+import fr.hardel.whispers_of_ether.runic_attribute.AttributeDataLoader;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +33,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 
 public class WhispersOfEther implements ModInitializer {
-
     public static final String MOD_ID = "whispers_of_ether";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Initializing Whispers of Ether");
         ModAttribute.register();
         ModEntities.register();
         ModBlocks.register();
@@ -57,15 +56,14 @@ public class WhispersOfEther implements ModInitializer {
         SceneObjectTypes.register();
         ModEffects.register();
 
-        ResourceLoader.get(PackType.SERVER_DATA)
-                .registerReloader(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spells"),
-                        new SpellResourceReloadListener());
-        CommandRegistrationCallback.EVENT
-                .register((dispatcher, registryAccess, environment) -> {
-                    SpellCommand.register(dispatcher);
-                    WaypointCommand.register(dispatcher);
-                    EtherObjectCommand.register(dispatcher);
-                });
+        ResourceLoader.get(PackType.SERVER_DATA).registerReloader(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spells"), new SpellResourceReloadListener());
+        ResourceLoader.get(PackType.SERVER_DATA).registerReloader(ResourceLocation.fromNamespaceAndPath(MOD_ID, "rune"), new AttributeDataLoader());
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            SpellCommand.register(dispatcher);
+            WaypointCommand.register(dispatcher);
+            EtherObjectCommand.register(dispatcher);
+        });
+
         NetworkHandler.registerServerPackets();
     }
 }

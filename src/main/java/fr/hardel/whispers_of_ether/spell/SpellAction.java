@@ -10,10 +10,9 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import java.util.Optional;
 
 public record SpellAction(Action action, Optional<LootItemCondition> condition, Target target) {
-    
+
     public static final Codec<SpellAction> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Action.CODEC.fieldOf("action").forGetter(SpellAction::action),
         LootItemCondition.DIRECT_CODEC.optionalFieldOf("condition").forGetter(SpellAction::condition),
-        Target.CODEC.optionalFieldOf("target", new SelfTarget()).forGetter(SpellAction::target)
-    ).apply(instance, SpellAction::new));
+        Target.CODEC.optionalFieldOf("target", new SelfTarget()).forGetter(SpellAction::target)).apply(instance, SpellAction::new));
 }

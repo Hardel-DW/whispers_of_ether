@@ -17,18 +17,18 @@ import java.util.List;
 import java.util.Optional;
 
 public record Spell(ResourceLocation icon, String name, Optional<Integer> cooldown,
-        Optional<LootItemCondition> condition, List<TimelineAction> timelines, OrganizationTimeline organization,
-        List<SpellAction> passive) {
+    Optional<LootItemCondition> condition, List<TimelineAction> timelines, OrganizationTimeline organization,
+    List<SpellAction> passive) {
 
     public static final Codec<Spell> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ResourceLocation.CODEC.fieldOf("icon").forGetter(Spell::icon),
-            Codec.STRING.fieldOf("name").forGetter(Spell::name),
-            Codec.INT.optionalFieldOf("cooldown").forGetter(Spell::cooldown),
-            LootItemCondition.DIRECT_CODEC.optionalFieldOf("condition").forGetter(Spell::condition),
-            TimelineAction.CODEC.listOf().fieldOf("timelines").forGetter(Spell::timelines),
-            OrganizationTimeline.CODEC.fieldOf("organization").forGetter(Spell::organization),
-            SpellAction.CODEC.listOf().optionalFieldOf("passive", List.of()).forGetter(Spell::passive))
-            .apply(instance, Spell::new));
+        ResourceLocation.CODEC.fieldOf("icon").forGetter(Spell::icon),
+        Codec.STRING.fieldOf("name").forGetter(Spell::name),
+        Codec.INT.optionalFieldOf("cooldown").forGetter(Spell::cooldown),
+        LootItemCondition.DIRECT_CODEC.optionalFieldOf("condition").forGetter(Spell::condition),
+        TimelineAction.CODEC.listOf().fieldOf("timelines").forGetter(Spell::timelines),
+        OrganizationTimeline.CODEC.fieldOf("organization").forGetter(Spell::organization),
+        SpellAction.CODEC.listOf().optionalFieldOf("passive", List.of()).forGetter(Spell::passive))
+        .apply(instance, Spell::new));
 
     public ResourceLocation getTextureId() {
         return ResourceLocation.fromNamespaceAndPath(icon.getNamespace(), "textures/spell/" + icon.getPath() + ".png");
@@ -39,27 +39,20 @@ public record Spell(ResourceLocation icon, String name, Optional<Integer> cooldo
         if (spellComponent.isOnCooldown(spellId)) {
             return false;
         }
-
-        if (condition.isEmpty() || !(caster.level() instanceof ServerLevel)) {
+        if (condition.isEmpty() || !(caster.level() instanceof ServerLevel serverWorld)) {
             return true;
         }
 
-        if (!(caster.level() instanceof ServerLevel serverWorld))
-            return true;
-
         LootParams lootWorldContext = new LootParams.Builder(serverWorld)
-                .withParameter(LootContextParams.THIS_ENTITY, caster)
-                .withParameter(LootContextParams.ORIGIN, caster.position())
-                .create(LootContextParamSets.COMMAND);
+            .withParameter(LootContextParams.THIS_ENTITY, caster)
+            .withParameter(LootContextParams.ORIGIN, caster.position())
+            .create(LootContextParamSets.COMMAND);
         LootContext lootContext = new LootContext.Builder(lootWorldContext).create(Optional.empty());
         return condition.get().test(lootContext);
     }
 
     public void cast(Player caster, ResourceLocation spellId) {
-        if (!canCast(caster, spellId))
-            return;
-
-        if (!(caster.level() instanceof ServerLevel serverWorld))
+        if (!canCast(caster, spellId) || !(caster.level() instanceof ServerLevel serverWorld))
             return;
 
         if (cooldown.isPresent() && cooldown.get() > 0) {
