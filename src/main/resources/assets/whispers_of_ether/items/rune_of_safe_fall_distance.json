@@ -1,0 +1,47 @@
+{
+    "model": {
+        "type": "minecraft:range_dispatch",
+        "property": "whispers_of_ether:rune_tier",
+        "entries": [
+            {
+                "threshold": 1,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune/rune_of_safe_fall_distance"
+                }
+            },
+            {
+                "threshold": 2,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune/reinforced_rune_of_safe_fall_distance"
+                }
+            },
+            {
+                "threshold": 3,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune/echo_rune_of_safe_fall_distance"
+                }
+            },
+            {
+                "threshold": 4,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune/nether_rune_of_safe_fall_distance"
+                }
+            },
+            {
+                "threshold": 5,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "whispers_of_ether:item/rune/dragon_rune_of_safe_fall_distance"
+                }
+            }
+        ],
+        "fallback": {
+            "type": "minecraft:model",
+            "model": "whispers_of_ether:item/rune/rune_of_safe_fall_distance"
+        }
+    }
+}

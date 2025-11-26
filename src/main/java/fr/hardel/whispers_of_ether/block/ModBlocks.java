@@ -18,35 +18,35 @@ import java.util.function.Function;
 
 public class ModBlocks {
     public static final Block FORGEMAGIC_BLOCK = register("forgemagic_block",
-            ForgeMagicBlock::new,
-            BlockBehaviour.Properties.of()
-                    .strength(3.0f)
-                    .sound(SoundType.WOOD).noOcclusion()
-                    .requiresCorrectToolForDrops(),
-            true);
+        ForgeMagicBlock::new,
+        BlockBehaviour.Properties.of()
+            .strength(3.0f)
+            .sound(SoundType.WOOD).noOcclusion()
+            .requiresCorrectToolForDrops(),
+        true);
 
     public static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory,
-            BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
-		ResourceKey<Block> blockKey = keyOfBlock(name);
+        BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
+        ResourceKey<Block> blockKey = keyOfBlock(name);
         ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name);
         Block block = blockFactory.apply(settings.setId(blockKey));
 
         if (shouldRegisterItem) {
             ResourceKey<Item> itemKey = keyOfItem(name);
-			BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix());
-			Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
+            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix());
+            Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
         }
 
-		return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
+        return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
     }
 
     public static void register() {
-        ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.CUSTOM_ITEM_GROUP_KEY).register(content -> content.accept(FORGEMAGIC_BLOCK));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> content.accept(FORGEMAGIC_BLOCK));
     }
 
     private static ResourceKey<Block> keyOfBlock(String name) {
         return ResourceKey.create(Registries.BLOCK,
-                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name));
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name));
     }
 
     private static ResourceKey<Item> keyOfItem(String name) {
