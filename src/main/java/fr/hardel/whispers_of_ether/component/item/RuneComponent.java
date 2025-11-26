@@ -34,7 +34,8 @@ public record RuneComponent(ResourceLocation runeId, int tier) implements Toolti
     @Override
     public void addToTooltip(final Item.TooltipContext context, final Consumer<Component> consumer,
             final TooltipFlag flag, final DataComponentGetter components) {
-        consumer.accept(Component.translatable("component.whispers_of_ether.rune.tier", this.tier)
-                .withStyle(ChatFormatting.LIGHT_PURPLE));
+        consumer.accept(Component.translatable("component.whispers_of_ether.rune.tier",
+                Component.translatable("enchantment.level." + this.tier))
+                .withStyle(ChatFormatting.GRAY));
     }
 }

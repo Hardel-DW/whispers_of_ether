@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -232,7 +233,7 @@ public class ModItems {
             content.accept(THREE_SPRING_LEAF);
             content.accept(TARGET_DUMMY);
         });
-    }
+    } 
 
     private static void registerRuneWithTiers(FabricItemGroupEntries content, Item item) {
         ResourceLocation runeId = RUNE_TO_DATA.get(item);
@@ -242,7 +243,7 @@ public class ModItems {
         for (int tier = 1; tier <= 5; tier++) {
             ItemStack stack = new ItemStack(item);
             stack.set(ModItemComponent.RUNES, new RuneComponent(runeId, tier));
-            content.accept(stack);
+            content.accept(stack, tier == 5 ? CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS : CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         }
     }
 }
