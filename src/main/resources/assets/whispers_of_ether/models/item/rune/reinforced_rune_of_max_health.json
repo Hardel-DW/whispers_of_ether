@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "whispers_of_ether:item/reinforced_rune_of_max_health"
+    "layer0": "whispers_of_ether:item/rune/reinforced_rune_of_max_health"
   }
 }

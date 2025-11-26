@@ -46,7 +46,7 @@ public class RuneForgeLogic {
         AttributeData runeData = runeDataOpt.get();
         WellComponent well = equipmentStack.getOrDefault(ModItemComponent.WELL, WellComponent.EMPTY);
 
-        double currentValue = getAttributeValue(equipmentStack, runeData.attribute());
+        double currentValue = getAttributeValue(equipmentStack, runeData.attribute(), runeData.operation());
         double maxValue = runeData.maxValue();
         boolean inverted = maxValue < 0;
 
@@ -54,7 +54,11 @@ public class RuneForgeLogic {
             return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.max_stat", List.of());
         }
 
-        double wellConsumed = calculateWellConsumption(runeData.weight(), currentValue, maxValue);
+        int attributeCount = (int) getOrInitModifiers(equipmentStack).modifiers().stream()
+            .map(entry -> BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value()))
+            .distinct()
+            .count();
+        double wellConsumed = calculateWellConsumption(runeData.weight(), currentValue, maxValue, attributeCount);
 
         if (well.currentWell() < wellConsumed) {
             return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.insufficient_well", List.of());
@@ -80,9 +84,10 @@ public class RuneForgeLogic {
         return new ForgeResult(outcome, result, message, statChanges);
     }
 
-    private static double calculateWellConsumption(double runeWeight, double currentValue, double maxValue) {
+    private static double calculateWellConsumption(double runeWeight, double currentValue, double maxValue, int attributeCount) {
         double currentStatLevel = maxValue != 0 ? Math.abs(currentValue / maxValue) : 0;
-        return runeWeight * currentStatLevel;
+        double baseCost = (runeWeight * 0.15) + attributeCount;
+        return baseCost + (runeWeight * currentStatLevel);
     }
 
     private static Probabilities calculateProbabilities(int tier, double currentValue, double maxValue,
@@ -184,10 +189,18 @@ public class RuneForgeLogic {
                 new AttributeModifier(existingEntry.modifier().id(), currentAmount + valueToAdd, operation),
                 existingEntry.slot()));
         } else {
+            EquipmentSlotGroup slot = entries.isEmpty()
+                ? EquipmentSlotGroup.ANY
+                : entries.get(0).slot();
+
+            ResourceLocation modifierId = ResourceLocation.fromNamespaceAndPath(
+                attributeId.getNamespace(),
+                attributeId.getPath() + "_" + slot.getSerializedName());
+
             entries.add(new ItemAttributeModifiers.Entry(
                 attribute,
-                new AttributeModifier(attributeId, valueToAdd, operation),
-                EquipmentSlotGroup.ANY));
+                new AttributeModifier(modifierId, valueToAdd, operation),
+                slot));
         }
 
         stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(entries));
@@ -246,11 +259,12 @@ public class RuneForgeLogic {
         stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(newEntries));
     }
 
-    private static double getAttributeValue(ItemStack stack, ResourceLocation attributeId) {
+    private static double getAttributeValue(ItemStack stack, ResourceLocation attributeId, AttributeModifier.Operation operation) {
         ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
 
         return modifiers.modifiers().stream()
             .filter(entry -> Objects.equals(BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value()), attributeId))
+            .filter(entry -> entry.modifier().operation() == operation)
             .mapToDouble(entry -> entry.modifier().amount())
             .sum();
     }

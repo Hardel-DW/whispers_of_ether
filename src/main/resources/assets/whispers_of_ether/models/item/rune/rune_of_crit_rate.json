@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "whispers_of_ether:item/rune_of_crit_rate"
+    "layer0": "whispers_of_ether:item/rune/rune_of_crit_rate"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "whispers_of_ether:item/dragon_rune_of_block_interaction_range"
+    "layer0": "whispers_of_ether:item/rune/dragon_rune_of_block_interaction_range"
   }
 }
