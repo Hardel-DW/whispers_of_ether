@@ -12,15 +12,23 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
 public class ItemGroupMod {
-    public static final ResourceKey<CreativeModeTab> CUSTOM_ITEM_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "item_group"));
+    public static final ResourceKey<CreativeModeTab> WHISPERSOFETHER_GENERAL_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),
+        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_general"));
+    public static final ResourceKey<CreativeModeTab> WHISPERSOFETHER_RUNES_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),
+        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_runes"));
 
-    public static final CreativeModeTab CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ModItems.RUNE_ATTACK_SPEED))
-            .title(Component.translatable("itemGroup.whispers_of_ether"))
-            .build();
+    public static final CreativeModeTab WHISPERSOFETHER_GENERAL_GROUP = FabricItemGroup.builder()
+        .icon(() -> new ItemStack(ModItems.ENDERCUBE))
+        .title(Component.translatable("itemGroup.whispers_of_ether_general"))
+        .build();
+
+    public static final CreativeModeTab WHISPERSOFETHER_RUNES_GROUP = FabricItemGroup.builder()
+        .icon(() -> new ItemStack(ModItems.RUNE_OF_ARMOR))
+        .title(Component.translatable("itemGroup.whispers_of_ether_runes"))
+        .build();
 
     public static void register() {
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, CUSTOM_ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, WHISPERSOFETHER_GENERAL_GROUP_KEY, WHISPERSOFETHER_GENERAL_GROUP);
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, WHISPERSOFETHER_RUNES_GROUP_KEY, WHISPERSOFETHER_RUNES_GROUP);
     }
 }

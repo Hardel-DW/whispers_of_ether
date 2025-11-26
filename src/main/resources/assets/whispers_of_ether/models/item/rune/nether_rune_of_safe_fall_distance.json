@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "whispers_of_ether:item/nether_rune_of_safe_fall_distance"
+  }
+}

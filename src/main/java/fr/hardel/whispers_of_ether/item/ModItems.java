@@ -20,23 +20,57 @@ import fr.hardel.whispers_of_ether.component.item.RuneComponent;
 
 public class ModItems {
     // Runes
-    public static final Item RUNE_ATTACK_SPEED = register("rune_attack_speed", Item::new,
+    public static final Item RUNE_OF_ARMOR = register("rune_of_armor", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_EXP = register("rune_exp", Item::new,
+    public static final Item RUNE_OF_ARMOR_TOUGHNESS = register("rune_of_armor_toughness", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_EXP_JOB = register("rune_exp_job", Item::new,
+    public static final Item RUNE_OF_ATTACK_DAMAGE = register("rune_of_attack_damage", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_FALL = register("rune_fall", Item::new,
+    public static final Item RUNE_OF_ATTACK_KNOCKBACK = register("rune_of_attack_knockback", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_MONEY_JOB = register("rune_money_job", Item::new,
+    public static final Item RUNE_OF_ATTACK_SPEED = register("rune_of_attack_speed", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_OTHER = register("rune_other", Item::new,
+    public static final Item RUNE_OF_BLOCK_BREAK_SPEED = register("rune_of_block_break_speed", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_SATURATION = register("rune_saturation", Item::new,
+    public static final Item RUNE_OF_BLOCK_INTERACTION_RANGE = register("rune_of_block_interaction_range", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_SPEED = register("rune_speed", Item::new,
+    public static final Item RUNE_OF_BURNING_TIME = register("rune_of_burning_time", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
-    public static final Item RUNE_STRENGTH = register("rune_strength", Item::new,
+    public static final Item RUNE_OF_CRIT_DAMAGE = register("rune_of_crit_damage", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_CRIT_RATE = register("rune_of_crit_rate", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_ENTITY_INTERACTION_RANGE = register("rune_of_entity_interaction_range", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_FALL_DAMAGE_MULTIPLIER = register("rune_of_fall_damage_multiplier", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_JUMP_STRENGTH = register("rune_of_jump_strength", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_KNOCKBACK_RESISTANCE = register("rune_of_knockback_resistance", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_MAX_HEALTH = register("rune_of_max_health", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_MINING_EFFICIENCY = register("rune_of_mining_efficiency", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_MOVEMENT_SPEED = register("rune_of_movement_speed", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_MULTI_JUMP = register("rune_of_multi_jump", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_OMNIVAMPIRISM = register("rune_of_omnivampirism", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_OMNIVAMPIRISM_RATE = register("rune_of_omnivampirism_rate", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_PICKUP_AREA_SIZE = register("rune_of_pickup_area_size", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_SAFE_FALL_DISTANCE = register("rune_of_safe_fall_distance", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_SNEAKING_SPEED = register("rune_of_sneaking_speed", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_STEP_HEIGHT = register("rune_of_step_height", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_SWEEPING_DAMAGE_RATIO = register("rune_of_sweeping_damage_ratio", Item::new,
+        new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
+    public static final Item RUNE_OF_WATER_MOVEMENT_EFFICIENCY = register("rune_of_water_movement_efficiency", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
 
     // Flame items
@@ -98,38 +132,70 @@ public class ModItems {
     }
 
     private static final Map<Item, ResourceLocation> RUNE_TO_DATA = Map.ofEntries(
-        Map.entry(RUNE_ATTACK_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_speed_percent")),
-        Map.entry(RUNE_STRENGTH, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_damage_flat")),
-        Map.entry(RUNE_EXP, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_flat")),
-        Map.entry(RUNE_EXP_JOB, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "entity_interaction_range_flat")),
-        Map.entry(RUNE_FALL, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_knockback_percent")),
-        Map.entry(RUNE_MONEY_JOB, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "max_health_flat")),
-        Map.entry(RUNE_OTHER, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "mining_efficiency_percent")),
-        Map.entry(RUNE_SATURATION, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "knockback_resistance_percent")),
-        Map.entry(RUNE_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "movement_speed_percent")));
+        Map.entry(RUNE_OF_ARMOR, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_flat")),
+        Map.entry(RUNE_OF_ARMOR_TOUGHNESS, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_toughness_percent")),
+        Map.entry(RUNE_OF_ATTACK_DAMAGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_damage_flat")),
+        Map.entry(RUNE_OF_ATTACK_KNOCKBACK, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_knockback_percent")),
+        Map.entry(RUNE_OF_ATTACK_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_speed_percent")),
+        Map.entry(RUNE_OF_BLOCK_BREAK_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "block_break_speed_percent")),
+        Map.entry(RUNE_OF_BLOCK_INTERACTION_RANGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "block_interaction_range_flat")),
+        Map.entry(RUNE_OF_BURNING_TIME, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "burning_time_percent")),
+        Map.entry(RUNE_OF_CRIT_DAMAGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "crit_damage_percent")),
+        Map.entry(RUNE_OF_CRIT_RATE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "crit_rate_percent")),
+        Map.entry(RUNE_OF_ENTITY_INTERACTION_RANGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "entity_interaction_range_flat")),
+        Map.entry(RUNE_OF_FALL_DAMAGE_MULTIPLIER, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "fall_damage_multiplier_percent")),
+        Map.entry(RUNE_OF_JUMP_STRENGTH, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "jump_strength_percent")),
+        Map.entry(RUNE_OF_KNOCKBACK_RESISTANCE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "knockback_resistance_percent")),
+        Map.entry(RUNE_OF_MAX_HEALTH, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "max_health_flat")),
+        Map.entry(RUNE_OF_MINING_EFFICIENCY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "mining_efficiency_percent")),
+        Map.entry(RUNE_OF_MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "movement_speed_percent")),
+        Map.entry(RUNE_OF_MULTI_JUMP, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump_flat")),
+        Map.entry(RUNE_OF_OMNIVAMPIRISM, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "omnivampirism_percent")),
+        Map.entry(RUNE_OF_OMNIVAMPIRISM_RATE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "omnivampirism_rate_percent")),
+        Map.entry(RUNE_OF_PICKUP_AREA_SIZE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "pickup_area_size_flat")),
+        Map.entry(RUNE_OF_SAFE_FALL_DISTANCE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "safe_fall_distance_flat")),
+        Map.entry(RUNE_OF_SNEAKING_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "sneaking_speed_percent")),
+        Map.entry(RUNE_OF_STEP_HEIGHT, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "step_height_flat")),
+        Map.entry(RUNE_OF_SWEEPING_DAMAGE_RATIO, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "sweeping_damage_ratio_percent")),
+        Map.entry(RUNE_OF_WATER_MOVEMENT_EFFICIENCY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "water_movement_efficiency_percent")));
 
     public static void register() {
-        ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.CUSTOM_ITEM_GROUP_KEY).register(content -> {
-            // Runes
-            registerRuneWithTiers(content, RUNE_ATTACK_SPEED);
-            registerRuneWithTiers(content, RUNE_EXP);
-            registerRuneWithTiers(content, RUNE_EXP_JOB);
-            registerRuneWithTiers(content, RUNE_FALL);
-            registerRuneWithTiers(content, RUNE_MONEY_JOB);
-            registerRuneWithTiers(content, RUNE_OTHER);
-            registerRuneWithTiers(content, RUNE_SATURATION);
-            registerRuneWithTiers(content, RUNE_SPEED);
-            registerRuneWithTiers(content, RUNE_STRENGTH);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.WHISPERSOFETHER_RUNES_GROUP_KEY).register(content -> {
+            registerRuneWithTiers(content, RUNE_OF_ARMOR);
+            registerRuneWithTiers(content, RUNE_OF_ARMOR_TOUGHNESS);
+            registerRuneWithTiers(content, RUNE_OF_ATTACK_DAMAGE);
+            registerRuneWithTiers(content, RUNE_OF_ATTACK_KNOCKBACK);
+            registerRuneWithTiers(content, RUNE_OF_ATTACK_SPEED);
+            registerRuneWithTiers(content, RUNE_OF_BLOCK_BREAK_SPEED);
+            registerRuneWithTiers(content, RUNE_OF_BLOCK_INTERACTION_RANGE);
+            registerRuneWithTiers(content, RUNE_OF_BURNING_TIME);
+            registerRuneWithTiers(content, RUNE_OF_CRIT_DAMAGE);
+            registerRuneWithTiers(content, RUNE_OF_CRIT_RATE);
+            registerRuneWithTiers(content, RUNE_OF_ENTITY_INTERACTION_RANGE);
+            registerRuneWithTiers(content, RUNE_OF_FALL_DAMAGE_MULTIPLIER);
+            registerRuneWithTiers(content, RUNE_OF_JUMP_STRENGTH);
+            registerRuneWithTiers(content, RUNE_OF_KNOCKBACK_RESISTANCE);
+            registerRuneWithTiers(content, RUNE_OF_MAX_HEALTH);
+            registerRuneWithTiers(content, RUNE_OF_MINING_EFFICIENCY);
+            registerRuneWithTiers(content, RUNE_OF_MOVEMENT_SPEED);
+            registerRuneWithTiers(content, RUNE_OF_MULTI_JUMP);
+            registerRuneWithTiers(content, RUNE_OF_OMNIVAMPIRISM);
+            registerRuneWithTiers(content, RUNE_OF_OMNIVAMPIRISM_RATE);
+            registerRuneWithTiers(content, RUNE_OF_PICKUP_AREA_SIZE);
+            registerRuneWithTiers(content, RUNE_OF_SAFE_FALL_DISTANCE);
+            registerRuneWithTiers(content, RUNE_OF_SNEAKING_SPEED);
+            registerRuneWithTiers(content, RUNE_OF_STEP_HEIGHT);
+            registerRuneWithTiers(content, RUNE_OF_SWEEPING_DAMAGE_RATIO);
+            registerRuneWithTiers(content, RUNE_OF_WATER_MOVEMENT_EFFICIENCY);
+        });
 
-            // Flame items
+        ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> {
             content.accept(FLAME_SWORD);
             content.accept(FLAME_FAST_SWORD);
             content.accept(FLAME_AXE);
             content.accept(FLAME_BOW);
             content.accept(FLAME_CRYSTAL);
             content.accept(FLAME_ESSENCE);
-
-            // Ice items
             content.accept(FROST_SWORD);
             content.accept(LONG_FROST_SWORD);
             content.accept(FROZEN_BOW);
@@ -146,8 +212,6 @@ public class ModItems {
             content.accept(ICE_TEARS);
             content.accept(SNOWFLAKE);
             content.accept(THREE_ICE_LEAF);
-
-            // Ice and Fire items
             content.accept(ICE_AND_FIRE_BOW);
             content.accept(FLAME_FROST_SWORD);
             content.accept(FLAME_FROST_SHOVEL);
@@ -159,8 +223,6 @@ public class ModItems {
             content.accept(FROSTED_FIRE_PICKAXE);
             content.accept(FROSTED_FIRE_AXE);
             content.accept(FROSTED_FIRE_HOE);
-
-            // Root items
             content.accept(AMETHYSM_CORAL_CRYSTAL);
             content.accept(AUTNOM_LEAF);
             content.accept(BIG_SCROLL);
