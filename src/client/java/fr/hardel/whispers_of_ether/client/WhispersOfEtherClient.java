@@ -1,6 +1,7 @@
 package fr.hardel.whispers_of_ether.client;
 
-import fr.hardel.whispers_of_ether.client.gui.screen.ForgeMagicScreen;
+import fr.hardel.whispers_of_ether.client.gui.screen.RunicTableScreen;
+import fr.hardel.whispers_of_ether.client.gui.screen.RunicForgeScreen;
 import fr.hardel.whispers_of_ether.client.network.ClientNetworkHandler;
 import fr.hardel.whispers_of_ether.client.particles.ModParticleClient;
 import fr.hardel.whispers_of_ether.client.render.RenderSystem;
@@ -30,7 +31,6 @@ public class WhispersOfEtherClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        LOGGER.info("Initializing Whispers of Ether client");
         ModKeyBindings.register();
         ModParticleClient.register();
         SpellCastHandler.initialize();
@@ -39,10 +39,11 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         WaypointRenderer.register();
         RenderSystem.register();
 
-        MenuScreens.register(ModMenuTypes.FORGE_MAGIC, ForgeMagicScreen::new);
+        MenuScreens.register(ModMenuTypes.RUNIC_TABLE, RunicTableScreen::new);
+        MenuScreens.register(ModMenuTypes.RUNIC_FORGE, RunicForgeScreen::new);
         EntityRenderers.register(ModEntities.TARGET_DUMMY, TargetDummyRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(TargetDummyModel.LAYER_LOCATION, TargetDummyModel::createBodyLayer);
         EntityRenderers.register(ModEntities.DAMAGE_INDICATOR, DamageIndicatorRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(TargetDummyModel.LAYER_LOCATION, TargetDummyModel::createBodyLayer);
 
         WorldRenderEvents.AFTER_ENTITIES.register(RenderSystem.getInstance()::renderAll);
         HudElementRegistry.addLast(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spell_selector"),

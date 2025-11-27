@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import fr.hardel.whispers_of_ether.attributes.ModAttribute;
 import fr.hardel.whispers_of_ether.block.ModBlocks;
+import fr.hardel.whispers_of_ether.block.entity.ModBlockEntities;
 import fr.hardel.whispers_of_ether.command.SpellCommand;
+import fr.hardel.whispers_of_ether.recipe.ModRecipes;
 import fr.hardel.whispers_of_ether.command.WaypointCommand;
 import fr.hardel.whispers_of_ether.command.EtherObjectCommand;
 import fr.hardel.whispers_of_ether.effects.ModEffects;
@@ -41,9 +43,11 @@ public class WhispersOfEther implements ModInitializer {
         ModAttribute.register();
         ModEntities.register();
         ModBlocks.register();
+        ModBlockEntities.register();
         ModItems.register();
         ModItemComponent.register();
         ModMenuTypes.register();
+        ModRecipes.register();
         ModParticle.register();
         ItemGroupMod.register();
         OrganizationType.register();

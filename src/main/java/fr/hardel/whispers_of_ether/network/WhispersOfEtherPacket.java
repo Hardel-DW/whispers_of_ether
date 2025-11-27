@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.network;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.menu.ForgeHistoryEntry;
+import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableHistoryEntry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -35,13 +35,13 @@ public class WhispersOfEtherPacket {
         }
     }
 
-    public record ForgeHistoryAdd(ForgeHistoryEntry entry) implements CustomPacketPayload {
-        public static final CustomPacketPayload.Type<ForgeHistoryAdd> ID = new CustomPacketPayload.Type<>(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "forge_history_add"));
+    public record RunicTableHistoryAdd(RunicTableHistoryEntry entry) implements CustomPacketPayload {
+        public static final CustomPacketPayload.Type<RunicTableHistoryAdd> ID = new CustomPacketPayload.Type<>(
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_history_add"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, ForgeHistoryAdd> CODEC = StreamCodec.composite(
-            ForgeHistoryEntry.STREAM_CODEC, ForgeHistoryAdd::entry,
-            ForgeHistoryAdd::new);
+        public static final StreamCodec<RegistryFriendlyByteBuf, RunicTableHistoryAdd> CODEC = StreamCodec.composite(
+            RunicTableHistoryEntry.STREAM_CODEC, RunicTableHistoryAdd::entry,
+            RunicTableHistoryAdd::new);
 
         @Override
         public @NotNull Type<? extends CustomPacketPayload> type() {
@@ -49,11 +49,11 @@ public class WhispersOfEtherPacket {
         }
     }
 
-    public record ForgeHistoryClear() implements CustomPacketPayload {
-        public static final CustomPacketPayload.Type<ForgeHistoryClear> ID = new CustomPacketPayload.Type<>(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "forge_history_clear"));
+    public record RunicTableHistoryClear() implements CustomPacketPayload {
+        public static final CustomPacketPayload.Type<RunicTableHistoryClear> ID = new CustomPacketPayload.Type<>(
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_history_clear"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, ForgeHistoryClear> CODEC = StreamCodec.unit(new ForgeHistoryClear());
+        public static final StreamCodec<RegistryFriendlyByteBuf, RunicTableHistoryClear> CODEC = StreamCodec.unit(new RunicTableHistoryClear());
 
         @Override
         public @NotNull Type<? extends CustomPacketPayload> type() {

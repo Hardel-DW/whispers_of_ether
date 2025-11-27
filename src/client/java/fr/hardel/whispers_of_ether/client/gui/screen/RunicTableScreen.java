@@ -3,9 +3,9 @@ package fr.hardel.whispers_of_ether.client.gui.screen;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import fr.hardel.whispers_of_ether.component.item.WellComponent;
-import fr.hardel.whispers_of_ether.menu.ForgeHistoryEntry;
-import fr.hardel.whispers_of_ether.menu.ForgeMagicMenu;
-import fr.hardel.whispers_of_ether.menu.RuneForgeLogic;
+import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableHistoryEntry;
+import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableMenu;
+import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableLogic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -27,22 +27,22 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
+public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
-        "textures/gui/container/forgemagic.png");
+        "textures/gui/container/runic_table.png");
     private static final ResourceLocation ATTRIBUTE_LINE = ResourceLocation.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
-        "textures/gui/sprites/container/forgemagic/attribute_line.png");
+        "textures/gui/sprites/container/runic_table/attribute_line.png");
     private static final ResourceLocation ATTRIBUTE_ICON_FALLBACK = ResourceLocation.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/attributes/fallback.png");
     private static final ResourceLocation SCROLL_TEXTURE = ResourceLocation.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
-        "textures/gui/sprites/container/forgemagic/scroll.png");
+        "textures/gui/sprites/container/runic_table/scroll.png");
     private static final ResourceLocation HISTORY_LINE_SPRITE = ResourceLocation.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
-        "container/forgemagic/history_line");
+        "container/runic_table/history_line");
 
     private static final int HISTORY_PANEL_X = 305;
     private static final int HISTORY_PANEL_Y = 18;
@@ -90,9 +90,9 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
     private int maxScrollOffset = 0;
     private int historyScrollOffset = 0;
     private int historyMaxScrollOffset = 0;
-    private final List<ForgeHistoryEntry> history = new ArrayList<>();
+    private final List<RunicTableHistoryEntry> history = new ArrayList<>();
 
-    public ForgeMagicScreen(ForgeMagicMenu menu, Inventory inventory, Component title) {
+    public RunicTableScreen(RunicTableMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         this.imageWidth = IMAGE_WIDTH;
         this.imageHeight = IMAGE_HEIGHT;
@@ -110,7 +110,7 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
         renderWellDisplay(graphics, x, y);
     }
 
-    public void addHistoryEntry(ForgeHistoryEntry entry) {
+    public void addHistoryEntry(RunicTableHistoryEntry entry) {
         history.addFirst(entry);
     }
 
@@ -270,7 +270,7 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
         graphics.enableScissor(panelX, panelY + HISTORY_OFFSET_Y, panelX + HISTORY_PANEL_WIDTH, panelY + HISTORY_PANEL_HEIGHT);
 
         int yOffset = -historyScrollOffset;
-        for (ForgeHistoryEntry entry : history) {
+        for (RunicTableHistoryEntry entry : history) {
             int entryHeight = calculateEntryHeight(entry);
             int lineY = panelY + yOffset;
 
@@ -301,18 +301,18 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
         renderScrollBar(graphics, x + HISTORY_SCROLL_X, y, historyScrollOffset, historyMaxScrollOffset, HISTORY_SCROLL_Y_MIN, HISTORY_SCROLL_Y_MAX);
     }
 
-    private int calculateEntryHeight(ForgeHistoryEntry entry) {
+    private int calculateEntryHeight(RunicTableHistoryEntry entry) {
         int statsLines = calculateStatsLines(entry.statChanges());
         int scaledLineHeight = (int) (font.lineHeight * TEXT_SCALE);
         return HISTORY_LINE_PADDING_Y * 2 + scaledLineHeight + statsLines * scaledLineHeight;
     }
 
-    private int calculateStatsLines(List<ForgeHistoryEntry.StatChange> changes) {
+    private int calculateStatsLines(List<RunicTableHistoryEntry.StatChange> changes) {
         int currentLineLength = 0;
         int lines = 1;
 
         for (int i = 0; i < changes.size(); i++) {
-            ForgeHistoryEntry.StatChange change = changes.get(i);
+            RunicTableHistoryEntry.StatChange change = changes.get(i);
             String value = formatValue(change.delta(), change.operation());
             String name = BuiltInRegistries.ATTRIBUTE.get(ResourceKey.create(Registries.ATTRIBUTE, change.attributeId()))
                 .map(holder -> Component.translatable(holder.value().getDescriptionId()).getString())
@@ -333,7 +333,7 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
         return lines;
     }
 
-    private int getOutcomeColor(RuneForgeLogic.Outcome outcome) {
+    private int getOutcomeColor(RunicTableLogic.Outcome outcome) {
         return switch (outcome) {
             case CRITICAL_SUCCESS -> 0xFF55FF55;
             case NEUTRAL_SUCCESS -> 0xFFFFFFFF;
@@ -342,12 +342,12 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
         };
     }
 
-    private String getOutcomeText(RuneForgeLogic.Outcome outcome) {
+    private String getOutcomeText(RunicTableLogic.Outcome outcome) {
         return switch (outcome) {
-            case CRITICAL_SUCCESS -> Component.translatable("forge.whispers_of_ether.critical_success").getString();
-            case NEUTRAL_SUCCESS -> Component.translatable("forge.whispers_of_ether.neutral_success").getString();
-            case CRITICAL_FAILURE -> Component.translatable("forge.whispers_of_ether.critical_failure").getString();
-            case BLOCKED -> Component.translatable("forge.whispers_of_ether.blocked").getString();
+            case CRITICAL_SUCCESS -> Component.translatable("runic_table.whispers_of_ether.critical_success").getString();
+            case NEUTRAL_SUCCESS -> Component.translatable("runic_table.whispers_of_ether.neutral_success").getString();
+            case CRITICAL_FAILURE -> Component.translatable("runic_table.whispers_of_ether.critical_failure").getString();
+            case BLOCKED -> Component.translatable("runic_table.whispers_of_ether.blocked").getString();
         };
     }
 
@@ -359,7 +359,7 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
         graphics.pose().popMatrix();
     }
 
-    private void drawScaledStats(GuiGraphics graphics, List<ForgeHistoryEntry.StatChange> changes, int x, int y) {
+    private void drawScaledStats(GuiGraphics graphics, List<RunicTableHistoryEntry.StatChange> changes, int x, int y) {
         graphics.pose().pushMatrix();
         graphics.pose().translate(x, y);
         graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
@@ -369,7 +369,7 @@ public class ForgeMagicScreen extends AbstractContainerScreen<ForgeMagicMenu> {
         int currentLineLength = 0;
 
         for (int i = 0; i < changes.size(); i++) {
-            ForgeHistoryEntry.StatChange change = changes.get(i);
+            RunicTableHistoryEntry.StatChange change = changes.get(i);
             String value = formatValue(change.delta(), change.operation());
             String name = BuiltInRegistries.ATTRIBUTE.get(ResourceKey.create(Registries.ATTRIBUTE, change.attributeId()))
                 .map(holder -> Component.translatable(holder.value().getDescriptionId()).getString())

@@ -4,12 +4,12 @@
 	"parent": "minecraft:block/block",
 	"ambientocclusion": true,
 	"textures": {
-		"particle": "whispers_of_ether:block/forgemagic_table/runic_table_wood",
-		"runic_table_wood": "whispers_of_ether:block/forgemagic_table/runic_table_wood",
-		"runic_table_pillar": "whispers_of_ether:block/forgemagic_table/runic_table_pillar",
-		"upper_page": "whispers_of_ether:block/forgemagic_table/upper_page",
-		"border_page": "whispers_of_ether:block/forgemagic_table/border_page",
-		"plate_book": "whispers_of_ether:block/forgemagic_table/plate_book"
+		"particle": "whispers_of_ether:block/runic_table/runic_table_wood",
+		"runic_table_wood": "whispers_of_ether:block/runic_table/runic_table_wood",
+		"runic_table_pillar": "whispers_of_ether:block/runic_table/runic_table_pillar",
+		"upper_page": "whispers_of_ether:block/runic_table/upper_page",
+		"border_page": "whispers_of_ether:block/runic_table/border_page",
+		"plate_book": "whispers_of_ether:block/runic_table/plate_book"
 	},
 	"elements": [
 		{

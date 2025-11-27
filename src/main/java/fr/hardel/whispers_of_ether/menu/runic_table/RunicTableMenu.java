@@ -1,6 +1,7 @@
-package fr.hardel.whispers_of_ether.menu;
+package fr.hardel.whispers_of_ether.menu.runic_table;
 
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
+import fr.hardel.whispers_of_ether.menu.ModMenuTypes;
 import fr.hardel.whispers_of_ether.menu.slot.EquipmentSlot;
 import fr.hardel.whispers_of_ether.menu.slot.RuneSlot;
 import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class ForgeMagicMenu extends AbstractContainerMenu {
+public class RunicTableMenu extends AbstractContainerMenu {
     private static final int RUNE_SLOT = 0;
     private static final int EQUIPMENT_SLOT = 1;
     private static final int CONTAINER_SIZE = 2;
@@ -29,12 +30,12 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
         @Override
         public void setChanged() {
             super.setChanged();
-            ForgeMagicMenu.this.slotsChanged(this);
+            RunicTableMenu.this.slotsChanged(this);
         }
     };
 
-    public ForgeMagicMenu(int containerId, Inventory playerInventory) {
-        super(ModMenuTypes.FORGE_MAGIC, containerId);
+    public RunicTableMenu(int containerId, Inventory playerInventory) {
+        super(ModMenuTypes.RUNIC_TABLE, containerId);
         this.level = playerInventory.player.level();
         this.player = playerInventory.player;
         container.startOpen(playerInventory.player);
@@ -123,7 +124,7 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
         if (!ItemStack.isSameItemSameComponents(currentEquipment, lastEquipmentStack)) {
             boolean wasForgeResult = isProcessing;
             if (!wasForgeResult && player instanceof ServerPlayer serverPlayer) {
-                ServerPlayNetworking.send(serverPlayer, new WhispersOfEtherPacket.ForgeHistoryClear());
+                ServerPlayNetworking.send(serverPlayer, new WhispersOfEtherPacket.RunicTableHistoryClear());
             }
             lastEquipmentStack = currentEquipment.copy();
         }
@@ -143,14 +144,14 @@ public class ForgeMagicMenu extends AbstractContainerMenu {
     }
 
     private void applyRune(ItemStack runeStack, ItemStack equipmentStack) {
-        RuneForgeLogic.ForgeResult result = RuneForgeLogic.applyRune(runeStack, equipmentStack);
-        if (result.outcome() == RuneForgeLogic.Outcome.BLOCKED) {
+        RunicTableLogic.RunicTableResult result = RunicTableLogic.applyRune(runeStack, equipmentStack);
+        if (result.outcome() == RunicTableLogic.Outcome.BLOCKED) {
             return;
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
-            ForgeHistoryEntry entry = new ForgeHistoryEntry(runeStack.copy(), result.outcome(), result.statChanges());
-            ServerPlayNetworking.send(serverPlayer, new WhispersOfEtherPacket.ForgeHistoryAdd(entry));
+            RunicTableHistoryEntry entry = new RunicTableHistoryEntry(runeStack.copy(), result.outcome(), result.statChanges());
+            ServerPlayNetworking.send(serverPlayer, new WhispersOfEtherPacket.RunicTableHistoryAdd(entry));
         }
 
         container.setItem(EQUIPMENT_SLOT, result.resultStack());
