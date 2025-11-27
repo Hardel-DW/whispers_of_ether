@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.menu;
+package fr.hardel.whispers_of_ether.menu.runic_table;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -11,9 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public record ForgeHistoryEntry(
+public record RunicTableHistoryEntry(
 	ItemStack runeStack,
-	RuneForgeLogic.Outcome outcome,
+	RunicTableLogic.Outcome outcome,
 	List<StatChange> statChanges) {
 	public record StatChange(
 		ResourceLocation attributeId,
@@ -28,21 +28,21 @@ public record ForgeHistoryEntry(
 			StatChange::new);
 	}
 
-	public static final StreamCodec<RegistryFriendlyByteBuf, ForgeHistoryEntry> STREAM_CODEC = new StreamCodec<>() {
+	public static final StreamCodec<RegistryFriendlyByteBuf, RunicTableHistoryEntry> STREAM_CODEC = new StreamCodec<>() {
 		@Override
-		public @NotNull ForgeHistoryEntry decode(RegistryFriendlyByteBuf buf) {
+		public @NotNull RunicTableHistoryEntry decode(RegistryFriendlyByteBuf buf) {
 			ItemStack stack = ItemStack.STREAM_CODEC.decode(buf);
-			RuneForgeLogic.Outcome outcome = buf.readEnum(RuneForgeLogic.Outcome.class);
+			RunicTableLogic.Outcome outcome = buf.readEnum(RunicTableLogic.Outcome.class);
 			int size = buf.readVarInt();
 			List<StatChange> changes = new ArrayList<>(size);
 			for (int i = 0; i < size; i++) {
 				changes.add(StatChange.STREAM_CODEC.decode(buf));
 			}
-			return new ForgeHistoryEntry(stack, outcome, changes);
+			return new RunicTableHistoryEntry(stack, outcome, changes);
 		}
 
 		@Override
-		public void encode(RegistryFriendlyByteBuf buf, ForgeHistoryEntry entry) {
+		public void encode(RegistryFriendlyByteBuf buf, RunicTableHistoryEntry entry) {
 			ItemStack.STREAM_CODEC.encode(buf, entry.runeStack);
 			buf.writeEnum(entry.outcome);
 			buf.writeVarInt(entry.statChanges.size());

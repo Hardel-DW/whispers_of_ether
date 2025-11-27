@@ -21,6 +21,11 @@ import fr.hardel.whispers_of_ether.component.item.RuneComponent;
 
 public class ModItems {
     // Runes
+    public static final Item RUNE = register("rune", Item::new, new Item.Properties());
+    public static final Item REINFORCED_RUNE = register("reinforced_rune", Item::new, new Item.Properties());
+    public static final Item ECHO_RUNE = register("echo_rune", Item::new, new Item.Properties());
+    public static final Item NETHER_RUNE = register("nether_rune", Item::new, new Item.Properties());
+    public static final Item DRAGON_RUNE = register("dragon_rune", Item::new, new Item.Properties());
     public static final Item RUNE_OF_ARMOR = register("rune_of_armor", Item::new,
         new Item.Properties().component(ModItemComponent.RUNES, RuneComponent.EMPTY));
     public static final Item RUNE_OF_ARMOR_TOUGHNESS = register("rune_of_armor_toughness", Item::new,
@@ -162,6 +167,11 @@ public class ModItems {
 
     public static void register() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.WHISPERSOFETHER_RUNES_GROUP_KEY).register(content -> {
+            content.accept(RUNE);
+            content.accept(REINFORCED_RUNE);
+            content.accept(ECHO_RUNE);
+            content.accept(NETHER_RUNE);
+            content.accept(DRAGON_RUNE);
             registerRuneWithTiers(content, RUNE_OF_ARMOR);
             registerRuneWithTiers(content, RUNE_OF_ARMOR_TOUGHNESS);
             registerRuneWithTiers(content, RUNE_OF_ATTACK_DAMAGE);
@@ -233,7 +243,7 @@ public class ModItems {
             content.accept(THREE_SPRING_LEAF);
             content.accept(TARGET_DUMMY);
         });
-    } 
+    }
 
     private static void registerRuneWithTiers(FabricItemGroupEntries content, Item item) {
         ResourceLocation runeId = RUNE_TO_DATA.get(item);

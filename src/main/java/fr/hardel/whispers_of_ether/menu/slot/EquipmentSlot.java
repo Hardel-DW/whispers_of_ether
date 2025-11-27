@@ -10,10 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 
 public class EquipmentSlot extends Slot {
-    private static final TagKey<Item> RUNIC_FORGE_COMPATIBLE = TagKey.create(
+    private static final TagKey<Item> RUNIC_TABLE_COMPATIBLE = TagKey.create(
         Registries.ITEM,
-        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_forge_compatible")
-    );
+        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_compatible"));
 
     public EquipmentSlot(Container container, int slot, int x, int y) {
         super(container, slot, x, y);
@@ -21,6 +20,6 @@ public class EquipmentSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return stack.is(RUNIC_FORGE_COMPATIBLE);
+        return stack.is(RUNIC_TABLE_COMPATIBLE);
     }
 }

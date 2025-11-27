@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.menu;
+package fr.hardel.whispers_of_ether.menu.runic_table;
 
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
 import fr.hardel.whispers_of_ether.component.item.RuneComponent;
@@ -20,7 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RuneForgeLogic {
+public class RunicTableLogic {
     private static final Random RANDOM = new Random();
 
     public enum Outcome {
@@ -30,17 +30,17 @@ public class RuneForgeLogic {
         BLOCKED
     }
 
-    public record ForgeResult(Outcome outcome, ItemStack resultStack, String message, List<ForgeHistoryEntry.StatChange> statChanges) {}
+    public record RunicTableResult(Outcome outcome, ItemStack resultStack, String message, List<RunicTableHistoryEntry.StatChange> statChanges) {}
 
-    public static ForgeResult applyRune(ItemStack runeStack, ItemStack equipmentStack) {
+    public static RunicTableResult applyRune(ItemStack runeStack, ItemStack equipmentStack) {
         RuneComponent rune = runeStack.get(ModItemComponent.RUNES);
         if (rune == null) {
-            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.no_rune", List.of());
+            return new RunicTableResult(Outcome.BLOCKED, equipmentStack, "runic_table.whispers_of_ether.no_rune", List.of());
         }
 
         Optional<AttributeData> runeDataOpt = AttributeDataLoader.getAttribute(rune.runeId());
         if (runeDataOpt.isEmpty()) {
-            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.invalid_rune", List.of());
+            return new RunicTableResult(Outcome.BLOCKED, equipmentStack, "runic_table.whispers_of_ether.invalid_rune", List.of());
         }
 
         AttributeData runeData = runeDataOpt.get();
@@ -51,7 +51,7 @@ public class RuneForgeLogic {
         boolean inverted = maxValue < 0;
 
         if (inverted ? currentValue <= maxValue : currentValue >= maxValue) {
-            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.max_stat", List.of());
+            return new RunicTableResult(Outcome.BLOCKED, equipmentStack, "runic_table.whispers_of_ether.max_stat", List.of());
         }
 
         int attributeCount = (int) getOrInitModifiers(equipmentStack).modifiers().stream()
@@ -61,7 +61,7 @@ public class RuneForgeLogic {
         double wellConsumed = calculateWellConsumption(runeData.weight(), currentValue, maxValue, attributeCount);
 
         if (well.currentWell() < wellConsumed) {
-            return new ForgeResult(Outcome.BLOCKED, equipmentStack, "forge.whispers_of_ether.insufficient_well", List.of());
+            return new RunicTableResult(Outcome.BLOCKED, equipmentStack, "runic_table.whispers_of_ether.insufficient_well", List.of());
         }
 
         WellComponent newWell = well.consume(wellConsumed);
@@ -70,18 +70,18 @@ public class RuneForgeLogic {
         Probabilities prob = calculateProbabilities(rune.tier(), currentValue, maxValue, newWell.getWellFactor());
         Outcome outcome = determineOutcome(prob);
 
-        List<ForgeHistoryEntry.StatChange> statChanges = new ArrayList<>();
+        List<RunicTableHistoryEntry.StatChange> statChanges = new ArrayList<>();
         ItemStack result = applyOutcome(equipmentStack, runeData, outcome, totalItemWeight, statChanges);
         result.set(ModItemComponent.WELL, newWell);
 
         String message = switch (outcome) {
-            case CRITICAL_SUCCESS -> "forge.whispers_of_ether.critical_success";
-            case NEUTRAL_SUCCESS -> "forge.whispers_of_ether.neutral_success";
-            case CRITICAL_FAILURE -> "forge.whispers_of_ether.critical_failure";
-            case BLOCKED -> "forge.whispers_of_ether.blocked";
+            case CRITICAL_SUCCESS -> "runic_table.whispers_of_ether.critical_success";
+            case NEUTRAL_SUCCESS -> "runic_table.whispers_of_ether.neutral_success";
+            case CRITICAL_FAILURE -> "runic_table.whispers_of_ether.critical_failure";
+            case BLOCKED -> "runic_table.whispers_of_ether.blocked";
         };
 
-        return new ForgeResult(outcome, result, message, statChanges);
+        return new RunicTableResult(outcome, result, message, statChanges);
     }
 
     private static double calculateWellConsumption(double runeWeight, double currentValue, double maxValue, int attributeCount) {
@@ -118,7 +118,7 @@ public class RuneForgeLogic {
     }
 
     private static ItemStack applyOutcome(ItemStack equipment, AttributeData runeData, Outcome outcome,
-        double totalWeight, List<ForgeHistoryEntry.StatChange> statChanges) {
+        double totalWeight, List<RunicTableHistoryEntry.StatChange> statChanges) {
         ItemStack result = equipment.copy();
 
         double statGain = switch (outcome) {
@@ -139,7 +139,7 @@ public class RuneForgeLogic {
         if (statGain != 0) {
             addAttributeModifier(result, runeData.attribute(), runeData.operation(), statGain);
             boolean isPositive = isPositiveChange(runeData.attribute(), statGain);
-            statChanges.add(new ForgeHistoryEntry.StatChange(runeData.attribute(), statGain, runeData.operation(), isPositive));
+            statChanges.add(new RunicTableHistoryEntry.StatChange(runeData.attribute(), statGain, runeData.operation(), isPositive));
         }
 
         if (outcome == Outcome.NEUTRAL_SUCCESS || outcome == Outcome.CRITICAL_FAILURE) {
@@ -207,7 +207,7 @@ public class RuneForgeLogic {
     }
 
     private static void applyStatLoss(ItemStack stack, ResourceLocation excludeAttribute, double runeWeight,
-        double totalWeight, double multiplier, Outcome outcome, List<ForgeHistoryEntry.StatChange> statChanges) {
+        double totalWeight, double multiplier, Outcome outcome, List<RunicTableHistoryEntry.StatChange> statChanges) {
         ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
         if (totalWeight <= 0) {
             return;
@@ -249,7 +249,7 @@ public class RuneForgeLogic {
                 if (Math.abs(newValue) > 0.001) {
                     newEntries.add(new ItemAttributeModifiers.Entry(holder, new AttributeModifier(entry.modifier().id(), newValue, entry.modifier().operation()), entry.slot()));
                     boolean isPositive = isPositiveChange(attrId, delta);
-                    statChanges.add(new ForgeHistoryEntry.StatChange(attrId, delta, entry.modifier().operation(), isPositive));
+                    statChanges.add(new RunicTableHistoryEntry.StatChange(attrId, delta, entry.modifier().operation(), isPositive));
                 }
             } else {
                 newEntries.add(entry);

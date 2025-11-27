@@ -7,10 +7,10 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 public class NetworkHandler {
     public static void registerClientPackets() {
-        PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.ForgeHistoryAdd.ID,
-            WhispersOfEtherPacket.ForgeHistoryAdd.CODEC);
-        PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.ForgeHistoryClear.ID,
-            WhispersOfEtherPacket.ForgeHistoryClear.CODEC);
+        PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.RunicTableHistoryAdd.ID,
+            WhispersOfEtherPacket.RunicTableHistoryAdd.CODEC);
+        PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.RunicTableHistoryClear.ID,
+            WhispersOfEtherPacket.RunicTableHistoryClear.CODEC);
     }
 
     public static void registerServerPackets() {
