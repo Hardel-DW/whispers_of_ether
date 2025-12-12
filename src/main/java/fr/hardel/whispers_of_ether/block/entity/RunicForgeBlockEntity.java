@@ -4,8 +4,10 @@ import fr.hardel.whispers_of_ether.menu.RunicForgeMenu;
 import fr.hardel.whispers_of_ether.recipe.ModRecipes;
 import fr.hardel.whispers_of_ether.recipe.RunicForgeRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -15,7 +17,9 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
@@ -110,28 +114,80 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity {
         Optional<RecipeHolder<RunicForgeRecipe>> recipeHolder = this.level.getServer().getRecipeManager().getRecipeFor(ModRecipes.RUNIC_FORGE_TYPE, recipeInput, this.level);
         if (recipeHolder.isEmpty()) {
             this.processProgress = 0;
+            updateLitState(false);
+            return;
+        }
+
+        if (!canOutputResult(recipeHolder.get().value())) {
+            this.processProgress = 0;
+            updateLitState(false);
             return;
         }
 
         if (++this.processProgress < PROCESS_TIME) {
+            updateLitState(true);
             this.setChanged();
             return;
         }
+
+        updateLitState(false);
 
         ItemStack result = recipeHolder.get().value().assemble(recipeInput, this.level.registryAccess());
         for (int i = 0; i < 5; i++) {
             this.removeItem(i, 1);
         }
 
-        ItemStack inputItem = this.getItem(5);
-        if (!inputItem.isEmpty() && inputItem.is(result.getItem())) {
-            inputItem.grow(result.getCount());
+        ItemStack remaining = pushToAdjacentContainers(result);
+        if (remaining.isEmpty()) {
+            this.removeItem(5, 1);
         } else {
-            this.setItem(5, result);
+            ItemStack inputItem = this.getItem(5);
+            if (!inputItem.isEmpty() && inputItem.is(remaining.getItem())) {
+                inputItem.grow(remaining.getCount());
+            } else {
+                this.setItem(5, remaining);
+            }
         }
 
         this.processProgress = 0;
         this.setChanged();
+    }
+
+    private boolean canOutputResult(RunicForgeRecipe recipe) {
+        ItemStack result = recipe.result();
+        ItemStack inputItem = this.getItem(5);
+
+        if (inputItem.isEmpty() && result.getItem().getDefaultMaxStackSize() < result.getCount()) {
+            return false;
+        }
+
+        if (!inputItem.isEmpty() && inputItem.is(result.getItem())) {
+            return inputItem.getCount() + result.getCount() <= inputItem.getMaxStackSize();
+        }
+
+        return true;
+    }
+
+    private void updateLitState(boolean lit) {
+        if (this.level != null && this.level.getBlockState(this.worldPosition).getValue(BlockStateProperties.LIT) != lit) {
+            this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition).setValue(BlockStateProperties.LIT, lit), 3);
+        }
+    }
+
+    private ItemStack pushToAdjacentContainers(ItemStack result) {
+        ItemStack remaining = result;
+        for (Direction direction : new Direction[] { Direction.DOWN, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST }) {
+            if (remaining.isEmpty()) {
+                break;
+            }
+            BlockPos adjacentPos = this.worldPosition.relative(direction);
+            Container adjacent = HopperBlockEntity.getContainerAt(this.level, adjacentPos);
+
+            if (adjacent != null) {
+                remaining = HopperBlockEntity.addItem(this, adjacent, remaining, direction);
+            }
+        }
+        return remaining;
     }
 
     private record RunicForgeRecipeInput(ItemStack[] items) implements RecipeInput {
