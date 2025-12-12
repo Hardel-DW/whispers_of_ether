@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "x": "#minecraft:logs",
+        "b": "minecraft:enchanting_table",
+        "s": "#minecraft:wooden_slabs"
+    },
+    "result": {
+        "id": "whispers_of_ether:runic_table",
+        "count": 1
+    },
+    "pattern": [
+        "xbx",
+        " x ",
+        "sss"
+    ]
+}

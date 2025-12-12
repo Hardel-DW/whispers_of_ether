@@ -1,0 +1,4 @@
+{
+    "type": "minecraft:entity",
+    "random_sequence": "whispers_of_ether:target_dummy"
+}

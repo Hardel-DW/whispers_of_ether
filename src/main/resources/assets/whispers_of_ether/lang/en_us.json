@@ -1,4 +1,5 @@
 {
+    "key.category.whispers_of_ether.main": "Whispers Of Ether",
     "effect.whispers_of_ether.camera_shaking": "Shaking",
     "effect.whispers_of_ether.pickup_area": "Pickup Area",
     "effect.whispers_of_ether.multi_jump": "Multi Jump",
@@ -136,5 +137,9 @@
     "item.whispers_of_ether.spring_leaf": "Spring Leaf",
     "item.whispers_of_ether.three_spring_leaf": "Three Spring Leaf",
     "item.whispers_of_ether.target_dummy": "Target Dummy",
-    "block.whispers_of_ether.runic_forge": "Runic Forge"
+    "block.whispers_of_ether.runic_forge": "Runic Forge",
+    "block.whispers_of_ether.runic_table": "Runic Table",
+    "block.whispers_of_ether.runic_infuser": "Runic Infuser",
+    "tag.item.whispers_of_ether.runic_table_compatible": "Runic Table Compatible",
+    "tag.item.whispers_of_ether.runes": "Runes"
 }

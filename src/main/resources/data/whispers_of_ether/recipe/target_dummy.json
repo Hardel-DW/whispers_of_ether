@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "x": "minecraft:bamboo_mosaic",
+        "a": "#minecraft:logs",
+        "c": "minecraft:hay_block"
+    },
+    "result": {
+        "id": "whispers_of_ether:target_dummy",
+        "count": 1
+    },
+    "pattern": [
+        " c ",
+        " a ",
+        "xxx"
+    ]
+}

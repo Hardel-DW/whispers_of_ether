@@ -21,6 +21,12 @@ public class ModMenuTypes {
         new MenuType<>(RunicForgeMenu::new, FeatureFlags.DEFAULT_FLAGS)
     );
 
+    public static final MenuType<RunicInfuserMenu> RUNIC_INFUSER = Registry.register(
+        BuiltInRegistries.MENU,
+        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_infuser"),
+        new MenuType<>(RunicInfuserMenu::new, FeatureFlags.DEFAULT_FLAGS)
+    );
+
     public static void register() {
         WhispersOfEther.LOGGER.info("Registering menu types for {}", WhispersOfEther.MOD_ID);
     }
