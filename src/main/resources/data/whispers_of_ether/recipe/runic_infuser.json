@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "s": "#whispers_of_ether:runes",
+        "x": "#minecraft:logs"
+    },
+    "result": {
+        "id": "whispers_of_ether:runic_infuser",
+        "count": 1
+    },
+    "pattern": [
+        "xxx",
+        "xsx",
+        "xxx"
+    ]
+}

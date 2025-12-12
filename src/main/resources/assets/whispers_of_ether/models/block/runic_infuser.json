@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"down": "whispers_of_ether:block/runic_infuser/runic_infuser_wood",
+		"east": "whispers_of_ether:block/runic_infuser/runic_infuser_wood",
+		"north": "whispers_of_ether:block/runic_infuser/runic_infuser_wood",
+		"particle": "whispers_of_ether:block/runic_infuser/runic_infuser_wood",
+		"south": "whispers_of_ether:block/runic_infuser/runic_infuser_wood",
+		"up": "whispers_of_ether:block/runic_infuser/runic_infuser_wood_top",
+		"west": "whispers_of_ether:block/runic_infuser/runic_infuser_wood"
+	}
+}

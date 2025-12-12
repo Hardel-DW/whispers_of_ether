@@ -1,0 +1,30 @@
+{
+    "values": [
+        "whispers_of_ether:rune_of_armor",
+        "whispers_of_ether:rune_of_armor_toughness",
+        "whispers_of_ether:rune_of_attack_damage",
+        "whispers_of_ether:rune_of_attack_knockback",
+        "whispers_of_ether:rune_of_attack_speed",
+        "whispers_of_ether:rune_of_block_break_speed",
+        "whispers_of_ether:rune_of_block_interaction_range",
+        "whispers_of_ether:rune_of_burning_time",
+        "whispers_of_ether:rune_of_crit_damage",
+        "whispers_of_ether:rune_of_crit_rate",
+        "whispers_of_ether:rune_of_entity_interaction_range",
+        "whispers_of_ether:rune_of_fall_damage_multiplier",
+        "whispers_of_ether:rune_of_jump_strength",
+        "whispers_of_ether:rune_of_knockback_resistance",
+        "whispers_of_ether:rune_of_max_health",
+        "whispers_of_ether:rune_of_mining_efficiency",
+        "whispers_of_ether:rune_of_movement_speed",
+        "whispers_of_ether:rune_of_multi_jump",
+        "whispers_of_ether:rune_of_omnivampirism",
+        "whispers_of_ether:rune_of_omnivampirism_rate",
+        "whispers_of_ether:rune_of_pickup_area_size",
+        "whispers_of_ether:rune_of_safe_fall_distance",
+        "whispers_of_ether:rune_of_sneaking_speed",
+        "whispers_of_ether:rune_of_step_height",
+        "whispers_of_ether:rune_of_sweeping_damage_ratio",
+        "whispers_of_ether:rune_of_water_movement_efficiency"
+    ]
+}

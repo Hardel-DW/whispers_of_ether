@@ -15,6 +15,12 @@ public class ModBlockEntities {
         FabricBlockEntityTypeBuilder.create(RunicForgeBlockEntity::new, ModBlocks.RUNIC_FORGE)
             .build());
 
+    public static final BlockEntityType<RunicInfuserBlockEntity> RUNIC_INFUSER = Registry.register(
+        BuiltInRegistries.BLOCK_ENTITY_TYPE,
+        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_infuser"),
+        FabricBlockEntityTypeBuilder.create(RunicInfuserBlockEntity::new, ModBlocks.RUNIC_INFUSER)
+            .build());
+
     public static void register() {
         WhispersOfEther.LOGGER.info("Registering block entities for {}", WhispersOfEther.MOD_ID);
     }

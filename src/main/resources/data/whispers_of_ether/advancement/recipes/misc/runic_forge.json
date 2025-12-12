@@ -1,0 +1,32 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_runic_forge": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "minecraft:nether_star"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "whispers_of_ether:runic_forge"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        }
+    },
+    "requirements": [
+        [
+            "has_the_recipe",
+            "has_runic_forge"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "whispers_of_ether:runic_forge"
+        ]
+    }
+}

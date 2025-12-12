@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "x": "minecraft:nether_star",
+        "b": "minecraft:deepslate_tiles"
+    },
+    "result": {
+        "id": "whispers_of_ether:runic_forge",
+        "count": 1
+    },
+    "pattern": [
+        "bbb",
+        "bxb",
+        "bbb"
+    ]
+}

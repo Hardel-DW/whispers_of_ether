@@ -2,6 +2,7 @@ package fr.hardel.whispers_of_ether.client;
 
 import fr.hardel.whispers_of_ether.client.gui.screen.RunicTableScreen;
 import fr.hardel.whispers_of_ether.client.gui.screen.RunicForgeScreen;
+import fr.hardel.whispers_of_ether.client.gui.screen.RunicInfuserScreen;
 import fr.hardel.whispers_of_ether.client.network.ClientNetworkHandler;
 import fr.hardel.whispers_of_ether.client.particles.ModParticleClient;
 import fr.hardel.whispers_of_ether.client.render.RenderSystem;
@@ -41,6 +42,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
 
         MenuScreens.register(ModMenuTypes.RUNIC_TABLE, RunicTableScreen::new);
         MenuScreens.register(ModMenuTypes.RUNIC_FORGE, RunicForgeScreen::new);
+        MenuScreens.register(ModMenuTypes.RUNIC_INFUSER, RunicInfuserScreen::new);
         EntityRenderers.register(ModEntities.TARGET_DUMMY, TargetDummyRenderer::new);
         EntityRenderers.register(ModEntities.DAMAGE_INDICATOR, DamageIndicatorRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(TargetDummyModel.LAYER_LOCATION, TargetDummyModel::createBodyLayer);

@@ -1,6 +1,7 @@
 package fr.hardel.whispers_of_ether.itemgroup;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
+import fr.hardel.whispers_of_ether.block.ModBlocks;
 import fr.hardel.whispers_of_ether.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,7 +19,7 @@ public class ItemGroupMod {
         ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_runes"));
 
     public static final CreativeModeTab WHISPERSOFETHER_GENERAL_GROUP = FabricItemGroup.builder()
-        .icon(() -> new ItemStack(ModItems.ENDERCUBE))
+        .icon(() -> new ItemStack(ModBlocks.RUNIC_FORGE))
         .title(Component.translatable("itemGroup.whispers_of_ether_general"))
         .build();
 
