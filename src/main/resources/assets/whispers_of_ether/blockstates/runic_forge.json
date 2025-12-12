@@ -1,7 +1,10 @@
 {
     "variants": {
-        "": {
+        "lit=false": {
             "model": "whispers_of_ether:block/runic_forge"
+        },
+        "lit=true": {
+            "model": "whispers_of_ether:block/runic_forge_lit"
         }
     }
 }

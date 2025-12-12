@@ -47,6 +47,11 @@ public class RunicForgeMenu extends AbstractContainerMenu {
             public int getMaxStackSize() {
                 return 1;
             }
+
+            @Override
+            public boolean mayPlace(ItemStack itemStack) {
+                return this.container.getItem(INPUT_SLOT).isEmpty();
+            }
         });
 
         addPlayerInventory(playerInventory);
