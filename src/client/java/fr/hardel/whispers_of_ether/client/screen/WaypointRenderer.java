@@ -3,8 +3,7 @@ package fr.hardel.whispers_of_ether.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.waypoint.Waypoint;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -48,11 +47,7 @@ public class WaypointRenderer {
     // Light value
     private static final int LIGHT_VALUE = 15728880;
 
-    public static void register() {
-        WorldRenderEvents.LAST.register(WaypointRenderer::render);
-    }
-
-    private static void render(WorldRenderContext context) {
+    public static void render(Vec3 cameraPos, Camera camera, float tickDelta) {
         Minecraft client = Minecraft.getInstance();
         if (client.player == null)
             return;
@@ -62,26 +57,17 @@ public class WaypointRenderer {
         if (waypoints.isEmpty())
             return;
 
-        client.getMainRenderTarget().bindWrite(false);
-
-        PoseStack matrices = context.matrixStack();
-        Vec3 cameraPos = context.camera().getPosition();
-        float tickDelta = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
-
-        assert matrices != null;
-        matrices.pushPose();
+        PoseStack matrices = new PoseStack();
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
 
         RenderSystem.disableDepthTest();
         for (Waypoint waypoint : waypoints) {
-            renderWaypoint(matrices, waypoint, cameraPos, tickDelta);
+            renderWaypoint(matrices, waypoint, camera, cameraPos, tickDelta);
         }
         RenderSystem.enableDepthTest();
-
-        matrices.popPose();
     }
 
-    private static void renderWaypoint(PoseStack matrices, Waypoint waypoint, Vec3 cameraPos, float tickDelta) {
+    private static void renderWaypoint(PoseStack matrices, Waypoint waypoint, Camera camera, Vec3 cameraPos, float tickDelta) {
         double distance = waypoint.getDistanceTo(cameraPos);
 
         if (distance < MIN_DISTANCE || distance > MAX_DISTANCE)
@@ -95,13 +81,13 @@ public class WaypointRenderer {
         matrices.pushPose();
         matrices.translate(waypointPos.x, waypointPos.y, waypointPos.z);
 
-        Minecraft client = Minecraft.getInstance();
-        matrices.mulPose(Axis.YP.rotationDegrees(-client.gameRenderer.getMainCamera().getYRot()));
-        matrices.mulPose(Axis.XP.rotationDegrees(client.gameRenderer.getMainCamera().getXRot()));
+        matrices.mulPose(Axis.YP.rotationDegrees(-camera.getYRot()));
+        matrices.mulPose(Axis.XP.rotationDegrees(camera.getXRot()));
 
         float scale = calculateScale(distance);
         matrices.scale(scale, scale, scale);
 
+        Minecraft client = Minecraft.getInstance();
         assert client.level != null;
         float time = (client.level.getGameTime() + tickDelta) * TIME_MULTIPLIER;
 
@@ -140,26 +126,25 @@ public class WaypointRenderer {
 
         var vertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
         var buffer = vertexConsumers.getBuffer(RenderType.textBackgroundSeeThrough());
-
-        // 1. Losange central fixe
         buffer.addVertex(matrix, 0.0f, DIAMOND_SIZE, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
-                .setLight(LIGHT_VALUE);
+            .setLight(LIGHT_VALUE);
         buffer.addVertex(matrix, DIAMOND_SIZE, 0.0f, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
-                .setLight(LIGHT_VALUE);
+            .setLight(LIGHT_VALUE);
         buffer.addVertex(matrix, 0.0f, -DIAMOND_SIZE, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
-                .setLight(LIGHT_VALUE);
+            .setLight(LIGHT_VALUE);
         buffer.addVertex(matrix, -DIAMOND_SIZE, 0.0f, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
-                .setLight(LIGHT_VALUE);
+            .setLight(LIGHT_VALUE);
         vertexConsumers.endBatch();
 
-        // 2. Bordure statique (avec gap/spacing)
         renderStaticBorder(matrices, r, g, b, alpha);
-
-        // 3. Animation pulse (toutes les 5s)
         renderPulseBorder(matrices, r, g, b, alpha, time);
     }
 
     private static void renderDistanceText(PoseStack matrices, double distance, float alpha) {
+        int alphaInt = (int) (ALPHA_MAX * alpha);
+        if (alphaInt < 4)
+            return;
+
         Minecraft client = Minecraft.getInstance();
         Font textRenderer = client.font;
 
@@ -172,12 +157,11 @@ public class WaypointRenderer {
         int textWidth = textRenderer.width(text);
         Matrix4f matrix = matrices.last().pose();
 
-        int alphaInt = (int) (ALPHA_MAX * alpha);
         int color = (alphaInt << 24) | TEXT_COLOR;
 
         textRenderer.drawInBatch(text, -textWidth / 2f, 0, color, false, matrix,
-                client.renderBuffers().bufferSource(),
-                Font.DisplayMode.SEE_THROUGH, 0, LIGHT_VALUE);
+            client.renderBuffers().bufferSource(),
+            Font.DisplayMode.SEE_THROUGH, 0, LIGHT_VALUE);
 
         client.renderBuffers().bufferSource().endBatch();
         matrices.popPose();
