@@ -1,8 +1,9 @@
 package fr.hardel.whispers_of_ether.object;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.Level;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
@@ -57,17 +58,25 @@ public class SceneObjectsComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void readData(ValueInput readView) {
+    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registries) {
         objectsById.clear();
-        readView.read("objects", SceneObject.CODEC.listOf()).ifPresent(list -> {
-            for (SceneObject obj : list) {
-                objectsById.put(obj.id(), obj);
-            }
-        });
+        if (tag.contains("objects")) {
+            SceneObject.CODEC.listOf()
+                .parse(registries.createSerializationContext(NbtOps.INSTANCE), tag.get("objects"))
+                .result()
+                .ifPresent(list -> {
+                    for (SceneObject obj : list) {
+                        objectsById.put(obj.id(), obj);
+                    }
+                });
+        }
     }
 
     @Override
-    public void writeData(ValueOutput writeView) {
-        writeView.store("objects", SceneObject.CODEC.listOf(), new ArrayList<>(objectsById.values()));
+    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registries) {
+        SceneObject.CODEC.listOf()
+            .encodeStart(registries.createSerializationContext(NbtOps.INSTANCE), new ArrayList<>(objectsById.values()))
+            .result()
+            .ifPresent(encoded -> tag.put("objects", encoded));
     }
 }

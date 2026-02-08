@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import <minecraft:globals.glsl>
+uniform float GameTime;
 
 // Textures: Sampler0 = noise, Sampler1 = stars
 uniform sampler2D Sampler0;

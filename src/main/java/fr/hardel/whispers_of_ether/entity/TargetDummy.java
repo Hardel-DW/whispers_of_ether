@@ -2,21 +2,25 @@ package fr.hardel.whispers_of_ether.entity;
 
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class TargetDummy extends LivingEntity {
 
@@ -94,6 +98,20 @@ public class TargetDummy extends LivingEntity {
     public void tick() {
         super.tick();
         this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
+    }
+
+    @Override
+    public Iterable<ItemStack> getArmorSlots() {
+        return List.of();
+    }
+
+    @Override
+    public ItemStack getItemBySlot(EquipmentSlot slot) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
     }
 
     @Override

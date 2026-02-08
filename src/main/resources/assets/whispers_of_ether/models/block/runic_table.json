@@ -15,7 +15,7 @@
 		{
 			"from": [1, 16, 2],
 			"to": [10, 17, 14],
-			"rotation": {"angle": -5, "axis": "z", "origin": [5.5, 16.5, 8]},
+			"rotation": {"angle": 0, "axis": "z", "origin": [5.5, 16.5, 8]},
 			"faces": {
 				"north": {"uv": [0, 0, 4.5, 0.5], "texture": "#plate_book"},
 				"east": {"uv": [0, 0, 6, 0.5], "texture": "#plate_book"},
@@ -28,7 +28,7 @@
 		{
 			"from": [2, 17, 3.1],
 			"to": [9, 18, 8.1],
-			"rotation": {"angle": 7.5, "axis": "x", "origin": [5.5, 17.5, 5.5]},
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [5.5, 17.5, 5.5]},
 			"faces": {
 				"north": {"uv": [5, 5, 8.5, 5.5], "texture": "#border_page"},
 				"east": {"uv": [2.55, 5, 5, 5.5], "texture": "#border_page"},
@@ -41,7 +41,7 @@
 		{
 			"from": [2, 17, 7.9],
 			"to": [9, 18, 12.9],
-			"rotation": {"angle": -7.5, "axis": "x", "origin": [5.5, 17.5, 10.5]},
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [5.5, 17.5, 10.5]},
 			"faces": {
 				"north": {"uv": [5, 5, 8.5, 5.5], "texture": "#plate_book"},
 				"east": {"uv": [0, 5, 2.55, 5.5], "texture": "#border_page"},

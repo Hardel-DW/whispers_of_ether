@@ -3,7 +3,6 @@ package fr.hardel.whispers_of_ether.client.render.entity.model;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.client.render.entity.animation.AttackAnimation;
 import fr.hardel.whispers_of_ether.client.render.entity.state.TargetDummyRenderState;
-import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -18,12 +17,9 @@ import net.minecraft.resources.ResourceLocation;
 public class TargetDummyModel extends EntityModel<TargetDummyRenderState> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
             ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "target_dummy"), "main");
-    private final KeyframeAnimation attackAnimation;
 
     public TargetDummyModel(ModelPart root) {
         super(root);
-        ModelPart root1 = root.getChild("root");
-        this.attackAnimation = AttackAnimation.dummy_attack.bake(root1);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -66,6 +62,6 @@ public class TargetDummyModel extends EntityModel<TargetDummyRenderState> {
     @Override
     public void setupAnim(TargetDummyRenderState state) {
         super.setupAnim(state);
-        this.attackAnimation.apply(state.attackAnimationState, state.ageInTicks);
+        this.animate(state.attackAnimationState, AttackAnimation.dummy_attack, state.ageInTicks);
     }
 }

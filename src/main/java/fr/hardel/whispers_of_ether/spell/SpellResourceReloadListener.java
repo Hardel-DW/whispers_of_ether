@@ -5,10 +5,7 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.minecraft.resources.RegistryOps;
-import net.minecraft.server.packs.resources.PreparableReloadListener;
-import net.minecraft.core.HolderLookup;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class SpellResourceReloadListener implements PreparableReloadListener {
+public class SpellResourceReloadListener implements IdentifiableResourceReloadListener {
     private static final Gson GSON = new Gson();
     private static final Map<ResourceLocation, Spell> SPELLS = new HashMap<>();
 
@@ -46,19 +43,18 @@ public class SpellResourceReloadListener implements PreparableReloadListener {
         }, executor);
     }
 
-    private CompletableFuture<Void> applySpells(Map<ResourceLocation, JsonElement> prepared, HolderLookup.Provider registries, Executor executor) {
+    private CompletableFuture<Void> applySpells(Map<ResourceLocation, JsonElement> prepared, Executor executor) {
         return CompletableFuture.runAsync(() -> {
             SPELLS.clear();
-            RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, registries);
 
             for (Map.Entry<ResourceLocation, JsonElement> entry : prepared.entrySet()) {
-                DataResult<Spell> result = Spell.CODEC.parse(ops, entry.getValue());
+                DataResult<Spell> result = Spell.CODEC.parse(JsonOps.INSTANCE, entry.getValue());
                 if (result.error().isPresent()) {
                     WhispersOfEther.LOGGER.error("Failed to parse spell {}: {}", entry.getKey(), result.error().map(Object::toString).orElse("Unknown error"));
                     continue;
                 }
 
-                SPELLS.put(entry.getKey(), result.result().get());
+                result.result().ifPresent(spell -> SPELLS.put(entry.getKey(), spell));
                 WhispersOfEther.LOGGER.info("Loaded spell: {}", entry.getKey());
             }
         }, executor);
@@ -73,9 +69,12 @@ public class SpellResourceReloadListener implements PreparableReloadListener {
     }
 
     @Override
-    public CompletableFuture<Void> reload(SharedState sharedState, Executor executor, PreparationBarrier preparationBarrier, Executor executor2) {
-        ResourceManager manager = sharedState.resourceManager();
-        HolderLookup.Provider registries = sharedState.get(ResourceLoader.RELOADER_REGISTRY_LOOKUP_KEY);
-        return loadSpells(manager, executor).thenCompose(preparationBarrier::wait).thenCompose(data -> applySpells(data, registries, executor2));
+    public ResourceLocation getFabricId() {
+        return ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "spells");
+    }
+
+    @Override
+    public CompletableFuture<Void> reload(PreparationBarrier barrier, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) {
+        return loadSpells(manager, prepareExecutor).thenCompose(barrier::wait).thenCompose(data -> applySpells(data, applyExecutor));
     }
 }

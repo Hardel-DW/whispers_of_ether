@@ -203,7 +203,7 @@ public class RunicTableLogic {
                 slot));
         }
 
-        stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(entries));
+        stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(entries, true));
     }
 
     private static void applyStatLoss(ItemStack stack, ResourceLocation excludeAttribute, double runeWeight,
@@ -256,7 +256,7 @@ public class RunicTableLogic {
             }
         }
 
-        stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(newEntries));
+        stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(newEntries, true));
     }
 
     private static double getAttributeValue(ItemStack stack, ResourceLocation attributeId, AttributeModifier.Operation operation) {

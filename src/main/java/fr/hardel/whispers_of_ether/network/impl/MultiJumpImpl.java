@@ -13,7 +13,7 @@ public class MultiJumpImpl {
     public static void handle(MultiJump packet, ServerPlayNetworking.Context context) {
         context.server().execute(() -> {
             ServerPlayer player = context.player();
-            ServerLevel level = player.level();
+            ServerLevel level = (ServerLevel) player.level();
             for (int i = 0; i < 3; i++) {
                 level.sendParticles(ModParticle.WAVE_JUMP,
                         player.getX(), player.getY() + 0.5, player.getZ(),

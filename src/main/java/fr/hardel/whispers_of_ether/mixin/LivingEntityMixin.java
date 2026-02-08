@@ -30,6 +30,9 @@ public abstract class LivingEntityMixin implements MultiJumpAccessor {
     private void onJump(CallbackInfo ci) {
         LivingEntity self = (LivingEntity) (Object) this;
         if (self instanceof Player) {
+            if (self.onGround()) {
+                whispers_of_ether$jumpCount = 0;
+            }
             whispers_of_ether$jumpCount++;
         }
     }
@@ -52,7 +55,7 @@ public abstract class LivingEntityMixin implements MultiJumpAccessor {
         boolean actualOnGround = instance.onGround();
         if (instance instanceof Player && !actualOnGround) {
             int maxJumps = (int) getAttributeValue(ModAttribute.MULTI_JUMP);
-            return whispers_of_ether$jumpCount < maxJumps;
+            return maxJumps > 1 && whispers_of_ether$jumpCount < maxJumps;
         }
         return actualOnGround;
     }

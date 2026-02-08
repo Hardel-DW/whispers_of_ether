@@ -1,10 +1,12 @@
 package fr.hardel.whispers_of_ether.component;
 
-import com.mojang.serialization.Codec;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.resources.ResourceLocation;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
@@ -84,41 +86,40 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void readData(ValueInput readView) {
+    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registries) {
         spellIds.clear();
         spellCooldowns.clear();
 
-        readView.read("spells", Codec.STRING.listOf()).ifPresent(strings -> {
-            strings.forEach(str -> {
-                var id = ResourceLocation.tryParse(str);
-                if (id != null) {
-                    spellIds.add(id);
-                }
-            });
-        });
+        ListTag list = tag.getList("spells", Tag.TAG_STRING);
+        for (int i = 0; i < list.size(); i++) {
+            var id = ResourceLocation.tryParse(list.getString(i));
+            if (id != null) {
+                spellIds.add(id);
+            }
+        }
 
-        var cooldownsViewOpt = readView.child("cooldowns");
-        if (cooldownsViewOpt.isPresent()) {
-            var cooldownsView = cooldownsViewOpt.get();
-            for (ResourceLocation spellId : spellIds) {
-                var endTimeOpt = cooldownsView.getLong(spellId.toString());
-                if (endTimeOpt.isPresent() && endTimeOpt.get() > 0) {
-                    spellCooldowns.put(spellId, endTimeOpt.get());
+        CompoundTag cooldowns = tag.getCompound("cooldowns");
+        for (ResourceLocation spellId : spellIds) {
+            String key = spellId.toString();
+            if (cooldowns.contains(key)) {
+                long endTime = cooldowns.getLong(key);
+                if (endTime > 0) {
+                    spellCooldowns.put(spellId, endTime);
                 }
             }
         }
     }
 
     @Override
-    public void writeData(ValueOutput writeView) {
-        var strings = spellIds.stream().map(ResourceLocation::toString).toList();
-        writeView.store("spells", Codec.STRING.listOf(), strings);
+    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registries) {
+        ListTag list = new ListTag();
+        spellIds.forEach(id -> list.add(StringTag.valueOf(id.toString())));
+        tag.put("spells", list);
 
         if (!spellCooldowns.isEmpty()) {
-            var cooldownsView = writeView.child("cooldowns");
-            for (var entry : spellCooldowns.entrySet()) {
-                cooldownsView.putLong(entry.getKey().toString(), entry.getValue());
-            }
+            CompoundTag cooldowns = new CompoundTag();
+            spellCooldowns.forEach((key, value) -> cooldowns.putLong(key.toString(), value));
+            tag.put("cooldowns", cooldowns);
         }
     }
 }

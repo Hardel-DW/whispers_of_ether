@@ -1,9 +1,8 @@
 package fr.hardel.whispers_of_ether.component;
 
-import com.mojang.serialization.Codec;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 public class OmnivampirismComponent implements AutoSyncedComponent {
@@ -60,16 +59,16 @@ public class OmnivampirismComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void readData(ValueInput readView) {
-        this.totalHeal = readView.read("total_heal", Codec.FLOAT).orElse(0.0f);
-        this.healedSoFar = readView.read("healed_so_far", Codec.FLOAT).orElse(0.0f);
-        this.startTick = readView.getLong("start_tick").orElse(0L);
+    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registries) {
+        this.totalHeal = tag.getFloat("total_heal");
+        this.healedSoFar = tag.getFloat("healed_so_far");
+        this.startTick = tag.getLong("start_tick");
     }
 
     @Override
-    public void writeData(ValueOutput writeView) {
-        writeView.store("total_heal", Codec.FLOAT, totalHeal);
-        writeView.store("healed_so_far", Codec.FLOAT, healedSoFar);
-        writeView.putLong("start_tick", startTick);
+    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registries) {
+        tag.putFloat("total_heal", totalHeal);
+        tag.putFloat("healed_so_far", healedSoFar);
+        tag.putLong("start_tick", startTick);
     }
 }

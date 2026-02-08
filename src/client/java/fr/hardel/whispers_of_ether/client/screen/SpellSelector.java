@@ -6,7 +6,7 @@ import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
@@ -51,14 +51,14 @@ public class SpellSelector {
         for (int i = 0; i < actualSlotCount; i++) {
             int x = Math.round(currentHudX);
             int y = startY + (i * (SLOT_SIZE + GAP));
-            drawContext.blit(RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
+            drawContext.blit(RenderType::guiTextured, SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
                     SLOT_SIZE, SLOT_SIZE);
 
             var spellId = spellIds.get(i);
             var spell = SpellResourceReloadListener.getSpell(spellId);
             if (spell != null) {
                 int iconSize = SLOT_SIZE - 4;
-                drawContext.blit(RenderPipelines.GUI_TEXTURED, spell.getTextureId(),
+                drawContext.blit(RenderType::guiTextured, spell.getTextureId(),
                         x + 2, y + 2, 0, 0, iconSize, iconSize, iconSize, iconSize);
             }
         }
@@ -84,19 +84,19 @@ public class SpellSelector {
                     var textRenderer = Minecraft.getInstance().font;
                     float scale = 0.6f;
 
-                    drawContext.pose().pushMatrix();
-                    drawContext.pose().translate(x + 2 + iconSize / 2f, y + 2 + iconSize / 2f);
-                    drawContext.pose().scale(scale, scale);
+                    drawContext.pose().pushPose();
+                    drawContext.pose().translate(x + 2 + iconSize / 2f, y + 2 + iconSize / 2f, 0);
+                    drawContext.pose().scale(scale, scale, 1);
 
                     int textWidth = textRenderer.width(timeText);
                     int textHeight = textRenderer.lineHeight;
                     drawContext.drawString(textRenderer, timeText, -textWidth / 2, -textHeight / 2, 0xFFFFFFFF, true);
-                    drawContext.pose().popMatrix();
+                    drawContext.pose().popPose();
                 }
             }
         }
 
-        drawContext.blit(RenderPipelines.GUI_TEXTURED, SELECTED_TEXTURE, Math.round(currentHudX),
+        drawContext.blit(RenderType::guiTextured, SELECTED_TEXTURE, Math.round(currentHudX),
                 Math.round(currentAnimationY),
                 0, 0, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE);
     }
