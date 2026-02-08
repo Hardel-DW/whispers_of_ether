@@ -16,10 +16,18 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import net.minecraft.core.RegistryAccess;
 
 public class SpellResourceReloadListener implements IdentifiableResourceReloadListener {
     private static final Gson GSON = new Gson();
     private static final Map<ResourceLocation, Spell> SPELLS = new HashMap<>();
+    private static final Map<ResourceLocation, JsonElement> RAW_SPELLS = new HashMap<>();
+
+    private static RegistryAccess.Frozen registryAccess;
+
+    public static void setRegistryAccess(RegistryAccess.Frozen registryAccess) {
+        SpellResourceReloadListener.registryAccess = registryAccess;
+    }
 
     private CompletableFuture<Map<ResourceLocation, JsonElement>> loadSpells(ResourceManager manager, Executor executor) {
         return CompletableFuture.supplyAsync(() -> {
@@ -45,19 +53,34 @@ public class SpellResourceReloadListener implements IdentifiableResourceReloadLi
 
     private CompletableFuture<Void> applySpells(Map<ResourceLocation, JsonElement> prepared, Executor executor) {
         return CompletableFuture.runAsync(() -> {
-            SPELLS.clear();
+            RAW_SPELLS.clear();
+            RAW_SPELLS.putAll(prepared);
 
-            for (Map.Entry<ResourceLocation, JsonElement> entry : prepared.entrySet()) {
-                DataResult<Spell> result = Spell.CODEC.parse(JsonOps.INSTANCE, entry.getValue());
-                if (result.error().isPresent()) {
-                    WhispersOfEther.LOGGER.error("Failed to parse spell {}: {}", entry.getKey(), result.error().map(Object::toString).orElse("Unknown error"));
-                    continue;
-                }
-
-                result.result().ifPresent(spell -> SPELLS.put(entry.getKey(), spell));
-                WhispersOfEther.LOGGER.info("Loaded spell: {}", entry.getKey());
+            if (registryAccess != null) {
+                parseSpells();
             }
         }, executor);
+    }
+
+    public static void reloadSpells() {
+        if (!RAW_SPELLS.isEmpty()) {
+            parseSpells();
+        }
+    }
+
+    private static void parseSpells() {
+        SPELLS.clear();
+        var registryOps = registryAccess.createSerializationContext(JsonOps.INSTANCE);
+
+        for (Map.Entry<ResourceLocation, JsonElement> entry : RAW_SPELLS.entrySet()) {
+            DataResult<Spell> result = Spell.CODEC.parse(registryOps, entry.getValue());
+            if (result.error().isPresent()) {
+                WhispersOfEther.LOGGER.error("Failed to parse spell {}: {}", entry.getKey(), result.error().map(Object::toString).orElse("Unknown error"));
+                continue;
+            }
+            result.result().ifPresent(spell -> SPELLS.put(entry.getKey(), spell));
+            WhispersOfEther.LOGGER.info("Loaded spell: {}", entry.getKey());
+        }
     }
 
     public static Map<ResourceLocation, Spell> getSpells() {

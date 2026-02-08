@@ -30,6 +30,7 @@ import fr.hardel.whispers_of_ether.spell.target.shape.ShapeType;
 import fr.hardel.whispers_of_ether.spell.timeline.OrganizationType;
 import fr.hardel.whispers_of_ether.spell.timeline.offset.LoopOffsetType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.PackType;
 
@@ -58,6 +59,11 @@ public class WhispersOfEther implements ModInitializer {
         SceneObjectType.register();
         SceneObjectTypes.register();
         ModEffects.register();
+
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+            SpellResourceReloadListener.setRegistryAccess(server.registryAccess());
+            SpellResourceReloadListener.reloadSpells();
+        });
 
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SpellResourceReloadListener());
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new AttributeDataLoader());
