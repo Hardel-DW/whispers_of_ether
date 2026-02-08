@@ -8,7 +8,6 @@ import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import java.util.function.Consumer;
@@ -33,7 +32,7 @@ public record RuneComponent(ResourceLocation runeId, int tier) implements Toolti
 
     @Override
     public void addToTooltip(final Item.TooltipContext context, final Consumer<Component> consumer,
-            final TooltipFlag flag, final DataComponentGetter components) {
+            final TooltipFlag flag) {
         consumer.accept(Component.translatable("component.whispers_of_ether.rune.tier",
                 Component.translatable("enchantment.level." + this.tier))
                 .withStyle(ChatFormatting.GRAY));

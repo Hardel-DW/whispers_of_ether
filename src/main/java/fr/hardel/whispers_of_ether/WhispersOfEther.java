@@ -30,8 +30,7 @@ import fr.hardel.whispers_of_ether.spell.target.shape.ShapeType;
 import fr.hardel.whispers_of_ether.spell.timeline.OrganizationType;
 import fr.hardel.whispers_of_ether.spell.timeline.offset.LoopOffsetType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.minecraft.resources.ResourceLocation;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.PackType;
 
 public class WhispersOfEther implements ModInitializer {
@@ -60,8 +59,8 @@ public class WhispersOfEther implements ModInitializer {
         SceneObjectTypes.register();
         ModEffects.register();
 
-        ResourceLoader.get(PackType.SERVER_DATA).registerReloader(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spells"), new SpellResourceReloadListener());
-        ResourceLoader.get(PackType.SERVER_DATA).registerReloader(ResourceLocation.fromNamespaceAndPath(MOD_ID, "rune"), new AttributeDataLoader());
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SpellResourceReloadListener());
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new AttributeDataLoader());
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             SpellCommand.register(dispatcher);
             WaypointCommand.register(dispatcher);

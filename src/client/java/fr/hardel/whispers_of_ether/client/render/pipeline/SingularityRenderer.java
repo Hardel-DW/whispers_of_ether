@@ -1,7 +1,5 @@
 package fr.hardel.whispers_of_ether.client.render.pipeline;
 
-import com.mojang.blaze3d.pipeline.BlendFunction;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.client.render.SceneObjectRenderer;
@@ -9,69 +7,44 @@ import fr.hardel.whispers_of_ether.client.render.obj.Circle;
 import fr.hardel.whispers_of_ether.object.SceneObject;
 import fr.hardel.whispers_of_ether.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
-import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderPipelines;
-import com.mojang.blaze3d.shaders.UniformType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.ShaderDefines;
+import net.minecraft.client.renderer.ShaderProgram;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Axis;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.minecraft.resources.ResourceLocation;
 
 public class SingularityRenderer implements SceneObjectRenderer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SingularityRenderer.class);
+    private static final ShaderProgram SINGULARITY_SHADER = new ShaderProgram(
+            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "core/singularity"),
+            DefaultVertexFormat.NEW_ENTITY,
+            ShaderDefines.EMPTY);
 
     private final RenderType renderLayer;
 
     public SingularityRenderer() {
         this.renderLayer = RenderType.create(
                 "ether_singularity",
+                DefaultVertexFormat.NEW_ENTITY,
+                VertexFormat.Mode.QUADS,
                 1536,
                 false,
                 false,
-                createSingularityPipeline(),
                 RenderType.CompositeState.builder()
+                        .setShaderState(new RenderStateShard.ShaderStateShard(SINGULARITY_SHADER))
                         .setTextureState(RenderStateShard.MultiTextureStateShard.builder()
                                 .build())
+                        .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                        .setWriteMaskState(RenderStateShard.COLOR_WRITE)
                         .setLightmapState(RenderStateShard.LIGHTMAP)
                         .setOverlayState(RenderStateShard.OVERLAY)
+                        .setCullState(RenderStateShard.NO_CULL)
                         .createCompositeState(false));
-    }
-
-    private RenderPipeline createSingularityPipeline() {
-        try {
-            var transforms = RenderPipeline.builder()
-                    .withUniform("DynamicTransforms", UniformType.UNIFORM_BUFFER)
-                    .withUniform("Projection", UniformType.UNIFORM_BUFFER)
-                    .buildSnippet();
-            var fog = RenderPipeline.builder()
-                    .withUniform("Fog", UniformType.UNIFORM_BUFFER)
-                    .buildSnippet();
-            var globals = RenderPipeline.builder()
-                    .withUniform("Globals", UniformType.UNIFORM_BUFFER)
-                    .buildSnippet();
-
-            return RenderPipeline.builder(transforms, fog, globals)
-                    .withLocation(ResourceLocation.parse("rendertype_singularity"))
-                    .withVertexShader(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID,
-                            "core/singularity"))
-                    .withFragmentShader(ResourceLocation.fromNamespaceAndPath(
-                            WhispersOfEther.MOD_ID, "core/singularity"))
-                    .withVertexFormat(DefaultVertexFormat.NEW_ENTITY,
-                            VertexFormat.Mode.QUADS)
-                    .withBlend(BlendFunction.TRANSLUCENT)
-                    .withCull(false)
-                    .build();
-        } catch (Exception e) {
-            LOGGER.error("Error creating singularity pipeline: {}", e.getMessage(), e);
-            return RenderPipelines.ENTITY_TRANSLUCENT;
-        }
     }
 
     @Override

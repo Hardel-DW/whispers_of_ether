@@ -38,7 +38,7 @@ public class TargetDummyItem extends Item {
             return InteractionResult.SUCCESS;
         }
 
-        dummy.snapTo(blockPos2.getX() + 0.5, blockPos2.getY(), blockPos2.getZ() + 0.5,
+        dummy.moveTo(blockPos2.getX() + 0.5, blockPos2.getY(), blockPos2.getZ() + 0.5,
                 context.getHorizontalDirection().toYRot() + 180.0F, 0.0F);
         serverLevel.addFreshEntity(dummy);
         level.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos2);

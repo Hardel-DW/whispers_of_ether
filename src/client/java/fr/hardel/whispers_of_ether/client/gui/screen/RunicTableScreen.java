@@ -9,7 +9,7 @@ import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableLogic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -104,7 +104,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
+        graphics.blit(RenderType::guiTextured, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
         renderStatsPanel(graphics, x, y);
         renderHistoryPanel(graphics, x, y);
         renderWellDisplay(graphics, x, y);
@@ -150,13 +150,13 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         int yOffset = -scrollOffset * lineHeight;
         for (AttributeEntry entry : attributes) {
             int lineY = panelY + yOffset;
-            graphics.blit(RenderPipelines.GUI_TEXTURED, ATTRIBUTE_LINE, panelX + OFFSET_X, lineY + OFFSET_Y, 0, 0,
+            graphics.blit(RenderType::guiTextured, ATTRIBUTE_LINE, panelX + OFFSET_X, lineY + OFFSET_Y, 0, 0,
                 ATTRIBUTE_LINE_WIDTH, ATTRIBUTE_LINE_HEIGHT, ATTRIBUTE_LINE_WIDTH, ATTRIBUTE_LINE_HEIGHT);
 
             ResourceLocation iconLocation = getAttributeIcon(entry.attribute);
             int iconX = panelX + OFFSET_X + ATTRIBUTE_LINE_WIDTH - ATTRIBUTE_ICON_SIZE - ATTRIBUTE_LINE_PADDING_X;
             int iconY = lineY + OFFSET_Y + ATTRIBUTE_LINE_PADDING_Y;
-            graphics.blit(RenderPipelines.GUI_TEXTURED, iconLocation, iconX, iconY, 0, 0,
+            graphics.blit(RenderType::guiTextured, iconLocation, iconX, iconY, 0, 0,
                 ATTRIBUTE_ICON_SIZE, ATTRIBUTE_ICON_SIZE, ATTRIBUTE_ICON_SIZE, ATTRIBUTE_ICON_SIZE);
 
             String valueText = formatValue(entry.value, entry.operation);
@@ -167,11 +167,11 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
             int color = getAttributeColor(entry.attribute, entry.value);
             int textBaseX = panelX + OFFSET_X + ATTRIBUTE_LINE_PADDING_X;
             int textBaseY = lineY + OFFSET_Y + (ATTRIBUTE_LINE_HEIGHT - (int) (font.lineHeight * TEXT_SCALE)) / 2;
-            graphics.pose().pushMatrix();
-            graphics.pose().translate(textBaseX, textBaseY);
-            graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
+            graphics.pose().pushPose();
+            graphics.pose().translate(textBaseX, textBaseY, 0);
+            graphics.pose().scale(TEXT_SCALE, TEXT_SCALE, 1);
             graphics.drawString(font, fullText, 0, 0, color, true);
-            graphics.pose().popMatrix();
+            graphics.pose().popPose();
             yOffset += lineHeight;
         }
 
@@ -274,7 +274,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
             int entryHeight = calculateEntryHeight(entry);
             int lineY = panelY + yOffset;
 
-            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, HISTORY_LINE_SPRITE,
+            graphics.blitSprite(RenderType::guiTextured, HISTORY_LINE_SPRITE,
                 panelX + HISTORY_OFFSET_X, lineY + HISTORY_OFFSET_Y,
                 HISTORY_LINE_WIDTH, entryHeight);
 
@@ -352,17 +352,17 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     }
 
     private void drawScaledText(GuiGraphics graphics, String text, int x, int y, int color) {
-        graphics.pose().pushMatrix();
-        graphics.pose().translate(x, y);
-        graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
+        graphics.pose().pushPose();
+        graphics.pose().translate(x, y, 0);
+        graphics.pose().scale(TEXT_SCALE, TEXT_SCALE, 1);
         graphics.drawString(font, text, 0, 0, color, true);
-        graphics.pose().popMatrix();
+        graphics.pose().popPose();
     }
 
     private void drawScaledStats(GuiGraphics graphics, List<RunicTableHistoryEntry.StatChange> changes, int x, int y) {
-        graphics.pose().pushMatrix();
-        graphics.pose().translate(x, y);
-        graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
+        graphics.pose().pushPose();
+        graphics.pose().translate(x, y, 0);
+        graphics.pose().scale(TEXT_SCALE, TEXT_SCALE, 1);
 
         int xOffset = 0;
         int yOffset = 0;
@@ -392,7 +392,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
             currentLineLength += text.length();
         }
 
-        graphics.pose().popMatrix();
+        graphics.pose().popPose();
     }
 
     private void renderScrollBar(GuiGraphics graphics, int scrollX, int baseY, int offset, int maxOffset, int yMin, int yMax) {
@@ -401,7 +401,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         }
         int scrollTrackHeight = yMax - yMin - SCROLL_HEIGHT;
         int scrollY = yMin + (int) ((float) offset / maxOffset * scrollTrackHeight);
-        graphics.blit(RenderPipelines.GUI_TEXTURED, SCROLL_TEXTURE, scrollX, baseY + scrollY, 0, 0,
+        graphics.blit(RenderType::guiTextured, SCROLL_TEXTURE, scrollX, baseY + scrollY, 0, 0,
             SCROLL_WIDTH, SCROLL_HEIGHT, SCROLL_WIDTH, SCROLL_HEIGHT);
     }
 
@@ -442,11 +442,11 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         int centeredX = wellX + (WELL_SIZE_X - scaledTextWidth) / 2;
         int centeredY = wellY + (WELL_SIZE_Y - scaledTextHeight) / 2;
 
-        graphics.pose().pushMatrix();
-        graphics.pose().translate(centeredX, centeredY);
-        graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
+        graphics.pose().pushPose();
+        graphics.pose().translate(centeredX, centeredY, 0);
+        graphics.pose().scale(TEXT_SCALE, TEXT_SCALE, 1);
         graphics.drawString(font, wellText, 0, 0, 0xFFFFFACA, false);
-        graphics.pose().popMatrix();
+        graphics.pose().popPose();
     }
 
     private record AttributeEntry(String name, double value, AttributeModifier.Operation operation,

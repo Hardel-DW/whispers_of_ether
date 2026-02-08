@@ -1,9 +1,10 @@
 package fr.hardel.whispers_of_ether.component;
 
 import fr.hardel.whispers_of_ether.waypoint.Waypoint;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.core.BlockPos;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
@@ -43,13 +44,21 @@ public class WaypointComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void readData(ValueInput readView) {
+    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registries) {
         waypoints.clear();
-        readView.read("waypoints", Waypoint.CODEC.listOf()).ifPresent(waypoints::addAll);
+        if (tag.contains("waypoints")) {
+            Waypoint.CODEC.listOf()
+                .parse(registries.createSerializationContext(NbtOps.INSTANCE), tag.get("waypoints"))
+                .result()
+                .ifPresent(waypoints::addAll);
+        }
     }
 
     @Override
-    public void writeData(ValueOutput writeView) {
-        writeView.store("waypoints", Waypoint.CODEC.listOf(), waypoints);
+    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registries) {
+        Waypoint.CODEC.listOf()
+            .encodeStart(registries.createSerializationContext(NbtOps.INSTANCE), waypoints)
+            .result()
+            .ifPresent(encoded -> tag.put("waypoints", encoded));
     }
 }

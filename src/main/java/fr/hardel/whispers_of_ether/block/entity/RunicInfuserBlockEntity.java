@@ -19,8 +19,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -64,16 +64,16 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
     }
 
     @Override
-    protected void loadAdditional(ValueInput input) {
-        super.loadAdditional(input);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(input, this.items);
+        ContainerHelper.loadAllItems(tag, this.items, registries);
     }
 
     @Override
-    protected void saveAdditional(ValueOutput output) {
-        super.saveAdditional(output);
-        ContainerHelper.saveAllItems(output, this.items);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.items, registries);
     }
 
     public boolean canInfuse(Player player) {

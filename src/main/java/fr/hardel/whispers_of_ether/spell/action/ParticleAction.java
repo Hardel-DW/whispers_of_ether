@@ -68,8 +68,6 @@ public record ParticleAction(ResourceLocation particle, Optional<Position> offse
 
             world.sendParticles(
                     particleEffect,
-                    force,
-                    false,
                     x, y, z,
                     count,
                     deltaX, deltaY, deltaZ,

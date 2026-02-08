@@ -1,0 +1,32 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "whispers_of_ether:item/rune/rune_of_entity_interaction_range"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "whispers_of_ether:tier": 0.4
+      },
+      "model": "whispers_of_ether:item/rune/reinforced_rune_of_entity_interaction_range"
+    },
+    {
+      "predicate": {
+        "whispers_of_ether:tier": 0.6
+      },
+      "model": "whispers_of_ether:item/rune/echo_rune_of_entity_interaction_range"
+    },
+    {
+      "predicate": {
+        "whispers_of_ether:tier": 0.8
+      },
+      "model": "whispers_of_ether:item/rune/nether_rune_of_entity_interaction_range"
+    },
+    {
+      "predicate": {
+        "whispers_of_ether:tier": 1.0
+      },
+      "model": "whispers_of_ether:item/rune/dragon_rune_of_entity_interaction_range"
+    }
+  ]
+}

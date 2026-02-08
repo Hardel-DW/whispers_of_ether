@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import <minecraft:globals.glsl>
+uniform float GameTime;
 
 in vec2 texCoord0;
 out vec4 fragColor;

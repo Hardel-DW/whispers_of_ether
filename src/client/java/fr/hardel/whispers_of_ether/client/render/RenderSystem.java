@@ -32,13 +32,13 @@ public class RenderSystem {
         renderers.put(renderer.getType(), renderer);
     }
 
-    public void renderAll(net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext context) {
+    public void renderAll(net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext context) {
         var client = Minecraft.getInstance();
         if (client.level == null)
             return;
 
-        PoseStack matrices = context.matrices();
-        var cameraPos = context.gameRenderer().getMainCamera().getPosition();
+        PoseStack matrices = context.matrixStack();
+        var cameraPos = context.camera().getPosition();
 
         matrices.pushPose();
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);

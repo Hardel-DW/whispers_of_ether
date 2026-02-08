@@ -2,8 +2,6 @@ package fr.hardel.whispers_of_ether.client.keybind;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.resources.ResourceLocation;
-
 import com.mojang.blaze3d.platform.InputConstants;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
@@ -11,8 +9,8 @@ import fr.hardel.whispers_of_ether.WhispersOfEther;
 import org.lwjgl.glfw.GLFW;
 
 public class ModKeyBindings {
-    private static final KeyMapping.Category MAIN_CATEGORY = KeyMapping.Category
-            .register(ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "main"));
+    private static final String MAIN_CATEGORY = "key.categories." + WhispersOfEther.MOD_ID;
+
     public static final KeyMapping CAST_SPELL = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.whispers_of_ether.cast_spell", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C,
             MAIN_CATEGORY));

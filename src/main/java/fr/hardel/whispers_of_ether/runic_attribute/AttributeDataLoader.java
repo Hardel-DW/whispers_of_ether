@@ -5,11 +5,8 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.RegistryOps;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +19,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class AttributeDataLoader implements PreparableReloadListener {
+public class AttributeDataLoader implements IdentifiableResourceReloadListener {
     private static final Gson GSON = new Gson();
     private static final Map<ResourceLocation, AttributeData> ATTRIBUTES = new HashMap<>();
 
@@ -48,13 +45,12 @@ public class AttributeDataLoader implements PreparableReloadListener {
         }, executor);
     }
 
-    private CompletableFuture<Void> applyAttributes(Map<ResourceLocation, JsonElement> prepared, HolderLookup.Provider registries, Executor executor) {
+    private CompletableFuture<Void> applyAttributes(Map<ResourceLocation, JsonElement> prepared, Executor executor) {
         return CompletableFuture.runAsync(() -> {
             ATTRIBUTES.clear();
-            RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, registries);
 
             for (Map.Entry<ResourceLocation, JsonElement> entry : prepared.entrySet()) {
-                DataResult<AttributeData> result = AttributeData.CODEC.parse(ops, entry.getValue());
+                DataResult<AttributeData> result = AttributeData.CODEC.parse(JsonOps.INSTANCE, entry.getValue());
                 if (result.error().isPresent()) {
                     WhispersOfEther.LOGGER.error("Failed to parse attribute {}: {}", entry.getKey(), result.error().map(Object::toString).orElse("Unknown error"));
                     continue;
@@ -75,9 +71,12 @@ public class AttributeDataLoader implements PreparableReloadListener {
     }
 
     @Override
-    public @NotNull CompletableFuture<Void> reload(SharedState sharedState, Executor executor, PreparationBarrier preparationBarrier, Executor executor2) {
-        ResourceManager manager = sharedState.resourceManager();
-        HolderLookup.Provider registries = sharedState.get(ResourceLoader.RELOADER_REGISTRY_LOOKUP_KEY);
-        return loadAttributes(manager, executor).thenCompose(preparationBarrier::wait).thenCompose(data -> applyAttributes(data, registries, executor2));
+    public ResourceLocation getFabricId() {
+        return ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "rune");
+    }
+
+    @Override
+    public @NotNull CompletableFuture<Void> reload(PreparationBarrier barrier, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) {
+        return loadAttributes(manager, prepareExecutor).thenCompose(barrier::wait).thenCompose(data -> applyAttributes(data, applyExecutor));
     }
 }
