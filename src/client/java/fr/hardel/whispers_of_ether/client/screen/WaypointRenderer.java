@@ -1,5 +1,6 @@
 package fr.hardel.whispers_of_ether.client.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.waypoint.Waypoint;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
@@ -71,9 +72,11 @@ public class WaypointRenderer {
         matrices.pushPose();
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
 
+        RenderSystem.disableDepthTest();
         for (Waypoint waypoint : waypoints) {
             renderWaypoint(matrices, waypoint, cameraPos, tickDelta);
         }
+        RenderSystem.enableDepthTest();
 
         matrices.popPose();
     }
