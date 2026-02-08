@@ -127,8 +127,6 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
 
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-        graphics.drawString(font, title, titleLabelX, titleLabelY, 0x404040, false);
-        graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
     }
 
     private void renderStatsPanel(GuiGraphics graphics, int x, int y) {

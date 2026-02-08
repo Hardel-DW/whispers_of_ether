@@ -1,5 +1,6 @@
 {
     "key.category.whispers_of_ether.main": "Whispers Of Ether",
+    "key.category.whispers_of_ether": "Whispers Of Ether",
     "effect.whispers_of_ether.camera_shaking": "Tremblement",
     "effect.whispers_of_ether.pickup_area": "Zone de ramassage",
     "effect.whispers_of_ether.multi_jump": "Multi-saut",
@@ -56,6 +57,7 @@
     "component.whispers_of_ether.well": "Puits: %s/%s",
     "container.whispers_of_ether.runic_table": "Table Runique",
     "container.whispers_of_ether.runic_forge": "Forge Runique",
+    "container.whispers_of_ether.runic_infuser": "Infuseur Runique",
     "runic_table.whispers_of_ether.critical_success": "Succès Critique!",
     "runic_table.whispers_of_ether.neutral_success": "Succès",
     "runic_table.whispers_of_ether.critical_failure": "Échec Critique!",

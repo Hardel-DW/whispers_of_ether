@@ -29,8 +29,6 @@ import java.util.Map;
 public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
     public static final TagKey<Item> RUNES_TAG = TagKey.create(Registries.ITEM,
         ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runes"));
-    public static final int XP_COST = 50;
-
     private static final Component TITLE = Component.translatable("container.whispers_of_ether.runic_infuser");
     private NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
 
@@ -78,7 +76,7 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
 
     public boolean canInfuse(Player player) {
         ItemStack stack = getItem(0);
-        return !stack.isEmpty() && stack.is(RUNES_TAG) && player.totalExperience >= XP_COST;
+        return !stack.isEmpty() && stack.is(RUNES_TAG);
     }
 
     public void infuse(Player player) {
@@ -94,8 +92,6 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
 
         List<Map.Entry<Item, ResourceLocation>> entries = List.copyOf(ModItems.RUNE_TO_DATA.entrySet());
         Map.Entry<Item, ResourceLocation> randomEntry = entries.get(level.random.nextInt(entries.size()));
-
-        player.giveExperiencePoints(-XP_COST);
 
         ItemStack newStack = new ItemStack(randomEntry.getKey());
         newStack.set(ModItemComponent.RUNES, new RuneComponent(randomEntry.getValue(), tier));
