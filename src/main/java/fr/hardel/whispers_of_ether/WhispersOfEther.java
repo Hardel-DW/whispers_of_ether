@@ -12,7 +12,6 @@ import fr.hardel.whispers_of_ether.block.entity.ModBlockEntities;
 import fr.hardel.whispers_of_ether.command.SpellCommand;
 import fr.hardel.whispers_of_ether.recipe.ModRecipes;
 import fr.hardel.whispers_of_ether.command.WaypointCommand;
-import fr.hardel.whispers_of_ether.command.EtherObjectCommand;
 import fr.hardel.whispers_of_ether.effects.ModEffects;
 import fr.hardel.whispers_of_ether.entity.ModEntities;
 import fr.hardel.whispers_of_ether.item.ModItems;
@@ -20,8 +19,6 @@ import fr.hardel.whispers_of_ether.itemgroup.ItemGroupMod;
 import fr.hardel.whispers_of_ether.menu.ModMenuTypes;
 import fr.hardel.whispers_of_ether.particle.ModParticle;
 import fr.hardel.whispers_of_ether.network.NetworkHandler;
-import fr.hardel.whispers_of_ether.object.SceneObjectType;
-import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
 import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
 import fr.hardel.whispers_of_ether.spell.action.ActionType;
 import fr.hardel.whispers_of_ether.spell.target.TargetType;
@@ -56,8 +53,6 @@ public class WhispersOfEther implements ModInitializer {
         ShapeType.register();
         PositionTargetType.register();
         LoopOffsetType.register();
-        SceneObjectType.register();
-        SceneObjectTypes.register();
         ModEffects.register();
 
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
@@ -70,7 +65,6 @@ public class WhispersOfEther implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             SpellCommand.register(dispatcher);
             WaypointCommand.register(dispatcher);
-            EtherObjectCommand.register(dispatcher);
         });
 
         NetworkHandler.registerServerPackets();

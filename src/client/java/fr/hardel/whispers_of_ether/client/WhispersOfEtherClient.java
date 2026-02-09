@@ -6,7 +6,6 @@ import fr.hardel.whispers_of_ether.client.gui.screen.RunicForgeScreen;
 import fr.hardel.whispers_of_ether.client.gui.screen.RunicInfuserScreen;
 import fr.hardel.whispers_of_ether.client.network.ClientNetworkHandler;
 import fr.hardel.whispers_of_ether.client.particles.ModParticleClient;
-import fr.hardel.whispers_of_ether.client.render.RenderSystem;
 import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
 import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
 import fr.hardel.whispers_of_ether.component.ModItemComponent;
@@ -21,7 +20,6 @@ import fr.hardel.whispers_of_ether.entity.ModEntities;
 import fr.hardel.whispers_of_ether.client.render.entity.model.TargetDummyModel;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -42,7 +40,6 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         SpellCastHandler.initialize();
         NetworkHandler.registerClientPackets();
         ClientNetworkHandler.register();
-        RenderSystem.register();
         registerItemProperties();
 
         MenuScreens.register(ModMenuTypes.RUNIC_TABLE, RunicTableScreen::new);
@@ -51,8 +48,6 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.TARGET_DUMMY, TargetDummyRenderer::new);
         EntityRendererRegistry.register(ModEntities.DAMAGE_INDICATOR, DamageIndicatorRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(TargetDummyModel.LAYER_LOCATION, TargetDummyModel::createBodyLayer);
-
-        WorldRenderEvents.AFTER_TRANSLUCENT.register(RenderSystem.getInstance()::renderAll);
         HudRenderCallback.EVENT.register(SpellSelector::render);
     }
 
@@ -92,9 +87,5 @@ public class WhispersOfEtherClient implements ClientModInitializer {
             RuneComponent rune = stack.get(ModItemComponent.RUNES);
             return rune != null ? rune.tier() / 5.0f : 0.0f;
         });
-    }
-
-    public static RenderSystem getRenderSystem() {
-        return RenderSystem.getInstance();
     }
 }
