@@ -6,7 +6,6 @@ import fr.hardel.whispers_of_ether.client.gui.screen.RunicInfuserScreen;
 import fr.hardel.whispers_of_ether.client.network.ClientNetworkHandler;
 import fr.hardel.whispers_of_ether.client.particles.ModParticleClient;
 import fr.hardel.whispers_of_ether.client.render.RenderSystem;
-import fr.hardel.whispers_of_ether.client.screen.WaypointRenderer;
 import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
 import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
 import fr.hardel.whispers_of_ether.menu.ModMenuTypes;
@@ -37,7 +36,6 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         SpellCastHandler.initialize();
         NetworkHandler.registerClientPackets();
         ClientNetworkHandler.register();
-        WaypointRenderer.register();
         RenderSystem.register();
 
         MenuScreens.register(ModMenuTypes.RUNIC_TABLE, RunicTableScreen::new);

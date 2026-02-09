@@ -45,9 +45,7 @@ void main() {
     // Time (seconds approx). GameTime in [0,1) over a full day (~1200s)
     float iTime = GameTime * 1200.0;
 
-    // Circular mask for the card and soft edge fade
-    float mask = step(r, 1.0);
-    float edgeFade = 1.0 - smoothstep(0.98, 1.0, r);
+    if (r >= 0.95) discard;
 
     // Parameters
     const float EVENT_HORIZON_R = 0.35;
@@ -91,9 +89,7 @@ void main() {
 
     vec3 col = base + ringCol + diskCol;
 
-    // Final alpha
-    float alpha = mask * edgeFade;
-    fragColor = vec4(col, alpha);
+    fragColor = vec4(col, 1.0);
 }
 
 
