@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +24,7 @@ public record SummonAction(ResourceLocation entity) implements Action {
 
     @Override
     public void execute(ServerLevel world, Entity caster, List<Entity> targets) {
-        EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.getValue(entity);
+        EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(entity);
 
         if (entityType == null) {
             return;
@@ -33,7 +32,7 @@ public record SummonAction(ResourceLocation entity) implements Action {
 
         for (Entity target : targets) {
             Vec3 spawnPos = target.position();
-            Entity summonedEntity = entityType.create(world, EntitySpawnReason.TRIGGERED);
+            Entity summonedEntity = entityType.create(world);
 
             if (summonedEntity != null) {
                 summonedEntity.setPos(spawnPos.x, spawnPos.y, spawnPos.z);

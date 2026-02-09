@@ -9,16 +9,13 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.ArrayList;
 
 public class RunicForgeRecipe implements Recipe<RecipeInput> {
     private final List<Ingredient> ingredients;
     private final Ingredient input;
     private final ItemStack result;
-    private @Nullable PlacementInfo placementInfo;
 
     public RunicForgeRecipe(List<Ingredient> ingredients, Ingredient input, ItemStack result) {
         this.ingredients = ingredients;
@@ -72,6 +69,16 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public ItemStack getResultItem(HolderLookup.Provider registries) {
+        return result.copy();
+    }
+
+    @Override
     public RecipeSerializer<? extends Recipe<RecipeInput>> getSerializer() {
         return ModRecipes.RUNIC_FORGE_SERIALIZER;
     }
@@ -79,21 +86,6 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
     @Override
     public RecipeType<? extends Recipe<RecipeInput>> getType() {
         return ModRecipes.RUNIC_FORGE_TYPE;
-    }
-
-    @Override
-    public PlacementInfo placementInfo() {
-        if (placementInfo == null) {
-            List<Ingredient> allIngredients = new ArrayList<>(ingredients);
-            allIngredients.add(input);
-            placementInfo = PlacementInfo.create(allIngredients);
-        }
-        return placementInfo;
-    }
-
-    @Override
-    public RecipeBookCategory recipeBookCategory() {
-        return ModRecipes.RUNIC_FORGE_CATEGORY;
     }
 
     public List<Ingredient> ingredients() {

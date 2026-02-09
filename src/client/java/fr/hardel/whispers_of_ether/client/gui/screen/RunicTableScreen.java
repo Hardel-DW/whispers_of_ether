@@ -9,7 +9,7 @@ import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableLogic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.RenderType;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -104,7 +104,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        graphics.blit(RenderType::guiTextured, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
+        graphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
         renderStatsPanel(graphics, x, y);
         renderHistoryPanel(graphics, x, y);
         renderWellDisplay(graphics, x, y);
@@ -148,13 +148,13 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         int yOffset = -scrollOffset * lineHeight;
         for (AttributeEntry entry : attributes) {
             int lineY = panelY + yOffset;
-            graphics.blit(RenderType::guiTextured, ATTRIBUTE_LINE, panelX + OFFSET_X, lineY + OFFSET_Y, 0, 0,
+            graphics.blit(ATTRIBUTE_LINE, panelX + OFFSET_X, lineY + OFFSET_Y, 0, 0,
                 ATTRIBUTE_LINE_WIDTH, ATTRIBUTE_LINE_HEIGHT, ATTRIBUTE_LINE_WIDTH, ATTRIBUTE_LINE_HEIGHT);
 
             ResourceLocation iconLocation = getAttributeIcon(entry.attribute);
             int iconX = panelX + OFFSET_X + ATTRIBUTE_LINE_WIDTH - ATTRIBUTE_ICON_SIZE - ATTRIBUTE_LINE_PADDING_X;
             int iconY = lineY + OFFSET_Y + ATTRIBUTE_LINE_PADDING_Y;
-            graphics.blit(RenderType::guiTextured, iconLocation, iconX, iconY, 0, 0,
+            graphics.blit(iconLocation, iconX, iconY, 0, 0,
                 ATTRIBUTE_ICON_SIZE, ATTRIBUTE_ICON_SIZE, ATTRIBUTE_ICON_SIZE, ATTRIBUTE_ICON_SIZE);
 
             String valueText = formatValue(entry.value, entry.operation);
@@ -272,7 +272,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
             int entryHeight = calculateEntryHeight(entry);
             int lineY = panelY + yOffset;
 
-            graphics.blitSprite(RenderType::guiTextured, HISTORY_LINE_SPRITE,
+            graphics.blitSprite(HISTORY_LINE_SPRITE,
                 panelX + HISTORY_OFFSET_X, lineY + HISTORY_OFFSET_Y,
                 HISTORY_LINE_WIDTH, entryHeight);
 
@@ -312,7 +312,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         for (int i = 0; i < changes.size(); i++) {
             RunicTableHistoryEntry.StatChange change = changes.get(i);
             String value = formatValue(change.delta(), change.operation());
-            String name = BuiltInRegistries.ATTRIBUTE.get(ResourceKey.create(Registries.ATTRIBUTE, change.attributeId()))
+            String name = BuiltInRegistries.ATTRIBUTE.getHolder(ResourceKey.create(Registries.ATTRIBUTE, change.attributeId()))
                 .map(holder -> Component.translatable(holder.value().getDescriptionId()).getString())
                 .orElse(change.attributeId().getPath());
             String text = value + " " + name;
@@ -369,7 +369,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         for (int i = 0; i < changes.size(); i++) {
             RunicTableHistoryEntry.StatChange change = changes.get(i);
             String value = formatValue(change.delta(), change.operation());
-            String name = BuiltInRegistries.ATTRIBUTE.get(ResourceKey.create(Registries.ATTRIBUTE, change.attributeId()))
+            String name = BuiltInRegistries.ATTRIBUTE.getHolder(ResourceKey.create(Registries.ATTRIBUTE, change.attributeId()))
                 .map(holder -> Component.translatable(holder.value().getDescriptionId()).getString())
                 .orElse(change.attributeId().getPath());
             String text = value + " " + name;
@@ -399,7 +399,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         }
         int scrollTrackHeight = yMax - yMin - SCROLL_HEIGHT;
         int scrollY = yMin + (int) ((float) offset / maxOffset * scrollTrackHeight);
-        graphics.blit(RenderType::guiTextured, SCROLL_TEXTURE, scrollX, baseY + scrollY, 0, 0,
+        graphics.blit(SCROLL_TEXTURE, scrollX, baseY + scrollY, 0, 0,
             SCROLL_WIDTH, SCROLL_HEIGHT, SCROLL_WIDTH, SCROLL_HEIGHT);
     }
 

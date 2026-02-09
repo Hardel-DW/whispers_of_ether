@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -32,7 +31,7 @@ public class TargetDummyItem extends Item {
         BlockPos blockPos = context.getClickedPos();
         BlockPos blockPos2 = blockPos.relative(direction);
 
-        TargetDummy dummy = ModEntities.TARGET_DUMMY.create(serverLevel, EntitySpawnReason.SPAWN_ITEM_USE);
+        TargetDummy dummy = ModEntities.TARGET_DUMMY.create(serverLevel);
         if (dummy == null) {
             context.getItemInHand().shrink(1);
             return InteractionResult.SUCCESS;

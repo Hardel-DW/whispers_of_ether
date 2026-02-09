@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 public class SpellResourceReloadListener implements IdentifiableResourceReloadListener {
     private static final Gson GSON = new Gson();
@@ -97,7 +98,7 @@ public class SpellResourceReloadListener implements IdentifiableResourceReloadLi
     }
 
     @Override
-    public CompletableFuture<Void> reload(PreparationBarrier barrier, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) {
+    public CompletableFuture<Void> reload(PreparationBarrier barrier, ResourceManager manager, ProfilerFiller prepareProfiler, ProfilerFiller applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
         return loadSpells(manager, prepareExecutor).thenCompose(barrier::wait).thenCompose(data -> applySpells(data, applyExecutor));
     }
 }

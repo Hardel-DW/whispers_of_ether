@@ -23,7 +23,7 @@ public final class SceneObjectType {
 
     public static final Codec<SceneObjectType> CODEC = ResourceLocation.CODEC.comapFlatMap(
             id -> {
-                var t = REGISTRY.getValue(id);
+                var t = REGISTRY.get(id);
                 return t != null ? DataResult.success(t) : DataResult.error(() -> "Unknown scene object type: " + id);
             },
             t -> {

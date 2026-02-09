@@ -1,6 +1,10 @@
 package fr.hardel.whispers_of_ether.client.render.pipeline;
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.math.Axis;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.client.render.SceneObjectRenderer;
 import fr.hardel.whispers_of_ether.client.render.obj.Circle;
@@ -9,23 +13,22 @@ import fr.hardel.whispers_of_ether.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.ShaderDefines;
-import net.minecraft.client.renderer.ShaderProgram;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 
 public class SingularityRenderer implements SceneObjectRenderer {
-    private static final ShaderProgram SINGULARITY_SHADER = new ShaderProgram(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "core/singularity"),
-            DefaultVertexFormat.NEW_ENTITY,
-            ShaderDefines.EMPTY);
+    private static ShaderInstance singularityShader;
 
     private final RenderType renderLayer;
+
+    public static void registerShaders(net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback.RegistrationContext context) throws java.io.IOException {
+        context.register(
+                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "core/singularity"),
+                DefaultVertexFormat.NEW_ENTITY,
+                shader -> singularityShader = shader);
+    }
 
     public SingularityRenderer() {
         this.renderLayer = RenderType.create(
@@ -36,7 +39,7 @@ public class SingularityRenderer implements SceneObjectRenderer {
                 false,
                 false,
                 RenderType.CompositeState.builder()
-                        .setShaderState(new RenderStateShard.ShaderStateShard(SINGULARITY_SHADER))
+                        .setShaderState(new RenderStateShard.ShaderStateShard(() -> singularityShader))
                         .setTextureState(RenderStateShard.MultiTextureStateShard.builder()
                                 .build())
                         .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
