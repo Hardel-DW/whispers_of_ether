@@ -9,7 +9,7 @@
     ],
     "input": "minecraft:amethyst_shard",
     "result": {
-        "count": 4,
+        "count": 1,
         "id": "minecraft:echo_shard"
     }
 }
