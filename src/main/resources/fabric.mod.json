@@ -16,9 +16,6 @@
         "main": [
             "fr.hardel.whispers_of_ether.WhispersOfEther"
         ],
-        "cardinal-components-world": [
-            "fr.hardel.whispers_of_ether.object.SceneObjectsComponents"
-        ],
         "cardinal-components-entity": [
             "fr.hardel.whispers_of_ether.component.ModComponents"
         ]
@@ -39,8 +36,7 @@
         "cardinal-components": [
             "whispers_of_ether:player_spell",
             "whispers_of_ether:waypoints",
-            "whispers_of_ether:omnivampirism",
-            "whispers_of_ether:scene_objects"
+            "whispers_of_ether:omnivampirism"
         ]
     }
 }

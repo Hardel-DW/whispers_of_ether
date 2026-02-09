@@ -1,15 +1,27 @@
 {
     "type": "whispers_of_ether:runic_forge",
     "ingredients": [
-        {"item": "minecraft:netherite_scrap"},
-        {"item": "minecraft:quartz"},
-        {"item": "minecraft:quartz"},
-        {"item": "minecraft:netherrack"},
-        {"item": "minecraft:netherrack"}
+        {
+            "item": "minecraft:netherite_scrap"
+        },
+        {
+            "item": "minecraft:quartz"
+        },
+        {
+            "item": "minecraft:quartz"
+        },
+        {
+            "item": "minecraft:netherrack"
+        },
+        {
+            "item": "minecraft:netherrack"
+        }
     ],
-    "input": {"item": "whispers_of_ether:reinforced_rune"},
+    "input": {
+        "item": "whispers_of_ether:reinforced_rune"
+    },
     "result": {
-        "count": 5,
+        "count": 1,
         "id": "whispers_of_ether:nether_rune"
     }
 }

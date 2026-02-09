@@ -1,15 +1,27 @@
 {
     "type": "whispers_of_ether:runic_forge",
     "ingredients": [
-        {"item": "minecraft:diamond"},
-        {"item": "minecraft:iron_ingot"},
-        {"item": "minecraft:iron_ingot"},
-        {"item": "minecraft:iron_ingot"},
-        {"item": "minecraft:iron_ingot"}
+        {
+            "item": "minecraft:diamond"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        }
     ],
-    "input": {"item": "whispers_of_ether:rune"},
+    "input": {
+        "item": "whispers_of_ether:rune"
+    },
     "result": {
-        "count": 5,
+        "count": 1,
         "id": "whispers_of_ether:reinforced_rune"
     }
 }
