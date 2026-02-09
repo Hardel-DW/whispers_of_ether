@@ -2,8 +2,7 @@ package fr.hardel.whispers_of_ether.client.screen;
 
 import fr.hardel.whispers_of_ether.component.ModComponents;
 import fr.hardel.whispers_of_ether.waypoint.Waypoint;
-import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
-import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -47,11 +46,7 @@ public class WaypointRenderer {
     // Light value
     private static final int LIGHT_VALUE = 15728880;
 
-    public static void register() {
-        WorldRenderEvents.AFTER_ENTITIES.register(WaypointRenderer::render);
-    }
-
-    private static void render(WorldRenderContext context) {
+    public static void render(Vec3 cameraPos, Camera camera, float tickDelta) {
         Minecraft client = Minecraft.getInstance();
         if (client.player == null)
             return;
@@ -61,11 +56,7 @@ public class WaypointRenderer {
         if (waypoints.isEmpty())
             return;
 
-        PoseStack matrices = context.matrices();
-        Vec3 cameraPos = context.worldState().cameraRenderState.pos;
-        float tickDelta = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
-
-        assert matrices != null;
+        PoseStack matrices = new PoseStack();
         matrices.pushPose();
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
 
