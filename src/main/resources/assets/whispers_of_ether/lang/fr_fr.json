@@ -140,7 +140,7 @@
     "block.whispers_of_ether.runic_forge": "Forge Runique",
     "block.whispers_of_ether.runic_table": "Table Runique",
     "block.whispers_of_ether.runic_infuser": "Infuseur Runique",
-    "tag.item.whispers_of_ether.runic_table_compatible": "Runic Table Compatible",
-    "tag.item.whispers_of_ether.runes_attribute": "Runes Attribute",
+    "tag.item.whispers_of_ether.runic_table_compatible": "Compatible Table Runique",
+    "tag.item.whispers_of_ether.runes_attribute": "Runes d'Attribut",
     "tag.item.whispers_of_ether.runes": "Runes"
 }

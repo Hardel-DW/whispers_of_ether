@@ -141,5 +141,6 @@
     "block.whispers_of_ether.runic_table": "Runic Table",
     "block.whispers_of_ether.runic_infuser": "Runic Infuser",
     "tag.item.whispers_of_ether.runic_table_compatible": "Runic Table Compatible",
-    "tag.item.whispers_of_ether.runes": "Runes"
+    "tag.item.whispers_of_ether.runes": "Runes",
+    "tag.item.whispers_of_ether.runes_attribute": "Attribute Runes"
 }
