@@ -6,12 +6,14 @@ import fr.hardel.whispers_of_ether.component.item.RuneComponent;
 import fr.hardel.whispers_of_ether.item.ModItems;
 import fr.hardel.whispers_of_ether.menu.RunicInfuserMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -22,14 +24,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
 
-public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
+public class RunicInfuserBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
     public static final TagKey<Item> RUNES_TAG = TagKey.create(Registries.ITEM,
         ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runes"));
-    public static final int XP_COST = 50;
+    public static final TagKey<Item> RUNES_ATTRIBUTE_TAG = TagKey.create(Registries.ITEM,
+        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runes_attribute"));
 
     private static final Component TITLE = Component.translatable("container.whispers_of_ether.runic_infuser");
     private NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
@@ -78,7 +82,7 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
 
     public boolean canInfuse(Player player) {
         ItemStack stack = getItem(0);
-        return !stack.isEmpty() && stack.is(RUNES_TAG) && player.totalExperience >= XP_COST;
+        return !stack.isEmpty() && stack.is(RUNES_TAG);
     }
 
     public void infuse(Player player) {
@@ -95,8 +99,6 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
         List<Map.Entry<Item, ResourceLocation>> entries = List.copyOf(ModItems.RUNE_TO_DATA.entrySet());
         Map.Entry<Item, ResourceLocation> randomEntry = entries.get(level.random.nextInt(entries.size()));
 
-        player.giveExperiencePoints(-XP_COST);
-
         ItemStack newStack = new ItemStack(randomEntry.getKey());
         newStack.set(ModItemComponent.RUNES, new RuneComponent(randomEntry.getValue(), tier));
         setItem(0, newStack);
@@ -110,5 +112,20 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity {
         if (item == ModItems.NETHER_RUNE) return 4;
         if (item == ModItems.DRAGON_RUNE) return 5;
         return 0;
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(Direction side) {
+        return new int[]{0};
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
+        return itemStack.is(RUNES_TAG);
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+        return stack.is(RUNES_ATTRIBUTE_TAG);
     }
 }

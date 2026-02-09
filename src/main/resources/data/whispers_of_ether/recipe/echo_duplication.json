@@ -9,7 +9,7 @@
     ],
     "input": "minecraft:echo_shard",
     "result": {
-        "count": 3,
+        "count": 1,
         "id": "minecraft:echo_shard"
     }
 }
