@@ -21,6 +21,7 @@ public class ModEntities {
             ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "damage_indicator"),
             EntityType.Builder.of(DamageIndicator::new, MobCategory.MISC)
                     .sized(0.0f, 0.0f)
+                    .noSave()
                     .clientTrackingRange(10)
                     .updateInterval(Integer.MAX_VALUE)
                     .build("damage_indicator"));

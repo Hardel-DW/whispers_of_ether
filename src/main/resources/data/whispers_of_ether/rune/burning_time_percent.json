@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:burning_time",
+    "attribute": "minecraft:generic.burning_time",
     "operation": "add_multiplied_base",
     "weight": 25.0,
     "max_value": -0.25,

@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:entity_interaction_range",
+    "attribute": "minecraft:player.entity_interaction_range",
     "operation": "add_value",
     "weight": 50.0,
     "max_value": 2.0,

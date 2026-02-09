@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:armor",
+    "attribute": "minecraft:generic.armor",
     "operation": "add_value",
     "weight": 10.0,
     "max_value": 12.0,

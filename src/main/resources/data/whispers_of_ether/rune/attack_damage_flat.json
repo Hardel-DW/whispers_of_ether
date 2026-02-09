@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:attack_damage",
+    "attribute": "minecraft:generic.attack_damage",
     "operation": "add_value",
     "weight": 20.0,
     "max_value": 12.0,

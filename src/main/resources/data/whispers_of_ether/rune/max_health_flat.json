@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:max_health",
+    "attribute": "minecraft:generic.max_health",
     "operation": "add_value",
     "weight": 20.0,
     "max_value": 10.0,

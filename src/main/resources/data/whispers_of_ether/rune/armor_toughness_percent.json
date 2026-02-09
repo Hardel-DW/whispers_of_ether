@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:armor_toughness",
+    "attribute": "minecraft:generic.armor_toughness",
     "operation": "add_multiplied_base",
     "weight": 15.0,
     "max_value": 1.0,

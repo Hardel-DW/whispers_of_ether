@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:attack_speed",
+    "attribute": "minecraft:generic.attack_speed",
     "operation": "add_multiplied_base",
     "weight": 12.0,
     "max_value": 1.0,

@@ -1,9 +1,9 @@
 {
     "type": "minecraft:crafting_shaped",
     "key": {
-        "x": "#minecraft:logs",
-        "b": "minecraft:enchanting_table",
-        "s": "#minecraft:wooden_slabs"
+        "x": {"tag": "minecraft:logs"},
+        "b": {"item": "minecraft:enchanting_table"},
+        "s": {"tag": "minecraft:wooden_slabs"}
     },
     "result": {
         "id": "whispers_of_ether:runic_table",

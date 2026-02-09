@@ -1,6 +1,5 @@
 package fr.hardel.whispers_of_ether.entity;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.EntityType;
@@ -14,14 +13,11 @@ public class DamageIndicator extends Display.TextDisplay {
 
     public DamageIndicator(EntityType<? extends Display.TextDisplay> entityType, Level level) {
         super(entityType, level);
-
-        CompoundTag nbt = new CompoundTag();
-        nbt.putString("billboard", "center");
-        nbt.putInt("background", 0);
-        nbt.putFloat("shadow_radius", 0.0f);
-        nbt.putInt("interpolation_duration", 1);
-        nbt.putInt("start_interpolation", 0);
-        this.readAdditionalSaveData(nbt);
+        this.setBillboardConstraints(BillboardConstraints.CENTER);
+        this.setBackgroundColor(0);
+        this.setShadowRadius(0.0f);
+        this.setTransformationInterpolationDuration(1);
+        this.setTransformationInterpolationDelay(0);
 
         double spread = 0.15;
         this.velocity = new Vec3(
@@ -35,10 +31,7 @@ public class DamageIndicator extends Display.TextDisplay {
                 ? String.valueOf((int) damage)
                 : String.format("%.1f", damage);
 
-        Component component = Component.literal(text).withStyle(style -> style.withColor(0xFF0000).withBold(true));
-        CompoundTag nbt = new CompoundTag();
-        nbt.putString("text", Component.Serializer.toJson(component, this.registryAccess()));
-        this.readAdditionalSaveData(nbt);
+        this.setText(Component.literal(text).withStyle(style -> style.withColor(0xFF0000).withBold(true)));
     }
 
     @Override

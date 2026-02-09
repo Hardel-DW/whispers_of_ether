@@ -1,5 +1,5 @@
 {
-    "attribute": "minecraft:mining_efficiency",
+    "attribute": "minecraft:player.mining_efficiency",
     "operation": "add_multiplied_base",
     "weight": 1.0,
     "max_value": 1.0,

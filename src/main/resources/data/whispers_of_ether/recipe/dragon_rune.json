@@ -1,13 +1,13 @@
 {
     "type": "whispers_of_ether:runic_forge",
     "ingredients": [
-        "minecraft:dragon_breath",
-        "minecraft:dragon_breath",
-        "minecraft:ender_pearl",
-        "minecraft:ender_pearl",
-        "minecraft:ender_pearl"
+        {"item": "minecraft:dragon_breath"},
+        {"item": "minecraft:dragon_breath"},
+        {"item": "minecraft:ender_pearl"},
+        {"item": "minecraft:ender_pearl"},
+        {"item": "minecraft:ender_pearl"}
     ],
-    "input": "whispers_of_ether:echo_rune",
+    "input": {"item": "whispers_of_ether:echo_rune"},
     "result": {
         "count": 5,
         "id": "whispers_of_ether:dragon_rune"
