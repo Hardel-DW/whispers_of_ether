@@ -9,7 +9,7 @@
     ],
     "input": "minecraft:stone",
     "result": {
-        "count": 5,
+        "count": 1,
         "id": "whispers_of_ether:rune"
     }
 }
