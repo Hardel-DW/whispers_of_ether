@@ -125,3 +125,4 @@ bin/
 .vscode/settings.json
 minecraft_sources/
 githubsource/
+decompiled/

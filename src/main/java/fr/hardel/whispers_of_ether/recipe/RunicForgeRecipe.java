@@ -9,6 +9,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -67,22 +68,22 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public ItemStack assemble(RecipeInput recipeInput, HolderLookup.Provider registries) {
+    public @NotNull ItemStack assemble(RecipeInput recipeInput, HolderLookup.Provider registries) {
         return result.copy();
     }
 
     @Override
-    public RecipeSerializer<? extends Recipe<RecipeInput>> getSerializer() {
+    public @NotNull RecipeSerializer<? extends Recipe<RecipeInput>> getSerializer() {
         return ModRecipes.RUNIC_FORGE_SERIALIZER;
     }
 
     @Override
-    public RecipeType<? extends Recipe<RecipeInput>> getType() {
+    public @NotNull RecipeType<? extends Recipe<RecipeInput>> getType() {
         return ModRecipes.RUNIC_FORGE_TYPE;
     }
 
     @Override
-    public PlacementInfo placementInfo() {
+    public @NotNull PlacementInfo placementInfo() {
         if (placementInfo == null) {
             List<Ingredient> allIngredients = new ArrayList<>(ingredients);
             allIngredients.add(input);
@@ -92,7 +93,7 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public RecipeBookCategory recipeBookCategory() {
+    public @NotNull RecipeBookCategory recipeBookCategory() {
         return ModRecipes.RUNIC_FORGE_CATEGORY;
     }
 
@@ -125,12 +126,12 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
             RunicForgeRecipe::new);
 
         @Override
-        public MapCodec<RunicForgeRecipe> codec() {
+        public @NotNull MapCodec<RunicForgeRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, RunicForgeRecipe> streamCodec() {
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, RunicForgeRecipe> streamCodec() {
             return STREAM_CODEC;
         }
     }
