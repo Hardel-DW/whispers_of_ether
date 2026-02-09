@@ -9,7 +9,7 @@
     ],
     "input": "whispers_of_ether:echo_rune",
     "result": {
-        "count": 5,
+        "count": 1,
         "id": "whispers_of_ether:dragon_rune"
     }
 }
