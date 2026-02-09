@@ -4,7 +4,6 @@ import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -23,12 +22,6 @@ public class ModRecipes {
         BuiltInRegistries.RECIPE_SERIALIZER,
         ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_forge"),
         new RunicForgeRecipe.Serializer()
-    );
-
-    public static final RecipeBookCategory RUNIC_FORGE_CATEGORY = Registry.register(
-        BuiltInRegistries.RECIPE_BOOK_CATEGORY,
-        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_forge"),
-        new RecipeBookCategory()
     );
 
     public static void register() {

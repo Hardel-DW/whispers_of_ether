@@ -35,7 +35,7 @@ public record IceSpikesAction(int height, int duration) implements Action {
             Vec3 targetPos = target.position();
             BlockPos basePos = BlockPos.containing(targetPos.x, targetPos.y - 1, targetPos.z);
 
-            while (basePos.getY() > world.getMinY() && world.getBlockState(basePos).isAir()) {
+            while (basePos.getY() > world.getMinBuildHeight() && world.getBlockState(basePos).isAir()) {
                 basePos = basePos.below();
             }
 

@@ -8,8 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -120,10 +118,9 @@ public class ModItems {
     public static final Item TARGET_DUMMY = register("target_dummy", TargetDummyItem::new, new Item.Properties());
 
     public static Item register(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
-        ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name));
-        Item item = itemFactory.apply(settings.setId(itemKey));
-        Registry.register(BuiltInRegistries.ITEM, itemKey, item);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name);
+        Item item = itemFactory.apply(settings);
+        Registry.register(BuiltInRegistries.ITEM, id, item);
         return item;
     }
 

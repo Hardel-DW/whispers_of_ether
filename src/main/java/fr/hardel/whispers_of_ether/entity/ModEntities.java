@@ -4,8 +4,6 @@ import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,9 +14,7 @@ public class ModEntities {
             ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "target_dummy"),
             EntityType.Builder.of(TargetDummy::new, MobCategory.MISC)
                     .sized(1.0f, 2.0f)
-                    .build(ResourceKey.create(Registries.ENTITY_TYPE,
-                            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID,
-                                    "target_dummy"))));
+                    .build("target_dummy"));
 
     public static final EntityType<DamageIndicator> DAMAGE_INDICATOR = Registry.register(
             BuiltInRegistries.ENTITY_TYPE,
@@ -27,9 +23,7 @@ public class ModEntities {
                     .sized(0.0f, 0.0f)
                     .clientTrackingRange(10)
                     .updateInterval(Integer.MAX_VALUE)
-                    .build(ResourceKey.create(Registries.ENTITY_TYPE,
-                            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID,
-                                    "damage_indicator"))));
+                    .build("damage_indicator"));
 
     public static void register() {
         FabricDefaultAttributeRegistry.register(TARGET_DUMMY, TargetDummy.createAttributes());

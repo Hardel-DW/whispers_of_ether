@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.client.Camera;
 import org.joml.Matrix4f;
-import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,7 +21,6 @@ public class LevelRendererMixin {
         at = @At(value = "INVOKE", target = "Lorg/joml/Matrix4fStack;popMatrix()Lorg/joml/Matrix4fStack;")
     )
     private void renderWaypointsAfterFrameGraph(
-            GraphicsResourceAllocator graphicsResourceAllocator,
             DeltaTracker deltaTracker,
             boolean bl,
             Camera camera,

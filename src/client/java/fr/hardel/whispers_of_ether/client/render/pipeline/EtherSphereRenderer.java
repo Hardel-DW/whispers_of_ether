@@ -13,17 +13,13 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderDefines;
-import net.minecraft.client.renderer.ShaderProgram;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Objects;
 
 public class EtherSphereRenderer implements SceneObjectRenderer {
-    private static final ShaderProgram GALAXY_SHADER = new ShaderProgram(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "core/galaxy"),
-            DefaultVertexFormat.NEW_ENTITY,
-            ShaderDefines.EMPTY);
+    private static ShaderInstance galaxyShader;
 
     private static final ResourceLocation NOISE_TEXTURE = ResourceLocation.fromNamespaceAndPath(
             WhispersOfEther.MOD_ID,
@@ -34,6 +30,13 @@ public class EtherSphereRenderer implements SceneObjectRenderer {
 
     private final RenderType renderLayer;
 
+    public static void registerShaders(net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback.RegistrationContext context) throws java.io.IOException {
+        context.register(
+                ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "core/galaxy"),
+                DefaultVertexFormat.NEW_ENTITY,
+                shader -> galaxyShader = shader);
+    }
+
     public EtherSphereRenderer() {
         this.renderLayer = RenderType.create(
                 "ether_galaxy",
@@ -43,7 +46,7 @@ public class EtherSphereRenderer implements SceneObjectRenderer {
                 false,
                 false,
                 RenderType.CompositeState.builder()
-                        .setShaderState(new RenderStateShard.ShaderStateShard(GALAXY_SHADER))
+                        .setShaderState(new RenderStateShard.ShaderStateShard(() -> galaxyShader))
                         .setTextureState(RenderStateShard.MultiTextureStateShard.builder()
                                 .add(NOISE_TEXTURE, false, false)
                                 .add(STARS_TEXTURE, false, false)

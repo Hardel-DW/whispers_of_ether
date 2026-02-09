@@ -6,7 +6,7 @@ import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.renderer.RenderType;
+
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
@@ -51,14 +51,14 @@ public class SpellSelector {
         for (int i = 0; i < actualSlotCount; i++) {
             int x = Math.round(currentHudX);
             int y = startY + (i * (SLOT_SIZE + GAP));
-            drawContext.blit(RenderType::guiTextured, SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
+            drawContext.blit(SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
                     SLOT_SIZE, SLOT_SIZE);
 
             var spellId = spellIds.get(i);
             var spell = SpellResourceReloadListener.getSpell(spellId);
             if (spell != null) {
                 int iconSize = SLOT_SIZE - 4;
-                drawContext.blit(RenderType::guiTextured, spell.getTextureId(),
+                drawContext.blit(spell.getTextureId(),
                         x + 2, y + 2, 0, 0, iconSize, iconSize, iconSize, iconSize);
             }
         }
@@ -96,7 +96,7 @@ public class SpellSelector {
             }
         }
 
-        drawContext.blit(RenderType::guiTextured, SELECTED_TEXTURE, Math.round(currentHudX),
+        drawContext.blit(SELECTED_TEXTURE, Math.round(currentHudX),
                 Math.round(currentAnimationY),
                 0, 0, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE);
     }

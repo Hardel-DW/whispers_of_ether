@@ -151,7 +151,7 @@ public class RunicTableLogic {
     }
 
     private static boolean isPositiveChange(ResourceLocation attributeId, double delta) {
-        Optional<Holder.Reference<Attribute>> holder = BuiltInRegistries.ATTRIBUTE.get(
+        Optional<Holder.Reference<Attribute>> holder = BuiltInRegistries.ATTRIBUTE.getHolder(
             ResourceKey.create(Registries.ATTRIBUTE, attributeId));
         if (holder.isEmpty())
             return delta > 0;
@@ -165,7 +165,7 @@ public class RunicTableLogic {
         ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
         List<ItemAttributeModifiers.Entry> entries = new ArrayList<>(modifiers.modifiers());
 
-        Optional<Holder.Reference<Attribute>> attributeHolder = BuiltInRegistries.ATTRIBUTE.get(
+        Optional<Holder.Reference<Attribute>> attributeHolder = BuiltInRegistries.ATTRIBUTE.getHolder(
             ResourceKey.create(Registries.ATTRIBUTE, attributeId));
 
         if (attributeHolder.isEmpty())

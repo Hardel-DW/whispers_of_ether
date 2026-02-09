@@ -2,8 +2,8 @@ package fr.hardel.whispers_of_ether.client.render.entity.model;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.client.render.entity.animation.AttackAnimation;
-import fr.hardel.whispers_of_ether.client.render.entity.state.TargetDummyRenderState;
-import net.minecraft.client.model.EntityModel;
+import fr.hardel.whispers_of_ether.entity.TargetDummy;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -14,12 +14,19 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 
-public class TargetDummyModel extends EntityModel<TargetDummyRenderState> {
+public class TargetDummyModel extends HierarchicalModel<TargetDummy> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
             ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "target_dummy"), "main");
 
+    private final ModelPart root;
+
     public TargetDummyModel(ModelPart root) {
-        super(root);
+        this.root = root;
+    }
+
+    @Override
+    public ModelPart root() {
+        return root;
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -60,8 +67,8 @@ public class TargetDummyModel extends EntityModel<TargetDummyRenderState> {
     }
 
     @Override
-    public void setupAnim(TargetDummyRenderState state) {
-        super.setupAnim(state);
-        this.animate(state.attackAnimationState, AttackAnimation.dummy_attack, state.ageInTicks);
+    public void setupAnim(TargetDummy entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        this.animate(entity.attackAnimationState, AttackAnimation.dummy_attack, ageInTicks);
     }
 }

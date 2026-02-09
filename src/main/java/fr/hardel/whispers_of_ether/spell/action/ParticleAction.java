@@ -34,7 +34,7 @@ public record ParticleAction(ResourceLocation particle, Optional<Position> offse
 
     @Override
     public void execute(ServerLevel world, Entity caster, List<Entity> targets) {
-        ParticleType<?> particleType = BuiltInRegistries.PARTICLE_TYPE.getValue(particle);
+        ParticleType<?> particleType = BuiltInRegistries.PARTICLE_TYPE.get(particle);
         if (particleType == null) {
             return;
         }

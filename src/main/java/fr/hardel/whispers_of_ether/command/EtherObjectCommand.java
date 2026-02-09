@@ -64,7 +64,7 @@ public class EtherObjectCommand {
         String typeStr = StringArgumentType.getString(ctx, "type");
         ResourceLocation typeId = typeStr.contains(":") ? ResourceLocation.tryParse(typeStr)
                 : ResourceLocation.fromNamespaceAndPath(fr.hardel.whispers_of_ether.WhispersOfEther.MOD_ID, typeStr);
-        SceneObjectType type = typeId == null ? null : SceneObjectType.REGISTRY.getValue(typeId);
+        SceneObjectType type = typeId == null ? null : SceneObjectType.REGISTRY.get(typeId);
         if (type == null) {
             src.sendFailure(Component.translatable("command.whispers_of_ether.etherobj.unknown_type", typeStr));
             return 0;

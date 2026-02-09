@@ -31,7 +31,7 @@ public record DamageAction(float amount, Holder<DamageType> damageType) implemen
         for (Entity target : targets) {
             if (target instanceof LivingEntity livingTarget) {
                 if (amount > 0) {
-                    livingTarget.hurtServer(world, damageSource, amount);
+                    livingTarget.hurt(damageSource, amount);
                 } else {
                     livingTarget.heal(-amount);
                 }

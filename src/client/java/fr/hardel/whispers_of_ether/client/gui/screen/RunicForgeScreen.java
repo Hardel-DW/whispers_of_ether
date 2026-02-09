@@ -4,7 +4,7 @@ import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.menu.RunicForgeMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.RenderType;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -35,11 +35,11 @@ public class RunicForgeScreen extends AbstractContainerScreen<RunicForgeMenu> {
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        graphics.blit(RenderType::guiTextured, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
+        graphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
 
         int progress = (menu.getProcessProgress() * PROGRESS_BAR_HEIGHT) / menu.getMaxProcessTime();
         if (progress > 0) {
-            graphics.blit(RenderType::guiTextured, PROGRESS_BAR,
+            graphics.blit(PROGRESS_BAR,
                 x + PROGRESS_BAR_X,
                 y + PROGRESS_BAR_Y + (PROGRESS_BAR_HEIGHT - progress),
                 0,

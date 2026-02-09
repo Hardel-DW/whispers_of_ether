@@ -48,16 +48,16 @@ public class TargetDummy extends LivingEntity {
     }
 
     @Override
-    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-        boolean damaged = super.hurtServer(level, source, amount);
-        if (damaged) {
+    public boolean hurt(DamageSource source, float amount) {
+        boolean damaged = super.hurt(source, amount);
+        if (damaged && this.level() instanceof ServerLevel serverLevel) {
             this.setHealth(this.getMaxHealth());
             this.level().broadcastEntityEvent(this, (byte) 60);
 
-            DamageIndicator indicator = new DamageIndicator(ModEntities.DAMAGE_INDICATOR, level);
+            DamageIndicator indicator = new DamageIndicator(ModEntities.DAMAGE_INDICATOR, serverLevel);
             indicator.setPos(this.getX(), this.getY() + this.getBbHeight() + 0.5, this.getZ());
             indicator.setDamage(amount);
-            level.addFreshEntity(indicator);
+            serverLevel.addFreshEntity(indicator);
         }
 
         return damaged;
