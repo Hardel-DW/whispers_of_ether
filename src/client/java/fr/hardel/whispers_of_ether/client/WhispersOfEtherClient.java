@@ -21,7 +21,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class WhispersOfEtherClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(TargetDummyModel.LAYER_LOCATION, TargetDummyModel::createBodyLayer);
 
         WorldRenderEvents.AFTER_ENTITIES.register(RenderSystem.getInstance()::renderAll);
-        HudElementRegistry.addLast(ResourceLocation.fromNamespaceAndPath(MOD_ID, "spell_selector"),
+        HudElementRegistry.addLast(Identifier.fromNamespaceAndPath(MOD_ID, "spell_selector"),
             SpellSelector::render);
     }
 

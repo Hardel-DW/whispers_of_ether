@@ -3,7 +3,7 @@ package fr.hardel.whispers_of_ether.menu.runic_table;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -16,12 +16,12 @@ public record RunicTableHistoryEntry(
 	RunicTableLogic.Outcome outcome,
 	List<StatChange> statChanges) {
 	public record StatChange(
-		ResourceLocation attributeId,
+		Identifier attributeId,
 		double delta,
 		AttributeModifier.Operation operation,
 		boolean isPositiveEffect) {
 		public static final StreamCodec<RegistryFriendlyByteBuf, StatChange> STREAM_CODEC = StreamCodec.composite(
-			ResourceLocation.STREAM_CODEC, StatChange::attributeId,
+			Identifier.STREAM_CODEC, StatChange::attributeId,
 			ByteBufCodecs.DOUBLE, StatChange::delta,
 			ByteBufCodecs.fromCodec(AttributeModifier.Operation.CODEC), StatChange::operation,
 			ByteBufCodecs.BOOL, StatChange::isPositiveEffect,

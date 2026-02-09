@@ -5,16 +5,16 @@ import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableHistoryEntry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 public class WhispersOfEtherPacket {
-    public record SpellCast(ResourceLocation spellId) implements CustomPacketPayload {
+    public record SpellCast(Identifier spellId) implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<SpellCast> ID = new CustomPacketPayload.Type<>(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "spell_cast"));
+            Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "spell_cast"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, SpellCast> CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, SpellCast::spellId,
+            Identifier.STREAM_CODEC, SpellCast::spellId,
             SpellCast::new);
 
         @Override
@@ -25,7 +25,7 @@ public class WhispersOfEtherPacket {
 
     public record MultiJump() implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<MultiJump> ID = new CustomPacketPayload.Type<>(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump"));
+            Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, MultiJump> CODEC = StreamCodec.unit(new MultiJump());
 
@@ -37,7 +37,7 @@ public class WhispersOfEtherPacket {
 
     public record RunicTableHistoryAdd(RunicTableHistoryEntry entry) implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<RunicTableHistoryAdd> ID = new CustomPacketPayload.Type<>(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_history_add"));
+            Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_history_add"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, RunicTableHistoryAdd> CODEC = StreamCodec.composite(
             RunicTableHistoryEntry.STREAM_CODEC, RunicTableHistoryAdd::entry,
@@ -51,7 +51,7 @@ public class WhispersOfEtherPacket {
 
     public record RunicTableHistoryClear() implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<RunicTableHistoryClear> ID = new CustomPacketPayload.Type<>(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_history_clear"));
+            Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_history_clear"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, RunicTableHistoryClear> CODEC = StreamCodec.unit(new RunicTableHistoryClear());
 

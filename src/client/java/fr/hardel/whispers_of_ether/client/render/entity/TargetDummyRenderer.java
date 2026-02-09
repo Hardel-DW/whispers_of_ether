@@ -6,11 +6,11 @@ import fr.hardel.whispers_of_ether.entity.TargetDummy;
 import fr.hardel.whispers_of_ether.client.render.entity.model.TargetDummyModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 public class TargetDummyRenderer extends LivingEntityRenderer<TargetDummy, TargetDummyRenderState, TargetDummyModel> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID,
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID,
             "textures/entity/target_dummy.png");
 
     public TargetDummyRenderer(EntityRendererProvider.Context context) {
@@ -18,7 +18,7 @@ public class TargetDummyRenderer extends LivingEntityRenderer<TargetDummy, Targe
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(TargetDummyRenderState state) {
+    public @NotNull Identifier getTextureLocation(TargetDummyRenderState state) {
         return TEXTURE;
     }
 

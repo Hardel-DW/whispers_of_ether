@@ -10,32 +10,29 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import java.util.function.Consumer;
 import net.minecraft.network.codec.ByteBufCodecs;
 
-public record RuneComponent(ResourceLocation runeId, int tier) implements TooltipProvider {
+public record RuneComponent(Identifier runeId, int tier) implements TooltipProvider {
     public static final RuneComponent EMPTY = new RuneComponent(
-        ResourceLocation.withDefaultNamespace("empty"),
-        1
-    );
+        Identifier.withDefaultNamespace("empty"),
+        1);
 
     public static final Codec<RuneComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        ResourceLocation.CODEC.fieldOf("rune_id").forGetter(RuneComponent::runeId),
-        Codec.INT.fieldOf("tier").forGetter(RuneComponent::tier)
-    ).apply(instance, RuneComponent::new));
+        Identifier.CODEC.fieldOf("rune_id").forGetter(RuneComponent::runeId),
+        Codec.INT.fieldOf("tier").forGetter(RuneComponent::tier)).apply(instance, RuneComponent::new));
 
     public static final StreamCodec<ByteBuf, RuneComponent> STREAM_CODEC = StreamCodec.composite(
-        ResourceLocation.STREAM_CODEC, RuneComponent::runeId,
+        Identifier.STREAM_CODEC, RuneComponent::runeId,
         ByteBufCodecs.VAR_INT, RuneComponent::tier,
-        RuneComponent::new
-    );
+        RuneComponent::new);
 
     @Override
     public void addToTooltip(final Item.TooltipContext context, final Consumer<Component> consumer,
-            final TooltipFlag flag, final DataComponentGetter components) {
+        final TooltipFlag flag, final DataComponentGetter components) {
         consumer.accept(Component.translatable("component.whispers_of_ether.rune.tier",
-                Component.translatable("enchantment.level." + this.tier))
-                .withStyle(ChatFormatting.GRAY));
+            Component.translatable("enchantment.level." + this.tier))
+            .withStyle(ChatFormatting.GRAY));
     }
 }

@@ -2,7 +2,7 @@ package fr.hardel.whispers_of_ether.menu;
 
 import fr.hardel.whispers_of_ether.block.entity.RunicInfuserBlockEntity;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RunicInfuserMenu extends AbstractContainerMenu {
     private static final TagKey<Item> RUNES_TAG = TagKey.create(Registries.ITEM,
-        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runes"));
+        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runes"));
     private static final int SLOT_X = 82;
     private static final int SLOT_Y = 38;
 

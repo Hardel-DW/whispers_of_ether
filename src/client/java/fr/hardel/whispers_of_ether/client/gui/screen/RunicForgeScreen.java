@@ -6,14 +6,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class RunicForgeScreen extends AbstractContainerScreen<RunicForgeMenu> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/container/runic_forge.png");
-    private static final ResourceLocation PROGRESS_BAR = ResourceLocation.fromNamespaceAndPath(
+    private static final Identifier PROGRESS_BAR = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/sprites/container/runic_forge/progress_bar.png");
     private static final int IMAGE_WIDTH = 180;

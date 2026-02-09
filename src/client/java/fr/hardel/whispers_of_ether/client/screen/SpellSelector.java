@@ -7,15 +7,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.List;
 
 public class SpellSelector {
-    private static final ResourceLocation SLOT_BACKGROUND = ResourceLocation.fromNamespaceAndPath(WhispersOfEtherClient.MOD_ID,
-            "textures/gui/sprites/hud/spell/slot_background.png");
-    private static final ResourceLocation SELECTED_TEXTURE = ResourceLocation.fromNamespaceAndPath(WhispersOfEtherClient.MOD_ID,
-            "textures/gui/sprites/hud/spell/selected.png");
+    private static final Identifier SLOT_BACKGROUND = Identifier.fromNamespaceAndPath(WhispersOfEtherClient.MOD_ID,
+        "textures/gui/sprites/hud/spell/slot_background.png");
+    private static final Identifier SELECTED_TEXTURE = Identifier.fromNamespaceAndPath(WhispersOfEtherClient.MOD_ID,
+        "textures/gui/sprites/hud/spell/selected.png");
 
     private static final int SLOT_SIZE = 20;
     private static final int GAP = 4;
@@ -32,7 +32,7 @@ public class SpellSelector {
     private static final float SLIDE_SPEED = 0.15f;
 
     public static void render(GuiGraphics drawContext, DeltaTracker ignoredTickCounter) {
-        List<ResourceLocation> spellIds = getValidSpellIds();
+        List<Identifier> spellIds = getValidSpellIds();
         if (spellIds.isEmpty())
             return;
 
@@ -52,14 +52,14 @@ public class SpellSelector {
             int x = Math.round(currentHudX);
             int y = startY + (i * (SLOT_SIZE + GAP));
             drawContext.blit(RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND, x, y, 0, 0, SLOT_SIZE, SLOT_SIZE,
-                    SLOT_SIZE, SLOT_SIZE);
+                SLOT_SIZE, SLOT_SIZE);
 
             var spellId = spellIds.get(i);
             var spell = SpellResourceReloadListener.getSpell(spellId);
             if (spell != null) {
                 int iconSize = SLOT_SIZE - 4;
                 drawContext.blit(RenderPipelines.GUI_TEXTURED, spell.getTextureId(),
-                        x + 2, y + 2, 0, 0, iconSize, iconSize, iconSize, iconSize);
+                    x + 2, y + 2, 0, 0, iconSize, iconSize, iconSize, iconSize);
             }
         }
 
@@ -97,23 +97,23 @@ public class SpellSelector {
         }
 
         drawContext.blit(RenderPipelines.GUI_TEXTURED, SELECTED_TEXTURE, Math.round(currentHudX),
-                Math.round(currentAnimationY),
-                0, 0, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE);
+            Math.round(currentAnimationY),
+            0, 0, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE, SLOT_SIZE);
     }
 
-    private static List<ResourceLocation> getValidSpellIds() {
+    private static List<Identifier> getValidSpellIds() {
         Minecraft client = Minecraft.getInstance();
         if (client.player == null)
             return List.of();
 
         return ModComponents.PLAYER_SPELL.get(client.player).getSpellIds().stream()
-                .filter(spellId -> SpellResourceReloadListener.getSpell(spellId) != null)
-                .limit(SLOT_COUNT)
-                .toList();
+            .filter(spellId -> SpellResourceReloadListener.getSpell(spellId) != null)
+            .limit(SLOT_COUNT)
+            .toList();
     }
 
     public static void setSelectedSlot(int slot) {
-        List<ResourceLocation> spellIds = getValidSpellIds();
+        List<Identifier> spellIds = getValidSpellIds();
         if (spellIds.isEmpty())
             return;
 
@@ -130,8 +130,8 @@ public class SpellSelector {
         return selectedSlot;
     }
 
-    public static ResourceLocation getSelectedSpellId() {
-        List<ResourceLocation> spellIds = getValidSpellIds();
+    public static Identifier getSelectedSpellId() {
+        List<Identifier> spellIds = getValidSpellIds();
         if (spellIds.isEmpty() || selectedSlot >= spellIds.size()) {
             return null;
         }
