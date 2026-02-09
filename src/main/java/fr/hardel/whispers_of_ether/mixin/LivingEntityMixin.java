@@ -3,7 +3,6 @@ package fr.hardel.whispers_of_ether.mixin;
 import fr.hardel.whispers_of_ether.MultiJumpAccessor;
 import fr.hardel.whispers_of_ether.attributes.ModAttribute;
 import fr.hardel.whispers_of_ether.component.ModComponents;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -60,8 +59,8 @@ public abstract class LivingEntityMixin implements MultiJumpAccessor {
         return actualOnGround;
     }
 
-    @Inject(method = "hurtServer", at = @At("RETURN"))
-    private void triggerOmnivampirism(ServerLevel level, DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "hurt", at = @At("RETURN"))
+    private void triggerOmnivampirism(DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValue() || !(source.getEntity() instanceof Player attacker)) {
             return;
         }

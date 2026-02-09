@@ -1,13 +1,13 @@
 {
     "type": "whispers_of_ether:runic_forge",
     "ingredients": [
-        "minecraft:sculk",
-        "minecraft:sculk",
-        "minecraft:sculk",
-        "minecraft:sculk",
-        "minecraft:sculk"
+        {"item": "minecraft:sculk"},
+        {"item": "minecraft:sculk"},
+        {"item": "minecraft:sculk"},
+        {"item": "minecraft:sculk"},
+        {"item": "minecraft:sculk"}
     ],
-    "input": "minecraft:echo_shard",
+    "input": {"item": "minecraft:echo_shard"},
     "result": {
         "count": 3,
         "id": "minecraft:echo_shard"
