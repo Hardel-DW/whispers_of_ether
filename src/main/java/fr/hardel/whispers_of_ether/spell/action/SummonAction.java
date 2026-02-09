@@ -7,16 +7,16 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public record SummonAction(ResourceLocation entity) implements Action {
+public record SummonAction(Identifier entity) implements Action {
 
     public static final MapCodec<SummonAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ResourceLocation.CODEC.fieldOf("entity").forGetter(SummonAction::entity))
-            .apply(instance, SummonAction::new));
+        Identifier.CODEC.fieldOf("entity").forGetter(SummonAction::entity))
+        .apply(instance, SummonAction::new));
 
     @Override
     public ActionType<?> getType() {

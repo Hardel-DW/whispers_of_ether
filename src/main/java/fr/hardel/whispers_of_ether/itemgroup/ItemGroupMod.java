@@ -10,13 +10,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ItemGroupMod {
     public static final ResourceKey<CreativeModeTab> WHISPERSOFETHER_GENERAL_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),
-        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_general"));
+        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_general"));
     public static final ResourceKey<CreativeModeTab> WHISPERSOFETHER_RUNES_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),
-        ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_runes"));
+        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_runes"));
 
     public static final CreativeModeTab WHISPERSOFETHER_GENERAL_GROUP = FabricItemGroup.builder()
         .icon(() -> new ItemStack(ModBlocks.RUNIC_FORGE))

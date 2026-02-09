@@ -10,7 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Function;
@@ -121,39 +121,39 @@ public class ModItems {
 
     public static Item register(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name));
+            Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, name));
         Item item = itemFactory.apply(settings.setId(itemKey));
         Registry.register(BuiltInRegistries.ITEM, itemKey, item);
         return item;
     }
 
-    public static final Map<Item, ResourceLocation> RUNE_TO_DATA = Map.ofEntries(
-        Map.entry(RUNE_OF_ARMOR, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_flat")),
-        Map.entry(RUNE_OF_ARMOR_TOUGHNESS, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_toughness_percent")),
-        Map.entry(RUNE_OF_ATTACK_DAMAGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_damage_flat")),
-        Map.entry(RUNE_OF_ATTACK_KNOCKBACK, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_knockback_percent")),
-        Map.entry(RUNE_OF_ATTACK_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_speed_percent")),
-        Map.entry(RUNE_OF_BLOCK_BREAK_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "block_break_speed_percent")),
-        Map.entry(RUNE_OF_BLOCK_INTERACTION_RANGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "block_interaction_range_flat")),
-        Map.entry(RUNE_OF_BURNING_TIME, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "burning_time_percent")),
-        Map.entry(RUNE_OF_CRIT_DAMAGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "crit_damage_percent")),
-        Map.entry(RUNE_OF_CRIT_RATE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "crit_rate_percent")),
-        Map.entry(RUNE_OF_ENTITY_INTERACTION_RANGE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "entity_interaction_range_flat")),
-        Map.entry(RUNE_OF_FALL_DAMAGE_MULTIPLIER, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "fall_damage_multiplier_percent")),
-        Map.entry(RUNE_OF_JUMP_STRENGTH, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "jump_strength_percent")),
-        Map.entry(RUNE_OF_KNOCKBACK_RESISTANCE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "knockback_resistance_percent")),
-        Map.entry(RUNE_OF_MAX_HEALTH, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "max_health_flat")),
-        Map.entry(RUNE_OF_MINING_EFFICIENCY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "mining_efficiency_percent")),
-        Map.entry(RUNE_OF_MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "movement_speed_percent")),
-        Map.entry(RUNE_OF_MULTI_JUMP, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump_flat")),
-        Map.entry(RUNE_OF_OMNIVAMPIRISM, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "omnivampirism_percent")),
-        Map.entry(RUNE_OF_OMNIVAMPIRISM_RATE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "omnivampirism_rate_percent")),
-        Map.entry(RUNE_OF_PICKUP_AREA_SIZE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "pickup_area_size_flat")),
-        Map.entry(RUNE_OF_SAFE_FALL_DISTANCE, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "safe_fall_distance_flat")),
-        Map.entry(RUNE_OF_SNEAKING_SPEED, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "sneaking_speed_percent")),
-        Map.entry(RUNE_OF_STEP_HEIGHT, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "step_height_flat")),
-        Map.entry(RUNE_OF_SWEEPING_DAMAGE_RATIO, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "sweeping_damage_ratio_percent")),
-        Map.entry(RUNE_OF_WATER_MOVEMENT_EFFICIENCY, ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "water_movement_efficiency_percent")));
+    public static final Map<Item, Identifier> RUNE_TO_DATA = Map.ofEntries(
+        Map.entry(RUNE_OF_ARMOR, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_flat")),
+        Map.entry(RUNE_OF_ARMOR_TOUGHNESS, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "armor_toughness_percent")),
+        Map.entry(RUNE_OF_ATTACK_DAMAGE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_damage_flat")),
+        Map.entry(RUNE_OF_ATTACK_KNOCKBACK, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_knockback_percent")),
+        Map.entry(RUNE_OF_ATTACK_SPEED, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "attack_speed_percent")),
+        Map.entry(RUNE_OF_BLOCK_BREAK_SPEED, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "block_break_speed_percent")),
+        Map.entry(RUNE_OF_BLOCK_INTERACTION_RANGE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "block_interaction_range_flat")),
+        Map.entry(RUNE_OF_BURNING_TIME, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "burning_time_percent")),
+        Map.entry(RUNE_OF_CRIT_DAMAGE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "crit_damage_percent")),
+        Map.entry(RUNE_OF_CRIT_RATE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "crit_rate_percent")),
+        Map.entry(RUNE_OF_ENTITY_INTERACTION_RANGE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "entity_interaction_range_flat")),
+        Map.entry(RUNE_OF_FALL_DAMAGE_MULTIPLIER, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "fall_damage_multiplier_percent")),
+        Map.entry(RUNE_OF_JUMP_STRENGTH, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "jump_strength_percent")),
+        Map.entry(RUNE_OF_KNOCKBACK_RESISTANCE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "knockback_resistance_percent")),
+        Map.entry(RUNE_OF_MAX_HEALTH, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "max_health_flat")),
+        Map.entry(RUNE_OF_MINING_EFFICIENCY, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "mining_efficiency_percent")),
+        Map.entry(RUNE_OF_MOVEMENT_SPEED, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "movement_speed_percent")),
+        Map.entry(RUNE_OF_MULTI_JUMP, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump_flat")),
+        Map.entry(RUNE_OF_OMNIVAMPIRISM, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "omnivampirism_percent")),
+        Map.entry(RUNE_OF_OMNIVAMPIRISM_RATE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "omnivampirism_rate_percent")),
+        Map.entry(RUNE_OF_PICKUP_AREA_SIZE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "pickup_area_size_flat")),
+        Map.entry(RUNE_OF_SAFE_FALL_DISTANCE, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "safe_fall_distance_flat")),
+        Map.entry(RUNE_OF_SNEAKING_SPEED, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "sneaking_speed_percent")),
+        Map.entry(RUNE_OF_STEP_HEIGHT, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "step_height_flat")),
+        Map.entry(RUNE_OF_SWEEPING_DAMAGE_RATIO, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "sweeping_damage_ratio_percent")),
+        Map.entry(RUNE_OF_WATER_MOVEMENT_EFFICIENCY, Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "water_movement_efficiency_percent")));
 
     public static void register() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroupMod.WHISPERSOFETHER_RUNES_GROUP_KEY).register(content -> {
@@ -209,7 +209,7 @@ public class ModItems {
     }
 
     private static void registerRuneWithTiers(FabricItemGroupEntries content, Item item) {
-        ResourceLocation runeId = RUNE_TO_DATA.get(item);
+        Identifier runeId = RUNE_TO_DATA.get(item);
         if (runeId == null)
             return;
 

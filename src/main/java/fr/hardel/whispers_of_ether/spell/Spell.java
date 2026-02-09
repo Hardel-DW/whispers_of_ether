@@ -12,16 +12,16 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import java.util.List;
 import java.util.Optional;
 
-public record Spell(ResourceLocation icon, String name, Optional<Integer> cooldown,
+public record Spell(Identifier icon, String name, Optional<Integer> cooldown,
     Optional<LootItemCondition> condition, List<TimelineAction> timelines, OrganizationTimeline organization,
     List<SpellAction> passive) {
 
     public static final Codec<Spell> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        ResourceLocation.CODEC.fieldOf("icon").forGetter(Spell::icon),
+        Identifier.CODEC.fieldOf("icon").forGetter(Spell::icon),
         Codec.STRING.fieldOf("name").forGetter(Spell::name),
         Codec.INT.optionalFieldOf("cooldown").forGetter(Spell::cooldown),
         LootItemCondition.DIRECT_CODEC.optionalFieldOf("condition").forGetter(Spell::condition),
@@ -30,11 +30,11 @@ public record Spell(ResourceLocation icon, String name, Optional<Integer> cooldo
         SpellAction.CODEC.listOf().optionalFieldOf("passive", List.of()).forGetter(Spell::passive))
         .apply(instance, Spell::new));
 
-    public ResourceLocation getTextureId() {
-        return ResourceLocation.fromNamespaceAndPath(icon.getNamespace(), "textures/spell/" + icon.getPath() + ".png");
+    public Identifier getTextureId() {
+        return Identifier.fromNamespaceAndPath(icon.getNamespace(), "textures/spell/" + icon.getPath() + ".png");
     }
 
-    public boolean canCast(Player caster, ResourceLocation spellId) {
+    public boolean canCast(Player caster, Identifier spellId) {
         var spellComponent = ModComponents.PLAYER_SPELL.get(caster);
         if (spellComponent.isOnCooldown(spellId)) {
             return false;
@@ -51,7 +51,7 @@ public record Spell(ResourceLocation icon, String name, Optional<Integer> cooldo
         return condition.get().test(lootContext);
     }
 
-    public void cast(Player caster, ResourceLocation spellId) {
+    public void cast(Player caster, Identifier spellId) {
         if (!canCast(caster, spellId) || !(caster.level() instanceof ServerLevel serverWorld))
             return;
 

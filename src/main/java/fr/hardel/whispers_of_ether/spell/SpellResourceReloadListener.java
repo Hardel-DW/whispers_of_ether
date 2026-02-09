@@ -11,7 +11,7 @@ import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -22,20 +22,20 @@ import java.util.concurrent.Executor;
 
 public class SpellResourceReloadListener implements PreparableReloadListener {
     private static final Gson GSON = new Gson();
-    private static final Map<ResourceLocation, Spell> SPELLS = new HashMap<>();
+    private static final Map<Identifier, Spell> SPELLS = new HashMap<>();
 
-    private CompletableFuture<Map<ResourceLocation, JsonElement>> loadSpells(ResourceManager manager, Executor executor) {
+    private CompletableFuture<Map<Identifier, JsonElement>> loadSpells(ResourceManager manager, Executor executor) {
         return CompletableFuture.supplyAsync(() -> {
-            Map<ResourceLocation, JsonElement> rawSpells = new HashMap<>();
+            Map<Identifier, JsonElement> rawSpells = new HashMap<>();
 
-            for (ResourceLocation id : manager.listResources("spells", path -> path.getPath().endsWith(".json")).keySet()) {
+            for (Identifier id : manager.listResources("spells", path -> path.getPath().endsWith(".json")).keySet()) {
                 Optional<Resource> resource = manager.getResource(id);
                 if (resource.isEmpty())
                     continue;
 
                 try (InputStream stream = resource.get().open()) {
                     JsonElement json = GSON.fromJson(new InputStreamReader(stream), JsonElement.class);
-                    ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath().substring("spells/".length(), id.getPath().length() - ".json".length()));
+                    Identifier spellId = Identifier.fromNamespaceAndPath(id.getNamespace(), id.getPath().substring("spells/".length(), id.getPath().length() - ".json".length()));
                     rawSpells.put(spellId, json);
                 } catch (Exception e) {
                     WhispersOfEther.LOGGER.error("Error loading spell {}: {}", id, e.getMessage());
@@ -46,12 +46,12 @@ public class SpellResourceReloadListener implements PreparableReloadListener {
         }, executor);
     }
 
-    private CompletableFuture<Void> applySpells(Map<ResourceLocation, JsonElement> prepared, HolderLookup.Provider registries, Executor executor) {
+    private CompletableFuture<Void> applySpells(Map<Identifier, JsonElement> prepared, HolderLookup.Provider registries, Executor executor) {
         return CompletableFuture.runAsync(() -> {
             SPELLS.clear();
             RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, registries);
 
-            for (Map.Entry<ResourceLocation, JsonElement> entry : prepared.entrySet()) {
+            for (Map.Entry<Identifier, JsonElement> entry : prepared.entrySet()) {
                 DataResult<Spell> result = Spell.CODEC.parse(ops, entry.getValue());
                 if (result.error().isPresent()) {
                     WhispersOfEther.LOGGER.error("Failed to parse spell {}: {}", entry.getKey(), result.error().map(Object::toString).orElse("Unknown error"));
@@ -64,11 +64,11 @@ public class SpellResourceReloadListener implements PreparableReloadListener {
         }, executor);
     }
 
-    public static Map<ResourceLocation, Spell> getSpells() {
+    public static Map<Identifier, Spell> getSpells() {
         return Map.copyOf(SPELLS);
     }
 
-    public static Spell getSpell(ResourceLocation id) {
+    public static Spell getSpell(Identifier id) {
         return SPELLS.get(id);
     }
 

@@ -15,7 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -150,7 +150,7 @@ public class RunicTableLogic {
         return result;
     }
 
-    private static boolean isPositiveChange(ResourceLocation attributeId, double delta) {
+    private static boolean isPositiveChange(Identifier attributeId, double delta) {
         Optional<Holder.Reference<Attribute>> holder = BuiltInRegistries.ATTRIBUTE.get(
             ResourceKey.create(Registries.ATTRIBUTE, attributeId));
         if (holder.isEmpty())
@@ -160,7 +160,7 @@ public class RunicTableLogic {
         return attr.getStyle(delta > 0) == net.minecraft.ChatFormatting.BLUE;
     }
 
-    private static void addAttributeModifier(ItemStack stack, ResourceLocation attributeId,
+    private static void addAttributeModifier(ItemStack stack, Identifier attributeId,
         AttributeModifier.Operation operation, double valueToAdd) {
         ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
         List<ItemAttributeModifiers.Entry> entries = new ArrayList<>(modifiers.modifiers());
@@ -193,7 +193,7 @@ public class RunicTableLogic {
                 ? EquipmentSlotGroup.ANY
                 : entries.get(0).slot();
 
-            ResourceLocation modifierId = ResourceLocation.fromNamespaceAndPath(
+            Identifier modifierId = Identifier.fromNamespaceAndPath(
                 attributeId.getNamespace(),
                 attributeId.getPath() + "_" + slot.getSerializedName());
 
@@ -206,7 +206,7 @@ public class RunicTableLogic {
         stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(entries));
     }
 
-    private static void applyStatLoss(ItemStack stack, ResourceLocation excludeAttribute, double runeWeight,
+    private static void applyStatLoss(ItemStack stack, Identifier excludeAttribute, double runeWeight,
         double totalWeight, double multiplier, Outcome outcome, List<RunicTableHistoryEntry.StatChange> statChanges) {
         ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
         if (totalWeight <= 0) {
@@ -228,7 +228,7 @@ public class RunicTableLogic {
 
         List<ItemAttributeModifiers.Entry> toAffect = new ArrayList<>(eligibleForLoss);
         Collections.shuffle(toAffect, RANDOM);
-        Set<ResourceLocation> affectedAttributes = toAffect.stream()
+        Set<Identifier> affectedAttributes = toAffect.stream()
             .limit(affected)
             .map(e -> BuiltInRegistries.ATTRIBUTE.getKey(e.attribute().value()))
             .collect(Collectors.toSet());
@@ -238,7 +238,7 @@ public class RunicTableLogic {
 
         for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
             Holder<Attribute> holder = entry.attribute();
-            ResourceLocation attrId = BuiltInRegistries.ATTRIBUTE.getKey(holder.value());
+            Identifier attrId = BuiltInRegistries.ATTRIBUTE.getKey(holder.value());
 
             if (affectedAttributes.contains(attrId)) {
                 double currentValue = entry.modifier().amount();
@@ -259,7 +259,7 @@ public class RunicTableLogic {
         stack.set(DataComponents.ATTRIBUTE_MODIFIERS, new ItemAttributeModifiers(newEntries));
     }
 
-    private static double getAttributeValue(ItemStack stack, ResourceLocation attributeId, AttributeModifier.Operation operation) {
+    private static double getAttributeValue(ItemStack stack, Identifier attributeId, AttributeModifier.Operation operation) {
         ItemAttributeModifiers modifiers = getOrInitModifiers(stack);
 
         return modifiers.modifiers().stream()
@@ -275,7 +275,7 @@ public class RunicTableLogic {
         return modifiers.modifiers().stream()
             .mapToDouble(entry -> {
                 double value = entry.modifier().amount();
-                ResourceLocation attrId = BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value());
+                Identifier attrId = BuiltInRegistries.ATTRIBUTE.getKey(entry.attribute().value());
                 assert attrId != null;
                 double weight = getAttributeWeightFromData(attrId);
                 return Math.abs(value) * weight;
@@ -287,7 +287,7 @@ public class RunicTableLogic {
         return stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, stack.getItem().components().getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY));
     }
 
-    private static double getAttributeWeightFromData(ResourceLocation attributeId) {
+    private static double getAttributeWeightFromData(Identifier attributeId) {
         return AttributeDataLoader.getAttributes().values().stream()
             .filter(data -> data.attribute().equals(attributeId))
             .findFirst()

@@ -15,7 +15,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,19 +28,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/container/runic_table.png");
-    private static final ResourceLocation ATTRIBUTE_LINE = ResourceLocation.fromNamespaceAndPath(
+    private static final Identifier ATTRIBUTE_LINE = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/sprites/container/runic_table/attribute_line.png");
-    private static final ResourceLocation ATTRIBUTE_ICON_FALLBACK = ResourceLocation.fromNamespaceAndPath(
+    private static final Identifier ATTRIBUTE_ICON_FALLBACK = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/attributes/fallback.png");
-    private static final ResourceLocation SCROLL_TEXTURE = ResourceLocation.fromNamespaceAndPath(
+    private static final Identifier SCROLL_TEXTURE = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/sprites/container/runic_table/scroll.png");
-    private static final ResourceLocation HISTORY_LINE_SPRITE = ResourceLocation.fromNamespaceAndPath(
+    private static final Identifier HISTORY_LINE_SPRITE = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "container/runic_table/history_line");
 
@@ -153,7 +153,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
             graphics.blit(RenderPipelines.GUI_TEXTURED, ATTRIBUTE_LINE, panelX + OFFSET_X, lineY + OFFSET_Y, 0, 0,
                 ATTRIBUTE_LINE_WIDTH, ATTRIBUTE_LINE_HEIGHT, ATTRIBUTE_LINE_WIDTH, ATTRIBUTE_LINE_HEIGHT);
 
-            ResourceLocation iconLocation = getAttributeIcon(entry.attribute);
+            Identifier iconLocation = getAttributeIcon(entry.attribute);
             int iconX = panelX + OFFSET_X + ATTRIBUTE_LINE_WIDTH - ATTRIBUTE_ICON_SIZE - ATTRIBUTE_LINE_PADDING_X;
             int iconY = lineY + OFFSET_Y + ATTRIBUTE_LINE_PADDING_Y;
             graphics.blit(RenderPipelines.GUI_TEXTURED, iconLocation, iconX, iconY, 0, 0,
@@ -217,13 +217,13 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         };
     }
 
-    private ResourceLocation getAttributeIcon(Attribute attribute) {
-        ResourceLocation attributeId = BuiltInRegistries.ATTRIBUTE.getKey(attribute);
+    private Identifier getAttributeIcon(Attribute attribute) {
+        Identifier attributeId = BuiltInRegistries.ATTRIBUTE.getKey(attribute);
         if (attributeId == null) {
             return ATTRIBUTE_ICON_FALLBACK;
         }
 
-        ResourceLocation iconLocation = ResourceLocation.fromNamespaceAndPath(
+        Identifier iconLocation = Identifier.fromNamespaceAndPath(
             attributeId.getNamespace(),
             "textures/attributes/" + attributeId.getPath() + ".png");
 

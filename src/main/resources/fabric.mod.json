@@ -8,6 +8,7 @@
     "contact": {},
     "license": "All-Rights-Reserved",
     "icon": "assets/whispers_of_ether/icon.png",
+    "accessWidener": "whispers_of_ether.accesswidener",
     "environment": "*",
     "entrypoints": {
         "client": [
@@ -34,8 +35,8 @@
         "fabricloader": ">=${loader_version}",
         "fabric": "*",
         "minecraft": "${minecraft_version}",
-        "cardinal-components-base": ">=7.2.0",
-        "cardinal-components-entity": ">=7.2.0"
+        "cardinal-components-base": ">=7.3.0",
+        "cardinal-components-entity": ">=7.3.0"
     },
     "custom": {
         "cardinal-components": [

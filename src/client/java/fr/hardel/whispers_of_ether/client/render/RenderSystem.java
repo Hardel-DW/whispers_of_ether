@@ -38,7 +38,7 @@ public class RenderSystem {
             return;
 
         PoseStack matrices = context.matrices();
-        var cameraPos = context.gameRenderer().getMainCamera().getPosition();
+        var cameraPos = context.gameRenderer().getMainCamera().position();
 
         matrices.pushPose();
         matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);

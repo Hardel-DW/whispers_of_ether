@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.network.chat.Component;
 import com.mojang.math.Axis;
 import net.minecraft.world.phys.Vec3;
@@ -91,8 +91,8 @@ public class WaypointRenderer {
         matrices.translate(waypointPos.x, waypointPos.y, waypointPos.z);
 
         Minecraft client = Minecraft.getInstance();
-        matrices.mulPose(Axis.YP.rotationDegrees(-client.gameRenderer.getMainCamera().getYRot()));
-        matrices.mulPose(Axis.XP.rotationDegrees(client.gameRenderer.getMainCamera().getXRot()));
+        matrices.mulPose(Axis.YP.rotationDegrees(-client.gameRenderer.getMainCamera().yRot()));
+        matrices.mulPose(Axis.XP.rotationDegrees(client.gameRenderer.getMainCamera().xRot()));
 
         float scale = calculateScale(distance);
         matrices.scale(scale, scale, scale);
@@ -134,7 +134,7 @@ public class WaypointRenderer {
         float b = (color & 0xFF) / 255.0f;
 
         var vertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
-        var buffer = vertexConsumers.getBuffer(RenderType.textBackgroundSeeThrough());
+        var buffer = vertexConsumers.getBuffer(RenderTypes.textBackgroundSeeThrough());
 
         // 1. Losange central fixe
         buffer.addVertex(matrix, 0.0f, DIAMOND_SIZE, 0.0f).setColor(r, g, b, DIAMOND_ALPHA * alpha)
@@ -180,7 +180,7 @@ public class WaypointRenderer {
 
     private static void renderStaticBorder(PoseStack matrices, float r, float g, float b, float alpha) {
         var vertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
-        var buffer = vertexConsumers.getBuffer(RenderType.textBackgroundSeeThrough());
+        var buffer = vertexConsumers.getBuffer(RenderTypes.textBackgroundSeeThrough());
         Matrix4f matrix = matrices.last().pose();
 
         float outerSize = BORDER_SIZE;
@@ -227,7 +227,7 @@ public class WaypointRenderer {
             return;
 
         var vertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
-        var buffer = vertexConsumers.getBuffer(RenderType.textBackgroundSeeThrough());
+        var buffer = vertexConsumers.getBuffer(RenderTypes.textBackgroundSeeThrough());
         Matrix4f matrix = matrices.last().pose();
 
         float thickness = BORDER_THICKNESS * pulseScale;

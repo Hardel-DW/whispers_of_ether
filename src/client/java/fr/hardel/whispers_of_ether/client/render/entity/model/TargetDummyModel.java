@@ -13,11 +13,11 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class TargetDummyModel extends EntityModel<TargetDummyRenderState> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-            ResourceLocation.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "target_dummy"), "main");
+            Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "target_dummy"), "main");
     private final KeyframeAnimation attackAnimation;
 
     public TargetDummyModel(ModelPart root) {

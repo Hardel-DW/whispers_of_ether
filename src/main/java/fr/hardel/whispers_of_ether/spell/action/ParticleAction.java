@@ -9,23 +9,23 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Optional;
 
-public record ParticleAction(ResourceLocation particle, Optional<Position> offset, Optional<Position> delta, int count,
-        double speed, boolean force) implements Action {
+public record ParticleAction(Identifier particle, Optional<Position> offset, Optional<Position> delta, int count,
+    double speed, boolean force) implements Action {
 
     public static final MapCodec<ParticleAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ResourceLocation.CODEC.fieldOf("particle").forGetter(ParticleAction::particle),
-            Position.CODEC.optionalFieldOf("offset").forGetter(ParticleAction::offset),
-            Position.CODEC.optionalFieldOf("delta").forGetter(ParticleAction::delta),
-            Codec.INT.optionalFieldOf("count", 1).forGetter(ParticleAction::count),
-            Codec.DOUBLE.optionalFieldOf("speed", 0.0).forGetter(ParticleAction::speed),
-            Codec.BOOL.optionalFieldOf("force", false).forGetter(ParticleAction::force))
-            .apply(instance, ParticleAction::new));
+        Identifier.CODEC.fieldOf("particle").forGetter(ParticleAction::particle),
+        Position.CODEC.optionalFieldOf("offset").forGetter(ParticleAction::offset),
+        Position.CODEC.optionalFieldOf("delta").forGetter(ParticleAction::delta),
+        Codec.INT.optionalFieldOf("count", 1).forGetter(ParticleAction::count),
+        Codec.DOUBLE.optionalFieldOf("speed", 0.0).forGetter(ParticleAction::speed),
+        Codec.BOOL.optionalFieldOf("force", false).forGetter(ParticleAction::force))
+        .apply(instance, ParticleAction::new));
 
     @Override
     public ActionType<?> getType() {
@@ -67,13 +67,13 @@ public record ParticleAction(ResourceLocation particle, Optional<Position> offse
             }
 
             world.sendParticles(
-                    particleEffect,
-                    force,
-                    false,
-                    x, y, z,
-                    count,
-                    deltaX, deltaY, deltaZ,
-                    speed);
+                particleEffect,
+                force,
+                false,
+                x, y, z,
+                count,
+                deltaX, deltaY, deltaZ,
+                speed);
         }
     }
 }
