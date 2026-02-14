@@ -1,0 +1,16 @@
+package fr.hardel.whispers_of_ether.server.spell.timeline.offset;
+
+import com.mojang.serialization.Codec;
+import fr.hardel.whispers_of_ether.server.spell.target.position.Position;
+import net.minecraft.world.entity.Entity;
+
+public sealed interface LoopOffset 
+    permits RandomBoxOffset, LookupOffset, RandomValueOffset, ForwardOffset {
+
+    Codec<LoopOffset> CODEC = LoopOffsetType.REGISTRY.byNameCodec()
+        .dispatch("type", LoopOffset::getType, LoopOffsetType::codec);
+
+    LoopOffsetType<?> getType();
+    
+    Position calculateOffset(int iteration, Entity caster);
+}
