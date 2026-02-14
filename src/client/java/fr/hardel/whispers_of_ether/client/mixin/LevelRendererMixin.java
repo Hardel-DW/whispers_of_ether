@@ -2,7 +2,7 @@ package fr.hardel.whispers_of_ether.client.mixin;
 
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
-import fr.hardel.whispers_of_ether.client.screen.WaypointRenderer;
+import fr.hardel.whispers_of_ether.client.gui.components.WaypointRenderer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.LevelRenderer;

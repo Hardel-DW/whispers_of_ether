@@ -1,7 +1,7 @@
-package fr.hardel.whispers_of_ether.client.gui.render;
+package fr.hardel.whispers_of_ether.client.renderer;
 
-import fr.hardel.whispers_of_ether.client.gui.render.pipeline.SingularityRenderer;
-import fr.hardel.whispers_of_ether.client.gui.render.pipeline.EtherSphereRenderer;
+import fr.hardel.whispers_of_ether.client.renderer.pipeline.SingularityRenderer;
+import fr.hardel.whispers_of_ether.client.renderer.pipeline.EtherSphereRenderer;
 
 public class RendererFactory {
 

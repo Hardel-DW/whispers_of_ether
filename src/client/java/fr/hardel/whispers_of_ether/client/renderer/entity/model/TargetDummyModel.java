@@ -1,8 +1,8 @@
-package fr.hardel.whispers_of_ether.client.gui.render.entity.model;
+package fr.hardel.whispers_of_ether.client.renderer.entity.model;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.client.gui.render.entity.animation.AttackAnimation;
-import fr.hardel.whispers_of_ether.client.gui.render.entity.state.TargetDummyRenderState;
+import fr.hardel.whispers_of_ether.client.renderer.entity.animation.AttackAnimation;
+import fr.hardel.whispers_of_ether.client.renderer.entity.state.TargetDummyRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;

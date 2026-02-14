@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.waypoint;
+package fr.hardel.whispers_of_ether.world.waypoint;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

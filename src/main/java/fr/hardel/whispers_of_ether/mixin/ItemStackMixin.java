@@ -1,6 +1,6 @@
 package fr.hardel.whispers_of_ether.mixin;
 
-import fr.hardel.whispers_of_ether.component.ModItemComponent;
+import fr.hardel.whispers_of_ether.component.DataComponent;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
@@ -26,7 +26,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "addDetailsToTooltip", at = @At(value = "HEAD"))
     private void addAttributeTooltips(Item.TooltipContext context, TooltipDisplay display, Player player, TooltipFlag tooltipFlag, Consumer<Component> builder, CallbackInfo ci) {
-        this.addToTooltip(ModItemComponent.RUNES, context, display, builder, tooltipFlag);
+        this.addToTooltip(DataComponent.RUNES, context, display, builder, tooltipFlag);
     }
 
 }

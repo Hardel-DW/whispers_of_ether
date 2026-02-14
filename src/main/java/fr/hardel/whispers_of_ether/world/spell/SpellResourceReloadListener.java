@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.server.spell;
+package fr.hardel.whispers_of_ether.world.spell;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

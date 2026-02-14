@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.menu;
+package fr.hardel.whispers_of_ether.world.inventory;
 
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicInfuserBlockEntity;
 import net.minecraft.core.registries.Registries;

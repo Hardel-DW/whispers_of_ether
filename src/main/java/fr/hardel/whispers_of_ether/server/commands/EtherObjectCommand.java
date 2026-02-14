@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.commands;
+package fr.hardel.whispers_of_ether.server.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
@@ -6,12 +6,12 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import fr.hardel.whispers_of_ether.object.SceneObjectsComponents;
-import fr.hardel.whispers_of_ether.object.SceneObjectType;
-import fr.hardel.whispers_of_ether.object.SceneObjectTypes;
+import fr.hardel.whispers_of_ether.world.object.SceneObjectsComponents;
+import fr.hardel.whispers_of_ether.world.object.SceneObjectType;
+import fr.hardel.whispers_of_ether.world.object.SceneObjectTypes;
 import net.minecraft.resources.Identifier;
-import fr.hardel.whispers_of_ether.object.SceneObject;
-import fr.hardel.whispers_of_ether.object.SceneObjectsComponent;
+import fr.hardel.whispers_of_ether.world.object.SceneObject;
+import fr.hardel.whispers_of_ether.world.object.SceneObjectsComponent;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.commands.Commands;

@@ -1,9 +1,9 @@
-package fr.hardel.whispers_of_ether.client.gui.render.entity;
+package fr.hardel.whispers_of_ether.client.renderer.entity;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.client.gui.render.entity.state.TargetDummyRenderState;
+import fr.hardel.whispers_of_ether.client.renderer.entity.state.TargetDummyRenderState;
 import fr.hardel.whispers_of_ether.world.entity.TargetDummy;
-import fr.hardel.whispers_of_ether.client.gui.render.entity.model.TargetDummyModel;
+import fr.hardel.whispers_of_ether.client.renderer.entity.model.TargetDummyModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.Identifier;

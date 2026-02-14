@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.gui.render.entity.animation;
+package fr.hardel.whispers_of_ether.client.renderer.entity.animation;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

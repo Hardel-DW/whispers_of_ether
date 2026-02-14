@@ -1,8 +1,7 @@
-package fr.hardel.whispers_of_ether.world.item.itemgroup;
+package fr.hardel.whispers_of_ether.world.item;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.world.level.block.ModBlocks;
-import fr.hardel.whispers_of_ether.world.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 
-public class ItemGroupMod {
+public class CreativeModeTabs {
     public static final ResourceKey<CreativeModeTab> WHISPERSOFETHER_GENERAL_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),
         Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_general"));
     public static final ResourceKey<CreativeModeTab> WHISPERSOFETHER_RUNES_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),

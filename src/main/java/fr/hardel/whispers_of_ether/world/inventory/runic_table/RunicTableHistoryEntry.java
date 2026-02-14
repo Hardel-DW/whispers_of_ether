@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.menu.runic_table;
+package fr.hardel.whispers_of_ether.world.inventory.runic_table;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

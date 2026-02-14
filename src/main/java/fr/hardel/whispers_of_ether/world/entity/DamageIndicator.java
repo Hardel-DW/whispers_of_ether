@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.entity;
+package fr.hardel.whispers_of_ether.world.entity;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Display;

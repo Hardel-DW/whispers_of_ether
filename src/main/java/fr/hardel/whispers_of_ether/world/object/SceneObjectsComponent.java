@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.object;
+package fr.hardel.whispers_of_ether.world.object;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.storage.ValueInput;

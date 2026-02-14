@@ -1,7 +1,7 @@
-package fr.hardel.whispers_of_ether.block.entity;
+package fr.hardel.whispers_of_ether.world.level.block.entity;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.block.ModBlocks;
+import fr.hardel.whispers_of_ether.world.level.block.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

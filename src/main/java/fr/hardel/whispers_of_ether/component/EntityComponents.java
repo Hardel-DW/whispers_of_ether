@@ -8,7 +8,7 @@ import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
 
-public class ModComponents implements EntityComponentInitializer {
+public class EntityComponents implements EntityComponentInitializer {
 
         public static final ComponentKey<PlayerSpellComponent> PLAYER_SPELL = ComponentRegistry.getOrCreate(Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "player_spell"), PlayerSpellComponent.class);
 

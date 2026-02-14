@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.effects;
+package fr.hardel.whispers_of_ether.world.effect;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.world.attribute.ModAttribute;

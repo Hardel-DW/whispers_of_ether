@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.menu.slot;
+package fr.hardel.whispers_of_ether.world.inventory.slot;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;

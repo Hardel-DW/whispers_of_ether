@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.object;
+package fr.hardel.whispers_of_ether.world.object;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

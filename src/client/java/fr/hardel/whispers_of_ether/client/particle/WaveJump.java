@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.particles;
+package fr.hardel.whispers_of_ether.client.particle;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;

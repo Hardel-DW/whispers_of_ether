@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.data.recipe;
+package fr.hardel.whispers_of_ether.world.item.crafting;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

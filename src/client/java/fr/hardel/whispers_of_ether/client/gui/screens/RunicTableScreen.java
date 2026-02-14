@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.gui.screen;
+package fr.hardel.whispers_of_ether.client.gui.screens;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.component.DataComponent;

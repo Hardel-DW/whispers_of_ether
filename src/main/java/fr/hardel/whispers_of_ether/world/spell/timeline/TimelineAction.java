@@ -1,8 +1,8 @@
-package fr.hardel.whispers_of_ether.server.spell.timeline;
+package fr.hardel.whispers_of_ether.world.spell.timeline;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hardel.whispers_of_ether.server.spell.SpellAction;
+import fr.hardel.whispers_of_ether.world.spell.SpellAction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.List;

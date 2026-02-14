@@ -1,8 +1,8 @@
 package fr.hardel.whispers_of_ether.mixin;
 
 import fr.hardel.whispers_of_ether.MultiJumpAccessor;
-import fr.hardel.whispers_of_ether.attributes.ModAttribute;
-import fr.hardel.whispers_of_ether.component.ModComponents;
+import fr.hardel.whispers_of_ether.component.EntityComponents;
+import fr.hardel.whispers_of_ether.world.attribute.ModAttribute;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -75,7 +75,7 @@ public abstract class LivingEntityMixin implements MultiJumpAccessor {
 
         float healAmount = damage * (float) omnivampValue;
         if (healAmount > 0.0f) {
-            ModComponents.OMNIVAMPIRISM.get(attacker).trigger(healAmount);
+            EntityComponents.OMNIVAMPIRISM.get(attacker).trigger(healAmount);
         }
     }
 }

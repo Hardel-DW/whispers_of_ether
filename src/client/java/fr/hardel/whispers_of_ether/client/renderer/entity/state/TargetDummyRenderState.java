@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.gui.render.entity.state;
+package fr.hardel.whispers_of_ether.client.renderer.entity.state;
 
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.AnimationState;

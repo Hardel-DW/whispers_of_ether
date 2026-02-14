@@ -1,11 +1,11 @@
-package fr.hardel.whispers_of_ether.commands;
+package fr.hardel.whispers_of_ether.server.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import fr.hardel.whispers_of_ether.component.ModComponents;
+import fr.hardel.whispers_of_ether.component.EntityComponents;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
@@ -46,7 +46,7 @@ public class WaypointCommand {
 
         int color = parseColor(colorString);
 
-        var waypointComponent = ModComponents.WAYPOINTS.get(source.getPlayer());
+        var waypointComponent = EntityComponents.WAYPOINTS.get(source.getPlayer());
         waypointComponent.addWaypoint(name, pos, color);
 
         source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.add.success",
@@ -62,7 +62,7 @@ public class WaypointCommand {
         }
 
         String name = StringArgumentType.getString(context, "name");
-        var waypointComponent = ModComponents.WAYPOINTS.get(source.getPlayer());
+        var waypointComponent = EntityComponents.WAYPOINTS.get(source.getPlayer());
 
         if (waypointComponent.removeWaypoint(name)) {
             source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.remove.success", name), false);
@@ -80,7 +80,7 @@ public class WaypointCommand {
             return 0;
         }
 
-        var waypointComponent = ModComponents.WAYPOINTS.get(source.getPlayer());
+        var waypointComponent = EntityComponents.WAYPOINTS.get(source.getPlayer());
         var waypoints = waypointComponent.getWaypoints();
 
         if (waypoints.isEmpty()) {
@@ -104,7 +104,7 @@ public class WaypointCommand {
             return 0;
         }
 
-        var waypointComponent = ModComponents.WAYPOINTS.get(source.getPlayer());
+        var waypointComponent = EntityComponents.WAYPOINTS.get(source.getPlayer());
         waypointComponent.clearWaypoints();
 
         source.sendSuccess(() -> Component.translatable("command.whispers_of_ether.waypoint.clear.success"), false);

@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.data.recipe;
+package fr.hardel.whispers_of_ether.world.item.crafting;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.minecraft.core.Registry;

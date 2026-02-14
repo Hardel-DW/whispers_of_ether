@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.server.spell.timeline.offset;
+package fr.hardel.whispers_of_ether.world.spell.timeline.offset;
 
 import com.mojang.serialization.MapCodec;
 import fr.hardel.whispers_of_ether.WhispersOfEther;

@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.gui.render;
+package fr.hardel.whispers_of_ether.client.renderer;
 
 import fr.hardel.whispers_of_ether.world.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.world.object.SceneObjectsComponents;

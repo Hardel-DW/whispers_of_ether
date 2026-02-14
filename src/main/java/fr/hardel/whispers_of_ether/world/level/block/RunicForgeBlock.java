@@ -1,10 +1,10 @@
 
-package fr.hardel.whispers_of_ether.block;
+package fr.hardel.whispers_of_ether.world.level.block;
 
 import com.mojang.serialization.MapCodec;
 
-import fr.hardel.whispers_of_ether.block.entity.ModBlockEntities;
-import fr.hardel.whispers_of_ether.block.entity.RunicForgeBlockEntity;
+import fr.hardel.whispers_of_ether.world.level.block.entity.ModBlockEntities;
+import fr.hardel.whispers_of_ether.world.level.block.entity.RunicForgeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;

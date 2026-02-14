@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.attributes;
+package fr.hardel.whispers_of_ether.world.attribute;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;

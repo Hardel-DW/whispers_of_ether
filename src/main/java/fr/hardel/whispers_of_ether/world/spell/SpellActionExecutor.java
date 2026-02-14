@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.server.spell;
+package fr.hardel.whispers_of_ether.world.spell;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.loot.LootContext;

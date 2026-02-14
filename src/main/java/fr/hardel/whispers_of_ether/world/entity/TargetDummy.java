@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.entity;
+package fr.hardel.whispers_of_ether.world.entity;
 
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;

@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.client.mixin;
 
-import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
-import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
+import fr.hardel.whispers_of_ether.client.ModKeyBindings;
+import fr.hardel.whispers_of_ether.client.gui.components.SpellSelector;
 import fr.hardel.whispers_of_ether.client.SpellCastHandler;
 import net.minecraft.client.MouseHandler;
 import org.spongepowered.asm.mixin.Mixin;

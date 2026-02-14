@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.mixin;
 
-import fr.hardel.whispers_of_ether.attributes.ModAttribute;
-import fr.hardel.whispers_of_ether.component.ModComponents;
+import fr.hardel.whispers_of_ether.world.attribute.ModAttribute;
+import fr.hardel.whispers_of_ether.component.EntityComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +38,7 @@ public class PlayerMixin {
     private void updateOmnivampirism(CallbackInfo ci) {
         Player player = (Player) (Object) this;
         if (!player.level().isClientSide()) {
-            ModComponents.OMNIVAMPIRISM.get(player).tick();
+            EntityComponents.OMNIVAMPIRISM.get(player).tick();
         }
     }
 }

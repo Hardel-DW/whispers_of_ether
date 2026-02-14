@@ -1,10 +1,10 @@
-package fr.hardel.whispers_of_ether.server.spell.timeline;
+package fr.hardel.whispers_of_ether.world.spell.timeline;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hardel.whispers_of_ether.server.spell.target.position.Position;
-import fr.hardel.whispers_of_ether.server.spell.timeline.offset.LoopOffset;
+import fr.hardel.whispers_of_ether.world.spell.target.position.Position;
+import fr.hardel.whispers_of_ether.world.spell.timeline.offset.LoopOffset;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 

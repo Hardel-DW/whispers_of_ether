@@ -1,7 +1,7 @@
-package fr.hardel.whispers_of_ether.menu;
+package fr.hardel.whispers_of_ether.world.inventory;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableMenu;
+import fr.hardel.whispers_of_ether.world.inventory.runic_table.RunicTableMenu;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;

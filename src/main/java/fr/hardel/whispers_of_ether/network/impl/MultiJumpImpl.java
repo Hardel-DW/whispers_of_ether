@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.network.impl;
 
 import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket.MultiJump;
-import fr.hardel.whispers_of_ether.particle.ModParticle;
+import fr.hardel.whispers_of_ether.core.particles.ModParticle;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

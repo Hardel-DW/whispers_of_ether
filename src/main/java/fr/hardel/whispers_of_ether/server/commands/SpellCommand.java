@@ -1,9 +1,9 @@
-package fr.hardel.whispers_of_ether.commands;
+package fr.hardel.whispers_of_ether.server.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import fr.hardel.whispers_of_ether.component.ModComponents;
-import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
+import fr.hardel.whispers_of_ether.component.EntityComponents;
+import fr.hardel.whispers_of_ether.world.spell.SpellResourceReloadListener;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.IdentifierArgument;
@@ -57,7 +57,7 @@ public class SpellCommand {
                 context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.unknown", spellId));
                 return 0;
             }
-            var component = ModComponents.PLAYER_SPELL.get(player);
+            var component = EntityComponents.PLAYER_SPELL.get(player);
 
             if (component.hasSpell(spellId)) {
                 context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.add.already_has",
@@ -83,7 +83,7 @@ public class SpellCommand {
                 context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.unknown", spellId));
                 return 0;
             }
-            var component = ModComponents.PLAYER_SPELL.get(player);
+            var component = EntityComponents.PLAYER_SPELL.get(player);
 
             if (!component.hasSpell(spellId)) {
                 context.getSource().sendFailure(Component.translatable("command.whispers_of_ether.spell.remove.not_found",
@@ -103,7 +103,7 @@ public class SpellCommand {
     private static int listSpells(CommandContext<CommandSourceStack> context) {
         try {
             ServerPlayer player = getTargetPlayer(context);
-            var spells = ModComponents.PLAYER_SPELL.get(player).getSpellIds();
+            var spells = EntityComponents.PLAYER_SPELL.get(player).getSpellIds();
 
             if (spells.isEmpty()) {
                 context.getSource().sendSuccess(() -> Component.translatable("command.whispers_of_ether.spell.list.empty", player.getName().getString()), false);
@@ -123,7 +123,7 @@ public class SpellCommand {
     private static int clearSpells(CommandContext<CommandSourceStack> context) {
         try {
             ServerPlayer player = getTargetPlayer(context);
-            var component = ModComponents.PLAYER_SPELL.get(player);
+            var component = EntityComponents.PLAYER_SPELL.get(player);
             int count = component.getSpellIds().size();
 
             if (count == 0) {

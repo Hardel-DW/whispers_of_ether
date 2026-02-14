@@ -1,6 +1,6 @@
 package fr.hardel.whispers_of_ether.client.network;
 
-import fr.hardel.whispers_of_ether.client.gui.screen.RunicTableScreen;
+import fr.hardel.whispers_of_ether.client.gui.screens.RunicTableScreen;
 import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;

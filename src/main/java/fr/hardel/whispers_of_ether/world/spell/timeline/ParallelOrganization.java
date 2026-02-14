@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.server.spell.timeline;
+package fr.hardel.whispers_of_ether.world.spell.timeline;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

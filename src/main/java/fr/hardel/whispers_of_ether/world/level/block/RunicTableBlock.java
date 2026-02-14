@@ -1,7 +1,7 @@
-package fr.hardel.whispers_of_ether.block;
+package fr.hardel.whispers_of_ether.world.level.block;
 
 import com.mojang.serialization.MapCodec;
-import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableMenu;
+import fr.hardel.whispers_of_ether.world.inventory.runic_table.RunicTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

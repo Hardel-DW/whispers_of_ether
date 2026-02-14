@@ -1,7 +1,6 @@
 package fr.hardel.whispers_of_ether.client;
 
-import fr.hardel.whispers_of_ether.client.keybind.ModKeyBindings;
-import fr.hardel.whispers_of_ether.client.screen.SpellSelector;
+import fr.hardel.whispers_of_ether.client.gui.components.SpellSelector;
 import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

@@ -1,6 +1,6 @@
 package fr.hardel.whispers_of_ether.component;
 
-import fr.hardel.whispers_of_ether.waypoint.Waypoint;
+import fr.hardel.whispers_of_ether.world.waypoint.Waypoint;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -24,13 +24,13 @@ public class WaypointComponent implements AutoSyncedComponent {
 
     public void addWaypoint(String name, BlockPos position, int color) {
         waypoints.add(new Waypoint(name, position, color));
-        ModComponents.WAYPOINTS.sync(player);
+        EntityComponents.WAYPOINTS.sync(player);
     }
 
     public boolean removeWaypoint(String name) {
         boolean removed = waypoints.removeIf(waypoint -> waypoint.getName().equals(name));
         if (removed) {
-            ModComponents.WAYPOINTS.sync(player);
+            EntityComponents.WAYPOINTS.sync(player);
         }
         return removed;
     }
@@ -38,7 +38,7 @@ public class WaypointComponent implements AutoSyncedComponent {
     public void clearWaypoints() {
         if (!waypoints.isEmpty()) {
             waypoints.clear();
-            ModComponents.WAYPOINTS.sync(player);
+            EntityComponents.WAYPOINTS.sync(player);
         }
     }
 

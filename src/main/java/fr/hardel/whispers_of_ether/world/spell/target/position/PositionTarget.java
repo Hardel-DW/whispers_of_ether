@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.server.spell.target.position;
+package fr.hardel.whispers_of_ether.world.spell.target.position;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.world.entity.Entity;

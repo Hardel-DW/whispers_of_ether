@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.particle;
+package fr.hardel.whispers_of_ether.core.particles;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;

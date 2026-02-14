@@ -1,7 +1,7 @@
-package fr.hardel.whispers_of_ether.server.spell.timeline.offset;
+package fr.hardel.whispers_of_ether.world.spell.timeline.offset;
 
 import com.mojang.serialization.Codec;
-import fr.hardel.whispers_of_ether.server.spell.target.position.Position;
+import fr.hardel.whispers_of_ether.world.spell.target.position.Position;
 import net.minecraft.world.entity.Entity;
 
 public sealed interface LoopOffset 

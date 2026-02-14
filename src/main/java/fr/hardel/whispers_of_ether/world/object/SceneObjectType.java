@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.object;
+package fr.hardel.whispers_of_ether.world.object;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;

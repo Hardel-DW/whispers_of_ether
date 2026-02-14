@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.gui.render.pipeline;
+package fr.hardel.whispers_of_ether.client.renderer.pipeline;
 
 import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
@@ -6,8 +6,8 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.client.gui.render.SceneObjectRenderer;
-import fr.hardel.whispers_of_ether.client.gui.render.obj.Sphere;
+import fr.hardel.whispers_of_ether.client.renderer.SceneObjectRenderer;
+import fr.hardel.whispers_of_ether.client.renderer.obj.Sphere;
 import fr.hardel.whispers_of_ether.world.object.SceneObject;
 import fr.hardel.whispers_of_ether.world.object.SceneObjectType;
 import fr.hardel.whispers_of_ether.world.object.SceneObjectTypes;

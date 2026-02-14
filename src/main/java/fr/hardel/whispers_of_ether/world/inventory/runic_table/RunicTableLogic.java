@@ -1,8 +1,8 @@
-package fr.hardel.whispers_of_ether.menu.runic_table;
+package fr.hardel.whispers_of_ether.world.inventory.runic_table;
 
-import fr.hardel.whispers_of_ether.component.ModItemComponent;
-import fr.hardel.whispers_of_ether.component.item.RuneComponent;
-import fr.hardel.whispers_of_ether.component.item.WellComponent;
+import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.RuneComponent;
+import fr.hardel.whispers_of_ether.world.item.component.WellComponent;
 import fr.hardel.whispers_of_ether.server.runic_attribute.AttributeData;
 import fr.hardel.whispers_of_ether.server.runic_attribute.AttributeDataLoader;
 import net.minecraft.core.Holder;
@@ -33,7 +33,7 @@ public class RunicTableLogic {
     public record RunicTableResult(Outcome outcome, ItemStack resultStack, String message, List<RunicTableHistoryEntry.StatChange> statChanges) {}
 
     public static RunicTableResult applyRune(ItemStack runeStack, ItemStack equipmentStack) {
-        RuneComponent rune = runeStack.get(ModItemComponent.RUNES);
+        RuneComponent rune = runeStack.get(DataComponent.RUNES);
         if (rune == null) {
             return new RunicTableResult(Outcome.BLOCKED, equipmentStack, "runic_table.whispers_of_ether.no_rune", List.of());
         }
@@ -44,7 +44,7 @@ public class RunicTableLogic {
         }
 
         AttributeData runeData = runeDataOpt.get();
-        WellComponent well = equipmentStack.getOrDefault(ModItemComponent.WELL, WellComponent.EMPTY);
+        WellComponent well = equipmentStack.getOrDefault(DataComponent.WELL, WellComponent.EMPTY);
 
         double currentValue = getAttributeValue(equipmentStack, runeData.attribute(), runeData.operation());
         double maxValue = runeData.maxValue();
@@ -72,7 +72,7 @@ public class RunicTableLogic {
 
         List<RunicTableHistoryEntry.StatChange> statChanges = new ArrayList<>();
         ItemStack result = applyOutcome(equipmentStack, runeData, outcome, totalItemWeight, statChanges);
-        result.set(ModItemComponent.WELL, newWell);
+        result.set(DataComponent.WELL, newWell);
 
         String message = switch (outcome) {
             case CRITICAL_SUCCESS -> "runic_table.whispers_of_ether.critical_success";

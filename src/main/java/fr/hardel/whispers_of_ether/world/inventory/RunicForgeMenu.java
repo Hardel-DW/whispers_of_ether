@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.menu;
+package fr.hardel.whispers_of_ether.world.inventory;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

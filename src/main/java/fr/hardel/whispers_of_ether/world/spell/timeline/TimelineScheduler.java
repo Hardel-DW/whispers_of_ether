@@ -1,7 +1,7 @@
-package fr.hardel.whispers_of_ether.server.spell.timeline;
+package fr.hardel.whispers_of_ether.world.spell.timeline;
 
-import fr.hardel.whispers_of_ether.server.spell.SpellActionExecutor;
-import fr.hardel.whispers_of_ether.server.spell.target.position.Position;
+import fr.hardel.whispers_of_ether.world.spell.SpellActionExecutor;
+import fr.hardel.whispers_of_ether.world.spell.target.position.Position;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;

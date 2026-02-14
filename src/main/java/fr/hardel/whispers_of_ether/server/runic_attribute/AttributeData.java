@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.runic_attribute;
+package fr.hardel.whispers_of_ether.server.runic_attribute;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

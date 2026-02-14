@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.item;
+package fr.hardel.whispers_of_ether.client.renderer.item.properties.numeric;
 
 import com.mojang.serialization.MapCodec;
 import fr.hardel.whispers_of_ether.component.DataComponent;

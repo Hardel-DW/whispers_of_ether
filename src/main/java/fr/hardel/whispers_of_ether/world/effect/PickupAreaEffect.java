@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.effects;
+package fr.hardel.whispers_of_ether.world.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.gui.render.entity;
+package fr.hardel.whispers_of_ether.client.renderer.entity;
 
 import net.minecraft.client.renderer.entity.DisplayRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

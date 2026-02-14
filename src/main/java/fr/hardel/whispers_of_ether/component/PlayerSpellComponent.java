@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.component;
 
 import com.mojang.serialization.Codec;
-import fr.hardel.whispers_of_ether.spell.SpellResourceReloadListener;
+import fr.hardel.whispers_of_ether.world.spell.SpellResourceReloadListener;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -34,12 +34,12 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
             return;
 
         spellIds.add(spellId);
-        ModComponents.PLAYER_SPELL.sync(player);
+        EntityComponents.PLAYER_SPELL.sync(player);
     }
 
     public void removeSpell(Identifier spellId) {
         if (spellIds.remove(spellId)) {
-            ModComponents.PLAYER_SPELL.sync(player);
+            EntityComponents.PLAYER_SPELL.sync(player);
         }
     }
 
@@ -50,13 +50,13 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
     public void clearSpells() {
         if (!spellIds.isEmpty()) {
             spellIds.clear();
-            ModComponents.PLAYER_SPELL.sync(player);
+            EntityComponents.PLAYER_SPELL.sync(player);
         }
     }
 
     public void setCooldown(Identifier spellId, long endTimeMillis) {
         spellCooldowns.put(spellId, endTimeMillis);
-        ModComponents.PLAYER_SPELL.sync(player);
+        EntityComponents.PLAYER_SPELL.sync(player);
     }
 
     public long getRemainingCooldown(Identifier spellId) {
@@ -75,7 +75,7 @@ public class PlayerSpellComponent implements AutoSyncedComponent {
         long currentTime = System.currentTimeMillis();
         boolean changed = spellCooldowns.entrySet().removeIf(entry -> entry.getValue() <= currentTime);
         if (changed) {
-            ModComponents.PLAYER_SPELL.sync(player);
+            EntityComponents.PLAYER_SPELL.sync(player);
         }
     }
 

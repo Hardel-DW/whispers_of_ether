@@ -1,10 +1,10 @@
-package fr.hardel.whispers_of_ether.server.spell;
+package fr.hardel.whispers_of_ether.world.spell;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hardel.whispers_of_ether.server.spell.action.Action;
-import fr.hardel.whispers_of_ether.server.spell.target.SelfTarget;
-import fr.hardel.whispers_of_ether.server.spell.target.Target;
+import fr.hardel.whispers_of_ether.world.spell.action.Action;
+import fr.hardel.whispers_of_ether.world.spell.target.SelfTarget;
+import fr.hardel.whispers_of_ether.world.spell.target.Target;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.Optional;

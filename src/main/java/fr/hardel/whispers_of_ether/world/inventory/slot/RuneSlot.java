@@ -1,6 +1,6 @@
-package fr.hardel.whispers_of_ether.menu.slot;
+package fr.hardel.whispers_of_ether.world.inventory.slot;
 
-import fr.hardel.whispers_of_ether.component.ModItemComponent;
+import fr.hardel.whispers_of_ether.component.DataComponent;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +12,7 @@ public class RuneSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return stack.has(ModItemComponent.RUNES);
+        return stack.has(DataComponent.RUNES);
     }
 
     @Override

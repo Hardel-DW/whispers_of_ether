@@ -1,7 +1,7 @@
-package fr.hardel.whispers_of_ether.block;
+package fr.hardel.whispers_of_ether.world.level.block;
 
 import com.mojang.serialization.MapCodec;
-import fr.hardel.whispers_of_ether.block.entity.RunicInfuserBlockEntity;
+import fr.hardel.whispers_of_ether.world.level.block.entity.RunicInfuserBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;

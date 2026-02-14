@@ -2,7 +2,7 @@ package fr.hardel.whispers_of_ether.client.mixin;
 
 import com.mojang.serialization.MapCodec;
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.client.item.RuneTier;
+import fr.hardel.whispers_of_ether.client.renderer.item.properties.numeric.RuneTier;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.resources.Identifier;

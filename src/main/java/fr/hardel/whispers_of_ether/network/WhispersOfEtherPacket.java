@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.network;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.menu.runic_table.RunicTableHistoryEntry;
+import fr.hardel.whispers_of_ether.world.inventory.runic_table.RunicTableHistoryEntry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

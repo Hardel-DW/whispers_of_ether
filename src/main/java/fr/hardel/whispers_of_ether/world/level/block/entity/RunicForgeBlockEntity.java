@@ -1,8 +1,8 @@
-package fr.hardel.whispers_of_ether.block.entity;
+package fr.hardel.whispers_of_ether.world.level.block.entity;
 
-import fr.hardel.whispers_of_ether.menu.RunicForgeMenu;
-import fr.hardel.whispers_of_ether.recipe.ModRecipes;
-import fr.hardel.whispers_of_ether.recipe.RunicForgeRecipe;
+import fr.hardel.whispers_of_ether.world.inventory.RunicForgeMenu;
+import fr.hardel.whispers_of_ether.world.item.crafting.ModRecipes;
+import fr.hardel.whispers_of_ether.world.item.crafting.RunicForgeRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

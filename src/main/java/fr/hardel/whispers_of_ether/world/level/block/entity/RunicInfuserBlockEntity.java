@@ -1,10 +1,10 @@
-package fr.hardel.whispers_of_ether.block.entity;
+package fr.hardel.whispers_of_ether.world.level.block.entity;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.component.ModItemComponent;
-import fr.hardel.whispers_of_ether.component.item.RuneComponent;
-import fr.hardel.whispers_of_ether.item.ModItems;
-import fr.hardel.whispers_of_ether.menu.RunicInfuserMenu;
+import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.RuneComponent;
+import fr.hardel.whispers_of_ether.world.item.ModItems;
+import fr.hardel.whispers_of_ether.world.inventory.RunicInfuserMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -100,7 +100,7 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity implements
         Map.Entry<Item, Identifier> randomEntry = entries.get(level.random.nextInt(entries.size()));
 
         ItemStack newStack = new ItemStack(randomEntry.getKey());
-        newStack.set(ModItemComponent.RUNES, new RuneComponent(randomEntry.getValue(), tier));
+        newStack.set(DataComponent.RUNES, new RuneComponent(randomEntry.getValue(), tier));
         setItem(0, newStack);
         setChanged();
     }

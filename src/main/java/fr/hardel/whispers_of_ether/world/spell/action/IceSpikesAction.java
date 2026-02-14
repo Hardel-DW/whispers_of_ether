@@ -1,9 +1,9 @@
-package fr.hardel.whispers_of_ether.server.spell.action;
+package fr.hardel.whispers_of_ether.world.spell.action;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hardel.whispers_of_ether.server.spell.timeline.TimelineScheduler;
+import fr.hardel.whispers_of_ether.world.spell.timeline.TimelineScheduler;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

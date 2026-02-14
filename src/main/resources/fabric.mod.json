@@ -18,10 +18,10 @@
             "fr.hardel.whispers_of_ether.WhispersOfEther"
         ],
         "cardinal-components-world": [
-            "fr.hardel.whispers_of_ether.object.SceneObjectsComponents"
+            "fr.hardel.whispers_of_ether.world.object.SceneObjectsComponents"
         ],
         "cardinal-components-entity": [
-            "fr.hardel.whispers_of_ether.component.ModComponents"
+            "fr.hardel.whispers_of_ether.component.EntityComponents"
         ]
     },
     "mixins": [

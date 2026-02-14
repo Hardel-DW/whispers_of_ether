@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.server.spell.target.shape;
+package fr.hardel.whispers_of_ether.world.spell.target.shape;
 
 import com.mojang.serialization.MapCodec;
 import fr.hardel.whispers_of_ether.WhispersOfEther;

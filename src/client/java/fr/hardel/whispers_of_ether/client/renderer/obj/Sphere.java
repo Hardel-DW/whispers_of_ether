@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.client.gui.render.obj;
+package fr.hardel.whispers_of_ether.client.renderer.obj;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;

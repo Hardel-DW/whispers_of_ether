@@ -23,7 +23,7 @@ public class OmnivampirismComponent implements AutoSyncedComponent {
         this.totalHeal = healAmount;
         this.healedSoFar = 0.0f;
         this.startTick = player.level().getGameTime();
-        ModComponents.OMNIVAMPIRISM.sync(player);
+        EntityComponents.OMNIVAMPIRISM.sync(player);
     }
 
     public void tick() {
@@ -56,7 +56,7 @@ public class OmnivampirismComponent implements AutoSyncedComponent {
         this.totalHeal = 0.0f;
         this.healedSoFar = 0.0f;
         this.startTick = 0;
-        ModComponents.OMNIVAMPIRISM.sync(player);
+        EntityComponents.OMNIVAMPIRISM.sync(player);
     }
 
     @Override

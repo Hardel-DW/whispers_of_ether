@@ -1,9 +1,9 @@
-package fr.hardel.whispers_of_ether.server.spell.timeline.offset;
+package fr.hardel.whispers_of_ether.world.spell.timeline.offset;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hardel.whispers_of_ether.server.spell.target.position.Position;
+import fr.hardel.whispers_of_ether.world.spell.target.position.Position;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 

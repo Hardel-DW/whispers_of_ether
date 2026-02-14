@@ -8,7 +8,7 @@ import net.minecraft.resources.Identifier;
 import fr.hardel.whispers_of_ether.world.item.component.RuneComponent;
 import fr.hardel.whispers_of_ether.world.item.component.WellComponent;
 
-public class ModItemComponent {
+public class DataComponent {
 
     public static final DataComponentType<RuneComponent> RUNES = Registry.register(
         BuiltInRegistries.DATA_COMPONENT_TYPE,

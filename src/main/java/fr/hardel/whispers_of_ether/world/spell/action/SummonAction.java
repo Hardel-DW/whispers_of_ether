@@ -1,4 +1,4 @@
-package fr.hardel.whispers_of_ether.server.spell.action;
+package fr.hardel.whispers_of_ether.world.spell.action;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

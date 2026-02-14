@@ -1,9 +1,9 @@
-package fr.hardel.whispers_of_ether.menu.runic_table;
+package fr.hardel.whispers_of_ether.world.inventory.runic_table;
 
-import fr.hardel.whispers_of_ether.component.ModItemComponent;
-import fr.hardel.whispers_of_ether.menu.ModMenuTypes;
-import fr.hardel.whispers_of_ether.menu.slot.EquipmentSlot;
-import fr.hardel.whispers_of_ether.menu.slot.RuneSlot;
+import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.inventory.ModMenuTypes;
+import fr.hardel.whispers_of_ether.world.inventory.slot.EquipmentSlot;
+import fr.hardel.whispers_of_ether.world.inventory.slot.RuneSlot;
 import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
@@ -73,7 +73,7 @@ public class RunicTableMenu extends AbstractContainerMenu {
             if (!moveItemStackTo(stack, CONTAINER_SIZE, slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-        } else if (stack.has(ModItemComponent.RUNES)) {
+        } else if (stack.has(DataComponent.RUNES)) {
             if (!moveItemStackTo(stack, RUNE_SLOT, RUNE_SLOT + 1, false)) {
                 return ItemStack.EMPTY;
             }
@@ -131,7 +131,7 @@ public class RunicTableMenu extends AbstractContainerMenu {
 
         ItemStack runeStack = getRuneStack();
         ItemStack equipmentStack = getEquipmentStack();
-        if (runeStack.isEmpty() || equipmentStack.isEmpty() || !runeStack.has(ModItemComponent.RUNES)) {
+        if (runeStack.isEmpty() || equipmentStack.isEmpty() || !runeStack.has(DataComponent.RUNES)) {
             return;
         }
 

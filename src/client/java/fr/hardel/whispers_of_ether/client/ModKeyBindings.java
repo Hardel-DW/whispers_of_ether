@@ -1,12 +1,11 @@
-package fr.hardel.whispers_of_ether.client.keybind;
+package fr.hardel.whispers_of_ether.client;
 
+import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 
 import com.mojang.blaze3d.platform.InputConstants;
-
-import fr.hardel.whispers_of_ether.WhispersOfEther;
 
 import org.lwjgl.glfw.GLFW;
 

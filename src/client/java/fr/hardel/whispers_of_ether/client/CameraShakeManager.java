@@ -1,6 +1,6 @@
 package fr.hardel.whispers_of_ether.client;
 
-import fr.hardel.whispers_of_ether.attributes.ModAttribute;
+import fr.hardel.whispers_of_ether.world.attribute.ModAttribute;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 
