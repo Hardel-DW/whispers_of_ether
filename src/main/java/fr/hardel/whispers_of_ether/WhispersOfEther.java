@@ -68,6 +68,7 @@ public class WhispersOfEther implements ModInitializer {
             EtherObjectCommand.register(dispatcher);
         });
 
+        NetworkHandler.registerPayloadTypes();
         NetworkHandler.registerServerPackets();
     }
 }
