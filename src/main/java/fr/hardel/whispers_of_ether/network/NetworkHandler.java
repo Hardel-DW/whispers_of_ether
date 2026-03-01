@@ -6,11 +6,14 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 public class NetworkHandler {
-    public static void registerClientPackets() {
+    public static void registerPayloadTypes() {
         PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.RunicTableHistoryAdd.ID,
             WhispersOfEtherPacket.RunicTableHistoryAdd.CODEC);
         PayloadTypeRegistry.playS2C().register(WhispersOfEtherPacket.RunicTableHistoryClear.ID,
             WhispersOfEtherPacket.RunicTableHistoryClear.CODEC);
+    }
+
+    public static void registerClientPackets() {
     }
 
     public static void registerServerPackets() {

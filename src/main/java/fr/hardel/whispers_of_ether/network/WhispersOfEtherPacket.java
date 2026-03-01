@@ -27,7 +27,7 @@ public class WhispersOfEtherPacket {
         public static final CustomPacketPayload.Type<MultiJump> ID = new CustomPacketPayload.Type<>(
             Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, MultiJump> CODEC = StreamCodec.unit(new MultiJump());
+        public static final StreamCodec<RegistryFriendlyByteBuf, MultiJump> CODEC = StreamCodec.of((RegistryFriendlyByteBuf buf, MultiJump val) -> {}, buf -> new MultiJump());
 
         @Override
         public @NotNull Type<? extends CustomPacketPayload> type() {
@@ -53,7 +53,7 @@ public class WhispersOfEtherPacket {
         public static final CustomPacketPayload.Type<RunicTableHistoryClear> ID = new CustomPacketPayload.Type<>(
             Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_table_history_clear"));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, RunicTableHistoryClear> CODEC = StreamCodec.unit(new RunicTableHistoryClear());
+        public static final StreamCodec<RegistryFriendlyByteBuf, RunicTableHistoryClear> CODEC = StreamCodec.of((RegistryFriendlyByteBuf buf, RunicTableHistoryClear val) -> {}, buf -> new RunicTableHistoryClear());
 
         @Override
         public @NotNull Type<? extends CustomPacketPayload> type() {
