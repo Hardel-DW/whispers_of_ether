@@ -4,6 +4,7 @@ package fr.hardel.whispers_of_ether.world.level.block;
 import fr.hardel.whispers_of_ether.world.level.block.entity.ModBlockEntities;
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicForgeBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
@@ -40,10 +41,7 @@ public class RunicForgeBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (type != ModBlockEntities.RUNIC_FORGE) {
-            return null;
-        }
-        return level.isClientSide() ? null : (lvl, pos, st, entity) -> RunicForgeBlockEntity.tick(lvl, (RunicForgeBlockEntity) entity);
+        return level instanceof ServerLevel serverLevel ? createTickerHelper(type, ModBlockEntities.RUNIC_FORGE, (lvl, pos, st, forge) -> forge.tick(serverLevel)) : null;
     }
 
     @Override

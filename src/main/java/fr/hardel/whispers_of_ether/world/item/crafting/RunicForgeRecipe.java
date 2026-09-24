@@ -13,77 +13,36 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.ArrayList;
 
-public class RunicForgeRecipe implements Recipe<RecipeInput> {
+public class RunicForgeRecipe implements Recipe<RunicForgeInput> {
     public static final MapCodec<RunicForgeRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
         r -> r.group(
             Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(RunicForgeRecipe::ingredients),
-            Ingredient.CODEC.fieldOf("input").forGetter(RunicForgeRecipe::input),
             ItemStackTemplate.CODEC.fieldOf("result").forGetter(RunicForgeRecipe::result)).apply(r, RunicForgeRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, RunicForgeRecipe> STREAM_CODEC = StreamCodec.composite(
         Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
         RunicForgeRecipe::ingredients,
-        Ingredient.CONTENTS_STREAM_CODEC,
-        RunicForgeRecipe::input,
         ItemStackTemplate.STREAM_CODEC,
         RunicForgeRecipe::result,
         RunicForgeRecipe::new);
 
     private final List<Ingredient> ingredients;
-    private final Ingredient input;
     private final ItemStackTemplate result;
     private @Nullable PlacementInfo placementInfo;
 
-    public RunicForgeRecipe(List<Ingredient> ingredients, Ingredient input, ItemStackTemplate result) {
+    public RunicForgeRecipe(List<Ingredient> ingredients, ItemStackTemplate result) {
         this.ingredients = ingredients;
-        this.input = input;
         this.result = result;
     }
 
     @Override
-    public boolean matches(RecipeInput recipeInput, Level level) {
-        if (recipeInput.size() != 6) {
-            return false;
-        }
-
-        if (!input.test(recipeInput.getItem(5))) {
-            return false;
-        }
-
-        boolean[] ingredientMatched = new boolean[ingredients.size()];
-        for (int i = 0; i < 5; i++) {
-            ItemStack runeStack = recipeInput.getItem(i);
-            if (runeStack.isEmpty()) {
-                continue;
-            }
-
-            boolean matched = false;
-            for (int j = 0; j < ingredients.size(); j++) {
-                if (!ingredientMatched[j] && ingredients.get(j).test(runeStack)) {
-                    ingredientMatched[j] = true;
-                    matched = true;
-                    break;
-                }
-            }
-
-            if (!matched && !runeStack.isEmpty()) {
-                return false;
-            }
-        }
-
-        for (int i = 0; i < ingredients.size(); i++) {
-            if (!ingredientMatched[i]) {
-                return false;
-            }
-        }
-
-        return true;
+    public boolean matches(RunicForgeInput input, Level level) {
+        return input.contents().canCraft(this, null);
     }
 
     @Override
-    public @NotNull ItemStack assemble(RecipeInput recipeInput) {
+    public @NotNull ItemStack assemble(RunicForgeInput input) {
         return result.create();
     }
 
@@ -98,21 +57,19 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public @NotNull RecipeSerializer<? extends Recipe<RecipeInput>> getSerializer() {
+    public @NotNull RecipeSerializer<RunicForgeRecipe> getSerializer() {
         return ModRecipes.RUNIC_FORGE_SERIALIZER;
     }
 
     @Override
-    public @NotNull RecipeType<? extends Recipe<RecipeInput>> getType() {
+    public @NotNull RecipeType<RunicForgeRecipe> getType() {
         return ModRecipes.RUNIC_FORGE_TYPE;
     }
 
     @Override
     public @NotNull PlacementInfo placementInfo() {
         if (placementInfo == null) {
-            List<Ingredient> allIngredients = new ArrayList<>(ingredients);
-            allIngredients.add(input);
-            placementInfo = PlacementInfo.create(allIngredients);
+            placementInfo = PlacementInfo.create(ingredients);
         }
         return placementInfo;
     }
@@ -124,10 +81,6 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
 
     public List<Ingredient> ingredients() {
         return ingredients;
-    }
-
-    public Ingredient input() {
-        return input;
     }
 
     public ItemStackTemplate result() {

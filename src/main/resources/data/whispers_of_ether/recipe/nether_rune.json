@@ -7,7 +7,6 @@
         "minecraft:netherrack",
         "minecraft:netherrack"
     ],
-    "input": "whispers_of_ether:reinforced_rune",
     "result": {
         "count": 1,
         "id": "whispers_of_ether:nether_rune"
