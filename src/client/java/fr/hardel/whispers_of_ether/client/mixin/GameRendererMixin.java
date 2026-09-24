@@ -2,7 +2,6 @@ package fr.hardel.whispers_of_ether.client.mixin;
 
 import fr.hardel.whispers_of_ether.client.CameraShakeManager;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GameRendererMixin {
 
     @Inject(method = "renderLevel", at = @At("HEAD"))
-    private void onRenderWorldStart(DeltaTracker tickCounter, CallbackInfo ci) {
+    private void onRenderWorldStart(CallbackInfo ci) {
         CameraShakeManager.getInstance().update();
     }
 

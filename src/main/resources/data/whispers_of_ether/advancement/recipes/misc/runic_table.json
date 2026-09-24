@@ -13,7 +13,7 @@
         },
         "has_the_recipe": {
             "conditions": {
-                "recipe": "whispers_of_ether:runic_table"
+                "recipes": "whispers_of_ether:runic_table"
             },
             "trigger": "minecraft:recipe_unlocked"
         }

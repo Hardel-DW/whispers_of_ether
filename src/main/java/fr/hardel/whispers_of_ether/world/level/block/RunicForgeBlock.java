@@ -1,8 +1,6 @@
 
 package fr.hardel.whispers_of_ether.world.level.block;
 
-import com.mojang.serialization.MapCodec;
-
 import fr.hardel.whispers_of_ether.world.level.block.entity.ModBlockEntities;
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicForgeBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -25,16 +23,9 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 public class RunicForgeBlock extends BaseEntityBlock {
-    public static final MapCodec<RunicForgeBlock> CODEC = simpleCodec(RunicForgeBlock::new);
-
     public RunicForgeBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(BlockStateProperties.LIT, false));
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package fr.hardel.whispers_of_ether.world.level.block;
 
-import com.mojang.serialization.MapCodec;
 import fr.hardel.whispers_of_ether.world.inventory.runic_table.RunicTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,18 +20,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class RunicTableBlock extends Block {
-    public static final MapCodec<RunicTableBlock> CODEC = simpleCodec(RunicTableBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     private static final Component TITLE = Component.translatable("container.whispers_of_ether.runic_table");
 
     public RunicTableBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
-
-    @Override
-    public @NotNull MapCodec<RunicTableBlock> codec() {
-        return CODEC;
     }
 
     @Override

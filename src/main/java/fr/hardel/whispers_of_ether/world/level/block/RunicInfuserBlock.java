@@ -1,6 +1,5 @@
 package fr.hardel.whispers_of_ether.world.level.block;
 
-import com.mojang.serialization.MapCodec;
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicInfuserBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -14,15 +13,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class RunicInfuserBlock extends BaseEntityBlock {
-    public static final MapCodec<RunicInfuserBlock> CODEC = simpleCodec(RunicInfuserBlock::new);
-
     public RunicInfuserBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     @Override
