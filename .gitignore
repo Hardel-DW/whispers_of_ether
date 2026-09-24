@@ -121,7 +121,7 @@ runs/
 PLANNED.md
 TODO.md
 bin/
-.claude/settings.local.json
+.claude/
 .vscode/settings.json
 minecraft_sources/
 githubsource/
