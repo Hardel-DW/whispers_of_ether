@@ -7,7 +7,6 @@
         "minecraft:copper_ingot",
         "minecraft:copper_ingot"
     ],
-    "input": "minecraft:stone",
     "result": {
         "count": 1,
         "id": "whispers_of_ether:rune"

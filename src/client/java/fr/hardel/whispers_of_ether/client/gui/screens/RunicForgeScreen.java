@@ -2,6 +2,7 @@ package fr.hardel.whispers_of_ether.client.gui.screens;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.world.inventory.RunicForgeMenu;
+import fr.hardel.whispers_of_ether.world.level.block.entity.RunicForgeBlockEntity;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -36,7 +37,7 @@ public class RunicForgeScreen extends AbstractContainerScreen<RunicForgeMenu> {
         int y = (height - imageHeight) / 2;
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
 
-        int progress = (menu.getProcessProgress() * PROGRESS_BAR_HEIGHT) / menu.getMaxProcessTime();
+        int progress = (menu.getProcessProgress() * PROGRESS_BAR_HEIGHT) / RunicForgeBlockEntity.PROCESS_TIME;
         if (progress > 0) {
             graphics.blit(RenderPipelines.GUI_TEXTURED, PROGRESS_BAR,
                 x + PROGRESS_BAR_X,
