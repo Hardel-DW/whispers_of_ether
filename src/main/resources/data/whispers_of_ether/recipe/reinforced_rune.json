@@ -7,7 +7,6 @@
         "minecraft:iron_ingot",
         "minecraft:iron_ingot"
     ],
-    "input": "whispers_of_ether:rune",
     "result": {
         "count": 1,
         "id": "whispers_of_ether:reinforced_rune"
