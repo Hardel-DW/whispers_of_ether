@@ -8,13 +8,13 @@ import net.minecraft.client.Minecraft;
 public class ClientNetworkHandler {
 	public static void register() {
 		ClientPlayNetworking.registerGlobalReceiver(WhispersOfEtherPacket.RunicTableHistoryAdd.ID, (payload, context) -> context.client().execute(() -> {
-            if (Minecraft.getInstance().screen instanceof RunicTableScreen screen) {
+            if (Minecraft.getInstance().gui.screen() instanceof RunicTableScreen screen) {
                 screen.addHistoryEntry(payload.entry());
             }
         }));
 
 		ClientPlayNetworking.registerGlobalReceiver(WhispersOfEtherPacket.RunicTableHistoryClear.ID, (payload, context) -> context.client().execute(() -> {
-            if (Minecraft.getInstance().screen instanceof RunicTableScreen screen) {
+            if (Minecraft.getInstance().gui.screen() instanceof RunicTableScreen screen) {
                 screen.clearHistory();
             }
         }));

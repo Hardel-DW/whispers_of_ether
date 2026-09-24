@@ -2,7 +2,7 @@ package fr.hardel.whispers_of_ether.world.attribute;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
@@ -41,7 +41,7 @@ public class ModAttribute {
         public static void register() {
                 WhispersOfEther.LOGGER.info("Registering Mod Attributes for {}", WhispersOfEther.MOD_ID);
 
-                FabricDefaultAttributeRegistry.register(EntityType.PLAYER,
+                FabricDefaultAttributeRegistry.register(EntityTypes.PLAYER,
                         Player.createAttributes().add(CAMERA_SHAKING_STRENTH).add(CAMERA_SHAKING_FREQUENCY)
                                 .add(PICKUP_AREA_SIZE).add(MULTI_JUMP).add(CRIT_RATE).add(CRIT_DAMAGE)
                                 .add(OMNIVAMPIRISM).add(OMNIVAMPIRISM_RATE));
