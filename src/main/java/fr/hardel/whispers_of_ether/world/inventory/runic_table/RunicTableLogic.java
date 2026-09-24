@@ -1,6 +1,6 @@
 package fr.hardel.whispers_of_ether.world.inventory.runic_table;
 
-import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import fr.hardel.whispers_of_ether.world.item.component.RuneComponent;
 import fr.hardel.whispers_of_ether.world.item.component.WellComponent;
 import fr.hardel.whispers_of_ether.server.runic_attribute.AttributeData;

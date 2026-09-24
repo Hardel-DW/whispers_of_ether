@@ -16,12 +16,6 @@
         ],
         "main": [
             "fr.hardel.whispers_of_ether.WhispersOfEther"
-        ],
-        "cardinal-components-world": [
-            "fr.hardel.whispers_of_ether.world.object.SceneObjectsComponents"
-        ],
-        "cardinal-components-entity": [
-            "fr.hardel.whispers_of_ether.component.EntityComponents"
         ]
     },
     "mixins": [
@@ -33,17 +27,8 @@
     ],
     "depends": {
         "fabricloader": ">=${loader_version}",
-        "fabric": "*",
-        "minecraft": "${minecraft_version}",
-        "cardinal-components-base": ">=7.3.0",
-        "cardinal-components-entity": ">=7.3.0"
-    },
-    "custom": {
-        "cardinal-components": [
-            "whispers_of_ether:player_spell",
-            "whispers_of_ether:waypoints",
-            "whispers_of_ether:omnivampirism",
-            "whispers_of_ether:scene_objects"
-        ]
+        "minecraft": "~${minecraft_version}",
+        "java": ">=25",
+        "fabric-api": "*"
     }
 }

@@ -9,20 +9,6 @@ import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 public class WhispersOfEtherPacket {
-    public record SpellCast(Identifier spellId) implements CustomPacketPayload {
-        public static final CustomPacketPayload.Type<SpellCast> ID = new CustomPacketPayload.Type<>(
-            Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "spell_cast"));
-
-        public static final StreamCodec<RegistryFriendlyByteBuf, SpellCast> CODEC = StreamCodec.composite(
-            Identifier.STREAM_CODEC, SpellCast::spellId,
-            SpellCast::new);
-
-        @Override
-        public @NotNull Type<? extends CustomPacketPayload> type() {
-            return ID;
-        }
-    }
-
     public record MultiJump() implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<MultiJump> ID = new CustomPacketPayload.Type<>(
             Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "multi_jump"));

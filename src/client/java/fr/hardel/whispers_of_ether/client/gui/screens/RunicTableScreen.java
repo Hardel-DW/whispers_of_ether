@@ -1,13 +1,13 @@
 package fr.hardel.whispers_of_ether.client.gui.screens;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import fr.hardel.whispers_of_ether.world.item.component.WellComponent;
 import fr.hardel.whispers_of_ether.world.inventory.runic_table.RunicTableHistoryEntry;
 import fr.hardel.whispers_of_ether.world.inventory.runic_table.RunicTableMenu;
 import fr.hardel.whispers_of_ether.world.inventory.runic_table.RunicTableLogic;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.component.DataComponents;
@@ -93,15 +93,14 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     private final List<RunicTableHistoryEntry> history = new ArrayList<>();
 
     public RunicTableScreen(RunicTableMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, title);
-        this.imageWidth = IMAGE_WIDTH;
-        this.imageHeight = IMAGE_HEIGHT;
+        super(menu, inventory, title, IMAGE_WIDTH, IMAGE_HEIGHT);
         this.inventoryLabelX = INVENTORY_LABEL_X;
         this.inventoryLabelY = INVENTORY_LABEL_Y;
     }
 
     @Override
-    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(graphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
@@ -120,18 +119,12 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.render(graphics, mouseX, mouseY, partialTick);
-        renderTooltip(graphics, mouseX, mouseY);
+    protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+        graphics.text(font, title, titleLabelX, titleLabelY, 0x404040, false);
+        graphics.text(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
     }
 
-    @Override
-    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-        graphics.drawString(font, title, titleLabelX, titleLabelY, 0x404040, false);
-        graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
-    }
-
-    private void renderStatsPanel(GuiGraphics graphics, int x, int y) {
+    private void renderStatsPanel(GuiGraphicsExtractor graphics, int x, int y) {
         ItemStack equipmentStack = menu.getEquipmentStack();
         if (equipmentStack.isEmpty()) {
             return;
@@ -170,7 +163,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
             graphics.pose().pushMatrix();
             graphics.pose().translate(textBaseX, textBaseY);
             graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
-            graphics.drawString(font, fullText, 0, 0, color, true);
+            graphics.text(font, fullText, 0, 0, color, true);
             graphics.pose().popMatrix();
             yOffset += lineHeight;
         }
@@ -259,7 +252,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         return false;
     }
 
-    private void renderHistoryPanel(GuiGraphics graphics, int x, int y) {
+    private void renderHistoryPanel(GuiGraphicsExtractor graphics, int x, int y) {
         if (history.isEmpty()) {
             return;
         }
@@ -280,7 +273,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
 
             int iconX = panelX + HISTORY_OFFSET_X + HISTORY_LINE_PADDING_X;
             int iconY = lineY + HISTORY_OFFSET_Y + (entryHeight - HISTORY_ICON_SIZE) / 2;
-            graphics.renderItem(entry.runeStack(), iconX, iconY);
+            graphics.item(entry.runeStack(), iconX, iconY);
 
             int textStartX = iconX + HISTORY_ICON_SIZE + 2;
             int outcomeColor = getOutcomeColor(entry.outcome());
@@ -351,15 +344,15 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         };
     }
 
-    private void drawScaledText(GuiGraphics graphics, String text, int x, int y, int color) {
+    private void drawScaledText(GuiGraphicsExtractor graphics, String text, int x, int y, int color) {
         graphics.pose().pushMatrix();
         graphics.pose().translate(x, y);
         graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
-        graphics.drawString(font, text, 0, 0, color, true);
+        graphics.text(font, text, 0, 0, color, true);
         graphics.pose().popMatrix();
     }
 
-    private void drawScaledStats(GuiGraphics graphics, List<RunicTableHistoryEntry.StatChange> changes, int x, int y) {
+    private void drawScaledStats(GuiGraphicsExtractor graphics, List<RunicTableHistoryEntry.StatChange> changes, int x, int y) {
         graphics.pose().pushMatrix();
         graphics.pose().translate(x, y);
         graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
@@ -386,7 +379,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
             }
 
             int color = change.isPositiveEffect() ? 0xFF55FF55 : 0xFFFF5555;
-            graphics.drawString(font, text, xOffset, yOffset, color, true);
+            graphics.text(font, text, xOffset, yOffset, color, true);
             int textWidth = font.width(text);
             xOffset += textWidth;
             currentLineLength += text.length();
@@ -395,7 +388,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         graphics.pose().popMatrix();
     }
 
-    private void renderScrollBar(GuiGraphics graphics, int scrollX, int baseY, int offset, int maxOffset, int yMin, int yMax) {
+    private void renderScrollBar(GuiGraphicsExtractor graphics, int scrollX, int baseY, int offset, int maxOffset, int yMin, int yMax) {
         if (maxOffset <= 0) {
             return;
         }
@@ -426,7 +419,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         return inPanel || inScrollBar;
     }
 
-    private void renderWellDisplay(GuiGraphics graphics, int x, int y) {
+    private void renderWellDisplay(GuiGraphicsExtractor graphics, int x, int y) {
         ItemStack equipmentStack = menu.getEquipmentStack();
         if (equipmentStack.isEmpty()) {
             return;
@@ -445,7 +438,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
         graphics.pose().pushMatrix();
         graphics.pose().translate(centeredX, centeredY);
         graphics.pose().scale(TEXT_SCALE, TEXT_SCALE);
-        graphics.drawString(font, wellText, 0, 0, 0xFFFFFACA, false);
+        graphics.text(font, wellText, 0, 0, 0xFFFFFACA, false);
         graphics.pose().popMatrix();
     }
 

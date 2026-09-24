@@ -1,6 +1,6 @@
 package fr.hardel.whispers_of_ether.world.inventory.slot;
 
-import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

@@ -3,6 +3,7 @@ package fr.hardel.whispers_of_ether.client.mixin;
 import fr.hardel.whispers_of_ether.client.CameraShakeManager;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,7 +19,7 @@ public class GameRendererMixin {
     }
 
     @Inject(method = "bobView", at = @At("TAIL"))
-    private void applyCameraShake(PoseStack matrices, float tickDelta, CallbackInfo ci) {
+    private void applyCameraShake(CameraRenderState cameraState, PoseStack matrices, CallbackInfo ci) {
         CameraShakeManager shakeManager = CameraShakeManager.getInstance();
         
         if (shakeManager.isShaking()) {

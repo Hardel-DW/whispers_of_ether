@@ -2,11 +2,11 @@ package fr.hardel.whispers_of_ether.world.item.crafting;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -16,12 +16,27 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class RunicForgeRecipe implements Recipe<RecipeInput> {
+    public static final MapCodec<RunicForgeRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
+        r -> r.group(
+            Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(RunicForgeRecipe::ingredients),
+            Ingredient.CODEC.fieldOf("input").forGetter(RunicForgeRecipe::input),
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(RunicForgeRecipe::result)).apply(r, RunicForgeRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, RunicForgeRecipe> STREAM_CODEC = StreamCodec.composite(
+        Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
+        RunicForgeRecipe::ingredients,
+        Ingredient.CONTENTS_STREAM_CODEC,
+        RunicForgeRecipe::input,
+        ItemStackTemplate.STREAM_CODEC,
+        RunicForgeRecipe::result,
+        RunicForgeRecipe::new);
+
     private final List<Ingredient> ingredients;
     private final Ingredient input;
-    private final ItemStack result;
+    private final ItemStackTemplate result;
     private @Nullable PlacementInfo placementInfo;
 
-    public RunicForgeRecipe(List<Ingredient> ingredients, Ingredient input, ItemStack result) {
+    public RunicForgeRecipe(List<Ingredient> ingredients, Ingredient input, ItemStackTemplate result) {
         this.ingredients = ingredients;
         this.input = input;
         this.result = result;
@@ -68,8 +83,18 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(RecipeInput recipeInput, HolderLookup.Provider registries) {
-        return result.copy();
+    public @NotNull ItemStack assemble(RecipeInput recipeInput) {
+        return result.create();
+    }
+
+    @Override
+    public boolean showNotification() {
+        return true;
+    }
+
+    @Override
+    public @NotNull String group() {
+        return "";
     }
 
     @Override
@@ -105,34 +130,7 @@ public class RunicForgeRecipe implements Recipe<RecipeInput> {
         return input;
     }
 
-    public ItemStack result() {
+    public ItemStackTemplate result() {
         return result;
-    }
-
-    public static class Serializer implements RecipeSerializer<RunicForgeRecipe> {
-        private static final MapCodec<RunicForgeRecipe> CODEC = RecordCodecBuilder.mapCodec(
-            r -> r.group(
-                Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(RunicForgeRecipe::ingredients),
-                Ingredient.CODEC.fieldOf("input").forGetter(RunicForgeRecipe::input),
-                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(RunicForgeRecipe::result)).apply(r, RunicForgeRecipe::new));
-
-        private static final StreamCodec<RegistryFriendlyByteBuf, RunicForgeRecipe> STREAM_CODEC = StreamCodec.composite(
-            Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
-            RunicForgeRecipe::ingredients,
-            Ingredient.CONTENTS_STREAM_CODEC,
-            RunicForgeRecipe::input,
-            ItemStack.STREAM_CODEC,
-            RunicForgeRecipe::result,
-            RunicForgeRecipe::new);
-
-        @Override
-        public @NotNull MapCodec<RunicForgeRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, RunicForgeRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 }

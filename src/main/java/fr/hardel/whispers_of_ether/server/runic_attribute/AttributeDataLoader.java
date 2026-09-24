@@ -77,7 +77,7 @@ public class AttributeDataLoader implements PreparableReloadListener {
     @Override
     public @NotNull CompletableFuture<Void> reload(SharedState sharedState, Executor executor, PreparationBarrier preparationBarrier, Executor executor2) {
         ResourceManager manager = sharedState.resourceManager();
-        HolderLookup.Provider registries = sharedState.get(ResourceLoader.RELOADER_REGISTRY_LOOKUP_KEY);
+        HolderLookup.Provider registries = sharedState.get(ResourceLoader.REGISTRY_LOOKUP_KEY);
         return loadAttributes(manager, executor).thenCompose(preparationBarrier::wait).thenCompose(data -> applyAttributes(data, registries, executor2));
     }
 }

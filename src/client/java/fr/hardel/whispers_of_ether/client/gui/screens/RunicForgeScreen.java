@@ -2,7 +2,7 @@ package fr.hardel.whispers_of_ether.client.gui.screens;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.world.inventory.RunicForgeMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -26,13 +26,12 @@ public class RunicForgeScreen extends AbstractContainerScreen<RunicForgeMenu> {
     private static final int PROGRESS_BAR_Y = 10;
 
     public RunicForgeScreen(RunicForgeMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, title);
-        this.imageWidth = IMAGE_WIDTH;
-        this.imageHeight = IMAGE_HEIGHT;
+        super(menu, inventory, title, IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 
     @Override
-    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(graphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, ASSET_SIZE_X, ASSET_SIZE_Y);
@@ -52,14 +51,8 @@ public class RunicForgeScreen extends AbstractContainerScreen<RunicForgeMenu> {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.render(graphics, mouseX, mouseY, partialTick);
-        renderTooltip(graphics, mouseX, mouseY);
-    }
-
-    @Override
-    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-        graphics.drawString(font, title, titleLabelX, titleLabelY, 0x404040, false);
-        graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
+    protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+        graphics.text(font, title, titleLabelX, titleLabelY, 0x404040, false);
+        graphics.text(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
     }
 }

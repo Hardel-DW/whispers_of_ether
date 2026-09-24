@@ -21,7 +21,7 @@ public class ModRecipes {
     public static final RecipeSerializer<RunicForgeRecipe> RUNIC_FORGE_SERIALIZER = Registry.register(
         BuiltInRegistries.RECIPE_SERIALIZER,
         Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_forge"),
-        new RunicForgeRecipe.Serializer());
+        new RecipeSerializer<>(RunicForgeRecipe.MAP_CODEC, RunicForgeRecipe.STREAM_CODEC));
 
     public static final RecipeBookCategory RUNIC_FORGE_CATEGORY = Registry.register(
         BuiltInRegistries.RECIPE_BOOK_CATEGORY,

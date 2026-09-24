@@ -1,6 +1,6 @@
 package fr.hardel.whispers_of_ether.world.inventory.runic_table;
 
-import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import fr.hardel.whispers_of_ether.world.inventory.ModMenuTypes;
 import fr.hardel.whispers_of_ether.world.inventory.slot.EquipmentSlot;
 import fr.hardel.whispers_of_ether.world.inventory.slot.RuneSlot;

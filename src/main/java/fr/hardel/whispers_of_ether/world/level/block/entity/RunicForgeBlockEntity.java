@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
@@ -132,7 +133,7 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity {
 
         updateLitState(false);
 
-        ItemStack result = recipeHolder.get().value().assemble(recipeInput, this.level.registryAccess());
+        ItemStack result = recipeHolder.get().value().assemble(recipeInput);
         for (int i = 0; i < 5; i++) {
             this.removeItem(i, 1);
         }
@@ -154,15 +155,15 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity {
     }
 
     private boolean canOutputResult(RunicForgeRecipe recipe) {
-        ItemStack result = recipe.result();
+        ItemStackTemplate result = recipe.result();
         ItemStack inputItem = this.getItem(5);
 
-        if (inputItem.isEmpty() && result.getItem().getDefaultMaxStackSize() < result.getCount()) {
+        if (inputItem.isEmpty() && result.item().value().getDefaultMaxStackSize() < result.count()) {
             return false;
         }
 
-        if (!inputItem.isEmpty() && inputItem.is(result.getItem())) {
-            return inputItem.getCount() + result.getCount() <= inputItem.getMaxStackSize();
+        if (!inputItem.isEmpty() && inputItem.is(result.item())) {
+            return inputItem.getCount() + result.count() <= inputItem.getMaxStackSize();
         }
 
         return true;

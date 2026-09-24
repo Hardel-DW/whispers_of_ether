@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.world.level.block.entity;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
-import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import fr.hardel.whispers_of_ether.world.item.component.RuneComponent;
 import fr.hardel.whispers_of_ether.world.item.ModItems;
 import fr.hardel.whispers_of_ether.world.inventory.RunicInfuserMenu;
@@ -97,7 +97,7 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity implements
         }
 
         List<Map.Entry<Item, Identifier>> entries = List.copyOf(ModItems.RUNE_TO_DATA.entrySet());
-        Map.Entry<Item, Identifier> randomEntry = entries.get(level.random.nextInt(entries.size()));
+        Map.Entry<Item, Identifier> randomEntry = entries.get(level.getRandom().nextInt(entries.size()));
 
         ItemStack newStack = new ItemStack(randomEntry.getKey());
         newStack.set(DataComponent.RUNES, new RuneComponent(randomEntry.getValue(), tier));

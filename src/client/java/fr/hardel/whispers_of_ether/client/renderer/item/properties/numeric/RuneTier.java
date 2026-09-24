@@ -1,7 +1,7 @@
 package fr.hardel.whispers_of_ether.client.renderer.item.properties.numeric;
 
 import com.mojang.serialization.MapCodec;
-import fr.hardel.whispers_of_ether.component.DataComponent;
+import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import fr.hardel.whispers_of_ether.world.item.component.RuneComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;

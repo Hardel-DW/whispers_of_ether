@@ -1,6 +1,0 @@
-{
-    "textures": {
-        "layer0": "whispers_of_ether:item/ice_and_fire/frosted_fire_hoe"
-    },
-    "parent": "minecraft:item/handheld"
-}

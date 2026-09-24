@@ -2,7 +2,7 @@ package fr.hardel.whispers_of_ether.world.level.block;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.world.item.CreativeModeTabs;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -37,9 +37,9 @@ public class ModBlocks {
     }
 
     public static void register() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> content.accept(RUNIC_TABLE));
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> content.accept(RUNIC_FORGE));
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> content.accept(RUNIC_INFUSER));
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> content.accept(RUNIC_TABLE));
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> content.accept(RUNIC_FORGE));
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.WHISPERSOFETHER_GENERAL_GROUP_KEY).register(content -> content.accept(RUNIC_INFUSER));
     }
 
     private static ResourceKey<Block> keyOfBlock(String name) {

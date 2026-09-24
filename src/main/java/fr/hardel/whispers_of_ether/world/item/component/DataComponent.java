@@ -1,0 +1,28 @@
+package fr.hardel.whispers_of_ether.world.item.component;
+
+import fr.hardel.whispers_of_ether.WhispersOfEther;
+import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.Identifier;
+
+public class DataComponent {
+
+    public static final DataComponentType<RuneComponent> RUNES = Registry.register(
+        BuiltInRegistries.DATA_COMPONENT_TYPE,
+        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "rune"),
+        DataComponentType.<RuneComponent> builder().persistent(RuneComponent.CODEC)
+            .networkSynchronized(RuneComponent.STREAM_CODEC).build());
+
+    public static final DataComponentType<WellComponent> WELL = Registry.register(
+        BuiltInRegistries.DATA_COMPONENT_TYPE,
+        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "well"),
+        DataComponentType.<WellComponent> builder().persistent(WellComponent.CODEC)
+            .networkSynchronized(WellComponent.STREAM_CODEC).build());
+
+    public static void register() {
+        ItemComponentTooltipProviderRegistry.addFirst(RUNES);
+    }
+
+}

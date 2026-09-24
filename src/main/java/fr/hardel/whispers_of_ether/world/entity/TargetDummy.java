@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +61,7 @@ public class TargetDummy extends LivingEntity {
     }
 
     @Override
-    public @NotNull InteractionResult interact(Player player, InteractionHand hand) {
+    public @NotNull InteractionResult interact(Player player, InteractionHand hand, Vec3 location) {
         if (player.isShiftKeyDown() && !this.level().isClientSide()) {
             this.remove(RemovalReason.KILLED);
             this.playSound(SoundEvents.ARMOR_STAND_BREAK, 1.0f, 1.0f);

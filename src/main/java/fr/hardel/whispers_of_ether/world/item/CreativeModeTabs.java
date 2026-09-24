@@ -2,7 +2,7 @@ package fr.hardel.whispers_of_ether.world.item;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.world.level.block.ModBlocks;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceKey;
@@ -17,12 +17,12 @@ public class CreativeModeTabs {
     public static final ResourceKey<CreativeModeTab> WHISPERSOFETHER_RUNES_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),
         Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "whispers_of_ether_runes"));
 
-    public static final CreativeModeTab WHISPERSOFETHER_GENERAL_GROUP = FabricItemGroup.builder()
+    public static final CreativeModeTab WHISPERSOFETHER_GENERAL_GROUP = FabricCreativeModeTab.builder()
         .icon(() -> new ItemStack(ModBlocks.RUNIC_FORGE))
         .title(Component.translatable("itemGroup.whispers_of_ether_general"))
         .build();
 
-    public static final CreativeModeTab WHISPERSOFETHER_RUNES_GROUP = FabricItemGroup.builder()
+    public static final CreativeModeTab WHISPERSOFETHER_RUNES_GROUP = FabricCreativeModeTab.builder()
         .icon(() -> new ItemStack(ModItems.RUNE_OF_ARMOR))
         .title(Component.translatable("itemGroup.whispers_of_ether_runes"))
         .build();
