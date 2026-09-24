@@ -1,20 +1,19 @@
 {
     "variants": {
         "facing=north": {
-            "model": "whispers_of_ether:block/runic_table",
-            "y": 270
+            "model": "whispers_of_ether:block/runic_table"
         },
         "facing=east": {
             "model": "whispers_of_ether:block/runic_table",
-            "y": 0
+            "y": 90
         },
         "facing=south": {
             "model": "whispers_of_ether:block/runic_table",
-            "y": 90
+            "y": 180
         },
         "facing=west": {
             "model": "whispers_of_ether:block/runic_table",
-            "y": 180
+            "y": 270
         }
     }
 }
