@@ -5,6 +5,7 @@
 *.ipr
 *.iws
 CLAUDE.md
+.claude/
 
 # IntelliJ
 out/
