@@ -1,7 +1,7 @@
 {
     "parent": "minecraft:recipes/root",
     "criteria": {
-        "has_target_infuser": {
+        "has_runic_infuser": {
             "conditions": {
                 "items": [
                     {
@@ -13,7 +13,7 @@
         },
         "has_the_recipe": {
             "conditions": {
-                "recipe": "whispers_of_ether:target_infuser"
+                "recipe": "whispers_of_ether:runic_infuser"
             },
             "trigger": "minecraft:recipe_unlocked"
         }
@@ -21,12 +21,12 @@
     "requirements": [
         [
             "has_the_recipe",
-            "has_target_infuser"
+            "has_runic_infuser"
         ]
     ],
     "rewards": {
         "recipes": [
-            "whispers_of_ether:target_infuser"
+            "whispers_of_ether:runic_infuser"
         ]
     }
 }
