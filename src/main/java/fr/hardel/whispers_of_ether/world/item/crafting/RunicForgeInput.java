@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-// Craft slots of the runic forge, counted as one shared pool of items.
 public record RunicForgeInput(List<ItemStack> items, StackedItemContents contents) implements RecipeInput {
 
     public static RunicForgeInput of(List<ItemStack> items) {

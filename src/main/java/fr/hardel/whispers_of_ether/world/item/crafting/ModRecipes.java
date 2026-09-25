@@ -29,7 +29,6 @@ public class ModRecipes {
         Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_forge"),
         new RecipeBookCategory());
 
-    // Forge recipes are all known from the start, like a vanilla crafting table with every recipe unlocked.
     public static void register() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> handler.player.awardRecipes(
             server.getRecipeManager().getRecipes().stream().filter(holder -> holder.value().getType() == RUNIC_FORGE_TYPE).toList()));
