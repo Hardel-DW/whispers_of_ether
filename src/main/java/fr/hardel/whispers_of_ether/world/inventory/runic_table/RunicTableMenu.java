@@ -2,6 +2,7 @@ package fr.hardel.whispers_of_ether.world.inventory.runic_table;
 
 import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import fr.hardel.whispers_of_ether.world.inventory.ModMenuTypes;
+import fr.hardel.whispers_of_ether.world.level.block.ModBlocks;
 import fr.hardel.whispers_of_ether.world.inventory.slot.EquipmentSlot;
 import fr.hardel.whispers_of_ether.world.inventory.slot.RuneSlot;
 import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
@@ -12,6 +13,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -24,6 +26,7 @@ public class RunicTableMenu extends AbstractContainerMenu {
     private boolean isProcessing = false;
     private final Level level;
     private final Player player;
+    private final ContainerLevelAccess access;
     private ItemStack lastEquipmentStack = ItemStack.EMPTY;
 
     private final Container container = new SimpleContainer(CONTAINER_SIZE) {
@@ -35,7 +38,12 @@ public class RunicTableMenu extends AbstractContainerMenu {
     };
 
     public RunicTableMenu(int containerId, Inventory playerInventory) {
+        this(containerId, playerInventory, ContainerLevelAccess.NULL);
+    }
+
+    public RunicTableMenu(int containerId, Inventory playerInventory, ContainerLevelAccess access) {
         super(ModMenuTypes.RUNIC_TABLE, containerId);
+        this.access = access;
         this.level = playerInventory.player.level();
         this.player = playerInventory.player;
         container.startOpen(playerInventory.player);
@@ -93,7 +101,7 @@ public class RunicTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return container.stillValid(player);
+        return stillValid(access, player, ModBlocks.RUNIC_TABLE);
     }
 
     @Override
