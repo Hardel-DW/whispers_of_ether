@@ -1,18 +1,27 @@
 package fr.hardel.whispers_of_ether.world.inventory;
 
+import fr.hardel.whispers_of_ether.world.item.crafting.RunicForgeInput;
+import fr.hardel.whispers_of_ether.world.item.crafting.RunicForgeRecipe;
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicForgeBlockEntity;
+import net.minecraft.recipebook.ServerPlaceRecipe;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.RecipeBookMenu;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class RunicForgeMenu extends AbstractContainerMenu {
+import java.util.List;
+
+public class RunicForgeMenu extends RecipeBookMenu {
     private static final int[][] CRAFT_SLOT_POSITIONS = { { 81, 12 }, { 52, 33 }, { 110, 33 }, { 62, 64 }, { 100, 64 } };
 
     private final Container container;
@@ -83,6 +92,40 @@ public class RunicForgeMenu extends AbstractContainerMenu {
         }
 
         return result;
+    }
+
+    @Override
+    public RecipeBookMenu.@NotNull PostPlaceAction handlePlacement(boolean useMaxItems, boolean allowDroppingItemsToClear, RecipeHolder<?> recipe, ServerLevel level,
+        Inventory inventory) {
+        List<Slot> craftSlots = this.slots.subList(0, RunicForgeBlockEntity.RESULT_SLOT);
+        return ServerPlaceRecipe.placeRecipe(new ServerPlaceRecipe.CraftingMenuAccess<RunicForgeRecipe>() {
+            @Override
+            public void fillCraftSlotsStackedContents(StackedItemContents stackedContents) {
+                RunicForgeMenu.this.fillCraftSlotsStackedContents(stackedContents);
+            }
+
+            @Override
+            public void clearCraftingContent() {
+                craftSlots.forEach(slot -> slot.set(ItemStack.EMPTY));
+            }
+
+            @Override
+            public boolean recipeMatches(RecipeHolder<RunicForgeRecipe> holder) {
+                return holder.value().matches(RunicForgeInput.of(craftSlots.stream().map(Slot::getItem).toList()), level);
+            }
+        }, RunicForgeBlockEntity.RESULT_SLOT, 1, craftSlots, craftSlots, inventory, (RecipeHolder<RunicForgeRecipe>) recipe, useMaxItems, allowDroppingItemsToClear);
+    }
+
+    @Override
+    public void fillCraftSlotsStackedContents(StackedItemContents stackedContents) {
+        for (int slot = 0; slot < RunicForgeBlockEntity.RESULT_SLOT; slot++) {
+            stackedContents.accountStack(this.container.getItem(slot));
+        }
+    }
+
+    @Override
+    public @NotNull RecipeBookType getRecipeBookType() {
+        return RecipeBookType.FURNACE;
     }
 
     public int getProcessProgress() {
