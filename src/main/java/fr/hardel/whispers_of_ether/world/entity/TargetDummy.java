@@ -5,6 +5,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
@@ -58,6 +59,13 @@ public class TargetDummy extends LivingEntity {
         }
 
         return damaged;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+            super.die(source);
+        }
     }
 
     @Override
