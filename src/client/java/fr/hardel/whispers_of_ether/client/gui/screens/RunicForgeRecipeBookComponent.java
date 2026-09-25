@@ -45,7 +45,6 @@ public class RunicForgeRecipeBookComponent extends RecipeBookComponent<RunicForg
         return Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, SPRITE_FOLDER + name);
     }
 
-    // Same drawing as vanilla, with the forge panel and the tabs and recipe page drawn through the forge theme.
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         if (!this.isVisible()) {

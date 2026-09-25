@@ -28,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-// Five craft slots share their items as one pool, the center slot only receives the result.
 public class RunicForgeBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
     public static final int RESULT_SLOT = 5;
     public static final int CONTAINER_SIZE = 6;

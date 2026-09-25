@@ -42,7 +42,6 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    // The multi jump attribute counts every jump, the one from the ground included.
     @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z", ordinal = 2))
     private boolean allowAirJump(LivingEntity instance) {
         if (instance instanceof Player && !instance.onGround()) {

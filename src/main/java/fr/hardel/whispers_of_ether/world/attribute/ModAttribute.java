@@ -47,10 +47,3 @@ public class ModAttribute {
                                 .add(OMNIVAMPIRISM).add(OMNIVAMPIRISM_RATE));
         }
 }
-
-/**
- * For omnivampirism: /give @a
- * minecraft:diamond_sword[minecraft:attribute_modifiers=[{"id":"attack_damage","type":"attack_damage","amount":7,"operation":"add_value"},{"id":"omnivampirism","type":"whispers_of_ether:omnivampirism","amount":1,"operation":"add_multiplied_base"},{"id":"omnivampirism_rate","type":"whispers_of_ether:omnivampirism_rate","amount":1,"operation":"add_multiplied_base"}]]
- * For crit rate: give @a
- * minecraft:diamond_sword[minecraft:attribute_modifiers=[{"id":"attack_damage","type":"attack_damage","amount":7,"operation":"add_value"},{"id":"crit_rate","type":"whispers_of_ether:crit_rate","amount":1,"operation":"add_multiplied_base"},{"id":"crit_damage","type":"whispers_of_ether:crit_damage","amount":1,"operation":"add_multiplied_base"}]]
- */

@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-// Draws into the same render state as its parent, with vanilla sprites and white text swapped for a theme.
 public class ThemedGuiGraphics extends GuiGraphicsExtractor {
     private static final int WHITE = -1;
     private final GuiGraphicsExtractor parent;
