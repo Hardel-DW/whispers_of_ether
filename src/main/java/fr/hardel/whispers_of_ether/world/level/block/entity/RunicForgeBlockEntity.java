@@ -2,11 +2,9 @@ package fr.hardel.whispers_of_ether.world.level.block.entity;
 
 import fr.hardel.whispers_of_ether.world.inventory.RunicForgeMenu;
 import fr.hardel.whispers_of_ether.world.item.crafting.ModRecipes;
-import fr.hardel.whispers_of_ether.world.item.crafting.RunicForgeInput;
 import fr.hardel.whispers_of_ether.world.item.crafting.RunicForgeRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -15,8 +13,8 @@ import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -90,7 +88,31 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity implements W
 
     @Override
     public boolean canPlaceItemThroughFace(int slot, ItemStack itemStack, @Nullable Direction direction) {
-        return slot != RESULT_SLOT;
+        return true;
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack itemStack) {
+        if (slot == RESULT_SLOT) {
+            return false;
+        }
+
+        ItemStack stack = this.items.get(slot);
+        if (stack.getCount() >= stack.getMaxStackSize()) {
+            return false;
+        }
+
+        return stack.isEmpty() || !smallerStackExists(stack, slot);
+    }
+
+    private boolean smallerStackExists(ItemStack stack, int slot) {
+        for (int next = slot + 1; next < RESULT_SLOT; next++) {
+            ItemStack other = this.items.get(next);
+            if (other.isEmpty() || other.getCount() < stack.getCount() && ItemStack.isSameItemSameComponents(other, stack)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -114,7 +136,7 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity implements W
     }
 
     public void tick(ServerLevel level) {
-        RunicForgeInput input = RunicForgeInput.of(this.items.subList(0, RESULT_SLOT));
+        CraftingInput input = CraftingInput.of(RESULT_SLOT, 1, this.items.subList(0, RESULT_SLOT));
         Optional<RunicForgeRecipe> recipe = level.getServer().getRecipeManager().getRecipeFor(ModRecipes.RUNIC_FORGE_TYPE, input, level).map(RecipeHolder::value);
         ItemStack result = recipe.map(value -> value.assemble(input)).filter(this::fitsInResultSlot).orElse(ItemStack.EMPTY);
         if (result.isEmpty()) {
@@ -125,7 +147,7 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity implements W
 
         updateLitState(true);
         if (++this.processProgress >= PROCESS_TIME) {
-            input.contents().canCraft(recipe.get(), this::consumeOne);
+            this.items.subList(0, RESULT_SLOT).stream().filter(stack -> !stack.isEmpty()).forEach(stack -> stack.shrink(1));
             addToResultSlot(result);
             this.processProgress = 0;
         }
@@ -148,15 +170,6 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity implements W
         output.grow(result.getCount());
     }
 
-    private void consumeOne(Holder<Item> item) {
-        for (int slot : CRAFT_SLOTS) {
-            ItemStack stack = this.items.get(slot);
-            if (stack.is(item)) {
-                stack.shrink(1);
-                return;
-            }
-        }
-    }
 
     private void updateLitState(boolean lit) {
         BlockState state = this.getBlockState();
