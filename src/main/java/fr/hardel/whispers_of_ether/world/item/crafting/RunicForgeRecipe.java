@@ -7,7 +7,11 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import fr.hardel.whispers_of_ether.world.level.block.ModBlocks;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -72,6 +76,12 @@ public class RunicForgeRecipe implements Recipe<RunicForgeInput> {
             placementInfo = PlacementInfo.create(ingredients);
         }
         return placementInfo;
+    }
+
+    @Override
+    public @NotNull List<RecipeDisplay> display() {
+        return List.of(new ShapelessCraftingRecipeDisplay(ingredients.stream().map(Ingredient::display).toList(), new SlotDisplay.ItemStackSlotDisplay(result),
+            new SlotDisplay.ItemSlotDisplay(ModBlocks.RUNIC_FORGE.asItem())));
     }
 
     @Override
