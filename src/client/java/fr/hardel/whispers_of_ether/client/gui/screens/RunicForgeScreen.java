@@ -4,6 +4,8 @@ import fr.hardel.whispers_of_ether.WhispersOfEther;
 import fr.hardel.whispers_of_ether.world.inventory.RunicForgeMenu;
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicForgeBlockEntity;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -27,11 +29,20 @@ public class RunicForgeScreen extends AbstractRecipeBookScreen<RunicForgeMenu> {
     private static final int PROGRESS_BAR_HEIGHT = 71;
     private static final int PROGRESS_BAR_X = 164;
     private static final int PROGRESS_BAR_Y = 10;
-    private static final int RECIPE_BOOK_BUTTON_X = 20;
-    private static final int RECIPE_BOOK_BUTTON_Y = 33;
+    private static final WidgetSprites RECIPE_BOOK_BUTTON_SPRITES = new WidgetSprites(
+        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "recipe_book/runic_forge/button"),
+        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "recipe_book/runic_forge/button_highlighted"));
+    private static final int RECIPE_BOOK_BUTTON_X = 7;
+    private static final int RECIPE_BOOK_BUTTON_Y = 7;
+    private final RunicForgeRecipeBookComponent recipeBook;
 
     public RunicForgeScreen(RunicForgeMenu menu, Inventory inventory, Component title) {
-        super(menu, new RunicForgeRecipeBookComponent(menu), inventory, title);
+        this(menu, inventory, title, new RunicForgeRecipeBookComponent(menu));
+    }
+
+    private RunicForgeScreen(RunicForgeMenu menu, Inventory inventory, Component title, RunicForgeRecipeBookComponent recipeBook) {
+        super(menu, recipeBook, inventory, title);
+        this.recipeBook = recipeBook;
         this.imageWidth = IMAGE_WIDTH;
         this.imageHeight = IMAGE_HEIGHT;
         this.inventoryLabelY = IMAGE_HEIGHT - 94;
@@ -40,6 +51,19 @@ public class RunicForgeScreen extends AbstractRecipeBookScreen<RunicForgeMenu> {
     @Override
     protected @NotNull ScreenPosition getRecipeBookButtonPosition() {
         return new ScreenPosition(this.leftPos + RECIPE_BOOK_BUTTON_X, this.topPos + RECIPE_BOOK_BUTTON_Y);
+    }
+
+    // Same button as vanilla, drawn with the forge book sprites.
+    @Override
+    protected void initButton() {
+        ScreenPosition position = this.getRecipeBookButtonPosition();
+        this.addRenderableWidget(new ImageButton(position.x(), position.y(), 20, 18, RECIPE_BOOK_BUTTON_SPRITES, button -> {
+            this.recipeBook.toggleVisibility();
+            this.leftPos = this.recipeBook.updateScreenPosition(this.width, this.imageWidth);
+            ScreenPosition updated = this.getRecipeBookButtonPosition();
+            button.setPosition(updated.x(), updated.y());
+        }));
+        this.addWidget(this.recipeBook);
     }
 
     @Override
