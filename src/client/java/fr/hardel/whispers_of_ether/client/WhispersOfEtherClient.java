@@ -8,7 +8,6 @@ import fr.hardel.whispers_of_ether.client.network.ClientNetworkHandler;
 import fr.hardel.whispers_of_ether.client.particle.ModParticleClient;
 import fr.hardel.whispers_of_ether.client.renderer.item.properties.numeric.RuneTier;
 import fr.hardel.whispers_of_ether.world.inventory.ModMenuTypes;
-import fr.hardel.whispers_of_ether.network.NetworkHandler;
 import net.fabricmc.api.ClientModInitializer;
 import fr.hardel.whispers_of_ether.client.renderer.entity.DamageIndicatorRenderer;
 import fr.hardel.whispers_of_ether.client.renderer.entity.TargetDummyRenderer;
@@ -25,7 +24,6 @@ public class WhispersOfEtherClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ModParticleClient.register();
-        NetworkHandler.registerClientPackets();
         ClientNetworkHandler.register();
 
         MenuScreens.register(ModMenuTypes.RUNIC_TABLE, RunicTableScreen::new);
