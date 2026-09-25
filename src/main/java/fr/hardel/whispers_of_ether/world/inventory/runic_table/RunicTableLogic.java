@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 public class RunicTableLogic {
     private static final Random RANDOM = new Random();
+    private static final double MAX_LOSS_FACTOR = 0.5;
 
     public enum Outcome {
         CRITICAL_SUCCESS,
@@ -233,7 +234,7 @@ public class RunicTableLogic {
             .map(e -> BuiltInRegistries.ATTRIBUTE.getKey(e.attribute().value()))
             .collect(Collectors.toSet());
 
-        double lossFactor = (runeWeight / totalWeight) * multiplier;
+        double lossFactor = Math.min(MAX_LOSS_FACTOR, (runeWeight / totalWeight) * multiplier);
         List<ItemAttributeModifiers.Entry> newEntries = new ArrayList<>();
 
         for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
@@ -242,10 +243,9 @@ public class RunicTableLogic {
 
             if (affectedAttributes.contains(attrId)) {
                 double currentValue = entry.modifier().amount();
-                double newValue = currentValue > 0
-                    ? currentValue * (1 - lossFactor)
-                    : currentValue * (1 + lossFactor);
-                double delta = newValue - currentValue;
+                double worseDirection = isPositiveChange(attrId, 1) ? -1 : 1;
+                double delta = worseDirection * Math.abs(currentValue) * lossFactor;
+                double newValue = currentValue + delta;
                 if (Math.abs(newValue) > 0.001) {
                     newEntries.add(new ItemAttributeModifiers.Entry(holder, new AttributeModifier(entry.modifier().id(), newValue, entry.modifier().operation()), entry.slot()));
                     boolean isPositive = isPositiveChange(attrId, delta);
