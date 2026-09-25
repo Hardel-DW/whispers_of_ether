@@ -1,6 +1,7 @@
 package fr.hardel.whispers_of_ether.world.item.crafting;
 
 import fr.hardel.whispers_of_ether.WhispersOfEther;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -28,7 +29,9 @@ public class ModRecipes {
         Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runic_forge"),
         new RecipeBookCategory());
 
+    // Forge recipes are all known from the start, like a vanilla crafting table with every recipe unlocked.
     public static void register() {
-        WhispersOfEther.LOGGER.info("Registering recipes for {}", WhispersOfEther.MOD_ID);
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> handler.player.awardRecipes(
+            server.getRecipeManager().getRecipes().stream().filter(holder -> holder.value().getType() == RUNIC_FORGE_TYPE).toList()));
     }
 }
