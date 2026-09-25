@@ -9,11 +9,13 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
@@ -147,12 +149,26 @@ public class RunicForgeBlockEntity extends BaseContainerBlockEntity implements W
 
         updateLitState(true);
         if (++this.processProgress >= PROCESS_TIME) {
-            this.items.subList(0, RESULT_SLOT).stream().filter(stack -> !stack.isEmpty()).forEach(stack -> stack.shrink(1));
+            consumeIngredients(level);
             addToResultSlot(result);
             this.processProgress = 0;
         }
 
         this.setChanged();
+    }
+
+    private void consumeIngredients(ServerLevel level) {
+        for (ItemStack stack : this.items.subList(0, RESULT_SLOT)) {
+            if (stack.isEmpty()) {
+                continue;
+            }
+
+            ItemStackTemplate remainder = stack.getItem().getCraftingRemainder();
+            stack.shrink(1);
+            if (remainder != null) {
+                Containers.dropItemStack(level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 1.0, this.worldPosition.getZ() + 0.5, remainder.create());
+            }
+        }
     }
 
     private boolean fitsInResultSlot(ItemStack result) {
