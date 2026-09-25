@@ -1,31 +1,20 @@
 package fr.hardel.whispers_of_ether.world.inventory;
 
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicInfuserBlockEntity;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import fr.hardel.whispers_of_ether.WhispersOfEther;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class RunicInfuserMenu extends AbstractContainerMenu {
-    private static final TagKey<Item> RUNES_TAG = TagKey.create(Registries.ITEM,
-        Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "runes"));
     private static final int SLOT_X = 82;
     private static final int SLOT_Y = 38;
 
     private final Container container;
-    private final @Nullable RunicInfuserBlockEntity blockEntity;
-    private final Player player;
 
     public RunicInfuserMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, new SimpleContainer(1));
@@ -34,28 +23,12 @@ public class RunicInfuserMenu extends AbstractContainerMenu {
     public RunicInfuserMenu(int containerId, Inventory playerInventory, Container container) {
         super(ModMenuTypes.RUNIC_INFUSER, containerId);
         this.container = container;
-        this.blockEntity = container instanceof RunicInfuserBlockEntity be ? be : null;
-        this.player = playerInventory.player;
-        container.startOpen(player);
-        addSlotListener(new ContainerListener() {
-            @Override
-            public void slotChanged(AbstractContainerMenu menu, int slotIndex, ItemStack stack) {
-                slotsChanged(container);
-            }
-
-            @Override
-            public void dataChanged(AbstractContainerMenu menu, int id, int value) {}
-        });
+        container.startOpen(playerInventory.player);
 
         addSlot(new Slot(container, 0, SLOT_X, SLOT_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(RUNES_TAG);
-            }
-
-            @Override
-            public int getMaxStackSize() {
-                return 1;
+                return stack.is(RunicInfuserBlockEntity.RUNES_TAG);
             }
         });
 
@@ -91,7 +64,7 @@ public class RunicInfuserMenu extends AbstractContainerMenu {
             if (!moveItemStackTo(stack, 1, slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-        } else if (stack.is(RUNES_TAG)) {
+        } else if (stack.is(RunicInfuserBlockEntity.RUNES_TAG)) {
             if (!moveItemStackTo(stack, 0, 1, false)) {
                 return ItemStack.EMPTY;
             }
@@ -117,16 +90,5 @@ public class RunicInfuserMenu extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         container.stopOpen(player);
-        if (blockEntity == null) {
-            clearContainer(player, container);
-        }
-    }
-
-    @Override
-    public void slotsChanged(Container container) {
-        super.slotsChanged(container);
-        if (blockEntity != null && blockEntity.canInfuse(player)) {
-            blockEntity.infuse(player);
-        }
     }
 }
