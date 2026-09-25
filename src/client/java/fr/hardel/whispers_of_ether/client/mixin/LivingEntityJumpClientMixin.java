@@ -1,6 +1,5 @@
 package fr.hardel.whispers_of_ether.client.mixin;
 
-import fr.hardel.whispers_of_ether.MultiJumpAccessor;
 import fr.hardel.whispers_of_ether.network.WhispersOfEtherPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,11 +15,8 @@ public class LivingEntityJumpClientMixin {
     @Inject(method = "jumpFromGround", at = @At("TAIL"))
     private void onClientJump(CallbackInfo ci) {
         LivingEntity self = (LivingEntity) (Object) this;
-        if (self instanceof Player && self.level().isClientSide()) {
-            int jumpCount = ((MultiJumpAccessor) self).whispers_of_ether$getJumpCount();
-            if (jumpCount > 1) {
-                ClientPlayNetworking.send(new WhispersOfEtherPacket.MultiJump());
-            }
+        if (self instanceof Player && self.level().isClientSide() && !self.onGround()) {
+            ClientPlayNetworking.send(new WhispersOfEtherPacket.MultiJump());
         }
     }
 }
