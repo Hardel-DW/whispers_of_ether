@@ -18,7 +18,7 @@ public class PlayerMixin {
     private AABB expandPickupBox(AABB aabb, double x, double y, double z) {
         Player player = (Player) (Object) this;
         double pickupAreaSize = player.getAttributeValue(ModAttribute.PICKUP_AREA_SIZE);
-        return aabb.inflate(pickupAreaSize, 0.5 * pickupAreaSize, pickupAreaSize);
+        return aabb.inflate(x * pickupAreaSize, y * pickupAreaSize, z * pickupAreaSize);
     }
 
     @ModifyVariable(method = "attack", at = @At(value = "STORE", ordinal = 0), ordinal = 3)
