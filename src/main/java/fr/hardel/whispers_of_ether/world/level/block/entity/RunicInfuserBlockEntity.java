@@ -15,7 +15,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -80,29 +79,24 @@ public class RunicInfuserBlockEntity extends BaseContainerBlockEntity implements
         ContainerHelper.saveAllItems(output, this.items);
     }
 
-    public boolean canInfuse(Player player) {
-        ItemStack stack = getItem(0);
-        return !stack.isEmpty() && stack.is(RUNES_TAG);
+    @Override
+    public int getMaxStackSize() {
+        return 1;
     }
 
-    public void infuse(Player player) {
-        if (!canInfuse(player) || level == null) {
-            return;
-        }
-
-        ItemStack inputStack = getItem(0);
-        int tier = getTierFromItem(inputStack.getItem());
-        if (tier == 0) {
+    @Override
+    public void setItem(int slot, ItemStack itemStack) {
+        int tier = getTierFromItem(itemStack.getItem());
+        if (tier == 0 || this.level == null) {
+            super.setItem(slot, itemStack);
             return;
         }
 
         List<Map.Entry<Item, Identifier>> entries = List.copyOf(ModItems.RUNE_TO_DATA.entrySet());
-        Map.Entry<Item, Identifier> randomEntry = entries.get(level.getRandom().nextInt(entries.size()));
-
-        ItemStack newStack = new ItemStack(randomEntry.getKey());
-        newStack.set(DataComponent.RUNES, new RuneComponent(randomEntry.getValue(), tier));
-        setItem(0, newStack);
-        setChanged();
+        Map.Entry<Item, Identifier> randomEntry = entries.get(this.level.getRandom().nextInt(entries.size()));
+        ItemStack infused = new ItemStack(randomEntry.getKey());
+        infused.set(DataComponent.RUNES, new RuneComponent(randomEntry.getValue(), tier));
+        super.setItem(slot, infused);
     }
 
     private int getTierFromItem(Item item) {
