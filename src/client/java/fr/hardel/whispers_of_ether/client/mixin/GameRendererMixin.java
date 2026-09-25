@@ -18,7 +18,7 @@ public class GameRendererMixin {
         CameraShakeManager.getInstance().update();
     }
 
-    @Inject(method = "bobView", at = @At("TAIL"))
+    @Inject(method = "bobHurt", at = @At("TAIL"))
     private void applyCameraShake(CameraRenderState cameraState, PoseStack matrices, CallbackInfo ci) {
         CameraShakeManager shakeManager = CameraShakeManager.getInstance();
         
