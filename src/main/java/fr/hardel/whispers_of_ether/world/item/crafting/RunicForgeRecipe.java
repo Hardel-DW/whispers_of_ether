@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RunicForgeRecipe implements Recipe<RunicForgeInput> {
+public class RunicForgeRecipe implements Recipe<CraftingInput> {
     public static final MapCodec<RunicForgeRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
         r -> r.group(
             Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(RunicForgeRecipe::ingredients),
@@ -41,12 +41,12 @@ public class RunicForgeRecipe implements Recipe<RunicForgeInput> {
     }
 
     @Override
-    public boolean matches(RunicForgeInput input, Level level) {
-        return input.contents().canCraft(this, null);
+    public boolean matches(CraftingInput input, Level level) {
+        return input.ingredientCount() == ingredients.size() && input.stackedContents().canCraft(this, null);
     }
 
     @Override
-    public @NotNull ItemStack assemble(RunicForgeInput input) {
+    public @NotNull ItemStack assemble(CraftingInput input) {
         return result.create();
     }
 
