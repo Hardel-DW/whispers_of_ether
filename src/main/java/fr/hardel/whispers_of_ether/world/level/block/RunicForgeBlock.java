@@ -101,7 +101,6 @@ public class RunicForgeBlock extends BaseEntityBlock {
         level.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x, pos.getY() + chimney.y, z, 0.0, 0.07, 0.0);
     }
 
-    // The model faces north, the blockstate turns it clockwise around the block center.
     private static Vec3 rotateFromNorth(Vec3 point, Direction facing) {
         Vec3 rotated = point.subtract(0.5, 0.0, 0.5);
         for (int step = 0; step < (facing.get2DDataValue() + 2) % 4; step++) {

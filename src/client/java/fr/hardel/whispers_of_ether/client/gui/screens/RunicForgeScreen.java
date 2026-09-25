@@ -53,7 +53,6 @@ public class RunicForgeScreen extends AbstractRecipeBookScreen<RunicForgeMenu> {
         return new ScreenPosition(this.leftPos + RECIPE_BOOK_BUTTON_X, this.topPos + RECIPE_BOOK_BUTTON_Y);
     }
 
-    // Same button as vanilla, drawn with the forge book sprites.
     @Override
     protected void initButton() {
         ScreenPosition position = this.getRecipeBookButtonPosition();

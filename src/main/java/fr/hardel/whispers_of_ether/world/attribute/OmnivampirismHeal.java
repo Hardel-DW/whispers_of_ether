@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 
-// Heal granted by omnivampirism, spread over DURATION ticks.
 public record OmnivampirismHeal(float totalHeal, float healedSoFar, long startTick) {
     private static final int DURATION = 60;
 

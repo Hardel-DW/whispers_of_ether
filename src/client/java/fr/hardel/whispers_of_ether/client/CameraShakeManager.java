@@ -4,17 +4,6 @@ import fr.hardel.whispers_of_ether.world.attribute.ModAttribute;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 
-/**
- * Camera shake manager that applies screen shake effects based on player's
- * attributes.
- * Uses CAMERA_SHAKING_STRENGTH and CAMERA_SHAKING_FREQUENCY attributes to
- * modify the effect.
- * Usage examples:
- * - CameraShakeManager.shake(1.0f, 0.5f): Shake with intensity 1.0 for 0.5
- * seconds
- * - CameraShakeManager.constantShake(0.5f): Constant shake with intensity 0.5
- * - CameraShakeManager.stopShake(): Stop all shaking effects
- */
 public class CameraShakeManager {
     private static CameraShakeManager instance;
 
@@ -145,32 +134,18 @@ public class CameraShakeManager {
         return shakeIntensity;
     }
 
-    // Static convenience methods
-
-    /**
-     * Apply a temporary shake effect with specified intensity and duration
-     */
     public static void shake(float intensity, float duration) {
         getInstance().addShake(intensity, duration);
     }
 
-    /**
-     * Apply a temporary shake effect with default duration (0.5 seconds)
-     */
     public static void shake(float intensity) {
         shake(intensity, 0.5f);
     }
 
-    /**
-     * Set a constant shake effect that persists until manually stopped
-     */
     public static void constantShake(float intensity) {
         getInstance().setConstantShake(intensity);
     }
 
-    /**
-     * Stop all shake effects immediately
-     */
     public static void stopShake() {
         getInstance().resetShake();
     }

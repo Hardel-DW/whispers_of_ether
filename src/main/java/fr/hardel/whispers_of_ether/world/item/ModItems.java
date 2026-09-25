@@ -18,7 +18,6 @@ import fr.hardel.whispers_of_ether.world.item.component.DataComponent;
 import fr.hardel.whispers_of_ether.world.item.component.RuneComponent;
 
 public class ModItems {
-    // Runes
     public static final Item RUNE = register("rune", Item::new, new Item.Properties());
     public static final Item REINFORCED_RUNE = register("reinforced_rune", Item::new, new Item.Properties());
     public static final Item ECHO_RUNE = register("echo_rune", Item::new, new Item.Properties());
