@@ -68,6 +68,7 @@ public class RunicTableMenu extends AbstractContainerMenu {
 
         ItemStack stack = slot.getItem();
         ItemStack result = stack.copy();
+        boolean runeApplied = index >= CONTAINER_SIZE && stack.has(DataComponent.RUNES);
 
         if (index < CONTAINER_SIZE) {
             if (!moveItemStackTo(stack, CONTAINER_SIZE, slots.size(), true)) {
@@ -87,7 +88,7 @@ public class RunicTableMenu extends AbstractContainerMenu {
             slot.setChanged();
         }
 
-        return result;
+        return runeApplied ? ItemStack.EMPTY : result;
     }
 
     @Override
