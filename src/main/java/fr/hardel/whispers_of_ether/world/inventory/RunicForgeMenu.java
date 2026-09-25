@@ -1,6 +1,5 @@
 package fr.hardel.whispers_of_ether.world.inventory;
 
-import fr.hardel.whispers_of_ether.world.item.crafting.RunicForgeInput;
 import fr.hardel.whispers_of_ether.world.item.crafting.RunicForgeRecipe;
 import fr.hardel.whispers_of_ether.world.level.block.entity.RunicForgeBlockEntity;
 import net.minecraft.recipebook.ServerPlaceRecipe;
@@ -16,6 +15,7 @@ import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -111,7 +111,7 @@ public class RunicForgeMenu extends RecipeBookMenu {
 
             @Override
             public boolean recipeMatches(RecipeHolder<RunicForgeRecipe> holder) {
-                return holder.value().matches(RunicForgeInput.of(craftSlots.stream().map(Slot::getItem).toList()), level);
+                return holder.value().matches(CraftingInput.of(RunicForgeBlockEntity.RESULT_SLOT, 1, craftSlots.stream().map(Slot::getItem).toList()), level);
             }
         }, RunicForgeBlockEntity.RESULT_SLOT, 1, craftSlots, craftSlots, inventory, (RecipeHolder<RunicForgeRecipe>) recipe, useMaxItems, allowDroppingItemsToClear);
     }
