@@ -43,6 +43,6 @@ public class WhispersOfEther implements ModInitializer {
 
         ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(Identifier.fromNamespaceAndPath(MOD_ID, "rune"), new AttributeDataLoader());
 
-        NetworkHandler.registerServerPackets();
+        NetworkHandler.register();
     }
 }
