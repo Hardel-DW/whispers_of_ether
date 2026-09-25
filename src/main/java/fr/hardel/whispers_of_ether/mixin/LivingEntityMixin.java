@@ -1,11 +1,12 @@
 package fr.hardel.whispers_of_ether.mixin;
 
-import fr.hardel.whispers_of_ether.MultiJumpAccessor;
 import fr.hardel.whispers_of_ether.world.attribute.ModAttribute;
 import fr.hardel.whispers_of_ether.world.attribute.OmnivampirismHeal;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,44 +18,37 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin implements MultiJumpAccessor {
+public abstract class LivingEntityMixin {
 
     @Shadow
-    public abstract double getAttributeValue(
-            net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute);
+    public abstract double getAttributeValue(Holder<Attribute> attribute);
 
     @Unique
-    private int whispers_of_ether$jumpCount = 0;
+    private int whispers_of_ether$airJumps = 0;
 
     @Inject(method = "jumpFromGround", at = @At("HEAD"))
-    private void onJump(CallbackInfo ci) {
+    private void countAirJump(CallbackInfo ci) {
         LivingEntity self = (LivingEntity) (Object) this;
-        if (self instanceof Player) {
-            whispers_of_ether$jumpCount++;
+        if (self instanceof Player && !self.onGround()) {
+            whispers_of_ether$airJumps++;
         }
-    }
-
-    @Override
-    public int whispers_of_ether$getJumpCount() {
-        return whispers_of_ether$jumpCount;
     }
 
     @Inject(method = "aiStep", at = @At("HEAD"))
-    private void resetJumpCount(CallbackInfo ci) {
+    private void resetAirJumps(CallbackInfo ci) {
         LivingEntity self = (LivingEntity) (Object) this;
         if (self instanceof Player && self.onGround()) {
-            whispers_of_ether$jumpCount = 0;
+            whispers_of_ether$airJumps = 0;
         }
     }
 
+    // The multi jump attribute counts every jump, the one from the ground included.
     @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z", ordinal = 2))
-    private boolean allowMultiJump(LivingEntity instance) {
-        boolean actualOnGround = instance.onGround();
-        if (instance instanceof Player && !actualOnGround) {
-            int maxJumps = (int) getAttributeValue(ModAttribute.MULTI_JUMP);
-            return whispers_of_ether$jumpCount < maxJumps;
+    private boolean allowAirJump(LivingEntity instance) {
+        if (instance instanceof Player && !instance.onGround()) {
+            return whispers_of_ether$airJumps < getAttributeValue(ModAttribute.MULTI_JUMP) - 1;
         }
-        return actualOnGround;
+        return instance.onGround();
     }
 
     @Inject(method = "hurtServer", at = @At("RETURN"))
