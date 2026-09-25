@@ -25,7 +25,9 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(
@@ -34,9 +36,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     private static final Identifier ATTRIBUTE_LINE = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/sprites/container/runic_table/attribute_line.png");
-    private static final Identifier ATTRIBUTE_ICON_FALLBACK = Identifier.fromNamespaceAndPath(
-        WhispersOfEther.MOD_ID,
-        "textures/gui/attributes/fallback.png");
+    private static final Identifier ATTRIBUTE_ICON_FALLBACK = Identifier.fromNamespaceAndPath(WhispersOfEther.MOD_ID, "textures/attributes/fallback.png");
     private static final Identifier SCROLL_TEXTURE = Identifier.fromNamespaceAndPath(
         WhispersOfEther.MOD_ID,
         "textures/gui/sprites/container/runic_table/scroll.png");
@@ -91,6 +91,7 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     private int historyScrollOffset = 0;
     private int historyMaxScrollOffset = 0;
     private final List<RunicTableHistoryEntry> history = new ArrayList<>();
+    private final Map<Attribute, Identifier> attributeIcons = new HashMap<>();
 
     public RunicTableScreen(RunicTableMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title, IMAGE_WIDTH, IMAGE_HEIGHT);
@@ -211,21 +212,17 @@ public class RunicTableScreen extends AbstractContainerScreen<RunicTableMenu> {
     }
 
     private Identifier getAttributeIcon(Attribute attribute) {
+        return attributeIcons.computeIfAbsent(attribute, this::findAttributeIcon);
+    }
+
+    private Identifier findAttributeIcon(Attribute attribute) {
         Identifier attributeId = BuiltInRegistries.ATTRIBUTE.getKey(attribute);
         if (attributeId == null) {
             return ATTRIBUTE_ICON_FALLBACK;
         }
 
-        Identifier iconLocation = Identifier.fromNamespaceAndPath(
-            attributeId.getNamespace(),
-            "textures/attributes/" + attributeId.getPath() + ".png");
-
-        assert minecraft != null;
-        if (minecraft.getResourceManager().getResource(iconLocation).isPresent()) {
-            return iconLocation;
-        }
-
-        return ATTRIBUTE_ICON_FALLBACK;
+        Identifier iconLocation = Identifier.fromNamespaceAndPath(attributeId.getNamespace(), "textures/attributes/" + attributeId.getPath() + ".png");
+        return minecraft.getResourceManager().getResource(iconLocation).isPresent() ? iconLocation : ATTRIBUTE_ICON_FALLBACK;
     }
 
     @Override
